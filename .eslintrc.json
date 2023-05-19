@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "ignorePatterns": ["node_modules/**/*", "lib/**/*", "dist/**/*"],
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.spec.*"],
+      "parserOptions": {
+        "project": ["tsconfig.eslint.json"],
+        "createDefaultProgram": false
+      },
+      "extends": ["./lint/eslint/native.json", "./lint/eslint/typescript.json"]
+    }
+  ]
+}

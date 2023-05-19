@@ -1,0 +1,49 @@
+{
+  "name": "@xsolla/pay-station-sdk",
+  "version": "0.0.1",
+  "description": "Pay Station SDK",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "build": "webpack --mode=production && tsc",
+    "dev:ts": "tsc --watch",
+    "dev:webpack": "webpack --mode=development --watch",
+    "test": "jest",
+    "test:dev": "jest --watch",
+    "lint": "eslint ./src/**/*",
+    "prepare": "husky install",
+    "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "author": "Xsolla Payments Team <payments@xsolla.com>",
+  "license": "ISC",
+  "files": [
+    "dist/**/*",
+    "lib/**/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "@types/prettier": "^2.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "^8.40.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-webpack-plugin": "^4.0.1",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8",
+    "ts-jest": "^29.1.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
+  }
+}
