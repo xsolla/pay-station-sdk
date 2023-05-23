@@ -1,4 +1,5 @@
-export const fooSum = (...a: number[]): number =>
-  a.reduce((acc, val): number => acc + val, 0);
+import 'reflect-metadata';
 
-export const message = 'message';
+import { headlessCheckout } from './features/headless-checkout/headless-checkout.instance';
+
+export { headlessCheckout };
