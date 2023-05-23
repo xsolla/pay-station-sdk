@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "./lint/stylelint/css.json",
+    "./lint/stylelint/scss.json",
+    "./lint/stylelint/order.json"
+  ]
+}

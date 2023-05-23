@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier-scss"
+  ],
+  "rules": {
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ],
+    "color-function-notation": "legacy",
+    "alpha-value-notation": "number",
+    "property-disallowed-list": ["gap"]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss",
+      "rules": {
+        "custom-property-pattern": "^([a-z][a-z0-9]*)(-[a-zA-Z0-9]+)*$"
+      }
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   entry: './src/index.ts',
@@ -9,6 +10,15 @@ const config = {
         test: /\.ts/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'resolve-url-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
@@ -25,6 +35,10 @@ const config = {
   plugins: [
     new ESLintPlugin({
       extensions: ['ts'],
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+      chunkFilename: '[name].css',
     }),
   ],
 };
