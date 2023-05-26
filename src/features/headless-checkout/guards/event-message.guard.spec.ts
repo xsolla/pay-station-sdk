@@ -1,5 +1,5 @@
 import { isEventMessage } from './event-message.guard';
-import { EventName } from '@core/post-messages-client/event-name.enum';
+import { EventName } from '../../../core/post-messages-client/event-name.enum';
 
 describe('Event message type guard', () => {
   test('Should return true', () => {

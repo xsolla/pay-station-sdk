@@ -1,6 +1,6 @@
-import { EventName } from '@core/post-messages-client/event-name.enum';
-import { Message } from '@core/post-messages-client/message.interface';
-import { PaymentMethod } from '@core/payment-method.interface';
+import { EventName } from '../../../core/post-messages-client/event-name.enum';
+import { Message } from '../../../core/post-messages-client/message.interface';
+import { PaymentMethod } from '../../../core/payment-method.interface';
 import { setTokenHandler } from './set-token.handler';
 
 const mockMessage: Message<{ methods: PaymentMethod[] }> = {

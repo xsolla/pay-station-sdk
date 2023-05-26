@@ -1,8 +1,8 @@
-import { Handler } from '@core/post-messages-client/handler.type';
-import { PaymentMethod } from '@core/payment-method.interface';
-import { Message } from '@core/post-messages-client/message.interface';
+import { Handler } from '../../../core/post-messages-client/handler.type';
+import { PaymentMethod } from '../../../core/payment-method.interface';
+import { Message } from '../../../core/post-messages-client/message.interface';
 import { isMethodsEventMessage } from '../guards/methods-event-message.guard';
-import { EventName } from '@core/post-messages-client/event-name.enum';
+import { EventName } from '../../../core/post-messages-client/event-name.enum';
 
 export const getRegularMethodsHandler: Handler<PaymentMethod[]> = (
   message: Message
