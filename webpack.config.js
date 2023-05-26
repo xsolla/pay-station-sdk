@@ -26,8 +26,7 @@ const config = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    library: 'HeadlessCheckout',
-    libraryTarget: 'window',
+    library: 'PayStationSdk',
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
