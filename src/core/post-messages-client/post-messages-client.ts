@@ -24,7 +24,7 @@ export class PostMessagesClient {
 
     return new Promise((resolve) => {
       const handlerWrapper = (message: MessageEvent): void => {
-        if (message.origin === this.recipientUrl) {
+        if (this.isSameOrigin(message.origin)) {
           const data = JSON.parse(message.data);
           const handledData: { isHandled: boolean; value?: T } | null =
             handler(data);
@@ -49,5 +49,10 @@ export class PostMessagesClient {
       JSON.stringify(message),
       this.recipientUrl
     );
+  }
+
+  private isSameOrigin(messageOrigin: string): boolean {
+    const recipientOrigin = new URL(this.recipientUrl).origin;
+    return messageOrigin === recipientOrigin;
   }
 }
