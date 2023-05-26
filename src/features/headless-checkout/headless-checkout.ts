@@ -1,6 +1,6 @@
-import { PaymentMethod } from '@core/payment-method.interface';
-import { EventName } from '@core/post-messages-client/event-name.enum';
-import { Message } from '@core/post-messages-client/message.interface';
+import { PaymentMethod } from '../../core/payment-method.interface';
+import { EventName } from '../../core/post-messages-client/event-name.enum';
+import { Message } from '../../core/post-messages-client/message.interface';
 import { PostMessagesClient } from '../../core/post-messages-client/post-messages-client';
 import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-methods.handler';
 import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';

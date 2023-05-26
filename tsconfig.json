@@ -19,10 +19,7 @@
     "lib": ["es2018", "dom", "dom.iterable"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "allowJs": true,
-    "paths": {
-      "@core/*": ["src/core/*"]
-    }
+    "allowJs": true
   },
   "allowSyntheticDefaultImports": true,
   "exclude": ["node_modules"],
