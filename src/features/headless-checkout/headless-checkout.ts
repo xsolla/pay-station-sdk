@@ -8,6 +8,7 @@ import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-metho
 import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
 import { setTokenHandler } from './post-messages-handlers/set-token.handler';
 import { headlessCheckoutAppUrl } from './variables';
+import { webComponents } from '../../core/web-components/web-components.map';
 
 @injectable()
 export class HeadlessCheckout {
@@ -19,7 +20,8 @@ export class HeadlessCheckout {
     private readonly window: Window,
     private readonly postMessagesClient: PostMessagesClient,
     private readonly localizeService: LocalizeService
-  ) {}
+  ) {
+  }
 
   public async init(environment: { isWebview: boolean }): Promise<void> {
     this.isWebView = environment.isWebview;
@@ -29,6 +31,7 @@ export class HeadlessCheckout {
     await this.setupCoreIframe();
 
     this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
+    this.defineComponents();
   }
 
   public async setToken(token: string): Promise<void> {
@@ -41,9 +44,9 @@ export class HeadlessCheckout {
       data: {
         configuration: {
           token,
-          isWebView: this.isWebView,
-        },
-      },
+          isWebView: this.isWebView
+        }
+      }
     };
 
     return this.postMessagesClient.send<void>(msg, setTokenHandler);
@@ -53,8 +56,8 @@ export class HeadlessCheckout {
     const msg: Message = {
       name: EventName.getPaymentMethodsList,
       data: {
-        country,
-      },
+        country
+      }
     };
 
     return this.postMessagesClient.send<PaymentMethod[]>(
@@ -67,8 +70,8 @@ export class HeadlessCheckout {
     const msg: Message = {
       name: EventName.getPaymentQuickMethods,
       data: {
-        country,
-      },
+        country
+      }
     };
 
     return this.postMessagesClient.send<PaymentMethod[]>(
@@ -85,6 +88,16 @@ export class HeadlessCheckout {
       this.coreIframe.onload = () => {
         resolve();
       };
+    });
+  }
+
+  private defineComponents(): void {
+    Object.entries(webComponents).forEach(([tagName, component]) => {
+      if (this.window.customElements.get(tagName)) {
+        return;
+      }
+
+      this.window.customElements.define(tagName, component);
     });
   }
 }

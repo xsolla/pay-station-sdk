@@ -1,8 +1,8 @@
 import { Handler } from './handler.type';
 import { Message } from './message.interface';
-import { injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 
-@injectable()
+@singleton()
 export class PostMessagesClient {
   private recipientUrl!: string;
   private recipient!: HTMLIFrameElement;

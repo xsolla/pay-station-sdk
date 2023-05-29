@@ -170,7 +170,7 @@
       }
     ],
     "@typescript-eslint/no-misused-promises": "error",
-    "@typescript-eslint/no-non-null-assertion": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "error",
     "no-throw-literal": "off",
