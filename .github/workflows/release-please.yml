@@ -17,3 +17,4 @@ jobs:
         with:
           release-type: node
           package-name: '@xsolla/pay-station-sdk'
+          default-branch: 'PAYMENTS-14318_test'
