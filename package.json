@@ -58,6 +58,7 @@
     "webpack-cli": "^5.1.1"
   },
   "dependencies": {
+    "i18next": "^22.5.0",
     "tsyringe": "^4.7.0"
   }
 }
