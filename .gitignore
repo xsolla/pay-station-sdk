@@ -6,3 +6,6 @@ node_modules
 .editorconfig
 .npmrc
 .idea
+.vscode
+dist
+lib
