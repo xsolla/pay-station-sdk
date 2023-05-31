@@ -1,10 +1,10 @@
 import { PostMessagesClient } from './post-messages-client';
-import { Message } from './message.interface';
-import { EventName } from './event-name.enum';
+import { Message } from '../message.interface';
+import { EventName } from '../event-name.enum';
 import { Handler } from './handler.type';
 import { container } from 'tsyringe';
 import { PaymentMethod } from '../payment-method.interface';
-import { isMethodsEventMessage } from '../../features/headless-checkout/guards/methods-event-message.guard';
+import { isMethodsEventMessage } from '../../core/guards/methods-event-message.guard';
 
 const mockHandler: Handler<PaymentMethod[]> = (
   message: Message
@@ -72,5 +72,40 @@ describe('PostMessagesClient', () => {
     postMessagesClient.init(recipient, recipientUrl);
     const value = await postMessagesClient.send(mockMessage, mockHandler);
     expect(value).toEqual([mockPaymentMethod]);
+  });
+
+  test('Should call callback on event', () => {
+    jest
+      .spyOn(window, 'addEventListener')
+      .mockImplementation(
+        (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
+          (handlerWrapper as (message: MessageEvent) => void)(mockMessageEvent);
+        }
+      );
+
+    const callbackSpy = jest.fn();
+    postMessagesClient.init(recipient, recipientUrl);
+    postMessagesClient.listen(
+      EventName.getPaymentMethodsList,
+      mockHandler,
+      callbackSpy
+    );
+
+    expect(callbackSpy).toHaveBeenCalled();
+  });
+
+  test('Should remove event listener', () => {
+    const spy = jest.spyOn(window, 'removeEventListener');
+
+    const callbackSpy = jest.fn();
+    postMessagesClient.init(recipient, recipientUrl);
+    const removeListener = postMessagesClient.listen(
+      EventName.getPaymentMethodsList,
+      mockHandler,
+      callbackSpy
+    );
+    removeListener();
+
+    expect(spy).toHaveBeenCalled();
   });
 });

@@ -1,5 +1,5 @@
-import { EventName } from '../../../core/post-messages-client/event-name.enum';
-import { Message } from '../../../core/post-messages-client/message.interface';
+import { EventName } from '../../../core/event-name.enum';
+import { Message } from '../../../core/message.interface';
 import { PaymentMethod } from '../../../core/payment-method.interface';
 import { getRegularMethodsHandler } from './get-regular-methods.handler';
 

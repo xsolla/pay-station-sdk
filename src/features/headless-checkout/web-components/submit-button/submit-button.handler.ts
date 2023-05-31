@@ -1,6 +1,6 @@
-import { Message } from '../../../../core/post-messages-client/message.interface';
-import { EventName } from '../../../../core/post-messages-client/event-name.enum';
 import { Handler } from '../../../../core/post-messages-client/handler.type';
+import { Message } from '../../../../core/message.interface';
+import { EventName } from '../../../../core/event-name.enum';
 
 //не имеет сути, сделано в качестве примера
 export const submitButtonHandler: Handler<void> = (

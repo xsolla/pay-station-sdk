@@ -1,4 +1,4 @@
-import { EventName } from '../../../core/post-messages-client/event-name.enum';
+import { EventName } from '../../core/event-name.enum';
 import { isMethodsEventMessage } from './methods-event-message.guard';
 
 describe('Methods event message guard', () => {
