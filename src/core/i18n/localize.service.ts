@@ -1,10 +1,10 @@
 import i18next from 'i18next';
-import { injectable } from 'tsyringe';
-import { loadDictionaries } from './dirctionary-loader.function';
+import { singleton } from 'tsyringe';
+import { loadDictionaries } from './dictionary-loader.function';
 import { Lang } from './lang.enum';
 
-@injectable()
-export class Localize {
+@singleton()
+export class LocalizeService {
   public async initDictionaries(): Promise<void> {
     await i18next.init({
       lng: Lang.EN,
