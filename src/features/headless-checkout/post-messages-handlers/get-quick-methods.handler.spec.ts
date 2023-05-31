@@ -1,6 +1,6 @@
-import { EventName } from '../../../core/post-messages-client/event-name.enum';
+import { EventName } from '../../../core/event-name.enum';
 import { getQuickMethodsHandler } from './get-quick-methods.handler';
-import { Message } from '../../../core/post-messages-client/message.interface';
+import { Message } from '../../../core/message.interface';
 import { PaymentMethod } from '../../../core/payment-method.interface';
 
 const mockMessage: Message<{ methods: PaymentMethod[] }> = {

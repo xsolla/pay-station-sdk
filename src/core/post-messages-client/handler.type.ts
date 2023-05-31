@@ -1,4 +1,4 @@
-import { Message } from './message.interface';
+import { Message } from '../message.interface';
 
 export type Handler<T> = (
   data: Message

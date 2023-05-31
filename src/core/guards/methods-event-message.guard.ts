@@ -1,7 +1,7 @@
-import { Message } from '../../../core/post-messages-client/message.interface';
+import { Message } from '../../core/message.interface';
 import { isEventMessage } from './event-message.guard';
-import { EventName } from '../../../core/post-messages-client/event-name.enum';
-import { PaymentMethod } from '../../../core/payment-method.interface';
+import { EventName } from '../../core/event-name.enum';
+import { PaymentMethod } from '../../core/payment-method.interface';
 
 export const isMethodsEventMessage = (
   messageData: unknown

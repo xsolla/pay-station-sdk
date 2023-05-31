@@ -1,7 +1,19 @@
 import { container } from 'tsyringe';
 import { HeadlessCheckout } from './headless-checkout';
 import { PostMessagesClient } from '../../core/post-messages-client/post-messages-client';
+import { EventName } from '../../core/event-name.enum';
+import { Message } from '../../core/message.interface';
+import { Handler } from '../../core/post-messages-client/handler.type';
 import { LocalizeService } from '../../core/i18n/localize.service';
+
+const mockMessage: Message = {
+  name: EventName.initPayment,
+  data: {},
+};
+
+const mockHandler: Handler<void> = (): null => {
+  return null;
+};
 
 class MockIframeElement {
   public src = '';
@@ -31,7 +43,8 @@ describe('HeadlessCheckout', () => {
     windowService = window;
     postMessagesClient = {
       init: jest.fn(),
-      send: jest.fn()
+      send: jest.fn(),
+      listen: jest.fn(),
     } as unknown as PostMessagesClient;
 
     localizeService = {
@@ -54,7 +67,20 @@ describe('HeadlessCheckout', () => {
     jest.resetAllMocks();
   });
 
-  test('Should init', () => {
+  test('Should init', async () => {
+    const spy = jest.spyOn(postMessagesClient, 'init');
+    jest.spyOn(windowService.document.body, 'appendChild').mockImplementation();
+    jest
+      .spyOn(windowService.document, 'createElement')
+      .mockImplementationOnce(
+        () => new MockIframeElement() as unknown as HTMLIFrameElement
+      );
+
+    await headlessCheckout.init({ isWebview: false });
+    expect(spy).toHaveBeenCalled();
+  });
+
+  test('Should init localization', () => {
     const localizeSpy = jest
       .spyOn(localizeService, 'initDictionaries')
       .mockResolvedValue();
@@ -62,6 +88,35 @@ describe('HeadlessCheckout', () => {
     void headlessCheckout.init({ isWebview: false });
 
     expect(localizeSpy).toHaveBeenCalled();
+  });
+
+  test('Should send post message', async () => {
+    const spy = jest.spyOn(postMessagesClient, 'send');
+    await headlessCheckout.events.send(mockMessage, mockHandler);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  test('Should set event handler', () => {
+    const spy = jest.spyOn(postMessagesClient, 'listen');
+    headlessCheckout.events.onCoreEvent(
+      EventName.initPayment,
+      mockHandler,
+      jest.fn()
+    );
+    expect(spy).toHaveBeenCalled();
+  });
+
+  test('Should start listen errors on init', async () => {
+    const spy = jest.spyOn(postMessagesClient, 'listen');
+    jest.spyOn(windowService.document.body, 'appendChild').mockImplementation();
+    jest
+      .spyOn(windowService.document, 'createElement')
+      .mockImplementationOnce(
+        () => new MockIframeElement() as unknown as HTMLIFrameElement
+      );
+
+    await headlessCheckout.init({ isWebview: false });
+    expect(spy).toHaveBeenCalled();
   });
 
   test('Should setToken', async () => {
@@ -91,6 +146,8 @@ describe('HeadlessCheckout', () => {
   });
 
   test('Should correctly define web components', async () => {
+    jest.spyOn(windowService.customElements, 'get').mockReturnValue(undefined);
+    jest.spyOn(windowService.customElements, 'define').mockImplementation(jest.fn());
     jest.spyOn(windowService.document.body, 'appendChild').mockImplementation();
     jest
       .spyOn(windowService.document, 'createElement')
