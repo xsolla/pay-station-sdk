@@ -26,6 +26,8 @@
     "lib/**/*"
   ],
   "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
     "@types/jest": "^29.5.1",
     "@types/prettier": "^2.7.2",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
@@ -58,6 +60,7 @@
     "webpack-cli": "^5.1.1"
   },
   "dependencies": {
+    "i18next": "^22.5.0",
     "tsyringe": "^4.7.0"
   }
 }

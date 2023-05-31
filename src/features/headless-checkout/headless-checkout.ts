@@ -1,11 +1,12 @@
+import { injectable } from 'tsyringe';
 import { PaymentMethod } from '../../core/payment-method.interface';
 import { EventName } from '../../core/post-messages-client/event-name.enum';
 import { Message } from '../../core/post-messages-client/message.interface';
 import { PostMessagesClient } from '../../core/post-messages-client/post-messages-client';
+import { LocalizeService } from '../../core/i18n/localize.service';
 import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-methods.handler';
 import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
 import { setTokenHandler } from './post-messages-handlers/set-token.handler';
-import { injectable } from 'tsyringe';
 import { headlessCheckoutAppUrl } from './variables';
 
 @injectable()
@@ -16,12 +17,17 @@ export class HeadlessCheckout {
 
   public constructor(
     private readonly window: Window,
-    private readonly postMessagesClient: PostMessagesClient
+    private readonly postMessagesClient: PostMessagesClient,
+    private readonly localizeService: LocalizeService
   ) {}
 
   public async init(environment: { isWebview: boolean }): Promise<void> {
     this.isWebView = environment.isWebview;
+
+    await this.localizeService.initDictionaries();
+
     await this.setupCoreIframe();
+
     this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
   }
 
