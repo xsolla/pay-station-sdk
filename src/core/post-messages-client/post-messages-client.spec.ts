@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { PostMessagesClient } from './post-messages-client';
 import { Message } from './message.interface';
 import { EventName } from './event-name.enum';
