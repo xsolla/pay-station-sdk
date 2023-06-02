@@ -1,9 +1,11 @@
 import { injectable } from 'tsyringe';
-import { PaymentMethod } from '../../core/payment-method.interface';
-import { EventName } from '../../core/post-messages-client/event-name.enum';
-import { Message } from '../../core/post-messages-client/message.interface';
-import { PostMessagesClient } from '../../core/post-messages-client/post-messages-client';
+import { EventName } from '../../core/event-name.enum';
 import { LocalizeService } from '../../core/i18n/localize.service';
+import { Message } from '../../core/message.interface';
+import { PaymentMethod } from '../../core/payment-method.interface';
+import { Handler } from '../../core/post-messages-client/handler.type';
+import { PostMessagesClient } from '../../core/post-messages-client/post-messages-client';
+import { getErrorHandler } from './post-messages-handlers/error.handler';
 import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-methods.handler';
 import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
 import { setTokenHandler } from './post-messages-handlers/set-token.handler';
@@ -12,8 +14,36 @@ import { webComponents } from '../../core/web-components/web-components.map';
 
 @injectable()
 export class HeadlessCheckout {
+  public events = {
+    /**
+     * Send public message
+     * @param msg Message to send
+     * @param handler Handler to process response data
+     * @returns promise that will be resolved once response is recieved
+     */
+    send: async <T>(msg: Message, handler: Handler<T>): Promise<T | void> => {
+      return this.postMessagesClient.send<T>(msg, handler);
+    },
+
+    /**
+     * Add core event listener
+     * @param eventName Name of event to listen
+     * @param handler Handler to process response data
+     * @param callback Callback for event
+     * @return {Function} function to remove listener
+     */
+    onCoreEvent: <T>(
+      eventName: EventName,
+      handler: Handler<T>,
+      callback: (value?: T) => void
+    ): (() => void) => {
+      return this.postMessagesClient.listen(eventName, handler, callback);
+    },
+  };
+
   private isWebView?: boolean;
   private coreIframe!: HTMLIFrameElement;
+  private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
 
   public constructor(
@@ -29,9 +59,21 @@ export class HeadlessCheckout {
     await this.localizeService.initDictionaries();
 
     await this.setupCoreIframe();
+    this.defineComponents();
 
     this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
-    this.defineComponents();
+    this.errorsSubscription = this.postMessagesClient.listen<string>(
+      EventName.error,
+      getErrorHandler,
+      (error) => {
+        throw new Error(error);
+      }
+    );
+  }
+
+  public destroy(): void {
+    this.destroyCoreIframe();
+    this.errorsSubscription?.();
   }
 
   public async setToken(token: string): Promise<void> {
@@ -52,6 +94,12 @@ export class HeadlessCheckout {
     return this.postMessagesClient.send<void>(msg, setTokenHandler);
   }
 
+  /**
+   * Returns available payment methods except quick methods
+   * @param country Country that quick methods should be loaded for.
+   *  Country from token is used by default
+   * @returns promise that returns payment methods
+   */
   public async getRegularMethods(country?: string): Promise<PaymentMethod[]> {
     const msg: Message = {
       name: EventName.getPaymentMethodsList,
@@ -66,6 +114,12 @@ export class HeadlessCheckout {
     ) as Promise<PaymentMethod[]>;
   }
 
+  /**
+   * Returns available quick payment methods like ApplePay, GooglePay, etc.
+   * @param country Country that quick methods should be loaded for.
+   *  Country from token is used by default
+   * @returns promise that returns payment methods
+   */
   public async getQuickMethods(country?: string): Promise<PaymentMethod[]> {
     const msg: Message = {
       name: EventName.getPaymentQuickMethods,
@@ -82,6 +136,10 @@ export class HeadlessCheckout {
 
   private async setupCoreIframe(): Promise<void> {
     this.coreIframe = this.window.document.createElement('iframe');
+    this.coreIframe.width = '0px';
+    this.coreIframe.height = '0px';
+    this.coreIframe.style.border = 'none';
+    this.coreIframe.style.position = 'absolute';
     this.coreIframe.src = `${this.headlessAppUrl}/core`;
     this.window.document.body.appendChild(this.coreIframe);
     return new Promise((resolve) => {
@@ -89,6 +147,10 @@ export class HeadlessCheckout {
         resolve();
       };
     });
+  }
+
+  private destroyCoreIframe(): void {
+    this.coreIframe.remove();
   }
 
   private defineComponents(): void {

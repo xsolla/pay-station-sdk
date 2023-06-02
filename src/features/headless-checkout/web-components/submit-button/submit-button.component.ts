@@ -2,7 +2,7 @@ import { WebComponentAbstract } from '../../../../core/web-components/web-compon
 import { container } from 'tsyringe';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { submitButtonHandler } from './submit-button.handler';
-import { EventName } from '../../../../core/post-messages-client/event-name.enum';
+import { EventName } from '../../../../core/event-name.enum';
 
 export class SubmitButtonComponent extends WebComponentAbstract {
   private readonly postMessagesClient: PostMessagesClient;

@@ -1,6 +1,8 @@
 import { Handler } from './handler.type';
-import { Message } from './message.interface';
+import { Message } from '../message.interface';
 import { singleton } from 'tsyringe';
+import { EventName } from '../event-name.enum';
+import { isEventMessage } from '../guards/event-message.guard';
 
 @singleton()
 export class PostMessagesClient {
@@ -42,6 +44,25 @@ export class PostMessagesClient {
       this.window.addEventListener('message', handlerWrapper);
       this.sendMessage(msg);
     });
+  }
+
+  public listen<T>(
+    eventName: EventName,
+    handler: Handler<T>,
+    callback: (value?: T) => void
+  ): () => void {
+    const handlerWrapper = (message: MessageEvent): void => {
+      if (this.isSameOrigin(message.origin)) {
+        const data = JSON.parse(message.data);
+        if (isEventMessage(data) && data.name === eventName) {
+          const handledData = handler(data);
+          callback(handledData?.value);
+        }
+      }
+    };
+
+    this.window.addEventListener('message', handlerWrapper);
+    return () => this.window.removeEventListener('message', handlerWrapper);
   }
 
   private sendMessage(message: Message): void {
