@@ -1,7 +1,8 @@
 {
   "en": {
     "translation": {
-      "hello": "Hello world!"
+      "hello": "Hello world!",
+      "expYearPatternValidator.message": "Enter a valid expiration year"
     }
   }
 }
