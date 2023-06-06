@@ -1,5 +1,8 @@
 {
-  "zh_HANT": {
-    "translation": {}
-  }
+   "zh_HANT" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "輸入有效到期年份",
+         "hello" : "你好，世界！"
+      }
+   }
 }

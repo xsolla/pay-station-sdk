@@ -1,5 +1,8 @@
 {
-  "vi": {
-    "translation": {}
-  }
+   "vi" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Nhập năm hết hạn hợp lệ",
+         "hello" : "Xin chào thế giới!"
+      }
+   }
 }

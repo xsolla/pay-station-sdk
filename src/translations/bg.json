@@ -1,5 +1,8 @@
 {
-  "bg": {
-    "translation": {}
-  }
+   "bg" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Въведете валидна година на валидност",
+         "hello" : "Здравей, свят!"
+      }
+   }
 }

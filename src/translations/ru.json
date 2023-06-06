@@ -1,7 +1,8 @@
 {
-  "ru": {
-    "translation": {
-      "hello": "Привет мир!"
-    }
-  }
+   "ru" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Введите верный год",
+         "hello" : "Привет, мир!"
+      }
+   }
 }

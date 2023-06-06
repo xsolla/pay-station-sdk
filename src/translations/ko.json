@@ -1,5 +1,8 @@
 {
-  "ko": {
-    "translation": {}
-  }
+   "ko" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "유효한 만료 년을 입력하세요",
+         "hello" : "안녕하세요 세상!"
+      }
+   }
 }

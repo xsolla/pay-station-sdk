@@ -1,5 +1,8 @@
 {
-  "ja": {
-    "translation": {}
-  }
+   "ja" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "有効期限年を入力してください",
+         "hello" : "こんにちは、世界！"
+      }
+   }
 }

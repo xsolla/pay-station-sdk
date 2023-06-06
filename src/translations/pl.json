@@ -1,5 +1,8 @@
 {
-  "pl": {
-    "translation": {}
-  }
+   "pl" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Wprowadź prawidłowy rok wygaśnięcia",
+         "hello" : "Witaj świecie!"
+      }
+   }
 }

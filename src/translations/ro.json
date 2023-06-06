@@ -1,5 +1,8 @@
 {
-  "ro": {
-    "translation": {}
-  }
+   "ro" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Introduceți un an de expirare valabil",
+         "hello" : "Salutare, lume!"
+      }
+   }
 }

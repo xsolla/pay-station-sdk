@@ -1,5 +1,8 @@
 {
-  "he": {
-    "translation": {}
-  }
+   "he" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "צריך להזין שנת תפוגה תקינה",
+         "hello" : "שלום עולם!"
+      }
+   }
 }

@@ -1,5 +1,8 @@
 {
-  "th": {
-    "translation": {}
-  }
+   "th" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "ป้อนปีหมดอายุที่ถูกต้อง",
+         "hello" : "สวัสดีชาวโลก!"
+      }
+   }
 }

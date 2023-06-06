@@ -1,5 +1,8 @@
 {
-  "tr": {
-    "translation": {}
-  }
+   "tr" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Geçerli bir son kullanma yılı girin",
+         "hello" : "Merhaba dünya!"
+      }
+   }
 }

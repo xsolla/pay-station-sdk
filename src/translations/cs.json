@@ -1,5 +1,8 @@
 {
-  "cs": {
-    "translation": {}
-  }
+   "cs" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Zadejte platný rok konce platnosti",
+         "hello" : "Ahoj světe!"
+      }
+   }
 }

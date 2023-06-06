@@ -1,5 +1,8 @@
 {
-  "es": {
-    "translation": {}
-  }
+   "es" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Introduce un año de caducidad válido",
+         "hello" : "¡Hola mundo!"
+      }
+   }
 }

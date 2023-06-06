@@ -1,5 +1,8 @@
 {
-  "de": {
-    "translation": {}
-  }
+   "de" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "Geben Sie ein gültiges Ablaufjahr ein",
+         "hello" : "Hallo Welt!"
+      }
+   }
 }

@@ -1,5 +1,8 @@
 {
-  "ar": {
-    "translation": {}
-  }
+   "ar" : {
+      "translation" : {
+         "expYearPatternValidator.message" : "أدخل عام انتهاء صلاحية صالحًا",
+         "hello" : "مرحبًا بالعالم!"
+      }
+   }
 }
