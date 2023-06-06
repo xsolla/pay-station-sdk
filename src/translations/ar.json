@@ -1,5 +1,7 @@
 {
-  "ar": {
-    "translation": {}
-  }
+   "ar" : {
+      "translation" : {
+         "hello" : "مرحبًا بالعالم!"
+      }
+   }
 }

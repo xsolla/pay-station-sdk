@@ -1,5 +1,7 @@
 {
-  "ko": {
-    "translation": {}
-  }
+   "ko" : {
+      "translation" : {
+         "hello" : "안녕하세요 세상!"
+      }
+   }
 }

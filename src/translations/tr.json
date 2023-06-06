@@ -1,5 +1,7 @@
 {
-  "tr": {
-    "translation": {}
-  }
+   "tr" : {
+      "translation" : {
+         "hello" : "Merhaba dünya!"
+      }
+   }
 }

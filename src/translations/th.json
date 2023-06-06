@@ -1,5 +1,7 @@
 {
-  "th": {
-    "translation": {}
-  }
+   "th" : {
+      "translation" : {
+         "hello" : "สวัสดีชาวโลก!"
+      }
+   }
 }

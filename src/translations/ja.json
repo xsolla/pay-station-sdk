@@ -1,5 +1,7 @@
 {
-  "ja": {
-    "translation": {}
-  }
+   "ja" : {
+      "translation" : {
+         "hello" : "こんにちは、世界！"
+      }
+   }
 }

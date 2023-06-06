@@ -1,5 +1,7 @@
 {
-  "cs": {
-    "translation": {}
-  }
+   "cs" : {
+      "translation" : {
+         "hello" : "Ahoj světe!"
+      }
+   }
 }
