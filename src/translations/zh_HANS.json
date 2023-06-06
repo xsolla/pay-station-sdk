@@ -1,5 +1,7 @@
 {
-  "zh_HANS": {
-    "translation": {}
-  }
+   "zh_HANS" : {
+      "translation" : {
+         "hello" : "你好，世界！"
+      }
+   }
 }

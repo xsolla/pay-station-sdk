@@ -1,5 +1,7 @@
 {
-  "ro": {
-    "translation": {}
-  }
+   "ro" : {
+      "translation" : {
+         "hello" : "Salutare, lume!"
+      }
+   }
 }

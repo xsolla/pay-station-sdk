@@ -1,5 +1,7 @@
 {
-  "bg": {
-    "translation": {}
-  }
+   "bg" : {
+      "translation" : {
+         "hello" : "Здравей, свят!"
+      }
+   }
 }

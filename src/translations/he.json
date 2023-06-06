@@ -1,5 +1,7 @@
 {
-  "he": {
-    "translation": {}
-  }
+   "he" : {
+      "translation" : {
+         "hello" : "שלום עולם!"
+      }
+   }
 }

@@ -1,5 +1,7 @@
 {
-  "vi": {
-    "translation": {}
-  }
+   "vi" : {
+      "translation" : {
+         "hello" : "Xin chào thế giới!"
+      }
+   }
 }

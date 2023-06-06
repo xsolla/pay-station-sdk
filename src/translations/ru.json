@@ -1,7 +1,7 @@
 {
-  "ru": {
-    "translation": {
-      "hello": "Привет мир!"
-    }
-  }
+   "ru" : {
+      "translation" : {
+         "hello" : "Привет, мир!"
+      }
+   }
 }

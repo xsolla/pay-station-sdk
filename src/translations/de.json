@@ -1,5 +1,7 @@
 {
-  "de": {
-    "translation": {}
-  }
+   "de" : {
+      "translation" : {
+         "hello" : "Hallo Welt!"
+      }
+   }
 }
