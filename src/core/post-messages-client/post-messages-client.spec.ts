@@ -46,44 +46,40 @@ describe('PostMessagesClient', () => {
 
   beforeEach(() => {
     recipient = window.document.createElement('iframe');
+    container.clearInstances();
     postMessagesClient = container
       .createChildContainer()
       .register<Window>(Window, { useValue: window })
       .resolve(PostMessagesClient);
   });
 
-  test('Should throw exception if no recipient', async () => {
-    try {
-      await postMessagesClient.send(mockMessage, mockHandler);
-    } catch (e: unknown) {
-      expect(e).toEqual(new Error('No recipient for post messages.'));
-    }
+  it('Should throw exception if no recipient', () => {
+    const promise = postMessagesClient.send(mockMessage, mockHandler);
+    return expectAsync(promise).toBeRejectedWithError(
+      'No recipient for post messages.'
+    );
   });
 
-  test('Should return payment methods', async () => {
-    jest
-      .spyOn(window, 'addEventListener')
-      .mockImplementation(
-        (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
-          (handlerWrapper as (message: MessageEvent) => void)(mockMessageEvent);
-        }
-      );
+  it('Should return payment methods', async () => {
+    spyOn(window, 'addEventListener').and.callFake(
+      (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
+        (handlerWrapper as (message: MessageEvent) => void)(mockMessageEvent);
+      }
+    );
 
     postMessagesClient.init(recipient, recipientUrl);
     const value = await postMessagesClient.send(mockMessage, mockHandler);
     expect(value).toEqual([mockPaymentMethod]);
   });
 
-  test('Should call callback on event', () => {
-    jest
-      .spyOn(window, 'addEventListener')
-      .mockImplementation(
-        (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
-          (handlerWrapper as (message: MessageEvent) => void)(mockMessageEvent);
-        }
-      );
+  it('Should call callback on event', () => {
+    spyOn(window, 'addEventListener').and.callFake(
+      (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
+        (handlerWrapper as (message: MessageEvent) => void)(mockMessageEvent);
+      }
+    );
 
-    const callbackSpy = jest.fn();
+    const callbackSpy = jasmine.createSpy();
     postMessagesClient.init(recipient, recipientUrl);
     postMessagesClient.listen(
       EventName.getPaymentMethodsList,
@@ -94,10 +90,10 @@ describe('PostMessagesClient', () => {
     expect(callbackSpy).toHaveBeenCalled();
   });
 
-  test('Should remove event listener', () => {
-    const spy = jest.spyOn(window, 'removeEventListener');
+  it('Should remove event listener', () => {
+    const spy = spyOn(window, 'removeEventListener');
 
-    const callbackSpy = jest.fn();
+    const callbackSpy = jasmine.createSpy();
     postMessagesClient.init(recipient, recipientUrl);
     const removeListener = postMessagesClient.listen(
       EventName.getPaymentMethodsList,

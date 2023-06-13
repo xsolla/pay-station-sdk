@@ -9,3 +9,6 @@ node_modules
 .vscode
 dist
 lib
+
+# misc
+coverage
