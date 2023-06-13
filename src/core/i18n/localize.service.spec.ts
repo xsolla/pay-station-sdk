@@ -11,7 +11,7 @@ describe('LocalizeService', () => {
   });
 
   it('Should init dictionaries', () => {
-    const spy = jest.spyOn(i18next, 'init');
+    const spy = spyOn(i18next, 'init');
 
     void localizeService.initDictionaries();
 
@@ -20,7 +20,8 @@ describe('LocalizeService', () => {
 
   it('Should translate', () => {
     const expectedValue = 'Hello World!';
-    jest.spyOn(i18next, 't').mockImplementation(() => expectedValue);
+
+    spyOn(i18next, 't').and.returnValue(expectedValue);
 
     const result = localizeService.translate('hello');
 
@@ -31,9 +32,9 @@ describe('LocalizeService', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const stub = (): void => {};
 
-    const spy = jest
-      .spyOn(i18next, 'changeLanguage')
-      .mockResolvedValue(stub as unknown as TFunction);
+    const spy = spyOn(i18next, 'changeLanguage').and.resolveTo(
+      stub as unknown as TFunction
+    );
 
     void localizeService.changeLang(Lang.EN);
 
@@ -44,9 +45,9 @@ describe('LocalizeService', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const stub = (): void => {};
 
-    const spy = jest
-      .spyOn(i18next, 'changeLanguage')
-      .mockResolvedValue(stub as unknown as TFunction);
+    const spy = spyOn(i18next, 'changeLanguage').and.resolveTo(
+      stub as unknown as TFunction
+    );
 
     void localizeService.changeLang(Lang.CN);
 

@@ -12,19 +12,19 @@ const emptyErrorMessage: Message<{ error: string }> = {
 };
 
 describe('getErrorHandler', () => {
-  test('Should handle data', () => {
+  it('Should handle data', () => {
     expect(getErrorHandler(mockMessage)).toEqual({
       isHandled: true,
       value: 'error',
     });
   });
-  test('Should set default error text', () => {
+  it('Should set default error text', () => {
     expect(getErrorHandler(emptyErrorMessage)).toEqual({
       isHandled: true,
       value: 'Unknown error',
     });
   });
-  test('Should return null', () => {
+  it('Should return null', () => {
     expect(getErrorHandler({ name: EventName.initPayment })).toBeNull();
   });
 });
