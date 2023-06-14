@@ -166,4 +166,16 @@ describe('HeadlessCheckout', () => {
     await headlessCheckout.init({ isWebview: false });
     expect(spy).not.toHaveBeenCalled();
   });
+
+  it('Should getSavedMethods', async () => {
+    const spy = spyOn(postMessagesClient, 'send');
+    await headlessCheckout.getSavedMethods();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('Should getUserBalance', async () => {
+    const spy = spyOn(postMessagesClient, 'send');
+    await headlessCheckout.getUserBalance();
+    expect(spy).toHaveBeenCalled();
+  });
 });
