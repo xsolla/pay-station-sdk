@@ -8,7 +8,7 @@ export const submitButtonHandler: Handler<void> = (
 ): { isHandled: boolean } | null => {
   if (message.name === EventName.submitButton) {
     return {
-      isHandled: true
+      isHandled: true,
     };
   }
   return null;

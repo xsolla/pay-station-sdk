@@ -1,4 +1,4 @@
-import { injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { EventName } from '../../core/event-name.enum';
 import { LocalizeService } from '../../core/i18n/localize.service';
 import { Message } from '../../core/message.interface';
@@ -7,16 +7,17 @@ import { Handler } from '../../core/post-messages-client/handler.type';
 import { PostMessagesClient } from '../../core/post-messages-client/post-messages-client';
 import { getErrorHandler } from './post-messages-handlers/error.handler';
 import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-methods.handler';
-import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
 import { setTokenHandler } from './post-messages-handlers/set-token.handler';
-import { headlessCheckoutAppUrl } from './variables';
+import { headlessCheckoutAppUrl } from './environment';
 import { webComponents } from '../../core/web-components/web-components.map';
 import { SavedMethod } from '../../core/saved-method.interface';
 import { getSavedMethodsHandler } from './post-messages-handlers/get-saved-methods.handler';
 import { UserBalance } from '../../core/user-balance.interface';
 import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance.handler';
+import { HeadlessCheckoutSpy } from '../../core/headless-checkout-spy/headless-checkout-spy';
+import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
 
-@injectable()
+@singleton()
 export class HeadlessCheckout {
   public events = {
     /**
@@ -53,7 +54,8 @@ export class HeadlessCheckout {
   public constructor(
     private readonly window: Window,
     private readonly postMessagesClient: PostMessagesClient,
-    private readonly localizeService: LocalizeService
+    private readonly localizeService: LocalizeService,
+    private readonly headlessCheckoutSpy: HeadlessCheckoutSpy
   ) {}
 
   public async init(environment: { isWebview: boolean }): Promise<void> {
@@ -94,7 +96,11 @@ export class HeadlessCheckout {
       },
     };
 
-    return this.postMessagesClient.send<void>(msg, setTokenHandler);
+    return this.postMessagesClient.send<void>(msg, (message) =>
+      setTokenHandler(message, () => {
+        this.headlessCheckoutSpy.appWasInit = true;
+      })
+    );
   }
 
   /**

@@ -62,6 +62,7 @@ describe('HeadlessCheckout', () => {
       .register<LocalizeService>(LocalizeService, {
         useValue: localizeService,
       })
+      .registerSingleton(HeadlessCheckout)
       .resolve(HeadlessCheckout);
   });
 

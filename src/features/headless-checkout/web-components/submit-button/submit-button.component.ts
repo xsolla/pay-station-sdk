@@ -20,7 +20,10 @@ export class SubmitButtonComponent extends WebComponentAbstract {
     super.render();
 
     this.addEventListenerToElement(this.elementRef, 'click', () => {
-      this.postMessagesClient.send({ name: EventName.submitButton }, submitButtonHandler) as Promise<void>;
+      this.postMessagesClient.send(
+        { name: EventName.submitButton },
+        submitButtonHandler
+      ) as Promise<void>;
     });
   }
 
