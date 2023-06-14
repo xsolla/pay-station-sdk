@@ -11,6 +11,10 @@ import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-m
 import { setTokenHandler } from './post-messages-handlers/set-token.handler';
 import { headlessCheckoutAppUrl } from './variables';
 import { webComponents } from '../../core/web-components/web-components.map';
+import { SavedMethod } from '../../core/saved-method.interface';
+import { getSavedMethodsHandler } from './post-messages-handlers/get-saved-methods.handler';
+import { UserBalance } from '../../core/user-balance.interface';
+import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance.handler';
 
 @injectable()
 export class HeadlessCheckout {
@@ -50,8 +54,7 @@ export class HeadlessCheckout {
     private readonly window: Window,
     private readonly postMessagesClient: PostMessagesClient,
     private readonly localizeService: LocalizeService
-  ) {
-  }
+  ) {}
 
   public async init(environment: { isWebview: boolean }): Promise<void> {
     this.isWebView = environment.isWebview;
@@ -86,9 +89,9 @@ export class HeadlessCheckout {
       data: {
         configuration: {
           token,
-          isWebView: this.isWebView
-        }
-      }
+          isWebView: this.isWebView,
+        },
+      },
     };
 
     return this.postMessagesClient.send<void>(msg, setTokenHandler);
@@ -104,8 +107,8 @@ export class HeadlessCheckout {
     const msg: Message = {
       name: EventName.getPaymentMethodsList,
       data: {
-        country
-      }
+        country,
+      },
     };
 
     return this.postMessagesClient.send<PaymentMethod[]>(
@@ -124,14 +127,36 @@ export class HeadlessCheckout {
     const msg: Message = {
       name: EventName.getPaymentQuickMethods,
       data: {
-        country
-      }
+        country,
+      },
     };
 
     return this.postMessagesClient.send<PaymentMethod[]>(
       msg,
       getQuickMethodsHandler
     ) as Promise<PaymentMethod[]>;
+  }
+
+  public async getSavedMethods(): Promise<SavedMethod[]> {
+    const msg: Message = {
+      name: EventName.getSavedMethods,
+    };
+
+    return this.postMessagesClient.send<SavedMethod[]>(
+      msg,
+      getSavedMethodsHandler
+    ) as Promise<SavedMethod[]>;
+  }
+
+  public async getUserBalance(): Promise<UserBalance> {
+    const msg: Message = {
+      name: EventName.getUserBalance,
+    };
+
+    return this.postMessagesClient.send<UserBalance>(
+      msg,
+      getUserBalanceHandler
+    ) as Promise<UserBalance>;
   }
 
   private async setupCoreIframe(): Promise<void> {
