@@ -8,13 +8,13 @@ const mockMessage: Message<{ methods: PaymentMethod[] }> = {
   data: { methods: [] },
 };
 describe('getQuickMethodsHandler', () => {
-  test('Should handle data', () => {
+  it('Should handle data', () => {
     expect(getQuickMethodsHandler(mockMessage)).toEqual({
       isHandled: true,
       value: [],
     });
   });
-  test('Should return null', () => {
+  it('Should return null', () => {
     expect(getQuickMethodsHandler({ name: EventName.initPayment })).toBeNull();
   });
 });
