@@ -15,9 +15,11 @@ To create a component, you need to create a directory inside `src/features/headl
 3. The component should be added to `src/core/web-components/web-components.map.ts`. This step is necessary for registering the component using `customElements.define()`.
    Example:
    ```typescript
-   export const webComponents: { [key in WebComponentName]: CustomElementConstructor } = {
+   export const webComponents: {
+     [key in WebComponentName]: CustomElementConstructor;
+   } = {
      [WebComponentName.CardNumberComponent]: CardNumberComponent,
-     [WebComponentName.SubmitButtonComponent]: SubmitButtonComponent
+     [WebComponentName.SubmitButtonComponent]: SubmitButtonComponent,
    };
    ```
 4. Need to export a component from a file `src/web-components.ts`
@@ -61,7 +63,10 @@ export class SubmitButtonComponent extends WebComponentAbstract {
 The partner can use web components after calling the `headlessCheckout.init()` method.
 
 ```typescript
-import { headlessCheckout, SubmitButtonComponent } from '@xsolla/pay-station-sdk';
+import {
+  headlessCheckout,
+  SubmitButtonComponent,
+} from '@xsolla/pay-station-sdk';
 
 headlessCheckout.init({
   isWebView: false,
@@ -74,5 +79,5 @@ const submitButton = window.document.createElement(new SubmitButtonComponent());
 `payment-form.component.html`
 
 ```html
-<psdk-submit-button text='Pay now'></psdk-submit-button>
+<psdk-submit-button text="Pay now"></psdk-submit-button>
 ```

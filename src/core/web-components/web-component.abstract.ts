@@ -43,4 +43,3 @@ export abstract class WebComponentAbstract extends HTMLElement {
     this.render();
   }
 }
-
