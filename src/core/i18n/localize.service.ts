@@ -1,4 +1,4 @@
-import i18next from 'i18next';
+import * as i18next from 'i18next';
 import { singleton } from 'tsyringe';
 import { loadDictionaries } from './dictionary-loader.function';
 import { Lang } from './lang.enum';
