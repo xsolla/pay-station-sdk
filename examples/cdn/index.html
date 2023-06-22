@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!--
+    Link the SDK bundle.
+    NOTE: In this example, we use a local build just for convenience purposes.
+    -->
+    <script src="../../dist/main.js"></script>
+  </head>
+
+  <body>
+    <h1>Pay Station SDK</h1>
+
+    <!--
+    Define a specific Payments component in the HTML markup, e.g., `psdk-payment-methods`.
+    The `country` attribute indicates the country for which the payment methods are being loaded.
+    -->
+    <psdk-payment-methods country="US"></psdk-payment-methods>
+
+    <!-- Initialization script -->
+    <script>
+      if (typeof PayStationSdk === 'undefined') {
+        alert(`
+It seems SDK library is undefined.
+Please, link CDN source or create local build (recommended to test purposes only).
+        `);
+      }
+      /**
+       * To learn more about creating tokens,
+       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       */
+      const accessToken = '';
+
+      if (!accessToken) {
+        alert(`No token provided. Please, check the documentation`);
+      }
+      async function initPayStationSdk() {
+        /**
+         * The SDK is available under the PayStationSdk namespace.
+         * To begin initialization, obtain a reference to the headlessCheckout object.
+         */
+        const { headlessCheckout } = PayStationSdk;
+
+        /**
+         * Call the `init()` method with the provided environment object.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a webview or not.
+         * Please note that this command executes asynchronously.
+         */
+        await headlessCheckout.init({
+          isWebView: false,
+        });
+
+        /**
+         * After the Payments SDK has been initialized, the next step is setting the token.
+         * To learn more about creating tokens,
+         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         */
+        await headlessCheckout.setToken(accessToken);
+
+        /**
+         * To gain more control over Pay Station components,
+         * you can access them as regular HTML elements.
+         */
+        const paymentMethods = document.querySelector('psdk-payment-methods');
+
+        /**
+         * To add extra logic to a component, you can subscribe to
+         * its events and place your code in a callback function.
+         */
+        paymentMethods.addEventListener('selectionChange', (e) => {
+          console.log(e);
+        });
+      }
+
+      // run initialization script
+      initPayStationSdk();
+    </script>
+  </body>
+</html>
