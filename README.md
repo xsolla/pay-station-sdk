@@ -2,7 +2,7 @@
 
 - [What is Pay Station SDK?](#what-is-pay-station-sdk)
 - [Installing with npm-package](#installing-with-npm-package)
-- [General integration scheme](#common-integration-scheme)
+- [General integration scheme](#general-integration-scheme)
 - [PaymentSdk library interface](#paymentsdk-library-interface)
 - [Pay Station SDK components](#pay-station-sdk-components)
   - [Regular components](#regular-components)
@@ -35,7 +35,7 @@ Except for secure inputs, the client has full control over the component's style
 
 ## General integration scheme
 
-![Common integration scheme](./readme_images/common_integration_scheme.png 'Common integration scheme')
+![General integration scheme](./readme_images/general_integration_scheme.png 'General integration scheme')
 
 ## PaymentSdk library interface
 
