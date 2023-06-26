@@ -238,7 +238,7 @@ To start using the Pay Station SDK, include the SDK bundle in your project. You 
 Regardless of the SDK adding method chosen, all integration steps are the same:
 
 1. Include the SDK library in your project. It doesn't matter whether you are using an npm-package or a CDN link.
-2. Access the `headlessCheckout` objectobject, which contains the Pay Station initialization logic.
+2. Access the `headlessCheckout` object, which contains the Pay Station initialization logic.
 3. Initialize the SDK with your environment parameters.
 4. Set the access token for the initialized SDK.
 5. Place the Pay Station components in the HTML markup.
