@@ -1,7 +1,13 @@
 {
    "vi" : {
       "translation" : {
-         "hello" : "Xin chào thế giới!"
+         "cookie-policy" : "Chính sách cookie",
+         "hello" : "Xin chào thế giới!",
+         "legal" : "Pháp lý",
+         "privacy-policy" : "Chính sách Quyền riêng tư",
+         "refund-policy" : "Chính sách hoàn tiền",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Kết nối bảo mật"
       }
    }
 }

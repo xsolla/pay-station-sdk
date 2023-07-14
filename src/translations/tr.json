@@ -1,7 +1,13 @@
 {
    "tr" : {
       "translation" : {
-         "hello" : "Merhaba dünya!"
+         "cookie-policy" : "Çerez Politikası",
+         "hello" : "Merhaba dünya!",
+         "legal" : "Yasal",
+         "privacy-policy" : "Gizlilik Politikası",
+         "refund-policy" : "İade Politikası",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Güvenli bağlantı"
       }
    }
 }

@@ -1,7 +1,13 @@
 {
    "zh_HANT" : {
       "translation" : {
-         "hello" : "你好，世界！"
+         "cookie-policy" : "Cookie 政策",
+         "hello" : "你好，世界！",
+         "legal" : "法律文件",
+         "privacy-policy" : "隱私權政策",
+         "refund-policy" : "退款政策",
+         "sctl-indications" : "特定商業交易法聲明",
+         "secure-connection" : "安全連線"
       }
    }
 }
