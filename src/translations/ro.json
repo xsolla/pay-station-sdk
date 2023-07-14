@@ -1,7 +1,13 @@
 {
    "ro" : {
       "translation" : {
-         "hello" : "Salutare, lume!"
+         "cookie-policy" : "Politica privind modulele cookie",
+         "hello" : "Salutare, lume!",
+         "legal" : "Juridic",
+         "privacy-policy" : "Politica de confidențialitate",
+         "refund-policy" : "Politica de retur",
+         "sctl-indications" : "Indicații SCTL",
+         "secure-connection" : "Conexiune securizată"
       }
    }
 }

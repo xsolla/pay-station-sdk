@@ -1,7 +1,13 @@
 {
    "es" : {
       "translation" : {
-         "hello" : "¡Hola mundo!"
+         "cookie-policy" : "Política de cookies",
+         "hello" : "¡Hola mundo!",
+         "legal" : "Legal",
+         "privacy-policy" : "Política de privacidad",
+         "refund-policy" : "Política de reembolso",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Conexión segura"
       }
    }
 }

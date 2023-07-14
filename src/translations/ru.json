@@ -1,7 +1,13 @@
 {
    "ru" : {
       "translation" : {
-         "hello" : "Привет, мир!"
+         "cookie-policy" : "Политика использования cookie",
+         "hello" : "Привет, мир!",
+         "legal" : "Юридические документы",
+         "privacy-policy" : "Политика конфиденциальности",
+         "refund-policy" : "Политика возврата",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Безопасное соединение"
       }
    }
 }

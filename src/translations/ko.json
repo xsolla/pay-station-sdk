@@ -1,7 +1,13 @@
 {
    "ko" : {
       "translation" : {
-         "hello" : "안녕하세요 세상!"
+         "cookie-policy" : "쿠키 정책",
+         "hello" : "안녕하세요 세상!",
+         "legal" : "법률",
+         "privacy-policy" : "개인정보 보호정책",
+         "refund-policy" : "환불 정책",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "보안 연결"
       }
    }
 }
