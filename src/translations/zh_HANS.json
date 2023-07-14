@@ -1,7 +1,13 @@
 {
-   "zh_HANS" : {
-      "translation" : {
-         "hello" : "你好，世界！"
-      }
-   }
+  "zh_HANS": {
+    "translation": {
+      "cookie-policy": "Cookie政策",
+      "hello": "你好，世界！",
+      "legal": "法律信息",
+      "privacy-policy": "隐私政策",
+      "refund-policy": "退款政策",
+      "sctl-indications": "SCTL Indications",
+      "secure-connection": "安全连接"
+    }
+  }
 }
