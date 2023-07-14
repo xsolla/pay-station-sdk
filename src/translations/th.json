@@ -1,7 +1,13 @@
 {
-   "th" : {
-      "translation" : {
-         "hello" : "สวัสดีชาวโลก!"
-      }
-   }
+  "th": {
+    "translation": {
+      "cookie-policy": "นโยบายคุกกี้",
+      "hello": "สวัสดีชาวโลก!",
+      "legal": "ข้อมูลด้านกฎหมาย",
+      "privacy-policy": "นโยบายความเป็นส่วนตัว",
+      "refund-policy": "นโยบายการคืนเงิน",
+      "sctl-indications": "SCTL Indications",
+      "secure-connection": "การเชื่อมต่อที่ปลอดภัย"
+    }
+  }
 }

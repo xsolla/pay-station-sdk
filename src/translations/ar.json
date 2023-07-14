@@ -1,7 +1,13 @@
 {
-   "ar" : {
-      "translation" : {
-         "hello" : "مرحبًا بالعالم!"
-      }
-   }
+  "ar": {
+    "translation": {
+      "cookie-policy": "سياسة ملفات تعريف الارتباط",
+      "hello": "مرحبًا بالعالم!",
+      "legal": "قانوني",
+      "privacy-policy": "سياسة الخصوصية",
+      "refund-policy": "سياسة الاسترداد",
+      "sctl-indications": "SCTL Indications",
+      "secure-connection": "اتصال آمن"
+    }
+  }
 }

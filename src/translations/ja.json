@@ -1,7 +1,13 @@
 {
-   "ja" : {
-      "translation" : {
-         "hello" : "こんにちは、世界！"
-      }
-   }
+  "ja": {
+    "translation": {
+      "cookie-policy": "クッキーポリシー",
+      "hello": "こんにちは、世界！",
+      "legal": "法的文書",
+      "privacy-policy": "プライバシーポリシー",
+      "refund-policy": "返金ポリシー",
+      "sctl-indications": "特商法取引に基づく表示",
+      "secure-connection": "安全な接続"
+    }
+  }
 }

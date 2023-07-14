@@ -20,6 +20,11 @@ const config = {
           'sass-loader',
         ],
       },
+      {
+        test: /\.svg$/,
+        type: 'asset',
+        use: 'svgo-loader',
+      },
     ],
   },
   resolve: {
