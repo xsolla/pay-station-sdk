@@ -1,7 +1,13 @@
 {
-   "cs" : {
-      "translation" : {
-         "hello" : "Ahoj světe!"
-      }
-   }
+  "cs": {
+    "translation": {
+      "cookie-policy": "Zásady používání cookies",
+      "hello": "Ahoj světe!",
+      "legal": "Právní informace",
+      "privacy-policy": "Zásady ochrany osobních údajů",
+      "refund-policy": "Podmínky vrácení peněz",
+      "sctl-indications": "SCTL Indications",
+      "secure-connection": "Zabezpečené připojení"
+    }
+  }
 }
