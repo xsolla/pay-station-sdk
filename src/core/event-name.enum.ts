@@ -6,4 +6,7 @@ export const enum EventName {
   getSavedMethods = 'getSavedMethods',
   getUserBalance = 'getUserBalance',
   submitButton = 'submitButton',
+  getLegalComponentConfig = 'getLegalComponentConfig',
+  legalComponentPing = 'legalComponentPing',
+  legalComponentPong = 'legalComponentPong',
 }

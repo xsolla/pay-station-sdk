@@ -1,7 +1,13 @@
 {
-   "bg" : {
-      "translation" : {
-         "hello" : "Здравей, свят!"
-      }
-   }
+  "bg": {
+    "translation": {
+      "cookie-policy": "Политика за бисквитките",
+      "hello": "Здравей, свят!",
+      "legal": "Правни документи",
+      "privacy-policy": "Политика за поверителност",
+      "refund-policy": "Политика за връщане на средства",
+      "sctl-indications": "SCTL Indications",
+      "secure-connection": "Сигурна връзка"
+    }
+  }
 }

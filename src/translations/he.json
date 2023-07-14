@@ -1,7 +1,13 @@
 {
-   "he" : {
-      "translation" : {
-         "hello" : "שלום עולם!"
-      }
-   }
+  "he": {
+    "translation": {
+      "cookie-policy": "מדיניות בנושא קובצי Cookie",
+      "hello": "שלום עולם!",
+      "legal": "משפטי",
+      "privacy-policy": "מדיניות פרטיות",
+      "refund-policy": "מדיניות החזרים כספיים",
+      "sctl-indications": "SCTL Indications",
+      "secure-connection": "חיבור מאובטח"
+    }
+  }
 }

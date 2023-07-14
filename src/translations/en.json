@@ -1,7 +1,14 @@
 {
   "en": {
     "translation": {
-      "hello": "Hello world!"
+      "disclaimer": "disclaimer",
+      "hello": "Hello world!",
+      "legal": "Legal",
+      "cookie-policy": "Cookie policy",
+      "privacy-policy": "Privacy policy",
+      "refund-policy": "Refund policy",
+      "sctl-indications": "SCTL Indications",
+      "secure-connection": "Secure connection"
     }
   }
 }
