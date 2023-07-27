@@ -1,6 +1,7 @@
 export const enum EventName {
   error = 'error',
   initPayment = 'initPayment',
+  initForm = 'initForm',
   getPaymentMethodsList = 'getPaymentMethodsList',
   getPaymentQuickMethods = 'getPaymentQuickMethods',
   getSavedMethods = 'getSavedMethods',
