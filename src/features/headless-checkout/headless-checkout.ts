@@ -19,6 +19,8 @@ import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-m
 import { FormConfiguration } from '../../core/form/form-configuration.interface';
 import { initFormHandler } from './post-messages-handlers/init-form.handler';
 import { Form } from '../../core/form/form.interface';
+import { NextAction } from '../../core/actions/next-action.interface';
+import { nextActionHandler } from './post-messages-handlers/next-action.handler';
 
 @singleton()
 export class HeadlessCheckout {
@@ -67,6 +69,18 @@ export class HeadlessCheckout {
         msg,
         initFormHandler
       ) as Promise<Form>;
+    },
+
+    onNextAction: (callbackFn: (nextAction: NextAction) => void): void => {
+      this.postMessagesClient.listen<NextAction>(
+        EventName.nextAction,
+        nextActionHandler,
+        (nextAction) => {
+          if (nextAction) {
+            callbackFn(nextAction);
+          }
+        }
+      );
     },
   };
 
