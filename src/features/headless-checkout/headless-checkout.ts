@@ -16,6 +16,9 @@ import { UserBalance } from '../../core/user-balance.interface';
 import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance.handler';
 import { HeadlessCheckoutSpy } from '../../core/headless-checkout-spy/headless-checkout-spy';
 import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
+import { FormConfiguration } from '../../core/form/form-configuration.interface';
+import { initFormHandler } from './post-messages-handlers/init-form.handler';
+import { Form } from '../../core/form/form.interface';
 
 @singleton()
 export class HeadlessCheckout {
@@ -43,6 +46,27 @@ export class HeadlessCheckout {
       callback: (value?: T) => void
     ): (() => void) => {
       return this.postMessagesClient.listen(eventName, handler, callback);
+    },
+  };
+
+  public form = {
+    /**
+     * Initialize payment form
+     * @param configuration Form configuration
+     * @returns {Form} form details
+     */
+    init: async (configuration: FormConfiguration): Promise<Form> => {
+      const msg: Message = {
+        name: EventName.initForm,
+        data: {
+          configuration,
+        },
+      };
+
+      return this.postMessagesClient.send<Form>(
+        msg,
+        initFormHandler
+      ) as Promise<Form>;
     },
   };
 
