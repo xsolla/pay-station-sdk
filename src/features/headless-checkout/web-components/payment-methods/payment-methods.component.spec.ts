@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
-import { HeadlessCheckoutSpy } from '../../../../core/headless-checkout-spy/headless-checkout-spy';
+import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { PaymentMethodsComponent } from './payment-methods.component';
 import { noopStub } from '../../../../tests/stubs/noop.stub';
 import { PaymentMethodsAttributes } from './payment-methods-attributes.enum';
