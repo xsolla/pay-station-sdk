@@ -14,13 +14,14 @@ import { SavedMethod } from '../../core/saved-method.interface';
 import { getSavedMethodsHandler } from './post-messages-handlers/get-saved-methods.handler';
 import { UserBalance } from '../../core/user-balance.interface';
 import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance.handler';
-import { HeadlessCheckoutSpy } from '../../core/headless-checkout-spy/headless-checkout-spy';
+import { HeadlessCheckoutSpy } from '../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
 import { FormConfiguration } from '../../core/form/form-configuration.interface';
 import { initFormHandler } from './post-messages-handlers/init-form.handler';
 import { Form } from '../../core/form/form.interface';
 import { NextAction } from '../../core/actions/next-action.interface';
 import { nextActionHandler } from './post-messages-handlers/next-action.handler';
+import { FormSpy } from '../../core/spy/form-spy/form-spy';
 
 @singleton()
 export class HeadlessCheckout {
@@ -65,9 +66,8 @@ export class HeadlessCheckout {
         },
       };
 
-      return this.postMessagesClient.send<Form>(
-        msg,
-        initFormHandler
+      return this.postMessagesClient.send<Form>(msg, (message) =>
+        initFormHandler(message, () => (this.formSpy.formWasInit = true))
       ) as Promise<Form>;
     },
 
@@ -93,7 +93,8 @@ export class HeadlessCheckout {
     private readonly window: Window,
     private readonly postMessagesClient: PostMessagesClient,
     private readonly localizeService: LocalizeService,
-    private readonly headlessCheckoutSpy: HeadlessCheckoutSpy
+    private readonly headlessCheckoutSpy: HeadlessCheckoutSpy,
+    private readonly formSpy: FormSpy
   ) {}
 
   public async init(environment: { isWebview: boolean }): Promise<void> {
@@ -210,6 +211,7 @@ export class HeadlessCheckout {
     this.coreIframe.style.border = 'none';
     this.coreIframe.style.position = 'absolute';
     this.coreIframe.src = `${this.headlessAppUrl}/core`;
+    this.coreIframe.name = 'core';
     this.window.document.body.appendChild(this.coreIframe);
     return new Promise((resolve) => {
       this.coreIframe.onload = () => {

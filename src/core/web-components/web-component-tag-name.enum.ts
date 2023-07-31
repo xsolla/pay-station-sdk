@@ -1,5 +1,5 @@
 export enum WebComponentTagName {
-  CardNumberComponent = 'psdk-card-number',
+  TextComponent = 'psdk-text-component',
   SubmitButtonComponent = 'psdk-submit-button',
   PaymentMethodsComponent = 'psdk-payment-methods',
   LegalComponent = 'psdk-legal',

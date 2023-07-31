@@ -5,7 +5,7 @@ import { EventName } from '../../../../core/event-name.enum';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { getLegalComponentTemplate } from './legal.component.tempate';
 import { Message } from '../../../../core/message.interface';
-import { HeadlessCheckoutSpy } from '../../../../core/headless-checkout-spy/headless-checkout-spy';
+import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { getLegalComponentConfigHandler } from '../../post-messages-handlers/get-legal-component-config.handler';
 import { LegalComponentConfig } from './legal-component.config.interface';
 import { isEventMessage } from '../../../../core/guards/event-message.guard';
