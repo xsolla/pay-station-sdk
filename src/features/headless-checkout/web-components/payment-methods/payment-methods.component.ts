@@ -5,7 +5,7 @@ import { getPaymentMethodTemplate } from './payment-method.template';
 import { filterPaymentMethods } from './filter-payment-methods.function';
 import { PaymentMethodsAttributes } from './payment-methods-attributes.enum';
 import { PaymentMethodsEvents } from './payment-methods-events.enum';
-import { HeadlessCheckoutSpy } from '../../../../core/headless-checkout-spy/headless-checkout-spy';
+import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { HeadlessCheckout } from '../../headless-checkout';
 
 export class PaymentMethodsComponent extends WebComponentAbstract {

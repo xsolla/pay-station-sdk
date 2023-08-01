@@ -1,18 +1,17 @@
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
-import { CardNumberComponent } from './card-number.component';
+import { TextComponent } from './text.component';
 
 function createComponent(): void {
-  const element = document.createElement(
-    WebComponentTagName.CardNumberComponent
-  );
+  const element = document.createElement(WebComponentTagName.TextComponent);
+  element.setAttribute('name', 'zip');
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
 }
 
 describe('HeadlessCheckout', () => {
   window.customElements.define(
-    WebComponentTagName.CardNumberComponent,
-    CardNumberComponent
+    WebComponentTagName.TextComponent,
+    TextComponent
   );
 
   beforeEach(() => {
