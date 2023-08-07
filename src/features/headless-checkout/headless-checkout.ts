@@ -5,23 +5,26 @@ import { Message } from '../../core/message.interface';
 import { PaymentMethod } from '../../core/payment-method.interface';
 import { Handler } from '../../core/post-messages-client/handler.type';
 import { PostMessagesClient } from '../../core/post-messages-client/post-messages-client';
-import { getErrorHandler } from './post-messages-handlers/error.handler';
-import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-methods.handler';
-import { setTokenHandler } from './post-messages-handlers/set-token.handler';
-import { headlessCheckoutAppUrl } from './environment';
 import { webComponents } from '../../core/web-components/web-components.map';
 import { SavedMethod } from '../../core/saved-method.interface';
-import { getSavedMethodsHandler } from './post-messages-handlers/get-saved-methods.handler';
 import { UserBalance } from '../../core/user-balance.interface';
-import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance.handler';
 import { HeadlessCheckoutSpy } from '../../core/spy/headless-checkout-spy/headless-checkout-spy';
-import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
 import { FormConfiguration } from '../../core/form/form-configuration.interface';
-import { initFormHandler } from './post-messages-handlers/init-form.handler';
 import { Form } from '../../core/form/form.interface';
 import { NextAction } from '../../core/actions/next-action.interface';
-import { nextActionHandler } from './post-messages-handlers/next-action.handler';
 import { FormSpy } from '../../core/spy/form-spy/form-spy';
+import { Status } from '../../core/status/status.interface';
+import { StatusEnum } from '../../core/status/status.enum';
+import { getErrorHandler } from './post-messages-handlers/error.handler';
+import { initFormHandler } from './post-messages-handlers/init-form.handler';
+import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-methods.handler';
+import { setTokenHandler } from './post-messages-handlers/set-token.handler';
+import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-methods.handler';
+import { getSavedMethodsHandler } from './post-messages-handlers/get-saved-methods.handler';
+import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance.handler';
+import { nextActionHandler } from './post-messages-handlers/next-action.handler';
+import { getPaymentStatusHandler } from './post-messages-handlers/get-payment-status/get-payment-status.handler';
+import { headlessCheckoutAppUrl } from './environment';
 
 @singleton()
 export class HeadlessCheckout {
@@ -81,6 +84,27 @@ export class HeadlessCheckout {
           }
         }
       );
+    },
+
+    getStatus: async (): Promise<Status> => {
+      const msg: Message = {
+        name: EventName.getPaymentStatus,
+      };
+
+      const status = await this.postMessagesClient.send<Status>(
+        msg,
+        (message) => getPaymentStatusHandler(message)
+      );
+
+      if (!status) {
+        return {
+          statusState: StatusEnum.unknown,
+          statusMessage: 'Unknown status',
+          group: 'unknown',
+        };
+      }
+
+      return status;
     },
   };
 
