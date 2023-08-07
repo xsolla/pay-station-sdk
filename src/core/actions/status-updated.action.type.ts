@@ -1,17 +1,8 @@
 import { Action } from './action.interface';
+import { StatusEnum } from '../status/status.enum';
 
 export type StatusUpdatedActionType = 'status_updated';
 
-export enum StatusEnum {
-  created = 'created',
-  awaiting = 'awaiting',
-  processing = 'processing',
-  authorized = 'authorized',
-  held = 'held',
-  done = 'done',
-  error = 'error',
-  canceled = 'canceled',
-}
 export interface StatusUpdatedActionData {
   statusState: StatusEnum;
   group: string;
