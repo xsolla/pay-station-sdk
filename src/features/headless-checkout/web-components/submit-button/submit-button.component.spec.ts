@@ -12,7 +12,7 @@ function createComponent(): void {
   (document.getElementById('container')! as HTMLElement).appendChild(element);
 }
 
-describe('HeadlessCheckout', () => {
+describe('SubmitButtonComponent', () => {
   let postMessagesClient: PostMessagesClient;
   window.customElements.define(
     WebComponentTagName.SubmitButtonComponent,

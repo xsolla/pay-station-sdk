@@ -12,7 +12,27 @@
          "status.processing.description" : "결제 완료 대기 중...",
          "status.processing.title" : "결제 처리 중",
          "status.success.description" : "{{email}}(으)로 영수증을 보내드렸습니다.",
-         "status.success.title" : "결제 성공함"
+         "status.success.title" : "결제 성공함",
+         "finance-details-cart-items-checkout-title" : "인게임 구매",
+         "finance-details-cart-items-sales-tax" : "판매 세금 {{percent}}%",
+         "finance-details-cart-items-vat" : "VAT {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "VAT, NHIL, GETFund Levy 및 Covid-19 Levy",
+         "finance-details-cart-items-vat-india" : "GST {{percent}}%",
+         "finance-details-hrk-equal" : "= {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "환율: 1 EUR = 7.5345 HRK",
+         "finance-details-subtotal-details-discount" : "할인",
+         "finance-details-subtotal-details-fee" : "결제 시스템 수수료",
+         "finance-details-subtotal-details-sales-tax" : "판매 세금",
+         "finance-details-subtotal-details-user-balance" : "잔액",
+         "finance-details-subtotal-details-vat" : "VAT {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "VAT, NHIL, GETFund Levy 및 Covid-19 Levy",
+         "finance-details-subtotal-details-vat-india" : "GST {{percent}}%",
+         "finance-details-subtotal-title" : "소계",
+         "finance-details-total-details-sales-tax" : "판매 세금 포함됨",
+         "finance-details-total-details-vat" : "{{percent}}% VAT 포함",
+         "finance-details-total-details-vat-ghana" : "VAT, NHIL, GETFund Levy 및 Covid-19 Levy 등 포함",
+         "finance-details-total-details-vat-india" : "{{percent}}% GST 포함",
+         "finance-details-total-title" : "합계"
       }
    }
 }

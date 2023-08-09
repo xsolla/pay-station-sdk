@@ -29,6 +29,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
 
   public constructor() {
     super();
+
     this.headlessCheckoutSpy = container.resolve(HeadlessCheckoutSpy);
     this.headlessCheckout = container.resolve(HeadlessCheckout);
   }

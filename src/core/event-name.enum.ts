@@ -11,5 +11,6 @@ export const enum EventName {
   getPaymentStatus = 'getPaymentStatus',
   legalComponentPing = 'legalComponentPing',
   legalComponentPong = 'legalComponentPong',
+  financeDetails = 'financeDetails',
   nextAction = 'nextAction',
 }
