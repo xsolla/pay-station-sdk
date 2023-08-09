@@ -1,13 +1,33 @@
 {
-  "es": {
-    "translation": {
-      "cookie-policy": "Política de cookies",
-      "hello": "¡Hola mundo!",
-      "legal": "Legal",
-      "privacy-policy": "Política de privacidad",
-      "refund-policy": "Política de reembolso",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Conexión segura"
-    }
-  }
+   "es" : {
+      "translation" : {
+         "cookie-policy" : "Política de cookies",
+         "finance-details-cart-items-checkout-title" : "Compra en el juego",
+         "finance-details-cart-items-sales-tax" : "Impuesto sobre las ventas {{percent}} %",
+         "finance-details-cart-items-vat" : "IVA {{percent}} %",
+         "finance-details-cart-items-vat-ghana" : "IVA, NHIL y los impuestos GETFund y Covid-19",
+         "finance-details-cart-items-vat-india" : "GST {{percent}} %",
+         "finance-details-hrk-equal" : "Es igual a {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Tipo de cambio: 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Descuento",
+         "finance-details-subtotal-details-fee" : "Comisión del sistema de pago",
+         "finance-details-subtotal-details-sales-tax" : "Impuesto sobre las ventas",
+         "finance-details-subtotal-details-user-balance" : "Saldo",
+         "finance-details-subtotal-details-vat" : "IVA {{percent}} %",
+         "finance-details-subtotal-details-vat-ghana" : "IVA, NHIL y los impuestos GETFund y Covid-19",
+         "finance-details-subtotal-details-vat-india" : "GST {{percent}} %",
+         "finance-details-subtotal-title" : "Subtotal",
+         "finance-details-total-details-sales-tax" : "Impuesto sobre las ventas incluido",
+         "finance-details-total-details-vat" : "{{percent}} % IVA incluido​",
+         "finance-details-total-details-vat-ghana" : "Incluyendo el IVA, GST, NHIL y los impuestos GETFund y Covid-19",
+         "finance-details-total-details-vat-india" : "{{percent}} % GST incluido​",
+         "finance-details-total-title" : "Total",
+         "hello" : "¡Hola mundo!",
+         "legal" : "Legal",
+         "privacy-policy" : "Política de privacidad",
+         "refund-policy" : "Política de reembolso",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Conexión segura"
+      }
+   }
 }

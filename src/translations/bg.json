@@ -1,13 +1,33 @@
 {
-  "bg": {
-    "translation": {
-      "cookie-policy": "Политика за бисквитките",
-      "hello": "Здравей, свят!",
-      "legal": "Правни документи",
-      "privacy-policy": "Политика за поверителност",
-      "refund-policy": "Политика за връщане на средства",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Сигурна връзка"
-    }
-  }
+   "bg" : {
+      "translation" : {
+         "cookie-policy" : "Политика за бисквитките",
+         "finance-details-cart-items-checkout-title" : "Покупка вътре в играта",
+         "finance-details-cart-items-sales-tax" : "Данък продажби {{percent}}%",
+         "finance-details-cart-items-vat" : "ДДС {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "ДДС, NHIL, облагане за GETFund и облагане за Covid-19",
+         "finance-details-cart-items-vat-india" : "ДСУ {{percent}}%",
+         "finance-details-hrk-equal" : "Равнява се на {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Обменен курс: 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Отстъпка",
+         "finance-details-subtotal-details-fee" : "Такса за система за плащане",
+         "finance-details-subtotal-details-sales-tax" : "Данък продажби",
+         "finance-details-subtotal-details-user-balance" : "Баланс",
+         "finance-details-subtotal-details-vat" : "ДДС {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "ДДС, NHIL, облагане за GETFund и облагане за Covid-19",
+         "finance-details-subtotal-details-vat-india" : "ДСУ {{percent}}%",
+         "finance-details-subtotal-title" : "Междинна сума",
+         "finance-details-total-details-sales-tax" : "С включен данък продажби",
+         "finance-details-total-details-vat" : "Включително {{percent}}% ДДС",
+         "finance-details-total-details-vat-ghana" : "С включени ДДС, GST, NHIL, облагане за GETFund и облагане за Covid-19",
+         "finance-details-total-details-vat-india" : "С включен {{percent}}% ДСУ",
+         "finance-details-total-title" : "Общо",
+         "hello" : "Здравей, свят!",
+         "legal" : "Правни документи",
+         "privacy-policy" : "Политика за поверителност",
+         "refund-policy" : "Политика за връщане на средства",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Сигурна връзка"
+      }
+   }
 }

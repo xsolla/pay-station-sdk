@@ -1,13 +1,33 @@
 {
-  "de": {
-    "translation": {
-      "cookie-policy": "Cookie-Richtlinie",
-      "hello": "Hallo Welt!",
-      "legal": "Rechtliches",
-      "privacy-policy": "Datenschutzerklärung",
-      "refund-policy": "Erstattungsrichtlinie",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Sichere Verbindung"
-    }
-  }
+   "de" : {
+      "translation" : {
+         "cookie-policy" : "Cookie-Richtlinie",
+         "finance-details-cart-items-checkout-title" : "Ingame-Kauf",
+         "finance-details-cart-items-sales-tax" : "{{percent}} % Umsatzsteuer",
+         "finance-details-cart-items-vat" : "{{percent}} % MwSt.",
+         "finance-details-cart-items-vat-ghana" : "VAT, NHIL, GETFund Levy und Covid-19 Levy",
+         "finance-details-cart-items-vat-india" : "{{percent}} % GST",
+         "finance-details-hrk-equal" : "Entspricht {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Wechselkurs: 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Rabatt",
+         "finance-details-subtotal-details-fee" : "Zahlungssystemgebühr",
+         "finance-details-subtotal-details-sales-tax" : "Sales Tax",
+         "finance-details-subtotal-details-user-balance" : "Guthaben",
+         "finance-details-subtotal-details-vat" : "{{percent}} % MwSt.",
+         "finance-details-subtotal-details-vat-ghana" : "VAT, NHIL, GETFund Levy und Covid-19 Levy",
+         "finance-details-subtotal-details-vat-india" : "{{percent}} % GST",
+         "finance-details-subtotal-title" : "Zwischensumme",
+         "finance-details-total-details-sales-tax" : "Inklusive Sales Tax",
+         "finance-details-total-details-vat" : "Einschließlich {{percent}} % MWSt.",
+         "finance-details-total-details-vat-ghana" : "Inklusive VAT, NHIL, GETFund Levy und Covid-19 Levy",
+         "finance-details-total-details-vat-india" : "Inklusive {{percent}} % GST",
+         "finance-details-total-title" : "Summe",
+         "hello" : "Hallo Welt!",
+         "legal" : "Rechtliches",
+         "privacy-policy" : "Datenschutzerklärung",
+         "refund-policy" : "Erstattungsrichtlinie",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Sichere Verbindung"
+      }
+   }
 }

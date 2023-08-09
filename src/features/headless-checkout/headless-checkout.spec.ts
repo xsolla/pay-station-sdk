@@ -5,6 +5,7 @@ import { EventName } from '../../core/event-name.enum';
 import { Message } from '../../core/message.interface';
 import { Handler } from '../../core/post-messages-client/handler.type';
 import { LocalizeService } from '../../core/i18n/localize.service';
+import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
 
 const mockMessage: Message = {
   name: EventName.initPayment,
@@ -127,6 +128,15 @@ describe('HeadlessCheckout', () => {
     } catch (e: unknown) {
       expect(e).toEqual(new Error('Need correct token'));
     }
+  });
+
+  it('Should getFinanceDetails', async () => {
+    const spy = spyOn(postMessagesClient, 'send');
+    await headlessCheckout.getFinanceDetails();
+    expect(spy).toHaveBeenCalledWith(
+      { name: EventName.financeDetails },
+      getFinanceDetailsHandler
+    );
   });
 
   it('Should getRegularMethods', async () => {

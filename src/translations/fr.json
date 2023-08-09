@@ -1,13 +1,33 @@
 {
-  "fr": {
-    "translation": {
-      "cookie-policy": "Politique en matière de cookies",
-      "hello": "Bonjour monde!",
-      "legal": "Juridique",
-      "privacy-policy": "Politique de confidentialité",
-      "refund-policy": "Politique de remboursement",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Connexion sécurisée"
-    }
-  }
+   "fr" : {
+      "translation" : {
+         "cookie-policy" : "Politique en matière de cookies",
+         "finance-details-cart-items-checkout-title" : "Achat intégré",
+         "finance-details-cart-items-sales-tax" : "Taxe de vente de {{percent}} %",
+         "finance-details-cart-items-vat" : "TVA de {{percent}} %",
+         "finance-details-cart-items-vat-ghana" : "La TVA, la NHIL, le prélèvement GETFund et le prélèvement Covid-19",
+         "finance-details-cart-items-vat-india" : "TPS de {{percent}} %",
+         "finance-details-hrk-equal" : "Égal {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Taux de change : 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Remise",
+         "finance-details-subtotal-details-fee" : "Frais du système de paiement",
+         "finance-details-subtotal-details-sales-tax" : "Taxe de vente",
+         "finance-details-subtotal-details-user-balance" : "Solde",
+         "finance-details-subtotal-details-vat" : "TVA de {{percent}} %",
+         "finance-details-subtotal-details-vat-ghana" : "La TVA, la NHIL, le prélèvement GETFund et le prélèvement Covid-19",
+         "finance-details-subtotal-details-vat-india" : "TPS de {{percent}} %",
+         "finance-details-subtotal-title" : "Sous-total",
+         "finance-details-total-details-sales-tax" : "Taxe de vente incluse",
+         "finance-details-total-details-vat" : "TVA de {{percent}} % incluse",
+         "finance-details-total-details-vat-ghana" : "Y compris la TVA, la NHIL, le prélèvement GETFund et le prélèvement Covid-19",
+         "finance-details-total-details-vat-india" : "TPS de {{percent}} % incluse",
+         "finance-details-total-title" : "Total",
+         "hello" : "Bonjour monde!",
+         "legal" : "Juridique",
+         "privacy-policy" : "Politique de confidentialité",
+         "refund-policy" : "Politique de remboursement",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Connexion sécurisée"
+      }
+   }
 }

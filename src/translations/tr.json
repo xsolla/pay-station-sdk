@@ -1,13 +1,33 @@
 {
-  "tr": {
-    "translation": {
-      "cookie-policy": "Çerez Politikası",
-      "hello": "Merhaba dünya!",
-      "legal": "Yasal",
-      "privacy-policy": "Gizlilik Politikası",
-      "refund-policy": "İade Politikası",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Güvenli bağlantı"
-    }
-  }
+   "tr" : {
+      "translation" : {
+         "cookie-policy" : "Çerez Politikası",
+         "finance-details-cart-items-checkout-title" : "Oyun içi satın alma",
+         "finance-details-cart-items-sales-tax" : "Satış vergisi %{{percent}}",
+         "finance-details-cart-items-vat" : "KDV %{{percent}}",
+         "finance-details-cart-items-vat-ghana" : "KDV, NHIL, GETFund Vergisi ve Covid-19 Vergisi",
+         "finance-details-cart-items-vat-india" : "GST %{{percent}}",
+         "finance-details-hrk-equal" : "{{value}} Hırvat kunasına eşittir",
+         "finance-details-hrk-exchange-rate" : "Döviz kuru: 1 euro = 7,5345 Hırvat kunası",
+         "finance-details-subtotal-details-discount" : "İndirim",
+         "finance-details-subtotal-details-fee" : "Ödeme sistemi ücreti",
+         "finance-details-subtotal-details-sales-tax" : "Satış vergisi",
+         "finance-details-subtotal-details-user-balance" : "Bakiye",
+         "finance-details-subtotal-details-vat" : "KDV %{{percent}}",
+         "finance-details-subtotal-details-vat-ghana" : "KDV, NHIL, GETFund Vergisi ve Covid-19 Vergisi",
+         "finance-details-subtotal-details-vat-india" : "GST %{{percent}}",
+         "finance-details-subtotal-title" : "Ara Toplam",
+         "finance-details-total-details-sales-tax" : "Satış vergisi dahildir",
+         "finance-details-total-details-vat" : "%{{percent}} KDV dahildir",
+         "finance-details-total-details-vat-ghana" : "KDV, NHIL, GETFund Vergisi ve Covid-19 Vergisi dahil",
+         "finance-details-total-details-vat-india" : "%{{percent}} GST dahildir",
+         "finance-details-total-title" : "Toplam",
+         "hello" : "Merhaba dünya!",
+         "legal" : "Yasal",
+         "privacy-policy" : "Gizlilik Politikası",
+         "refund-policy" : "İade Politikası",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Güvenli bağlantı"
+      }
+   }
 }
