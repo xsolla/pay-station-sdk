@@ -12,7 +12,27 @@
          "status.processing.description" : "正在等待支付完成...",
          "status.processing.title" : "正在处理付款",
          "status.success.description" : "您的收据已发送至{{email}}",
-         "status.success.title" : "支付成功"
+         "status.success.title" : "支付成功",
+         "finance-details-cart-items-checkout-title" : "游戏内购买",
+         "finance-details-cart-items-sales-tax" : "销售税 {{percent}}%",
+         "finance-details-cart-items-vat" : "增值税 {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "VAT、NHIL、GETFund征税和Covid-19征税",
+         "finance-details-cart-items-vat-india" : "商品和服务税 {{percent}}%",
+         "finance-details-hrk-equal" : "等于 {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "汇率：1 欧元 = 7.5345 HRK",
+         "finance-details-subtotal-details-discount" : "折扣",
+         "finance-details-subtotal-details-fee" : "支付系统使用费",
+         "finance-details-subtotal-details-sales-tax" : "销售税",
+         "finance-details-subtotal-details-user-balance" : "余额",
+         "finance-details-subtotal-details-vat" : "增值税 {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "VAT、NHIL、GETFund征税和Covid-19征税",
+         "finance-details-subtotal-details-vat-india" : "商品和服务税 {{percent}}%",
+         "finance-details-subtotal-title" : "小计",
+         "finance-details-total-details-sales-tax" : "含销售税",
+         "finance-details-total-details-vat" : "含{{percent}}%增值税",
+         "finance-details-total-details-vat-ghana" : "含VAT、NHIL、GETFund征税和Covid-19征税",
+         "finance-details-total-details-vat-india" : "含{{percent}}%商品和服务税",
+         "finance-details-total-title" : "总计"
       }
    }
 }

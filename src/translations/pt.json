@@ -12,7 +12,27 @@
          "status.processing.description" : "Aguardando a conclusão do pagamento",
          "status.processing.title" : "Pagamento em processamento",
          "status.success.description" : "Enviamos seu recibo para {{email}}",
-         "status.success.title" : "Pagamento bem-sucedido"
+         "status.success.title" : "Pagamento bem-sucedido",
+         "finance-details-cart-items-checkout-title" : "Compra no jogo",
+         "finance-details-cart-items-sales-tax" : "Imposto sobre venda {{percent}}%",
+         "finance-details-cart-items-vat" : "VAT {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "VAT, NHIL, Taxa GETFund e Taxa Covid-19",
+         "finance-details-cart-items-vat-india" : "GST {{percent}}%",
+         "finance-details-hrk-equal" : "Equivale {{value}}HRK",
+         "finance-details-hrk-exchange-rate" : "Taxa de câmbio: 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Desconto",
+         "finance-details-subtotal-details-fee" : "Taxa do sistema de pagamento",
+         "finance-details-subtotal-details-sales-tax" : "Imposto sobre venda",
+         "finance-details-subtotal-details-user-balance" : "Saldo",
+         "finance-details-subtotal-details-vat" : "VAT {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "VAT, NHIL, Taxa GETFund e Taxa Covid-19",
+         "finance-details-subtotal-details-vat-india" : "GST {{percent}}%",
+         "finance-details-subtotal-title" : "Subtotal",
+         "finance-details-total-details-sales-tax" : "Imposto de venda incluso",
+         "finance-details-total-details-vat" : "Incluindo {{percent}}% de VAT",
+         "finance-details-total-details-vat-ghana" : "Incluindo VAT, NHIL, Taxa GETFund e Taxa Covid-19",
+         "finance-details-total-details-vat-india" : "Incluindo {{percent}}% de GST",
+         "finance-details-total-title" : "Total"
       }
    }
 }

@@ -12,7 +12,27 @@
          "status.processing.description" : "Čekání na dokončení platby...",
          "status.processing.title" : "Zpracovávání platby",
          "status.success.description" : "Vaši stvrzenku jsme zaslali na {{email}}",
-         "status.success.title" : "Platba byla úspěšná"
+         "status.success.title" : "Platba byla úspěšná",
+         "finance-details-cart-items-checkout-title" : "Nákup ve hře",
+         "finance-details-cart-items-sales-tax" : "Daň z obratu {{percent}} %",
+         "finance-details-cart-items-vat" : "DPH {{percent}} %",
+         "finance-details-cart-items-vat-ghana" : "DPH, NHIL, odvod GETFund a odvod Covid-19",
+         "finance-details-cart-items-vat-india" : "GST {{percent}} %",
+         "finance-details-hrk-equal" : "Což odpovídá {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Směnný kurz: 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Sleva",
+         "finance-details-subtotal-details-fee" : "Poplatek za platební systém",
+         "finance-details-subtotal-details-sales-tax" : "Daň z obratu",
+         "finance-details-subtotal-details-user-balance" : "Zůstatek",
+         "finance-details-subtotal-details-vat" : "DPH {{percent}} %",
+         "finance-details-subtotal-details-vat-ghana" : "DPH, NHIL, odvod GETFund a odvod Covid-19",
+         "finance-details-subtotal-details-vat-india" : "GST {{percent}} %",
+         "finance-details-subtotal-title" : "Mezisoučet",
+         "finance-details-total-details-sales-tax" : "Včetně daně z obratu",
+         "finance-details-total-details-vat" : "Včetně {{percent}}% DPH",
+         "finance-details-total-details-vat-ghana" : "Včetně DPH, NHIL, odvodu GETFund a odvodu Covid-19",
+         "finance-details-total-details-vat-india" : "Včetně {{percent}}% GST",
+         "finance-details-total-title" : "Celkem"
       }
    }
 }

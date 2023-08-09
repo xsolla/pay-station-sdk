@@ -12,7 +12,27 @@
          "status.processing.description" : "กำลังรอการชำระเงินให้เสร็จสิ้น...",
          "status.processing.title" : "กำลังดำเนินการชำระเงิน",
          "status.success.description" : "เราส่งใบเสร็จรับเงินไปยัง {{email}} แล้ว",
-         "status.success.title" : "ชำระเงินสำเร็จแล้ว"
+         "status.success.title" : "ชำระเงินสำเร็จแล้ว",
+         "finance-details-cart-items-checkout-title" : "การซื้อภายในเกม",
+         "finance-details-cart-items-sales-tax" : "ภาษีขาย {{percent}}%",
+         "finance-details-cart-items-vat" : "VAT {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "การจัดเก็บภาษี VAT, NHIL, GETFund และ Covid-19",
+         "finance-details-cart-items-vat-india" : "GST {{percent}}%",
+         "finance-details-hrk-equal" : "เท่ากับ {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "อัตราแลกเปลี่ยน: 1 EUR = 7.5345 HRK",
+         "finance-details-subtotal-details-discount" : "ส่วนลด",
+         "finance-details-subtotal-details-fee" : "ค่าธรรมเนียมระบบการชำระเงิน",
+         "finance-details-subtotal-details-sales-tax" : "ภาษีขาย",
+         "finance-details-subtotal-details-user-balance" : "ยอดคงเหลือ",
+         "finance-details-subtotal-details-vat" : "VAT {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "การจัดเก็บภาษี VAT, NHIL, GETFund และ Covid-19",
+         "finance-details-subtotal-details-vat-india" : "GST {{percent}}%",
+         "finance-details-subtotal-title" : "ยอดรวมย่อย",
+         "finance-details-total-details-sales-tax" : "รวมภาษีการขายแล้ว",
+         "finance-details-total-details-vat" : "รวม VAT {{percent}}% ",
+         "finance-details-total-details-vat-ghana" : "รวมถึง การจัดเก็บภาษี VAT, NHIL, GETFund และ Covid-19",
+         "finance-details-total-details-vat-india" : "รวม GST {{percent}}%",
+         "finance-details-total-title" : "ยอดรวม"
       }
    }
 }
