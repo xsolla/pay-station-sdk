@@ -14,7 +14,6 @@ import { Form } from '../../core/form/form.interface';
 import { NextAction } from '../../core/actions/next-action.interface';
 import { FormSpy } from '../../core/spy/form-spy/form-spy';
 import { Status } from '../../core/status/status.interface';
-import { StatusEnum } from '../../core/status/status.enum';
 import { getErrorHandler } from './post-messages-handlers/error.handler';
 import { initFormHandler } from './post-messages-handlers/init-form.handler';
 import { getQuickMethodsHandler } from './post-messages-handlers/get-quick-methods.handler';
@@ -85,30 +84,10 @@ export class HeadlessCheckout {
         }
       );
     },
-
-    getStatus: async (): Promise<Status> => {
-      const msg: Message = {
-        name: EventName.getPaymentStatus,
-      };
-
-      const status = await this.postMessagesClient.send<Status>(
-        msg,
-        (message) => getPaymentStatusHandler(message)
-      );
-
-      if (!status) {
-        return {
-          statusState: StatusEnum.unknown,
-          statusMessage: 'Unknown status',
-          group: 'unknown',
-        };
-      }
-
-      return status;
-    },
   };
 
   private isWebView?: boolean;
+  private isSandbox?: boolean;
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
@@ -121,8 +100,12 @@ export class HeadlessCheckout {
     private readonly formSpy: FormSpy
   ) {}
 
-  public async init(environment: { isWebview: boolean }): Promise<void> {
+  public async init(environment: {
+    isWebview?: boolean;
+    sandbox?: boolean;
+  }): Promise<void> {
     this.isWebView = environment.isWebview;
+    this.isSandbox = environment.sandbox;
 
     await this.localizeService.initDictionaries();
 
@@ -155,6 +138,7 @@ export class HeadlessCheckout {
         configuration: {
           token,
           isWebView: this.isWebView,
+          sandbox: this.isSandbox,
         },
       },
     };
@@ -226,6 +210,16 @@ export class HeadlessCheckout {
       msg,
       getUserBalanceHandler
     ) as Promise<UserBalance>;
+  }
+
+  public async getStatus(): Promise<Status> {
+    const msg: Message = {
+      name: EventName.getPaymentStatus,
+    };
+
+    return this.postMessagesClient.send<Status>(msg, (message) =>
+      getPaymentStatusHandler(message)
+    ) as Promise<Status>;
   }
 
   private async setupCoreIframe(): Promise<void> {

@@ -1,13 +1,18 @@
 {
-  "th": {
-    "translation": {
-      "cookie-policy": "นโยบายคุกกี้",
-      "hello": "สวัสดีชาวโลก!",
-      "legal": "ข้อมูลด้านกฎหมาย",
-      "privacy-policy": "นโยบายความเป็นส่วนตัว",
-      "refund-policy": "นโยบายการคืนเงิน",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "การเชื่อมต่อที่ปลอดภัย"
-    }
-  }
+   "th" : {
+      "translation" : {
+         "cookie-policy" : "นโยบายคุกกี้",
+         "hello" : "สวัสดีชาวโลก!",
+         "legal" : "ข้อมูลด้านกฎหมาย",
+         "privacy-policy" : "นโยบายความเป็นส่วนตัว",
+         "refund-policy" : "นโยบายการคืนเงิน",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "การเชื่อมต่อที่ปลอดภัย",
+         "status.error.title" : "ชำระเงินไม่สำเร็จ",
+         "status.processing.description" : "กำลังรอการชำระเงินให้เสร็จสิ้น...",
+         "status.processing.title" : "กำลังดำเนินการชำระเงิน",
+         "status.success.description" : "เราส่งใบเสร็จรับเงินไปยัง {{email}} แล้ว",
+         "status.success.title" : "ชำระเงินสำเร็จแล้ว"
+      }
+   }
 }

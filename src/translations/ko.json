@@ -1,13 +1,18 @@
 {
-  "ko": {
-    "translation": {
-      "cookie-policy": "쿠키 정책",
-      "hello": "안녕하세요 세상!",
-      "legal": "법률",
-      "privacy-policy": "개인정보 보호정책",
-      "refund-policy": "환불 정책",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "보안 연결"
-    }
-  }
+   "ko" : {
+      "translation" : {
+         "cookie-policy" : "쿠키 정책",
+         "hello" : "안녕하세요 세상!",
+         "legal" : "법률",
+         "privacy-policy" : "개인정보 보호정책",
+         "refund-policy" : "환불 정책",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "보안 연결",
+         "status.error.title" : "결제 실패함",
+         "status.processing.description" : "결제 완료 대기 중...",
+         "status.processing.title" : "결제 처리 중",
+         "status.success.description" : "{{email}}(으)로 영수증을 보내드렸습니다.",
+         "status.success.title" : "결제 성공함"
+      }
+   }
 }

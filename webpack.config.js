@@ -21,9 +21,8 @@ const config = {
         ],
       },
       {
-        test: /\.svg$/,
-        type: 'asset',
-        use: 'svgo-loader',
+        test: /\.(svg|png)$/,
+        type: 'asset/resource',
       },
     ],
   },
@@ -34,6 +33,7 @@ const config = {
     library: 'PayStationSdk',
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'assets/[name].[ext]',
     clean: true,
   },
   plugins: [

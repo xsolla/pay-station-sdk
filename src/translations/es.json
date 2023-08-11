@@ -1,13 +1,18 @@
 {
-  "es": {
-    "translation": {
-      "cookie-policy": "Política de cookies",
-      "hello": "¡Hola mundo!",
-      "legal": "Legal",
-      "privacy-policy": "Política de privacidad",
-      "refund-policy": "Política de reembolso",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Conexión segura"
-    }
-  }
+   "es" : {
+      "translation" : {
+         "cookie-policy" : "Política de cookies",
+         "hello" : "¡Hola mundo!",
+         "legal" : "Legal",
+         "privacy-policy" : "Política de privacidad",
+         "refund-policy" : "Política de reembolso",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Conexión segura",
+         "status.error.title" : "Pago fallido",
+         "status.processing.description" : "Esperando la confirmación del pago...",
+         "status.processing.title" : "Procesando el pago",
+         "status.success.description" : "Hemos enviado el recibo a {{email}}",
+         "status.success.title" : "Pago efectuado"
+      }
+   }
 }
