@@ -1,13 +1,33 @@
 {
-  "ro": {
-    "translation": {
-      "cookie-policy": "Politica privind modulele cookie",
-      "hello": "Salutare, lume!",
-      "legal": "Juridic",
-      "privacy-policy": "Politica de confidențialitate",
-      "refund-policy": "Politica de retur",
-      "sctl-indications": "Indicații SCTL",
-      "secure-connection": "Conexiune securizată"
-    }
-  }
+   "ro" : {
+      "translation" : {
+         "cookie-policy" : "Politica privind modulele cookie",
+         "finance-details-cart-items-checkout-title" : "Achiziție în joc",
+         "finance-details-cart-items-sales-tax" : "Taxa pe vânzări {{percent}}%",
+         "finance-details-cart-items-vat" : "TVA {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "VAT, NHIL, GETFund Levy și Covid-19 Levy",
+         "finance-details-cart-items-vat-india" : "GST {{percent}}%",
+         "finance-details-hrk-equal" : "Echivalent al sumei de {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Curs de schimb: 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Reducere",
+         "finance-details-subtotal-details-fee" : "Taxă sistem de plată",
+         "finance-details-subtotal-details-sales-tax" : "Taxa pe vânzări",
+         "finance-details-subtotal-details-user-balance" : "Sold",
+         "finance-details-subtotal-details-vat" : "TVA {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "VAT, NHIL, GETFund Levy și Covid-19 Levy",
+         "finance-details-subtotal-details-vat-india" : "GST {{percent}}%",
+         "finance-details-subtotal-title" : "Subtotal",
+         "finance-details-total-details-sales-tax" : "Taxe pe vânzări incluse",
+         "finance-details-total-details-vat" : "Inclusiv {{percent}}% TVA",
+         "finance-details-total-details-vat-ghana" : "Inclusiv VAT, NHIL, GETFund Levy și Covid-19 Levy",
+         "finance-details-total-details-vat-india" : "Inclusiv {{percent}}% GST",
+         "finance-details-total-title" : "Total",
+         "hello" : "Salutare, lume!",
+         "legal" : "Juridic",
+         "privacy-policy" : "Politica de confidențialitate",
+         "refund-policy" : "Politica de retur",
+         "sctl-indications" : "Indicații SCTL",
+         "secure-connection" : "Conexiune securizată"
+      }
+   }
 }

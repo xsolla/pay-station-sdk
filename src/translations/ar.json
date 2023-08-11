@@ -1,13 +1,33 @@
 {
-  "ar": {
-    "translation": {
-      "cookie-policy": "سياسة ملفات تعريف الارتباط",
-      "hello": "مرحبًا بالعالم!",
-      "legal": "قانوني",
-      "privacy-policy": "سياسة الخصوصية",
-      "refund-policy": "سياسة الاسترداد",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "اتصال آمن"
-    }
-  }
+   "ar" : {
+      "translation" : {
+         "cookie-policy" : "سياسة ملفات تعريف الارتباط",
+         "finance-details-cart-items-checkout-title" : "الشراء من داخل اللعبة",
+         "finance-details-cart-items-sales-tax" : "ضريبة المبيعات {{percent}}%",
+         "finance-details-cart-items-vat" : "ضريبة القيمة المضافة{{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "ضريبة القيمة المضافة، وضريبة التأمين الصحي الوطنية، وضريبة GETFund وضريبة كوفيد-19",
+         "finance-details-cart-items-vat-india" : "ضرائب البضائع والخدمات{{percent}}%",
+         "finance-details-hrk-equal" : "يساوي {{value}} كرونا سويدية",
+         "finance-details-hrk-exchange-rate" : "سعر الصرف: 1 يورو = 7.5345 كرونا سويدية",
+         "finance-details-subtotal-details-discount" : "خصم",
+         "finance-details-subtotal-details-fee" : "رسوم نظام الدفع",
+         "finance-details-subtotal-details-sales-tax" : "ضريبة المبيعات",
+         "finance-details-subtotal-details-user-balance" : "الرصيد",
+         "finance-details-subtotal-details-vat" : "ضريبة القيمة المضافة{{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "ضريبة القيمة المضافة، وضريبة التأمين الصحي الوطنية، وضريبة GETFund وضريبة كوفيد-19",
+         "finance-details-subtotal-details-vat-india" : "ضرائب البضائع والخدمات{{percent}}%",
+         "finance-details-subtotal-title" : "الإجمالي الفرعي",
+         "finance-details-total-details-sales-tax" : "شامل ضريبة المبيعات",
+         "finance-details-total-details-vat" : "شامل {{percent}}% ضريبة قيمة مضافة",
+         "finance-details-total-details-vat-ghana" : "متضمنة ضريبة القيمة المضافة، وضريبة التأمين الصحي الوطنية، وضريبة GETFund وضريبة كوفيد-19",
+         "finance-details-total-details-vat-india" : "شامل {{percent}}% ضريبة البضائع والخدمات",
+         "finance-details-total-title" : "الإجمالي",
+         "hello" : "مرحبًا بالعالم!",
+         "legal" : "قانوني",
+         "privacy-policy" : "سياسة الخصوصية",
+         "refund-policy" : "سياسة الاسترداد",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "اتصال آمن"
+      }
+   }
 }
