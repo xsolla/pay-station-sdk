@@ -27,6 +27,7 @@ import { getPaymentStatusHandler } from './post-messages-handlers/get-payment-st
 import { headlessCheckoutAppUrl } from './environment';
 import { FinanceDetails } from '../../core/finance-details/finance-details.interface';
 import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
+import { FormStatus } from '../../core/status/form-status.enum';
 
 @singleton()
 export class HeadlessCheckout {
@@ -64,6 +65,8 @@ export class HeadlessCheckout {
      * @returns {Form} form details
      */
     init: async (configuration: FormConfiguration): Promise<Form> => {
+      this.formStatus = FormStatus.pending;
+
       const msg: Message = {
         name: EventName.initForm,
         data: {
@@ -77,6 +80,7 @@ export class HeadlessCheckout {
             this.formSpy.formFields = (args as { fields: Field[] }).fields;
           }
           this.formSpy.formWasInit = true;
+          this.formStatus = FormStatus.active;
         })
       ) as Promise<Form>;
     },
@@ -92,8 +96,21 @@ export class HeadlessCheckout {
         }
       );
     },
+
+    getStatus: (): FormStatus => {
+      if (this.formSpy.formWasInit) return FormStatus.active;
+
+      return this.formStatus === FormStatus.pending
+        ? FormStatus.pending
+        : FormStatus.undefined;
+    },
+
+    activate: (): void => {
+      this.formStatus = FormStatus.active;
+    },
   };
 
+  private formStatus: FormStatus = FormStatus.undefined;
   private isWebView?: boolean;
   private isSandbox?: boolean;
   private coreIframe!: HTMLIFrameElement;
