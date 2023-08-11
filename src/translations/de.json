@@ -1,13 +1,18 @@
 {
-  "de": {
-    "translation": {
-      "cookie-policy": "Cookie-Richtlinie",
-      "hello": "Hallo Welt!",
-      "legal": "Rechtliches",
-      "privacy-policy": "Datenschutzerklärung",
-      "refund-policy": "Erstattungsrichtlinie",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Sichere Verbindung"
-    }
-  }
+   "de" : {
+      "translation" : {
+         "cookie-policy" : "Cookie-Richtlinie",
+         "hello" : "Hallo Welt!",
+         "legal" : "Rechtliches",
+         "privacy-policy" : "Datenschutzerklärung",
+         "refund-policy" : "Erstattungsrichtlinie",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Sichere Verbindung",
+         "status.error.title" : "Zahlung fehlgeschlagen",
+         "status.processing.description" : "Zahlung wird durchgeführt …",
+         "status.processing.title" : "Zahlung wird verarbeitet",
+         "status.success.description" : "Wir haben den Beleg an {{email}} gesendet",
+         "status.success.title" : "Zahlung erfolgreich"
+      }
+   }
 }

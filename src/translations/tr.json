@@ -1,13 +1,18 @@
 {
-  "tr": {
-    "translation": {
-      "cookie-policy": "Çerez Politikası",
-      "hello": "Merhaba dünya!",
-      "legal": "Yasal",
-      "privacy-policy": "Gizlilik Politikası",
-      "refund-policy": "İade Politikası",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Güvenli bağlantı"
-    }
-  }
+   "tr" : {
+      "translation" : {
+         "cookie-policy" : "Çerez Politikası",
+         "hello" : "Merhaba dünya!",
+         "legal" : "Yasal",
+         "privacy-policy" : "Gizlilik Politikası",
+         "refund-policy" : "İade Politikası",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Güvenli bağlantı",
+         "status.error.title" : "Ödeme alınamadı",
+         "status.processing.description" : "Ödeme işleminin tamamlanması bekleniyor...",
+         "status.processing.title" : "Ödeme işlemi gerçekleştiriliyor",
+         "status.success.description" : "Makbuzunuzu {{email}} adresine gönderdik",
+         "status.success.title" : "Ödeme alındı"
+      }
+   }
 }

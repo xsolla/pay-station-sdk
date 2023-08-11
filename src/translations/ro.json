@@ -1,13 +1,18 @@
 {
-  "ro": {
-    "translation": {
-      "cookie-policy": "Politica privind modulele cookie",
-      "hello": "Salutare, lume!",
-      "legal": "Juridic",
-      "privacy-policy": "Politica de confidențialitate",
-      "refund-policy": "Politica de retur",
-      "sctl-indications": "Indicații SCTL",
-      "secure-connection": "Conexiune securizată"
-    }
-  }
+   "ro" : {
+      "translation" : {
+         "cookie-policy" : "Politica privind modulele cookie",
+         "hello" : "Salutare, lume!",
+         "legal" : "Juridic",
+         "privacy-policy" : "Politica de confidențialitate",
+         "refund-policy" : "Politica de retur",
+         "sctl-indications" : "Indicații SCTL",
+         "secure-connection" : "Conexiune securizată",
+         "status.error.title" : "Plată eșuată",
+         "status.processing.description" : "Se aşteaptă încheierea plății...",
+         "status.processing.title" : "Procesare plată",
+         "status.success.description" : "Am trimis chitanța dumneavoastră la {{email}}",
+         "status.success.title" : "Plată realizată cu succes"
+      }
+   }
 }

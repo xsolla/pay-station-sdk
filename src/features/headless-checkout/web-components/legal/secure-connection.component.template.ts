@@ -1,6 +1,7 @@
-import { LegalComponentConfig } from './legal-component.config.interface';
-import logo from '../../../../assets/icons/logo.svg';
 import i18next from 'i18next';
+import logo from '../../../../assets/icons/logo.svg';
+import { LegalComponentConfig } from './legal-component.config.interface';
+
 export const getSecureConnectionTemplate = (
   secureConnection?: LegalComponentConfig['secureConnection']
 ): string => {
