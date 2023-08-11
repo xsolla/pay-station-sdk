@@ -22,6 +22,7 @@ import { getRegularMethodsHandler } from './post-messages-handlers/get-regular-m
 import { getSavedMethodsHandler } from './post-messages-handlers/get-saved-methods.handler';
 import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance.handler';
 import { nextActionHandler } from './post-messages-handlers/next-action.handler';
+import { Field } from '../../core/form/field.interface';
 import { getPaymentStatusHandler } from './post-messages-handlers/get-payment-status/get-payment-status.handler';
 import { headlessCheckoutAppUrl } from './environment';
 import { FinanceDetails } from '../../core/finance-details/finance-details.interface';
@@ -71,7 +72,12 @@ export class HeadlessCheckout {
       };
 
       return this.postMessagesClient.send<Form>(msg, (message) =>
-        initFormHandler(message, () => (this.formSpy.formWasInit = true))
+        initFormHandler(message, (args?: unknown) => {
+          if (args) {
+            this.formSpy.formFields = (args as { fields: Field[] }).fields;
+          }
+          this.formSpy.formWasInit = true;
+        })
       ) as Promise<Form>;
     },
 

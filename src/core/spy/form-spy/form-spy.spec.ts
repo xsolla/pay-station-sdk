@@ -29,13 +29,13 @@ describe('FormSpy', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('Should call formWasInitHandler once', () => {
+  it('Should call formWasInitHandler twice', () => {
     const observer = new Observer();
     const spy = spyOn(observer, 'formInitHandler');
     formSpy.listenFormInit(observer.formInitHandler);
     formSpy.formWasInit = true;
     formSpy.formWasInit = true;
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 
   it('Should call appWasInitHandler once', () => {
