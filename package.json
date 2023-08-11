@@ -14,7 +14,8 @@
     "test:dev": "karma start --auto-watch",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "prepare": "husky install",
-    "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public"
+    "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public",
+    "prettier": "prettier --write ./src"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

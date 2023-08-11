@@ -6,6 +6,7 @@ import { StatusComponent } from '../../features/headless-checkout/web-components
 import { FinanceDetailsComponent } from '../../features/headless-checkout/web-components/finance-details/finance-details.component';
 import { PriceTextComponent } from '../../features/headless-checkout/web-components/finance-details/price-text/price-text.component';
 import { WebComponentTagName } from './web-component-tag-name.enum';
+import { PaymentFormComponent } from '../../features/headless-checkout/web-components/payment-form/payment-form.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -17,4 +18,5 @@ export const webComponents: {
   [WebComponentTagName.FinanceDetailsComponent]: FinanceDetailsComponent,
   [WebComponentTagName.LegalComponent]: LegalComponent,
   [WebComponentTagName.StatusComponent]: StatusComponent,
+  [WebComponentTagName.PaymentFormComponent]: PaymentFormComponent,
 };
