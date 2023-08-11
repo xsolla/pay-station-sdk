@@ -8,7 +8,12 @@
       "privacy-policy": "Privacy policy",
       "refund-policy": "Refund policy",
       "sctl-indications": "SCTL Indications",
-      "secure-connection": "Secure connection"
+      "secure-connection": "Secure connection",
+      "status.processing.title": "Processing payment",
+      "status.processing.description": "Waiting for payment to complete...",
+      "status.error.title": "Payment failed",
+      "status.success.title": "Payment successful",
+      "status.success.description": "We sent your receipt to {{email}}"
     }
   }
 }

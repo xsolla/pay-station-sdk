@@ -7,5 +7,4 @@ export enum StatusEnum {
   done = 'done',
   error = 'error',
   canceled = 'canceled',
-  unknown = 'unknown',
 }

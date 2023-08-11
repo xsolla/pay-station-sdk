@@ -3,4 +3,5 @@ export enum WebComponentTagName {
   SubmitButtonComponent = 'psdk-submit-button',
   PaymentMethodsComponent = 'psdk-payment-methods',
   LegalComponent = 'psdk-legal',
+  StatusComponent = 'psdk-status',
 }

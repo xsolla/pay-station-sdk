@@ -25,6 +25,11 @@ const config = {
         type: 'asset',
         use: 'svgo-loader',
       },
+      {
+        test: /\.png$/,
+        type: 'asset',
+        use: 'file-loader',
+      },
     ],
   },
   resolve: {
