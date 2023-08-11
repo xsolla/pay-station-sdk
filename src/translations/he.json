@@ -1,13 +1,33 @@
 {
-  "he": {
-    "translation": {
-      "cookie-policy": "מדיניות בנושא קובצי Cookie",
-      "hello": "שלום עולם!",
-      "legal": "משפטי",
-      "privacy-policy": "מדיניות פרטיות",
-      "refund-policy": "מדיניות החזרים כספיים",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "חיבור מאובטח"
-    }
-  }
+   "he" : {
+      "translation" : {
+         "cookie-policy" : "מדיניות בנושא קובצי Cookie",
+         "finance-details-cart-items-checkout-title" : "רכישה מתוך המשחק",
+         "finance-details-cart-items-sales-tax" : "מס מכירה {{percent}}%",
+         "finance-details-cart-items-vat" : "מע\"מ {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "מע\"מ,‏ NHIL, מס GETFund ומס Covid-19",
+         "finance-details-cart-items-vat-india" : "מס סחורות ושירותים {{percent}}%",
+         "finance-details-hrk-equal" : "שווה-ערך ל-{{value}} קונה קרואטי",
+         "finance-details-hrk-exchange-rate" : "שער המרה: 1 אירו = 7.5345 קונה קרואטי",
+         "finance-details-subtotal-details-discount" : "הנחה",
+         "finance-details-subtotal-details-fee" : "עמלת מערכת תשלומים",
+         "finance-details-subtotal-details-sales-tax" : "מס מכירה",
+         "finance-details-subtotal-details-user-balance" : "יתרה",
+         "finance-details-subtotal-details-vat" : "מע\"מ {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "מע\"מ,‏ NHIL, מס GETFund ומס Covid-19",
+         "finance-details-subtotal-details-vat-india" : "מס סחורות ושירותים {{percent}}%",
+         "finance-details-subtotal-title" : "סיכום ביניים",
+         "finance-details-total-details-sales-tax" : "כולל מס מכירה",
+         "finance-details-total-details-vat" : "כולל {{percent}}% מע\"מ",
+         "finance-details-total-details-vat-ghana" : "כולל מע\"מ,‏ NHIL, מס GETFund ומס Covid-19",
+         "finance-details-total-details-vat-india" : "כולל {{percent}}% מס סחורות ושירותים",
+         "finance-details-total-title" : "סה\"כ",
+         "hello" : "שלום עולם!",
+         "legal" : "משפטי",
+         "privacy-policy" : "מדיניות פרטיות",
+         "refund-policy" : "מדיניות החזרים כספיים",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "חיבור מאובטח"
+      }
+   }
 }
