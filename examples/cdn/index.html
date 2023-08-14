@@ -8,11 +8,33 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+
+    <style>
+      .cart-item {
+        border: 1px solid black;
+        margin-bottom: 12px;
+      }
+
+      .image {
+        max-width: 80px;
+      }
+
+      .subtotal-row,
+      .total-row {
+        margin-bottom: 12px;
+      }
+
+      .subtotal-row .title,
+      .total-row .title {
+        font-weight: bold;
+      }
+    </style>
+
     <!--
     Link the SDK bundle.
     NOTE: In this example, we use a local build just for convenience purposes.
     -->
-    <script src="../../dist/main.js"></script>
+    <script src="./main.js"></script>
   </head>
 
   <body>
@@ -22,7 +44,8 @@
     Define a specific Payments component in the HTML markup, e.g., `psdk-payment-methods`.
     The `country` attribute indicates the country for which the payment methods are being loaded.
     -->
-    <psdk-payment-methods country="US"></psdk-payment-methods>
+    <!-- <psdk-payment-methods country="US"></psdk-payment-methods> -->
+    <psdk-finance-details></psdk-finance-details>
 
     <!-- Initialization script -->
     <script>
@@ -36,7 +59,7 @@ Please, link CDN source or create local build (recommended to test purposes only
        * To learn more about creating tokens,
        * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
-      const accessToken = '';
+      const accessToken = '8sogOOlRWs4VIpgdlZxtrD2qR0isbaUH_lc_en';
 
       if (!accessToken) {
         alert(`No token provided. Please, check the documentation`);
@@ -69,14 +92,19 @@ Please, link CDN source or create local build (recommended to test purposes only
          * To gain more control over Pay Station components,
          * you can access them as regular HTML elements.
          */
-        const paymentMethods = document.querySelector('psdk-payment-methods');
+        // const paymentMethods = document.querySelector('psdk-payment-methods');
 
         /**
          * To add extra logic to a component, you can subscribe to
          * its events and place your code in a callback function.
          */
-        paymentMethods.addEventListener('selectionChange', (e) => {
-          console.log(e);
+        // paymentMethods.addEventListener('selectionChange', (e) => {
+        //   console.log(e);
+        // });
+
+        await headlessCheckout.form.init({
+          paymentMethodId: 1380,
+          returnUrl: 'return-url',
         });
       }
 
