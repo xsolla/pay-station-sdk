@@ -6,6 +6,7 @@ import { Message } from '../../core/message.interface';
 import { Handler } from '../../core/post-messages-client/handler.type';
 import { LocalizeService } from '../../core/i18n/localize.service';
 import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
+import { FormStatus } from '../../core/status/form-status.enum';
 
 const mockMessage: Message = {
   name: EventName.initPayment,
@@ -188,5 +189,25 @@ describe('HeadlessCheckout', () => {
     const spy = spyOn(postMessagesClient, 'send');
     await headlessCheckout.getUserBalance();
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('Should have correct form status', async () => {
+    expect(headlessCheckout.form.getStatus()).toEqual(FormStatus.undefined);
+
+    spyOn(postMessagesClient, 'send').and.callFake(async (msg, callback) => {
+      await Promise.resolve().then(() => callback(msg));
+      return Promise.resolve(undefined);
+    });
+
+    const formInitPromise = headlessCheckout.form.init({
+      paymentMethodId: 1380,
+      returnUrl: '',
+    });
+
+    expect(headlessCheckout.form.getStatus()).toEqual(FormStatus.pending);
+
+    await formInitPromise.then();
+
+    expect(headlessCheckout.form.getStatus()).toEqual(FormStatus.active);
   });
 });

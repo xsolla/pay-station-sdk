@@ -98,7 +98,9 @@ export class HeadlessCheckout {
     },
 
     getStatus: (): FormStatus => {
-      if (this.formSpy.formWasInit) return FormStatus.active;
+      if (this.formSpy.formWasInit) {
+        return FormStatus.active;
+      }
 
       return this.formStatus === FormStatus.pending
         ? FormStatus.pending
