@@ -12,7 +12,27 @@
          "status.processing.description" : "Đợi thanh toán hoàn tất...",
          "status.processing.title" : "Đang xử lý thanh toán",
          "status.success.description" : "Biên nhận đã được gửi đến {{email}}",
-         "status.success.title" : "Thanh toán thành công"
+         "status.success.title" : "Thanh toán thành công",
+         "finance-details-cart-items-checkout-title" : "Giao dịch trong trò chơi",
+         "finance-details-cart-items-sales-tax" : "Thuế doanh thu {{percent}}%",
+         "finance-details-cart-items-vat" : "Thuế giá trị gia tăng (VAT) {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "Thuế Giá trị gia tăng (VAT), Thuế phụ thu bảo hiểm y tế quốc gia (NHIL), Thuế phụ thu GETFund và Thuế phụ thu Covid-19",
+         "finance-details-cart-items-vat-india" : "Thuế hàng hóa và dịch vụ (GST) {{percent}}%",
+         "finance-details-hrk-equal" : "Tương đương {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Tỷ giá: 1 EUR = 7,5345 HRK",
+         "finance-details-subtotal-details-discount" : "Giảm giá",
+         "finance-details-subtotal-details-fee" : "Phí hệ thống thanh toán",
+         "finance-details-subtotal-details-sales-tax" : "Thuế doanh thu",
+         "finance-details-subtotal-details-user-balance" : "Số dư",
+         "finance-details-subtotal-details-vat" : "Thuế giá trị gia tăng (VAT) {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "Thuế Giá trị gia tăng (VAT), Thuế phụ thu bảo hiểm y tế quốc gia (NHIL), Thuế phụ thu GETFund và Thuế phụ thu Covid-19",
+         "finance-details-subtotal-details-vat-india" : "Thuế hàng hóa và dịch vụ (GST) {{percent}}%",
+         "finance-details-subtotal-title" : "Tạm tính",
+         "finance-details-total-details-sales-tax" : "Đã bao gồm thuế doanh thu",
+         "finance-details-total-details-vat" : "Bao gồm {{percent}}% thuế GTGT",
+         "finance-details-total-details-vat-ghana" : "Bao gồm thuế Giá trị gia tăng (VAT), Thuế phụ thu bảo hiểm y tế quốc gia (NHIL), Thuế phụ thu GETFund và Thuế phụ thu Covid-19",
+         "finance-details-total-details-vat-india" : "Bao gồm {{percent}}% thuế hàng hóa và dịch vụ (GST)",
+         "finance-details-total-title" : "Tổng"
       }
    }
 }

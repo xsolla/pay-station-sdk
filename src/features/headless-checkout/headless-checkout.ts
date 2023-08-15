@@ -24,6 +24,8 @@ import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance
 import { nextActionHandler } from './post-messages-handlers/next-action.handler';
 import { getPaymentStatusHandler } from './post-messages-handlers/get-payment-status/get-payment-status.handler';
 import { headlessCheckoutAppUrl } from './environment';
+import { FinanceDetails } from '../../core/finance-details/finance-details.interface';
+import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
 
 @singleton()
 export class HeadlessCheckout {
@@ -148,6 +150,21 @@ export class HeadlessCheckout {
         this.headlessCheckoutSpy.appWasInit = true;
       })
     );
+  }
+
+  /**
+   * Returns finance details for created payment
+   * @returns promise that returns finance details
+   */
+  public async getFinanceDetails(): Promise<FinanceDetails | null> {
+    const msg: Message = {
+      name: EventName.financeDetails,
+    };
+
+    return this.postMessagesClient.send<FinanceDetails | null>(
+      msg,
+      getFinanceDetailsHandler
+    ) as Promise<FinanceDetails | null>;
   }
 
   /**

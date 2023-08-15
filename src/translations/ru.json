@@ -12,7 +12,27 @@
          "status.processing.description" : "Ожидаем завершения оплаты...",
          "status.processing.title" : "Обработка платежа",
          "status.success.description" : "Мы отправили чек на {{email}}",
-         "status.success.title" : "Платеж прошел"
+         "status.success.title" : "Платеж прошел",
+         "finance-details-cart-items-checkout-title" : "Внутриигровая покупка",
+         "finance-details-cart-items-sales-tax" : "Налог с продаж {{percent}}%",
+         "finance-details-cart-items-vat" : "НДС {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "НДС и взносы NHIL, GETFund и Covid-19",
+         "finance-details-cart-items-vat-india" : "GST {{percent}}%",
+         "finance-details-hrk-equal" : "Равняется {{value}} HRK",
+         "finance-details-hrk-exchange-rate" : "Обменный курс: 1 EUR = 7.5345 HRK",
+         "finance-details-subtotal-details-discount" : "Скидка",
+         "finance-details-subtotal-details-fee" : "Комиссия платежной системы",
+         "finance-details-subtotal-details-sales-tax" : "Налог с продаж",
+         "finance-details-subtotal-details-user-balance" : "Баланс",
+         "finance-details-subtotal-details-vat" : "НДС {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "НДС и взносы NHIL, GETFund и Covid-19",
+         "finance-details-subtotal-details-vat-india" : "GST {{percent}}%",
+         "finance-details-subtotal-title" : "Сумма",
+         "finance-details-total-details-sales-tax" : "Включая налог с продаж",
+         "finance-details-total-details-vat" : "Включая НДС {{percent}}%",
+         "finance-details-total-details-vat-ghana" : "Включая НДС и взносы NHIL, GETFund и Covid-19",
+         "finance-details-total-details-vat-india" : "Включая {{percent}}% GST",
+         "finance-details-total-title" : "К оплате"
       }
    }
 }

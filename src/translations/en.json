@@ -12,7 +12,27 @@
       "status.processing.description": "Waiting for payment to complete...",
       "status.error.title": "Payment failed",
       "status.success.title": "Payment successful",
-      "status.success.description": "We sent your receipt to {{email}}"
+      "status.success.description": "We sent your receipt to {{email}}",
+      "finance-details-total-title": "Total",
+      "finance-details-subtotal-title": "Subtotal",
+      "finance-details-hrk-equal": "Equals {{value}} HRK",
+      "finance-details-hrk-exchange-rate": "Exchange rate: 1 EUR = 7.5345 HRK",
+      "finance-details-total-details-vat": "Including {{percent}}% VAT",
+      "finance-details-total-details-vat-india": "Including {{percent}}% GST",
+      "finance-details-total-details-vat-ghana": "Including VAT, NHIL, GETFund Levy, and Covid-19 Levy",
+      "finance-details-total-details-sales-tax": "Sales tax included",
+      "finance-details-subtotal-details-fee": "Payment system fee",
+      "finance-details-subtotal-details-discount": "Discount",
+      "finance-details-subtotal-details-user-balance": "Balance",
+      "finance-details-subtotal-details-vat": "VAT {{percent}}%",
+      "finance-details-subtotal-details-vat-india": "GST {{percent}}%",
+      "finance-details-subtotal-details-vat-ghana": "VAT, NHIL, GETFund Levy, and Covid-19 Levy",
+      "finance-details-subtotal-details-sales-tax": "Sales tax",
+      "finance-details-cart-items-checkout-title": "In-game purchase",
+      "finance-details-cart-items-vat": "VAT {{percent}}%",
+      "finance-details-cart-items-vat-india": "GST {{percent}}%",
+      "finance-details-cart-items-vat-ghana": "VAT, NHIL, GETFund Levy, and Covid-19 Levy",
+      "finance-details-cart-items-sales-tax": "Sales tax {{percent}}%"
     }
   }
 }

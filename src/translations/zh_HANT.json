@@ -12,7 +12,27 @@
          "status.processing.description" : "等待完成付款......",
          "status.processing.title" : "正在處理付款",
          "status.success.description" : "我們已將您的收據發送至 {{email}}",
-         "status.success.title" : "付款成功"
+         "status.success.title" : "付款成功",
+         "finance-details-cart-items-checkout-title" : "遊戲內選購",
+         "finance-details-cart-items-sales-tax" : "營業稅 {{percent}}%",
+         "finance-details-cart-items-vat" : "加值稅 {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "含增值稅，徵收國民健康保險、迦納教育信託基金和 Covid-19 等稅金",
+         "finance-details-cart-items-vat-india" : "商品及服務稅 {{percent}}%",
+         "finance-details-hrk-equal" : "相當於 {{value}} 克羅埃西亞庫納(HRK)",
+         "finance-details-hrk-exchange-rate" : "匯率換算：1 歐元 (EUR) = 7.5345 克羅埃西亞庫納 (HRK)",
+         "finance-details-subtotal-details-discount" : "折扣",
+         "finance-details-subtotal-details-fee" : "支付系統費用",
+         "finance-details-subtotal-details-sales-tax" : "營業稅",
+         "finance-details-subtotal-details-user-balance" : "餘額",
+         "finance-details-subtotal-details-vat" : "加值稅 {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "含增值稅，徵收國民健康保險、迦納教育信託基金和 Covid-19 等稅金",
+         "finance-details-subtotal-details-vat-india" : "商品及服務稅 {{percent}}%",
+         "finance-details-subtotal-title" : "小計",
+         "finance-details-total-details-sales-tax" : "含營業稅",
+         "finance-details-total-details-vat" : "含{{percent}}% 增值稅",
+         "finance-details-total-details-vat-ghana" : "含增值稅，徵收國民健康保險、迦納教育信託基金和 Covid-19 等稅金",
+         "finance-details-total-details-vat-india" : "含{{percent}}%商品及服務稅",
+         "finance-details-total-title" : "總計"
       }
    }
 }

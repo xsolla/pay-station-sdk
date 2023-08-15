@@ -12,7 +12,27 @@
          "status.processing.description" : "決済の完了待ち...",
          "status.processing.title" : "決済処理中",
          "status.success.description" : "領収書を{{email}}に送信しました",
-         "status.success.title" : "決済完了"
+         "status.success.title" : "決済完了",
+         "finance-details-cart-items-checkout-title" : "ゲーム内購入",
+         "finance-details-cart-items-sales-tax" : "売上税 {{percent}}%",
+         "finance-details-cart-items-vat" : "消費税 {{percent}}%",
+         "finance-details-cart-items-vat-ghana" : "VAT、NHIL、GETFund税及びCovid-19税",
+         "finance-details-cart-items-vat-india" : "財・サービス税 {{percent}}%",
+         "finance-details-hrk-equal" : "{{value}} HRKに相当する",
+         "finance-details-hrk-exchange-rate" : "為替レート：1ユーロ＝7.5345HRK",
+         "finance-details-subtotal-details-discount" : "割引",
+         "finance-details-subtotal-details-fee" : "決済システム料金",
+         "finance-details-subtotal-details-sales-tax" : "消費税",
+         "finance-details-subtotal-details-user-balance" : "残高",
+         "finance-details-subtotal-details-vat" : "消費税 {{percent}}%",
+         "finance-details-subtotal-details-vat-ghana" : "VAT、NHIL、GETFund税及びCovid-19税",
+         "finance-details-subtotal-details-vat-india" : "財・サービス税 {{percent}}%",
+         "finance-details-subtotal-title" : "小計",
+         "finance-details-total-details-sales-tax" : "消費税込み",
+         "finance-details-total-details-vat" : "{{percent}}% 消費税込み",
+         "finance-details-total-details-vat-ghana" : "VAT、NHIL、GETFund税及びCovid-19税を含む",
+         "finance-details-total-details-vat-india" : "{{percent}}% 商品サービス税込み",
+         "finance-details-total-title" : "合計"
       }
    }
 }

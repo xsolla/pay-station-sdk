@@ -42,4 +42,20 @@ export abstract class WebComponentAbstract extends HTMLElement {
   protected attributeChangedCallback(): void {
     this.render();
   }
+
+  protected getNumberAttribute(name: string): number | null {
+    const stringValue = this.getAttribute(name);
+
+    if (!stringValue) {
+      return null;
+    }
+
+    const numberValue = parseFloat(stringValue);
+
+    if (isNaN(numberValue)) {
+      return null;
+    }
+
+    return numberValue;
+  }
 }
