@@ -1,13 +1,18 @@
 {
-  "he": {
-    "translation": {
-      "cookie-policy": "מדיניות בנושא קובצי Cookie",
-      "hello": "שלום עולם!",
-      "legal": "משפטי",
-      "privacy-policy": "מדיניות פרטיות",
-      "refund-policy": "מדיניות החזרים כספיים",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "חיבור מאובטח"
-    }
-  }
+   "he" : {
+      "translation" : {
+         "cookie-policy" : "מדיניות בנושא קובצי Cookie",
+         "hello" : "שלום עולם!",
+         "legal" : "משפטי",
+         "privacy-policy" : "מדיניות פרטיות",
+         "refund-policy" : "מדיניות החזרים כספיים",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "חיבור מאובטח",
+         "status.error.title" : "התשלום נכשל",
+         "status.processing.description" : "בהמתנה לסיום התשלום...",
+         "status.processing.title" : "התשלום בעיבוד",
+         "status.success.description" : "שלחנו את הקבלה אל {{email}}",
+         "status.success.title" : "התשלום התקבל"
+      }
+   }
 }

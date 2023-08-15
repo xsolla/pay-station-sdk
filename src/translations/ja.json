@@ -1,13 +1,18 @@
 {
-  "ja": {
-    "translation": {
-      "cookie-policy": "クッキーポリシー",
-      "hello": "こんにちは、世界！",
-      "legal": "法的文書",
-      "privacy-policy": "プライバシーポリシー",
-      "refund-policy": "返金ポリシー",
-      "sctl-indications": "特商法取引に基づく表示",
-      "secure-connection": "安全な接続"
-    }
-  }
+   "ja" : {
+      "translation" : {
+         "cookie-policy" : "クッキーポリシー",
+         "hello" : "こんにちは、世界！",
+         "legal" : "法的文書",
+         "privacy-policy" : "プライバシーポリシー",
+         "refund-policy" : "返金ポリシー",
+         "sctl-indications" : "特商法取引に基づく表示",
+         "secure-connection" : "安全な接続",
+         "status.error.title" : "決済失敗",
+         "status.processing.description" : "決済の完了待ち...",
+         "status.processing.title" : "決済処理中",
+         "status.success.description" : "領収書を{{email}}に送信しました",
+         "status.success.title" : "決済完了"
+      }
+   }
 }

@@ -1,13 +1,18 @@
 {
-  "pl": {
-    "translation": {
-      "cookie-policy": "Polityka plików cookie",
-      "hello": "Witaj świecie!",
-      "legal": "Informacje prawne",
-      "privacy-policy": "Polityka prywatności",
-      "refund-policy": "Polityka zwrotów",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Bezpieczne połączenie"
-    }
-  }
+   "pl" : {
+      "translation" : {
+         "cookie-policy" : "Polityka plików cookie",
+         "hello" : "Witaj świecie!",
+         "legal" : "Informacje prawne",
+         "privacy-policy" : "Polityka prywatności",
+         "refund-policy" : "Polityka zwrotów",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Bezpieczne połączenie",
+         "status.error.title" : "Płatność nieudana",
+         "status.processing.description" : "Oczekiwanie na sfinalizowanie płatności...",
+         "status.processing.title" : "Trwa przetwarzanie płatności",
+         "status.success.description" : "Wysłaliśmy rachunek na adres {{email}}",
+         "status.success.title" : "Płatność zrealizowana"
+      }
+   }
 }

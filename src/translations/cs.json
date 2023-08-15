@@ -1,13 +1,18 @@
 {
-  "cs": {
-    "translation": {
-      "cookie-policy": "Zásady používání cookies",
-      "hello": "Ahoj světe!",
-      "legal": "Právní informace",
-      "privacy-policy": "Zásady ochrany osobních údajů",
-      "refund-policy": "Podmínky vrácení peněz",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "Zabezpečené připojení"
-    }
-  }
+   "cs" : {
+      "translation" : {
+         "cookie-policy" : "Zásady používání cookies",
+         "hello" : "Ahoj světe!",
+         "legal" : "Právní informace",
+         "privacy-policy" : "Zásady ochrany osobních údajů",
+         "refund-policy" : "Podmínky vrácení peněz",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Zabezpečené připojení",
+         "status.error.title" : "Platba se nezdařila",
+         "status.processing.description" : "Čekání na dokončení platby...",
+         "status.processing.title" : "Zpracovávání platby",
+         "status.success.description" : "Vaši stvrzenku jsme zaslali na {{email}}",
+         "status.success.title" : "Platba byla úspěšná"
+      }
+   }
 }

@@ -1,13 +1,18 @@
 {
-  "ar": {
-    "translation": {
-      "cookie-policy": "سياسة ملفات تعريف الارتباط",
-      "hello": "مرحبًا بالعالم!",
-      "legal": "قانوني",
-      "privacy-policy": "سياسة الخصوصية",
-      "refund-policy": "سياسة الاسترداد",
-      "sctl-indications": "SCTL Indications",
-      "secure-connection": "اتصال آمن"
-    }
-  }
+   "ar" : {
+      "translation" : {
+         "cookie-policy" : "سياسة ملفات تعريف الارتباط",
+         "hello" : "مرحبًا بالعالم!",
+         "legal" : "قانوني",
+         "privacy-policy" : "سياسة الخصوصية",
+         "refund-policy" : "سياسة الاسترداد",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "اتصال آمن",
+         "status.error.title" : "فشلت عملية السداد",
+         "status.processing.description" : "في انتظار أن يتم السداد...",
+         "status.processing.title" : "جارٍ تنفيذ السداد",
+         "status.success.description" : "أرسلنا إيصالك إلى {{email}}",
+         "status.success.title" : "نجحت عملية السداد"
+      }
+   }
 }
