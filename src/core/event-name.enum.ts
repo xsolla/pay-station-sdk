@@ -13,4 +13,5 @@ export const enum EventName {
   legalComponentPong = 'legalComponentPong',
   financeDetails = 'financeDetails',
   nextAction = 'nextAction',
+  warning = 'warning',
 }

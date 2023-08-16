@@ -5,11 +5,11 @@ import { Handler } from '../../../core/post-messages-client/handler.type';
 
 export const initFormHandler: Handler<Form> = (
   message: Message,
-  callback?: () => void
+  callback?: (args?: unknown) => void
 ): { isHandled: boolean; value?: Form } | null => {
   if (isInitFormEventMessage(message)) {
     if (typeof callback === 'function') {
-      callback();
+      callback(message.data);
     }
     return {
       isHandled: true,
