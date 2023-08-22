@@ -11,8 +11,8 @@ export const getPaymentMethodTemplate = (method: PaymentMethod): string => {
   } else {
     iconName = method.iconName;
   }
-  return `<li class="payment-method">
-    <a tabindex="0" href="${method.id}" data-method-id="${method.id}">
+  return `<li class="payment-method" data-method-id="${method.id}">
+    <a tabindex="0" href="${method.id}">
       <span class="icon">
         <img src="${iconsPath}/${iconName}" alt="${method.name}">
       </span>

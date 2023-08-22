@@ -7,6 +7,7 @@ import { PaymentMethodsAttributes } from './payment-methods-attributes.enum';
 import { PaymentMethodsEvents } from './payment-methods-events.enum';
 import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { HeadlessCheckout } from '../../headless-checkout';
+import { PaymentMethodAttributes } from './payment-method-attributes.enum';
 
 export class PaymentMethodsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -43,9 +44,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
       this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
       return;
     }
-    void this.headlessCheckout
-      .getRegularMethods()
-      .then(this.paymentMethodsLoadedHandler);
+    this.loadRegularMethods();
   }
 
   protected getHtml(): string {
@@ -62,8 +61,14 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
     if (!this.headlessCheckoutSpy.appWasInit) {
       return;
     }
+    this.loadRegularMethods();
+  }
+
+  private loadRegularMethods(): void {
+    const country =
+      this.getAttribute(PaymentMethodsAttributes.country) ?? undefined;
     void this.headlessCheckout
-      .getRegularMethods()
+      .getRegularMethods(country)
       .then(this.paymentMethodsLoadedHandler);
   }
 
@@ -115,15 +120,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   }
 
   private getPaymentMethodId(target: HTMLElement): string | null | undefined {
-    const attributeName = 'data-method-id';
-
-    if (typeof target?.closest === 'function') {
-      return target.closest('a')?.getAttribute(attributeName);
-    }
-    return (
-      target.getAttribute(attributeName) ??
-      target.parentElement?.getAttribute(attributeName)
-    );
+    return target.closest('li')?.getAttribute(PaymentMethodAttributes.methodId);
   }
 
   private setupSearch(): void {
