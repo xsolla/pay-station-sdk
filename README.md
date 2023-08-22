@@ -40,12 +40,17 @@ Except for secure inputs, the client has full control over the component's style
 ## PaymentSdk library interface
 
 ```typescript
-declare const HeadlessCheckout: {
+declare const headlessCheckout: {
   /**
    * Load secure Core Iframe.
    * Load components to CustomElementRegistry. https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry
    */
-  init(environment: { isWebview: boolean }): Promise<void>;
+  init(environment: { isWebview?: boolean; sandbox?: boolean }): Promise<void>;
+
+  /**
+   * Remove secure Core Iframe.
+   */
+  destroy(): void;
 
   /**
    * Initialize the payment with a token.
@@ -54,19 +59,29 @@ declare const HeadlessCheckout: {
   setToken(token: string): Promise<void>;
 
   /**
-   * Get all payment methods, including saved accounts.
-   * Use a country token if it hasn't been passed yet.
-   * regular - list of available payment methods sorted according to relevance.
-   * quick - list of available quick payment methods, e.g., Google and Apple Pay buttons.
-   * saved - list of saved user payment accounts.
-   * balance - special payment method for users that have an Xsolla balance. Null if the balance is not sufficient for the payment.
+   * Returns available payment methods, excluding quick payment options.
    */
-  getMethods(country?: string): Promise<{
-    regular: PaymentMethod[];
-    quick: PaymentMethod[];
-    saved: Account[];
-    balance: PaymentMethod | null;
-  }>;
+  getRegularMethods(country?: string): Promise<PaymentMethod[]>;
+
+  /**
+   * Returns available quick payment options, e.g., Apple Pay, Google Pay.
+   */
+  getQuickMethods(country?: string): Promise<PaymentMethod[]>;
+
+  /**
+   * Returns a user’s saved methods.
+   */
+  getSavedMethods(): Promise<SavedMethod[]>;
+
+  /**
+   * Returns a user’s balance.
+   */
+  getUserBalance(): Promise<UserBalance>;
+
+  /**
+   * Returns financial information about the payment.
+   */
+  getFinanceDetails(): Promise<FinanceDetails | null>;
 
   /**
    * Payment form.
@@ -130,11 +145,6 @@ declare const HeadlessCheckout: {
   getStatus(invoiceId?: number): Promise<Status>;
 
   /**
-   * Delete saved user account.
-   */
-  deleteAccount(accountId: number): Promise<void>;
-
-  /**
    * Can be used instead of SDK components for creating custom components.
    * List of events will be added later.
    * Events between an app and Core Iframe.
@@ -143,11 +153,6 @@ declare const HeadlessCheckout: {
     onCoreEvent: (event: Event) => void;
     send(event: Event): void;
   };
-
-  /**
-   * Create an iframe with secure elements like form input and use it for component creation.
-   */
-  createSecureComponent(name: string): HTMLIFrameElement;
 };
 ```
 
@@ -157,19 +162,19 @@ declare const HeadlessCheckout: {
 
 | **Component**         | **Selector**         | **Status** |
 | --------------------- | -------------------- | ---------- |
-| Apple Pay Button      | ❔                   | 🕑         |
-| Checkbox              | ❔                   | 🕑         |
-| Delete Account Button | ❔                   | 🕑         |
-| Finance Details       | ❔                   | 🕑         |
-| Google Pay Button     | ❔                   | 🕑         |
-| Payment Form Messages | ❔                   | 🕑         |
 | Payment Methods       | psdk-payment-methods | ✅         |
-| Receipt               | ❔                   | 🕑         |
 | Saved Methods         | ❔                   | 🕑         |
+| Payment Form Messages | ❔                   | 🕑         |
+| Checkbox              | ❔                   | 🕑         |
 | Select                | ❔                   | 🕑         |
-| Status                | ❔                   | 🕑         |
-| Submit                | psdk-submit-button   | ✅         |
+| Apple Pay Button      | ❔                   | 🕑         |
+| Google Pay Button     | ❔                   | 🕑         |
+| Delete Account Button | ❔                   | 🕑         |
+| Submit Button         | psdk-submit-button   | ✅         |
 | User Balance          | ❔                   | 🕑         |
+| Finance Details       | psdk-finance-details | ✅         |
+| Status                | psdk-status          | ✅         |
+| Receipt               | ❔                   | 🕑         |
 
 ![Regular SDK web components](./readme_images/sdk_web_components_scheme.png 'Regular SDK web components')
 
@@ -181,11 +186,11 @@ Using SDK components is straightforward: you only need to paste the HTML tag of 
 
 ### Secure components
 
-| **Component**         | **Selector**     | **Status** |
-| --------------------- | ---------------- | ---------- |
-| Card Number Component | psdk-card-number | ✅         |
-| Phone Component       | ❔               | 🕑         |
-| Text Component        | ❔               | 🕑         |
+| **Component**         | **Selector** | **Status** |
+| --------------------- | ------------ | ---------- |
+| Text Component        | psdk-text    | ✅         |
+| Phone Component       | ❔           | 🕑         |
+| Card Number Component | ❔           | 🕑         |
 
 ![SDK secure componentscheme](./readme_images/secure_component_scheme.png 'SDK secure componentscheme')
 
@@ -197,10 +202,10 @@ Secure components have access to sensitive user data, and are encapsulated in if
 
 ### Special components
 
-| **Component** | **Selector** | **Status** |
-| ------------- | ------------ | ---------- |
-| Legal         | ❔           | 🕑         |
-| Payment Form  | ❔           | 🕑         |
+| **Component** | **Selector**      | **Status** |
+| ------------- | ----------------- | ---------- |
+| Legal         | psdk-legal        | ✅         |
+| Payment Form  | psdk-payment-form | ✅         |
 
 The `Payment Form` component creates missed payment form components to ensure the client does not omit required payment form components. The client receives a warning message from the SDK, but still allows users to complete the payment.
 
@@ -233,7 +238,7 @@ The `Legal` component contains information about Xsolla's legal documents. Clien
 
 To start using the Pay Station SDK, include the SDK bundle in your project. You can do this in any convenient way, such as adding the SDK bundle as npm-package or simply adding a CDN link in the `<script>` HTML tag.
 
-> A working example can be found [here](./examples/cdn)
+> A working example can be found [here](./examples/select-method)
 
 Regardless of the SDK adding method chosen, all integration steps are the same:
 
@@ -333,3 +338,32 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
   </body>
 </html>
 ```
+
+## PayPal integration guide
+
+> A working example can be found [here](./examples/paypal)
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
+   - The financial details component will be updated with transaction details once the payment is completed.
+1. Initialize the SDK with your environment parameters.
+1. Set the access token for the initialized SDK.
+1. Initialize the payment form with the PayPal payment method ID and return URL.
+   - The return URL is used to redirect the user once payment is completed on PayPal’s side.
+   - `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
+   - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the URL to redirect from the action payload.
+1. Add the form fields component to the HTML markup.
+   - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
+   - Use fields with the `isMandatory` flag to get required fields only.
+   - Use the `<psdk-text>` component to render form fields if required. Email and ZIP fields can only be required for PayPal.
+1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
+1. Handle next action with the `redirect` type once the submit button is clicked.
+   - Use action payload to get the URL. Make sure you add query parameters to the URL from action payload data.
+   - Redirect the user to the PayPal payment system using the generated URL.
+   - You can redirect to the PayPal URL in the same window or create a new window and keep the payment form in a separate tab. Once payment is completed on PayPal’s side, a user is redirected to `returnUrl`.
+1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
