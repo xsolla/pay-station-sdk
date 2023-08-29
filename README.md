@@ -48,7 +48,7 @@ declare const headlessCheckout: {
   init(environment: { isWebview?: boolean; sandbox?: boolean }): Promise<void>;
 
   /**
-   * Destroy secure Core Iframe.
+   * Remove secure Core Iframe.
    */
   destroy(): void;
 
@@ -59,27 +59,27 @@ declare const headlessCheckout: {
   setToken(token: string): Promise<void>;
 
   /**
-   * Returns available payment methods except quick methods.
+   * Returns available payment methods, excluding quick payment options.
    */
   getRegularMethods(country?: string): Promise<PaymentMethod[]>;
 
   /**
-   * Returns available quick payment methods like ApplePay, GooglePay, etc.
+   * Returns available quick payment options, e.g., Apple Pay, Google Pay.
    */
   getQuickMethods(country?: string): Promise<PaymentMethod[]>;
 
   /**
-   * Returns user saved methods.
+   * Returns a user’s saved methods.
    */
   getSavedMethods(): Promise<SavedMethod[]>;
 
   /**
-   * Returns user balance.
+   * Returns a user’s balance.
    */
   getUserBalance(): Promise<UserBalance>;
 
   /**
-   * Returns finance details for created payment.
+   * Returns financial information about the payment.
    */
   getFinanceDetails(): Promise<FinanceDetails | null>;
 
@@ -343,27 +343,27 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 
 > A working example can be found [here](./examples/paypal)
 
-Integration steps:
+Integration flow:
 
-1. Include the SDK library in your project. It doesn't matter whether you are using an npm-package or a CDN link.
-1. Access the `headlessCheckout` object, which contains the Pay Station initialization logic.
-1. Place the `<psdk-legal>` component in the HTML markup to provide links to legal documents.
-1. Place the `<psdk-finance-details>` component in the HTML markup to show purchase details.
-   - Finance details component will be updated with transaction details once payment completed.
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
+   - The financial details component will be updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
-1. Set the access token for the initialized SDK.
-1. Initialize payment form with PayPal payment method id and return url
-   - Return url will be used to redirect user once payment is completed on PayPal side.
-   - `headlessCheckout.form.init` method returns form object that can be used for future work with payment form
-1. Subscribe to form next actions to be notified about next payment flow steps
-   - Next action with type `redirect` will inform you that redirect action is required on your side. You can get url to redirect from action payload.
-1. Place the form fields component in the HTML markup
+1. Get the access token for the initialized SDK.
+1. Initialize the payment form with the PayPal payment method ID and return URL.
+   - The return URL is used to redirect the user once payment is completed on PayPal’s side.
+   - `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
+   - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the URL to redirect from the action payload.
+1. Add the form fields component to the HTML markup.
    - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
-   - Use fields with `isMandatory` flag to get required fields only.
-   - Use `<psdk-text>` component to render form fields if required. Email and Zip fields only can be required for PayPal.
-1. Place the `<psdk-submit-button>` form submit button in the HTML markup.
-1. Handle next action with type `redirect` once submit button was clicked
-   - Use action paylaod to get url. Make sure you add query params to url from action payload data.
-   - Redirect user to PayPal payment system using generated url.
-     - You can redirect to PayPal url in the same window or create new one and keep payment form in separate tab. Once payment is completed on PayPal side user will be redirected to provided `returnUrl`.
-   - Place the `<psdk-status>` component in the HTML markup to see the payment status.
+   - Use fields with the `isMandatory` flag to get required fields only.
+   - Use the `<psdk-text>` component to render form fields if required. Email and ZIP fields can only be required for PayPal.
+1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
+1. Handle next action with the `redirect` type once the submit button is clicked.
+   - Use action paylaod to get the URL. Make sure you add query parameters to the URL from action payload data.
+   - Redirect the user to the PayPal payment system using the generated URL.
+   - You can redirect to the PayPal URL in the same window or create a new window and keep the payment form in a separate tab. Once payment is completed on PayPal’s side, a user is redirected to `returnUrl`.
+1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
