@@ -16,7 +16,7 @@ const translationMap = new Map<string, string>([
 
 function translateSubtotalDetails(
   finance: XpsFinance,
-  items: CartLine[] = []
+  items: CartLine[] = [],
 ): CartLine[] {
   const vatPercent = finance.vat_user?.percent;
   return items.map((item) => {
@@ -26,10 +26,10 @@ function translateSubtotalDetails(
 
     return {
       ...item,
-      title: i18next.t<string>(translationMap.get(item.key)!, {
+      title: i18next.t(translationMap.get(item.key)!, {
         percent: vatPercent,
       }),
-    };
+    } as CartLine;
   });
 }
 
@@ -38,7 +38,7 @@ function getSubtotalTitle(cartSummary: CartSummary): string {
 
   if (cartSummary.subtotal) {
     lines.push(
-      `<div class="title">${i18next.t('finance-details-subtotal-title')}</div>`
+      `<div class="title">${i18next.t('finance-details-subtotal-title')}</div>`,
     );
   }
 
@@ -51,7 +51,7 @@ function getSubtotalTitle(cartSummary: CartSummary): string {
       ? `${getPriceTextTemplate(
           cartSummary.subtotal,
           null,
-          'price converted-price'
+          'price converted-price',
         )} <span class="equal-sign">=</span>`
       : '';
 
@@ -73,11 +73,11 @@ function getSubtotalTitle(cartSummary: CartSummary): string {
 
 function getSubtotalContent(
   finance: XpsFinance,
-  cartSummary: CartSummary
+  cartSummary: CartSummary,
 ): string {
   const lines = translateSubtotalDetails(
     finance,
-    cartSummary.subtotalDetails
+    cartSummary.subtotalDetails,
   ).map((details) => {
     if (!details.money?.amount && !details.content) {
       return '';
@@ -95,7 +95,7 @@ function getSubtotalContent(
 
 export const getSubtotalDetailsTemplate = (
   finance: XpsFinance,
-  cartSummary: CartSummary
+  cartSummary: CartSummary,
 ): string => {
   return [
     getSubtotalTitle(cartSummary),
