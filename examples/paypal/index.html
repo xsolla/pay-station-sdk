@@ -7,7 +7,7 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>PayPal integration</title>
     <!--
     Link the SDK bundle.
     NOTE: In this example, we use a local build just for convenience purposes.
@@ -87,10 +87,11 @@ Please, link CDN source or create local build (recommended to test purposes only
         /**
          * Initialize payment.
          * returnUrl will be opened after payment completed on PayPal side.
+         * Please see `examples/paypal/return.html` for more details
          */
         const form = await headlessCheckout.form.init({
           paymentMethodId: paypalPaymentMethodId,
-          returnUrl: 'https://xsolla.com',
+          returnUrl: 'http://return',
         });
 
         /**
@@ -116,10 +117,8 @@ Please, link CDN source or create local build (recommended to test purposes only
 
             /**
              * Open PayPal payment system.
-             * You can open PayPal in the same window with `window.location.href = url`
-             * and provide your return payment page url during form initialization.
              */
-            window.open(url, '_blank');
+            window.location.href = url;
 
             /**
              * Create status component. It will be updated once payment status changed.
