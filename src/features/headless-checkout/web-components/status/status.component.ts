@@ -10,9 +10,13 @@ import failedImage from '../../../../assets/statuses/failed.png';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { getStatusComponentTemplate } from './status.component.template';
 import { StatusComponentConfig } from './status.component.config.interface';
+import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
+import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 
 export class StatusComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
+  private readonly headlessCheckoutSpy: HeadlessCheckoutSpy;
+  private readonly formSpy: FormSpy;
 
   private statusConfig: StatusComponentConfig | null = null;
   private prevStatusUpdate: StatusUpdatedAction | null = null;
@@ -21,10 +25,32 @@ export class StatusComponent extends WebComponentAbstract {
     super();
 
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.headlessCheckoutSpy = container.resolve(HeadlessCheckoutSpy);
+    this.formSpy = container.resolve(FormSpy);
   }
 
   protected connectedCallback(): void {
+    if (!this.headlessCheckoutSpy.appWasInit) {
+      this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
+      return;
+    }
     void this.getStatus();
+    this.listenFormInit();
+  }
+
+  protected getHtml(): string {
+    if (this.statusConfig) {
+      return getStatusComponentTemplate(this.statusConfig);
+    }
+
+    return '';
+  }
+
+  private listenFormInit(): void {
+    if (!this.formSpy.formWasInit) {
+      this.formSpy.listenFormInit(() => this.listenFormInit());
+      return;
+    }
 
     this.headlessCheckout.form.onNextAction((nextAction) => {
       if (
@@ -36,14 +62,6 @@ export class StatusComponent extends WebComponentAbstract {
         void this.getStatus();
       }
     });
-  }
-
-  protected getHtml(): string {
-    if (this.statusConfig) {
-      return getStatusComponentTemplate(this.statusConfig);
-    }
-
-    return '';
   }
 
   private statusLoadedHandler(
@@ -72,12 +90,22 @@ export class StatusComponent extends WebComponentAbstract {
       StatusEnum.created,
       StatusEnum.held,
     ].includes(status.statusState);
-    const isError =
-      [StatusEnum.canceled, StatusEnum.error].includes(status.statusState) ||
-      status.isCancelUser;
+    const isCanceled =
+      status.statusState === StatusEnum.canceled || status.isCancelUser;
+    const isError = status.statusState === StatusEnum.error;
     const isSuccess =
       status.statusState === StatusEnum.done ??
       status.statusState === StatusEnum.authorized;
+
+    // check cancel before processing since canceled invoice has status state "created"
+    if (isCanceled) {
+      return {
+        image: failedImage,
+        title: i18next.t('status.error.title'),
+        description: '',
+        showDescription: false,
+      };
+    }
 
     if (isProcessing) {
       return {
