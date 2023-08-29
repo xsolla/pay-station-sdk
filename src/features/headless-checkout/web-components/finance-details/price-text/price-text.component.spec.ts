@@ -5,7 +5,7 @@ import { PriceTextComponent } from './price-text.component';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.PriceTextComponent
+    WebComponentTagName.PriceTextComponent,
   );
 
   element.setAttribute('price-line-content', 'content');
@@ -20,13 +20,16 @@ function createComponent(): void {
 describe('PriceTextComponent', () => {
   window.customElements.define(
     WebComponentTagName.PriceTextComponent,
-    PriceTextComponent
+    PriceTextComponent,
   );
 
   const currencyPipe = { transform: () => '' } as unknown as CurrencyPipe;
 
   beforeEach(() => {
     document.body.innerHTML = '<div id="container"></div>';
+
+    container.clearInstances();
+
     container.register<CurrencyPipe>(CurrencyPipe, { useValue: currencyPipe });
     spyOn(container, 'resolve').and.returnValue(currencyPipe);
   });
@@ -38,7 +41,7 @@ describe('PriceTextComponent', () => {
   it('Should draw price content', () => {
     createComponent();
     expect(document.querySelector('.content')!.textContent).toContain(
-      'content'
+      'content',
     );
   });
 

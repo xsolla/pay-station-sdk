@@ -14,4 +14,5 @@ export const enum EventName {
   financeDetails = 'financeDetails',
   nextAction = 'nextAction',
   warning = 'warning',
+  getTextComponentConfig = 'getTextComponentConfig',
 }

@@ -7,6 +7,8 @@ describe('LocalizeService', () => {
   let localizeService: LocalizeService;
 
   beforeEach(() => {
+    container.clearInstances();
+
     localizeService = container.createChildContainer().resolve(LocalizeService);
   });
 
@@ -33,7 +35,7 @@ describe('LocalizeService', () => {
     const stub = (): void => {};
 
     const spy = spyOn(i18next, 'changeLanguage').and.resolveTo(
-      stub as unknown as TFunction
+      stub as unknown as TFunction,
     );
 
     void localizeService.changeLang(Lang.EN);
@@ -46,7 +48,7 @@ describe('LocalizeService', () => {
     const stub = (): void => {};
 
     const spy = spyOn(i18next, 'changeLanguage').and.resolveTo(
-      stub as unknown as TFunction
+      stub as unknown as TFunction,
     );
 
     void localizeService.changeLang(Lang.CN);

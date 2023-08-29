@@ -2,6 +2,9 @@ import { container } from 'tsyringe';
 import { SubmitButtonComponent } from './submit-button.component';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
+import { HeadlessCheckout } from '../../headless-checkout';
+import { NextAction } from '../../../../core/actions/next-action.interface';
+import { noopStub } from '../../../../tests/stubs/noop.stub';
 
 function createComponent(): void {
   const element = document.createElement(
@@ -14,22 +17,36 @@ function createComponent(): void {
 
 describe('SubmitButtonComponent', () => {
   let postMessagesClient: PostMessagesClient;
+  let headlessCheckout: HeadlessCheckout;
+
   window.customElements.define(
     WebComponentTagName.SubmitButtonComponent,
     SubmitButtonComponent
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const stub = (): void => {};
-
   beforeEach(() => {
     document.body.innerHTML = '<div id="container"></div>';
 
     postMessagesClient = {
-      init: stub,
-      send: stub,
+      init: noopStub,
+      send: noopStub,
     } as unknown as PostMessagesClient;
-    spyOn(container, 'resolve').and.returnValue(postMessagesClient);
+
+    headlessCheckout = {
+      form: {
+        onNextAction: noopStub,
+      },
+    } as unknown as HeadlessCheckout;
+
+    container.clearInstances();
+
+    container
+      .register<PostMessagesClient>(PostMessagesClient, {
+        useValue: postMessagesClient,
+      })
+      .register<HeadlessCheckout>(HeadlessCheckout, {
+        useValue: headlessCheckout,
+      });
   });
 
   afterEach(() => {
@@ -44,9 +61,25 @@ describe('SubmitButtonComponent', () => {
 
   it('Should sendPostMessage event', () => {
     const spy = spyOn(postMessagesClient, 'send');
+    const onNextActionSpy = spyOn(headlessCheckout.form, 'onNextAction');
+
+    const nextAction = {
+      type: 'show_field_state',
+      data: { error: 'Some error' },
+    } as unknown as NextAction;
+
+    onNextActionSpy.and.callFake(
+      (callback: (nextAction: NextAction) => void) => {
+        callback(nextAction);
+      }
+    );
+
     createComponent();
 
-    document.querySelector('button')!.click();
+    const button = document.querySelector('button');
+
+    button!.removeAttribute('disabled');
+    button!.click();
 
     expect(spy).toHaveBeenCalled();
   });

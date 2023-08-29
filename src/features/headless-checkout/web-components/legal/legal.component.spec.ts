@@ -37,7 +37,7 @@ describe('LegalComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.LegalComponent,
-    LegalComponent
+    LegalComponent,
   );
 
   beforeEach(() => {
@@ -60,6 +60,8 @@ describe('LegalComponent', () => {
 
     windowService = window;
 
+    container.clearInstances();
+
     container
       .register<HeadlessCheckoutSpy>(HeadlessCheckoutSpy, {
         useValue: headlessCheckoutSpy,
@@ -80,16 +82,16 @@ describe('LegalComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.LegalComponent)
+      document.querySelector(WebComponentTagName.LegalComponent),
     ).toBeDefined();
   });
 
   it('Should load legal component config', () => {
     const spy = spyOn(postMessagesClient, 'send').and.returnValue(
-      Promise.resolve({})
+      Promise.resolve({}),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     expect(spy).toHaveBeenCalled();
@@ -97,12 +99,12 @@ describe('LegalComponent', () => {
 
   it('Should load legal component config after init', () => {
     const spy = spyOn(postMessagesClient, 'send').and.returnValue(
-      Promise.resolve({})
+      Promise.resolve({}),
     );
     const appWasInitSpy = spyOnProperty(
       headlessCheckoutSpy,
       'appWasInit',
-      'get'
+      'get',
     );
     const listenAppInitSpy = spyOn(headlessCheckoutSpy, 'listenAppInit');
     listenAppInitSpy.and.callFake((callback: () => void) => {
@@ -116,10 +118,10 @@ describe('LegalComponent', () => {
 
   it('Should call addEventListener', async () => {
     spyOn(postMessagesClient, 'send').and.returnValue(
-      Promise.resolve(mockConfig)
+      Promise.resolve(mockConfig),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     const spy = spyOn(windowService, 'addEventListener');
     createComponent();
@@ -130,7 +132,7 @@ describe('LegalComponent', () => {
   it('Should not call addEventListener', async () => {
     spyOn(postMessagesClient, 'send').and.returnValue(Promise.resolve(null));
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     const spy = spyOn(windowService, 'addEventListener');
     createComponent();
@@ -140,10 +142,10 @@ describe('LegalComponent', () => {
 
   it('Should send pong message', async () => {
     spyOn(postMessagesClient, 'send').and.returnValue(
-      Promise.resolve(mockConfig)
+      Promise.resolve(mockConfig),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     spyOn(windowService, 'addEventListener').and.callFake(
       (name: string, callback: (event: unknown) => void) => {
@@ -159,7 +161,7 @@ describe('LegalComponent', () => {
         const spy = spyOn(messageEvent.source, 'postMessage');
         callback(messageEvent);
         expect(spy).toHaveBeenCalled();
-      }
+      },
     );
     createComponent();
     await delay();
