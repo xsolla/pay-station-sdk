@@ -144,8 +144,7 @@
     "@typescript-eslint/no-confusing-non-null-assertion": "error",
     "no-dupe-class-members": "off",
     "@typescript-eslint/no-dupe-class-members": "error",
-    "no-duplicate-imports": "off",
-    "@typescript-eslint/no-duplicate-imports": "error",
+    "no-duplicate-imports": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-floating-promises": [
       "error",
@@ -154,7 +153,6 @@
         "ignoreIIFE": true
       }
     ],
-    "@typescript-eslint/no-implicit-any-catch": "error",
     "no-implied-eval": "off",
     "@typescript-eslint/no-implied-eval": "error",
     "no-magic-numbers": "off",
