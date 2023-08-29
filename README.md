@@ -351,7 +351,7 @@ Integration flow:
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
    - The financial details component will be updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
-1. Get the access token for the initialized SDK.
+1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the PayPal payment method ID and return URL.
    - The return URL is used to redirect the user once payment is completed on PayPal’s side.
    - `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
@@ -363,7 +363,7 @@ Integration flow:
    - Use the `<psdk-text>` component to render form fields if required. Email and ZIP fields can only be required for PayPal.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Handle next action with the `redirect` type once the submit button is clicked.
-   - Use action paylaod to get the URL. Make sure you add query parameters to the URL from action payload data.
+   - Use action payload to get the URL. Make sure you add query parameters to the URL from action payload data.
    - Redirect the user to the PayPal payment system using the generated URL.
    - You can redirect to the PayPal URL in the same window or create a new window and keep the payment form in a separate tab. Once payment is completed on PayPal’s side, a user is redirected to `returnUrl`.
 1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
