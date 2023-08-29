@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!--
+    Link the SDK bundle.
+    NOTE: In this example, we use a local build just for convenience purposes.
+    -->
+    <script src="../../dist/main.js"></script>
+  </head>
+
+  <body>
+    <h1>PayPal payment integration</h1>
+
+    <div id="form-container"></div>
+    <div id="status-container"></div>
+
+    <!--
+      Add finance details component to show purchase details
+    -->
+    <psdk-finance-details></psdk-finance-details>
+
+    <!--
+      Add legal component to provide links to legal documents
+    -->
+    <psdk-legal></psdk-legal>
+
+    <!-- Initialization script -->
+    <script>
+      if (typeof PayStationSdk === 'undefined') {
+        alert(`
+It seems SDK library is undefined.
+Please, link CDN source or create local build (recommended to test purposes only).
+        `);
+        throw new Error('PayStationSdk not found');
+      }
+      /**
+       * To learn more about creating tokens,
+       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       */
+      const accessToken = '';
+
+      if (!accessToken) {
+        alert('No token provided. Please, check the documentation');
+        throw new Error('No token provided');
+      }
+
+      /**
+       * The SDK is available under the PayStationSdk namespace.
+       * To begin initialization, obtain a reference to the headlessCheckout object.
+       */
+      const { headlessCheckout } = PayStationSdk;
+
+      async function initPayStationSdk() {
+        /**
+         * Call the `init()` method with the provided environment object.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a webview or not.
+         * You can set sandbox payment mode with `sandbox` parameter
+         * Please note that this command executes asynchronously.
+         */
+        await headlessCheckout.init({
+          isWebView: false,
+          sandbox: true,
+        });
+
+        /**
+         * After the Payments SDK has been initialized, the next step is setting the token.
+         * To learn more about creating tokens,
+         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         */
+        await headlessCheckout.setToken(accessToken);
+
+        /**
+         * Define payment method id.
+         * To get lists of payment methods use psdk-payment-methods.
+         * Please see `examples/select-method` for more details
+         */
+        const paypalPaymentMethodId = 24;
+
+        /**
+         * Initialize payment.
+         * returnUrl will be opened after payment completed on PayPal side.
+         */
+        const form = await headlessCheckout.form.init({
+          paymentMethodId: paypalPaymentMethodId,
+          returnUrl: 'https://xsolla.com',
+        });
+
+        /**
+         * Subscribe to payment actions
+         */
+        headlessCheckout.form.onNextAction((nextAction) => {
+          console.log('Next action', nextAction);
+          const statusContainer = document.querySelector('#status-container');
+
+          /**
+           * Handle redirect action
+           */
+          if (nextAction.type === 'redirect') {
+            /**
+             * Generate PayPal redirect url
+             */
+            const url = new URL(nextAction.data.redirect.redirectUrl);
+            const params = Object.entries(nextAction.data.redirect.data);
+            params.forEach((entry) => {
+              const [key, value] = entry;
+              url.searchParams.append(key, value);
+            });
+
+            /**
+             * Open PayPal payment system.
+             * You can open PayPal in the same window with `window.location.href = url`
+             * and provide your return payment page url during form initialization.
+             */
+            window.open(url, '_blank');
+
+            /**
+             * Create status component. It will be updated once payment status changed.
+             * You can use <psdk-status></psdk-status> component as well
+             */
+            const statusComponent = new PayStationSdk.StatusComponent();
+            statusContainer.append(statusComponent);
+          }
+        });
+
+        /**
+         * Create payment form
+         */
+        const formElement = document.querySelector('#form-container');
+
+        /**
+         * form.fields provide available fields for selected payment method.
+         * You can filter it by `isMandatory` flag to get required fields only
+         */
+        const requiredFields = form.fields.filter(
+          (field) => field.isMandatory === '1'
+        );
+        console.log('Required form fields', requiredFields);
+
+        /**
+         * Render requried fields
+         */
+        requiredFields.forEach((field) => {
+          if (field.type === 'text') {
+            /**
+             * You can use <psdk-text name="field.name"></psdk-text> as well
+             */
+            const input = new PayStationSdk.TextComponent();
+            input.setAttribute('name', field.name);
+            formElement.append(input);
+          }
+        });
+
+        /**
+         * Render submit form button.
+         * You can use <psdk-submit-button></psdk-submit-button> as well
+         */
+        const submitButton = new PayStationSdk.SubmitButtonComponent();
+        submitButton.setAttribute('text', 'Pay Now');
+        formElement.append(submitButton);
+      }
+
+      // initialize sdk
+      initPayStationSdk();
+    </script>
+  </body>
+</html>

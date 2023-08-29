@@ -1,5 +1,5 @@
 export enum WebComponentTagName {
-  TextComponent = 'psdk-text-component',
+  TextComponent = 'psdk-text',
   SubmitButtonComponent = 'psdk-submit-button',
   PaymentMethodsComponent = 'psdk-payment-methods',
   PriceTextComponent = 'psdk-price-text',

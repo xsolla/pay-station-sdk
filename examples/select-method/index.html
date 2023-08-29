@@ -31,6 +31,7 @@
 It seems SDK library is undefined.
 Please, link CDN source or create local build (recommended to test purposes only).
         `);
+        throw new Error('PayStationSdk not found');
       }
       /**
        * To learn more about creating tokens,
@@ -40,6 +41,7 @@ Please, link CDN source or create local build (recommended to test purposes only
 
       if (!accessToken) {
         alert(`No token provided. Please, check the documentation`);
+        throw new Error('No token provided');
       }
       async function initPayStationSdk() {
         /**
@@ -56,6 +58,7 @@ Please, link CDN source or create local build (recommended to test purposes only
          */
         await headlessCheckout.init({
           isWebView: false,
+          sandbox: true,
         });
 
         /**
@@ -75,8 +78,8 @@ Please, link CDN source or create local build (recommended to test purposes only
          * To add extra logic to a component, you can subscribe to
          * its events and place your code in a callback function.
          */
-        paymentMethods.addEventListener('selectionChange', (e) => {
-          console.log(e);
+        paymentMethods.addEventListener('selectionChange', (event) => {
+          console.log(event.detail);
         });
       }
 
