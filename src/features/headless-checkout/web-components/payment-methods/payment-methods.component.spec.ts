@@ -10,7 +10,7 @@ import { HeadlessCheckout } from '../../headless-checkout';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.PaymentMethodsComponent
+    WebComponentTagName.PaymentMethodsComponent,
   );
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
@@ -40,7 +40,7 @@ describe('PaymentMethodsComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.PaymentMethodsComponent,
-    PaymentMethodsComponent
+    PaymentMethodsComponent,
   );
 
   beforeEach(() => {
@@ -56,6 +56,8 @@ describe('PaymentMethodsComponent', () => {
         return;
       },
     } as unknown as HeadlessCheckoutSpy;
+
+    container.clearInstances();
 
     container
       .register<HeadlessCheckoutSpy>(HeadlessCheckoutSpy, {
@@ -73,16 +75,16 @@ describe('PaymentMethodsComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.PaymentMethodsComponent)
+      document.querySelector(WebComponentTagName.PaymentMethodsComponent),
     ).toBeDefined();
   });
 
   it('Should load payment methods', () => {
     const spy = spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     expect(spy).toHaveBeenCalled();
@@ -90,12 +92,12 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should load payment methods after init', () => {
     const spy = spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     const appWasInitSpy = spyOnProperty(
       headlessCheckoutSpy,
       'appWasInit',
-      'get'
+      'get',
     );
     const listenAppInitSpy = spyOn(headlessCheckoutSpy, 'listenAppInit');
     listenAppInitSpy.and.callFake((callback: () => void) => {
@@ -109,10 +111,10 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should not load payment methods', () => {
     const spy = spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      false
+      false,
     );
     createComponent();
     expect(spy).not.toHaveBeenCalled();
@@ -120,10 +122,10 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should load payment methods twice if change country', () => {
     const spy = spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     document
@@ -134,10 +136,10 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should draw 2 payment methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod, mockVisiblePaymentMethod])
+      Promise.resolve([mockVisiblePaymentMethod, mockVisiblePaymentMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
@@ -148,10 +150,10 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should draw 1 payment methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockNotVisiblePaymentMethod, mockVisiblePaymentMethod])
+      Promise.resolve([mockNotVisiblePaymentMethod, mockVisiblePaymentMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
@@ -164,10 +166,10 @@ describe('PaymentMethodsComponent', () => {
       Promise.resolve([
         mockNotVisiblePaymentMethod,
         mockNotVisiblePaymentMethod,
-      ])
+      ]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
@@ -177,10 +179,10 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should dispatch custom event', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod])
+      Promise.resolve([mockVisiblePaymentMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
@@ -198,10 +200,10 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should search methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod, mockQiwiPaymentMethod])
+      Promise.resolve([mockVisiblePaymentMethod, mockQiwiPaymentMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
@@ -216,10 +218,10 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should draw no methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod, mockQiwiPaymentMethod])
+      Promise.resolve([mockVisiblePaymentMethod, mockQiwiPaymentMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 

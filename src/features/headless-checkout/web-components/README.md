@@ -2,7 +2,7 @@
 
 Before creating web components, it is worth familiarizing yourself with the following resource: [https://javascript.info/web-components](https://javascript.info/web-components).
 
-All components are located in `src/features/web-components`.
+All components are located in `src/features/headless-checkout/web-components`.
 
 ### Creating a Component
 

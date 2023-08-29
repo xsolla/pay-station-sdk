@@ -34,7 +34,7 @@ export class LegalComponent extends WebComponentAbstract {
   }
 
   protected readonly configLoadedHandler = (
-    config: LegalComponentConfig,
+    config: LegalComponentConfig
   ): void => {
     this.config = config;
     super.render();
@@ -59,7 +59,7 @@ export class LegalComponent extends WebComponentAbstract {
 
     return this.postMessagesClient.send<LegalComponentConfig>(
       msg,
-      getLegalComponentConfigHandler,
+      getLegalComponentConfigHandler
     ) as Promise<LegalComponentConfig>;
   }
 
@@ -71,19 +71,19 @@ export class LegalComponent extends WebComponentAbstract {
   }
 
   private readonly pingCallback = (message: MessageEvent): void => {
-    try {
-      const data = JSON.parse(message.data);
-      if (!isEventMessage(data) || data.name !== EventName.legalComponentPing) {
-        return;
-      }
-      message.source?.postMessage(
-        JSON.stringify({
-          name: EventName.legalComponentPong,
-        }),
-        message.origin as WindowPostMessageOptions,
-      );
-    } catch (error) {
-      /* empty */
+    const data = this.getJsonOrNull(message?.data);
+    if (
+      !data ||
+      !isEventMessage(data) ||
+      data.name !== EventName.legalComponentPing
+    ) {
+      return;
     }
+    message.source?.postMessage(
+      JSON.stringify({
+        name: EventName.legalComponentPong,
+      }),
+      message.origin as WindowPostMessageOptions
+    );
   };
 }

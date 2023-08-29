@@ -13,6 +13,7 @@ export interface ShowFieldStateActionData {
   fieldName: string;
   fieldState: FieldStatus;
   error: { code: string; message: string } | null;
+  isFocused?: boolean;
 }
 
 export type ShowFieldStateAction = Action<

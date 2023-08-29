@@ -18,7 +18,7 @@ export abstract class WebComponentAbstract extends HTMLElement {
   protected addEventListenerToElement(
     element: HTMLElement,
     eventType: string,
-    listener: (event: Event) => void
+    listener: (event: Event) => void,
   ): void {
     element.addEventListener(eventType, listener);
     this.eventListeners.push({ element, eventType, listener });
@@ -57,5 +57,13 @@ export abstract class WebComponentAbstract extends HTMLElement {
     }
 
     return numberValue;
+  }
+
+  protected getJsonOrNull(data: string): unknown | null {
+    try {
+      return JSON.parse(data);
+    } catch (err: unknown) {
+      return null;
+    }
   }
 }

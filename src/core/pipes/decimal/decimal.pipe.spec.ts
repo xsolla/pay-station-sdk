@@ -6,6 +6,8 @@ describe('DecimalPipe', () => {
   let pipe: DecimalPipe;
 
   beforeEach(() => {
+    container.clearInstances();
+
     pipe = container.createChildContainer().resolve(DecimalPipe);
   });
 
@@ -28,7 +30,7 @@ describe('DecimalPipe', () => {
       minIntDigits,
       minFracDigits,
       maxFracDigits,
-      Lang.RU
+      Lang.RU,
     );
     expect(value).toEqual('01,234');
   });
