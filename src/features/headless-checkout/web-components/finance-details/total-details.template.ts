@@ -13,7 +13,7 @@ const translationMap = new Map<string, string>([
 
 function translateTotalDetails(
   finance: XpsFinance,
-  items: CartLine[] = []
+  items: CartLine[] = [],
 ): CartLine[] {
   const vatPercent = finance.vat?.percent;
   return items.map((item) => {
@@ -23,20 +23,20 @@ function translateTotalDetails(
 
     return {
       ...item,
-      title: i18next.t<string>(translationMap.get(item.key)!, {
+      title: i18next.t(translationMap.get(item.key)!, {
         percent: vatPercent,
       }),
-    };
+    } as CartLine;
   });
 }
 
 export const getTotalDetailsTemplate = (
   finance: XpsFinance,
-  cartSummary: CartSummary
+  cartSummary: CartSummary,
 ): string => {
   const totalDetailsRows = translateTotalDetails(
     finance,
-    cartSummary.totalDetails
+    cartSummary.totalDetails,
   )?.map((totalDetails) => {
     return `
       <div class="total-details-row">
