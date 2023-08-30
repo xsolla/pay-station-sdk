@@ -257,6 +257,9 @@ export class HeadlessCheckout {
   public async getStatus(): Promise<Status> {
     const msg: Message = {
       name: EventName.getPaymentStatus,
+      data: {
+        url: this.window.location.href,
+      },
     };
 
     return this.postMessagesClient.send<Status>(msg, (message) =>
