@@ -2,17 +2,6 @@
    "it" : {
       "translation" : {
          "cookie-policy" : "Informativa sui Cookie",
-         "hello" : "Ciao mondo!",
-         "legal" : "Note legali",
-         "privacy-policy" : "Informativa sulla Privacy",
-         "refund-policy" : "Politica di Rimborso",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Connessione sicura",
-         "status.error.title" : "Pagamento non riuscito",
-         "status.processing.description" : "In attesa che il pagamento venga completato…",
-         "status.processing.title" : "Elaborazione pagamento",
-         "status.success.description" : "Abbiamo inviato una ricevuta a {{email}}",
-         "status.success.title" : "Pagamento effettuato con successo",
          "finance-details-cart-items-checkout-title" : "Acquisto in-game",
          "finance-details-cart-items-sales-tax" : "Imposta sulle vendite {{percent}}%",
          "finance-details-cart-items-vat" : "IVA {{percent}}%",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "Include {{percent}}% IVA",
          "finance-details-total-details-vat-ghana" : "Inclusi IVA, NHIL, contributo GETFund e contributo Covid-19",
          "finance-details-total-details-vat-india" : "Compresa GST {{percent}}% ",
-         "finance-details-total-title" : "Totale"
+         "finance-details-total-title" : "Totale",
+         "hello" : "Ciao mondo!",
+         "legal" : "Note legali",
+         "privacy-policy" : "Informativa sulla Privacy",
+         "refund-policy" : "Politica di Rimborso",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Connessione sicura",
+         "status.error.title" : "Pagamento non riuscito",
+         "status.processing.description" : "In attesa che il pagamento venga completato…",
+         "status.processing.title" : "Elaborazione pagamento",
+         "status.success.description" : "Abbiamo inviato una ricevuta a {{email}}",
+         "status.success.title" : "Pagamento effettuato con successo"
       }
    }
 }

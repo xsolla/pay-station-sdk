@@ -2,17 +2,6 @@
    "cs" : {
       "translation" : {
          "cookie-policy" : "Zásady používání cookies",
-         "hello" : "Ahoj světe!",
-         "legal" : "Právní informace",
-         "privacy-policy" : "Zásady ochrany osobních údajů",
-         "refund-policy" : "Podmínky vrácení peněz",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Zabezpečené připojení",
-         "status.error.title" : "Platba se nezdařila",
-         "status.processing.description" : "Čekání na dokončení platby...",
-         "status.processing.title" : "Zpracovávání platby",
-         "status.success.description" : "Vaši stvrzenku jsme zaslali na {{email}}",
-         "status.success.title" : "Platba byla úspěšná",
          "finance-details-cart-items-checkout-title" : "Nákup ve hře",
          "finance-details-cart-items-sales-tax" : "Daň z obratu {{percent}} %",
          "finance-details-cart-items-vat" : "DPH {{percent}} %",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "Včetně {{percent}}% DPH",
          "finance-details-total-details-vat-ghana" : "Včetně DPH, NHIL, odvodu GETFund a odvodu Covid-19",
          "finance-details-total-details-vat-india" : "Včetně {{percent}}% GST",
-         "finance-details-total-title" : "Celkem"
+         "finance-details-total-title" : "Celkem",
+         "hello" : "Ahoj světe!",
+         "legal" : "Právní informace",
+         "privacy-policy" : "Zásady ochrany osobních údajů",
+         "refund-policy" : "Podmínky vrácení peněz",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Zabezpečené připojení",
+         "status.error.title" : "Platba se nezdařila",
+         "status.processing.description" : "Čekání na dokončení platby...",
+         "status.processing.title" : "Zpracovávání platby",
+         "status.success.description" : "Vaši stvrzenku jsme zaslali na {{email}}",
+         "status.success.title" : "Platba byla úspěšná"
       }
    }
 }

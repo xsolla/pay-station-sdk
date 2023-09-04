@@ -2,17 +2,6 @@
    "vi" : {
       "translation" : {
          "cookie-policy" : "Chính sách cookie",
-         "hello" : "Xin chào thế giới!",
-         "legal" : "Pháp lý",
-         "privacy-policy" : "Chính sách Quyền riêng tư",
-         "refund-policy" : "Chính sách hoàn tiền",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Kết nối bảo mật",
-         "status.error.title" : "Thanh toán thất bại",
-         "status.processing.description" : "Đợi thanh toán hoàn tất...",
-         "status.processing.title" : "Đang xử lý thanh toán",
-         "status.success.description" : "Biên nhận đã được gửi đến {{email}}",
-         "status.success.title" : "Thanh toán thành công",
          "finance-details-cart-items-checkout-title" : "Giao dịch trong trò chơi",
          "finance-details-cart-items-sales-tax" : "Thuế doanh thu {{percent}}%",
          "finance-details-cart-items-vat" : "Thuế giá trị gia tăng (VAT) {{percent}}%",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "Bao gồm {{percent}}% thuế GTGT",
          "finance-details-total-details-vat-ghana" : "Bao gồm thuế Giá trị gia tăng (VAT), Thuế phụ thu bảo hiểm y tế quốc gia (NHIL), Thuế phụ thu GETFund và Thuế phụ thu Covid-19",
          "finance-details-total-details-vat-india" : "Bao gồm {{percent}}% thuế hàng hóa và dịch vụ (GST)",
-         "finance-details-total-title" : "Tổng"
+         "finance-details-total-title" : "Tổng",
+         "hello" : "Xin chào thế giới!",
+         "legal" : "Pháp lý",
+         "privacy-policy" : "Chính sách Quyền riêng tư",
+         "refund-policy" : "Chính sách hoàn tiền",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Kết nối bảo mật",
+         "status.error.title" : "Thanh toán thất bại",
+         "status.processing.description" : "Đợi thanh toán hoàn tất...",
+         "status.processing.title" : "Đang xử lý thanh toán",
+         "status.success.description" : "Biên nhận đã được gửi đến {{email}}",
+         "status.success.title" : "Thanh toán thành công"
       }
    }
 }

@@ -2,17 +2,6 @@
    "ru" : {
       "translation" : {
          "cookie-policy" : "Политика использования cookie",
-         "hello" : "Привет, мир!",
-         "legal" : "Юридические документы",
-         "privacy-policy" : "Политика конфиденциальности",
-         "refund-policy" : "Политика возврата",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Безопасное соединение",
-         "status.error.title" : "Платеж не прошел",
-         "status.processing.description" : "Ожидаем завершения оплаты...",
-         "status.processing.title" : "Обработка платежа",
-         "status.success.description" : "Мы отправили чек на {{email}}",
-         "status.success.title" : "Платеж прошел",
          "finance-details-cart-items-checkout-title" : "Внутриигровая покупка",
          "finance-details-cart-items-sales-tax" : "Налог с продаж {{percent}}%",
          "finance-details-cart-items-vat" : "НДС {{percent}}%",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "Включая НДС {{percent}}%",
          "finance-details-total-details-vat-ghana" : "Включая НДС и взносы NHIL, GETFund и Covid-19",
          "finance-details-total-details-vat-india" : "Включая {{percent}}% GST",
-         "finance-details-total-title" : "К оплате"
+         "finance-details-total-title" : "К оплате",
+         "hello" : "Привет, мир!",
+         "legal" : "Юридические документы",
+         "privacy-policy" : "Политика конфиденциальности",
+         "refund-policy" : "Политика возврата",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Безопасное соединение",
+         "status.error.title" : "Платеж не прошел",
+         "status.processing.description" : "Ожидаем завершения оплаты...",
+         "status.processing.title" : "Обработка платежа",
+         "status.success.description" : "Мы отправили чек на {{email}}",
+         "status.success.title" : "Платеж прошел"
       }
    }
 }
