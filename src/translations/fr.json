@@ -2,17 +2,6 @@
    "fr" : {
       "translation" : {
          "cookie-policy" : "Politique en matière de cookies",
-         "hello" : "Bonjour monde!",
-         "legal" : "Juridique",
-         "privacy-policy" : "Politique de confidentialité",
-         "refund-policy" : "Politique de remboursement",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Connexion sécurisée",
-         "status.error.title" : "Échec de paiement",
-         "status.processing.description" : "En attente de l'achèvement du paiement…",
-         "status.processing.title" : "Traitement du paiement",
-         "status.success.description" : "Nous avons envoyé votre reçu à {{email}}",
-         "status.success.title" : "Paiement réussi",
          "finance-details-cart-items-checkout-title" : "Achat intégré",
          "finance-details-cart-items-sales-tax" : "Taxe de vente de {{percent}} %",
          "finance-details-cart-items-vat" : "TVA de {{percent}} %",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "TVA de {{percent}} % incluse",
          "finance-details-total-details-vat-ghana" : "Y compris la TVA, la NHIL, le prélèvement GETFund et le prélèvement Covid-19",
          "finance-details-total-details-vat-india" : "TPS de {{percent}} % incluse",
-         "finance-details-total-title" : "Total"
+         "finance-details-total-title" : "Total",
+         "hello" : "Bonjour monde!",
+         "legal" : "Juridique",
+         "privacy-policy" : "Politique de confidentialité",
+         "refund-policy" : "Politique de remboursement",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Connexion sécurisée",
+         "status.error.title" : "Échec de paiement",
+         "status.processing.description" : "En attente de l'achèvement du paiement…",
+         "status.processing.title" : "Traitement du paiement",
+         "status.success.description" : "Nous avons envoyé votre reçu à {{email}}",
+         "status.success.title" : "Paiement réussi"
       }
    }
 }

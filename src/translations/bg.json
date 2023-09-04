@@ -2,17 +2,6 @@
    "bg" : {
       "translation" : {
          "cookie-policy" : "Политика за бисквитките",
-         "hello" : "Здравей, свят!",
-         "legal" : "Правни документи",
-         "privacy-policy" : "Политика за поверителност",
-         "refund-policy" : "Политика за връщане на средства",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Сигурна връзка",
-         "status.error.title" : "Неуспешно плащане",
-         "status.processing.description" : "Изчаква завършване на плащане...",
-         "status.processing.title" : "Плащането се обработва",
-         "status.success.description" : "Изпратихме касовата Ви бележка на {{email}}",
-         "status.success.title" : "Успешно плащане",
          "finance-details-cart-items-checkout-title" : "Покупка вътре в играта",
          "finance-details-cart-items-sales-tax" : "Данък продажби {{percent}}%",
          "finance-details-cart-items-vat" : "ДДС {{percent}}%",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "Включително {{percent}}% ДДС",
          "finance-details-total-details-vat-ghana" : "С включени ДДС, GST, NHIL, облагане за GETFund и облагане за Covid-19",
          "finance-details-total-details-vat-india" : "С включен {{percent}}% ДСУ",
-         "finance-details-total-title" : "Общо"
+         "finance-details-total-title" : "Общо",
+         "hello" : "Здравей, свят!",
+         "legal" : "Правни документи",
+         "privacy-policy" : "Политика за поверителност",
+         "refund-policy" : "Политика за връщане на средства",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Сигурна връзка",
+         "status.error.title" : "Неуспешно плащане",
+         "status.processing.description" : "Изчаква завършване на плащане...",
+         "status.processing.title" : "Плащането се обработва",
+         "status.success.description" : "Изпратихме касовата Ви бележка на {{email}}",
+         "status.success.title" : "Успешно плащане"
       }
    }
 }

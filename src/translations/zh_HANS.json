@@ -2,17 +2,6 @@
    "zh_HANS" : {
       "translation" : {
          "cookie-policy" : "Cookie政策",
-         "hello" : "你好，世界！",
-         "legal" : "法律信息",
-         "privacy-policy" : "隐私政策",
-         "refund-policy" : "退款政策",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "安全连接",
-         "status.error.title" : "支付失败",
-         "status.processing.description" : "正在等待支付完成...",
-         "status.processing.title" : "正在处理付款",
-         "status.success.description" : "您的收据已发送至{{email}}",
-         "status.success.title" : "支付成功",
          "finance-details-cart-items-checkout-title" : "游戏内购买",
          "finance-details-cart-items-sales-tax" : "销售税 {{percent}}%",
          "finance-details-cart-items-vat" : "增值税 {{percent}}%",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "含{{percent}}%增值税",
          "finance-details-total-details-vat-ghana" : "含VAT、NHIL、GETFund征税和Covid-19征税",
          "finance-details-total-details-vat-india" : "含{{percent}}%商品和服务税",
-         "finance-details-total-title" : "总计"
+         "finance-details-total-title" : "总计",
+         "hello" : "你好，世界！",
+         "legal" : "法律信息",
+         "privacy-policy" : "隐私政策",
+         "refund-policy" : "退款政策",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "安全连接",
+         "status.error.title" : "支付失败",
+         "status.processing.description" : "正在等待支付完成...",
+         "status.processing.title" : "正在处理付款",
+         "status.success.description" : "您的收据已发送至{{email}}",
+         "status.success.title" : "支付成功"
       }
    }
 }

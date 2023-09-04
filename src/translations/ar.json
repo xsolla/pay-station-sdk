@@ -2,17 +2,6 @@
    "ar" : {
       "translation" : {
          "cookie-policy" : "سياسة ملفات تعريف الارتباط",
-         "hello" : "مرحبًا بالعالم!",
-         "legal" : "قانوني",
-         "privacy-policy" : "سياسة الخصوصية",
-         "refund-policy" : "سياسة الاسترداد",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "اتصال آمن",
-         "status.error.title" : "فشلت عملية السداد",
-         "status.processing.description" : "في انتظار أن يتم السداد...",
-         "status.processing.title" : "جارٍ تنفيذ السداد",
-         "status.success.description" : "أرسلنا إيصالك إلى {{email}}",
-         "status.success.title" : "نجحت عملية السداد",
          "finance-details-cart-items-checkout-title" : "الشراء من داخل اللعبة",
          "finance-details-cart-items-sales-tax" : "ضريبة المبيعات {{percent}}%",
          "finance-details-cart-items-vat" : "ضريبة القيمة المضافة{{percent}}%",
@@ -32,7 +21,18 @@
          "finance-details-total-details-vat" : "شامل {{percent}}% ضريبة قيمة مضافة",
          "finance-details-total-details-vat-ghana" : "متضمنة ضريبة القيمة المضافة، وضريبة التأمين الصحي الوطنية، وضريبة GETFund وضريبة كوفيد-19",
          "finance-details-total-details-vat-india" : "شامل {{percent}}% ضريبة البضائع والخدمات",
-         "finance-details-total-title" : "الإجمالي"
+         "finance-details-total-title" : "الإجمالي",
+         "hello" : "مرحبًا بالعالم!",
+         "legal" : "قانوني",
+         "privacy-policy" : "سياسة الخصوصية",
+         "refund-policy" : "سياسة الاسترداد",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "اتصال آمن",
+         "status.error.title" : "فشلت عملية السداد",
+         "status.processing.description" : "في انتظار أن يتم السداد...",
+         "status.processing.title" : "جارٍ تنفيذ السداد",
+         "status.success.description" : "أرسلنا إيصالك إلى {{email}}",
+         "status.success.title" : "نجحت عملية السداد"
       }
    }
 }
