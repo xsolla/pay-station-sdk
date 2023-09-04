@@ -3,7 +3,7 @@ import { getSecureConnectionTemplate } from './secure-connection.component.templ
 import i18next from 'i18next';
 
 export const getLegalComponentTemplate = (
-  config: LegalComponentConfig
+  config: LegalComponentConfig,
 ): string => {
   const {
     isJapanUser,
@@ -17,7 +17,9 @@ export const getLegalComponentTemplate = (
       disclaimer
         ? `
   <div class="disclaimer">
-    ${i18next.t('disclaimer')}
+    ${i18next.t('disclaimer', {
+      link: 'https://xsolla.com/eula',
+    })}
   </div>`
         : ''
     }
