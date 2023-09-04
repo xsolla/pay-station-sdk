@@ -3,6 +3,7 @@
     "translation": {
       "hello": "Hello world!",
       "legal": "Legal",
+      "disclaimer": "Xsolla is the official distributor of this content. By purchasing, you confirm that you’re an adult and that you've read, understood, and accepted the <a href={{link}} target='_blank'>EULA</a>. You also accept that the agreement takes effect immediately and acknowledge that you'll lose any right of withdrawal once the digital content starts downloading.",
       "cookie-policy": "Cookie policy",
       "privacy-policy": "Privacy policy",
       "refund-policy": "Refund policy",
