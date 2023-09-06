@@ -2,6 +2,7 @@
    "it" : {
       "translation" : {
          "cookie-policy" : "Informativa sui Cookie",
+         "disclaimer" : "Xsolla è il distributore ufficiale di questo contenuto. Procedendo con l'acquisto, l'utente conferma di essere maggiorenne e di aver letto, compreso e accettato l' <a href={{link}} target='_blank'>EULA<\/a>. L'utente accetta inoltre che il contratto abbia effetto immediato e riconosce che perderà qualsiasi diritto di recesso una volta che il contenuto digitale inizierà a essere scaricato.",
          "finance-details-cart-items-checkout-title" : "Acquisto in-game",
          "finance-details-cart-items-sales-tax" : "Imposta sulle vendite {{percent}}%",
          "finance-details-cart-items-vat" : "IVA {{percent}}%",

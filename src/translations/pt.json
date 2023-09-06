@@ -2,6 +2,7 @@
    "pt" : {
       "translation" : {
          "cookie-policy" : "Política de Cookies",
+         "disclaimer" : "A Xsolla é a distribuidora oficial desse conteúdo. Ao comprá-lo, você confirma que é um adulto e que você leu, compreendeu e aceitou o <a href={{link}} target='_blank'>CLUA<\/a>. Você também aceita que o acordo entra em efeito imediatamente e reconhece que você perde qualquer direito de arrependimento assim que o download do conteúdo digital é iniciado.",
          "finance-details-cart-items-checkout-title" : "Compra no jogo",
          "finance-details-cart-items-sales-tax" : "Imposto sobre venda {{percent}}%",
          "finance-details-cart-items-vat" : "VAT {{percent}}%",

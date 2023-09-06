@@ -2,6 +2,7 @@
    "vi" : {
       "translation" : {
          "cookie-policy" : "Chính sách cookie",
+         "disclaimer" : "Xsolla là nhà phân phối chính thức của nội dung này. Bằng việc mua hàng, bạn xác nhận mình là người trưởng thành, đồng thời đã đọc, hiểu và chấp nhận <a href={{link}} target='_blank'>Thỏa thuận dành cho người dùng cuối (EULA)<\/a> của chúng tôi. Ngoài ra, bạn chấp nhận việc thỏa thuận sẽ có hiệu lực tức thị và xác nhận sẽ mất quyền rút lại quyết định ngay khi bắt đầu tải xuống nội dung số này.",
          "finance-details-cart-items-checkout-title" : "Giao dịch trong trò chơi",
          "finance-details-cart-items-sales-tax" : "Thuế doanh thu {{percent}}%",
          "finance-details-cart-items-vat" : "Thuế giá trị gia tăng (VAT) {{percent}}%",
