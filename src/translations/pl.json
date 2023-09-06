@@ -2,17 +2,7 @@
    "pl" : {
       "translation" : {
          "cookie-policy" : "Polityka plików cookie",
-         "hello" : "Witaj świecie!",
-         "legal" : "Informacje prawne",
-         "privacy-policy" : "Polityka prywatności",
-         "refund-policy" : "Polityka zwrotów",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Bezpieczne połączenie",
-         "status.error.title" : "Płatność nieudana",
-         "status.processing.description" : "Oczekiwanie na sfinalizowanie płatności...",
-         "status.processing.title" : "Trwa przetwarzanie płatności",
-         "status.success.description" : "Wysłaliśmy rachunek na adres {{email}}",
-         "status.success.title" : "Płatność zrealizowana",
+         "disclaimer" : "Xsolla jest oficjalnym dystrybutorem tych treści. Dokonując zakupu potwierdzasz, że jesteś osobą pełnoletnią i przeczytałeś, zrozumiałeś i zaakceptowałeś <a href={{link}} target='_blank'>Umowę licencyjną użytkownika końcowego (EULA)<\/a>. Wyrażasz również zgodę na natychmiastowe wejście w życie postanowień umownych i przyjmujesz do wiadomości, że po rozpoczęciu pobierania treści cyfrowych utracisz prawo odstąpienia od umowy.",
          "finance-details-cart-items-checkout-title" : "Zakup w grze",
          "finance-details-cart-items-sales-tax" : "Podatek od sprzedaży {{percent}}%",
          "finance-details-cart-items-vat" : "VAT {{percent}}%",
@@ -32,7 +22,18 @@
          "finance-details-total-details-vat" : "Zawiera {{percent}}% VAT",
          "finance-details-total-details-vat-ghana" : "Zawiera VAT, NHIL, opłaty GETFund i Covid-19",
          "finance-details-total-details-vat-india" : "Zawiera {{percent}}% GST",
-         "finance-details-total-title" : "Suma zamówienia"
+         "finance-details-total-title" : "Suma zamówienia",
+         "hello" : "Witaj świecie!",
+         "legal" : "Informacje prawne",
+         "privacy-policy" : "Polityka prywatności",
+         "refund-policy" : "Polityka zwrotów",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Bezpieczne połączenie",
+         "status.error.title" : "Płatność nieudana",
+         "status.processing.description" : "Oczekiwanie na sfinalizowanie płatności...",
+         "status.processing.title" : "Trwa przetwarzanie płatności",
+         "status.success.description" : "Wysłaliśmy rachunek na adres {{email}}",
+         "status.success.title" : "Płatność zrealizowana"
       }
    }
 }

@@ -2,17 +2,7 @@
    "ja" : {
       "translation" : {
          "cookie-policy" : "クッキーポリシー",
-         "hello" : "こんにちは、世界！",
-         "legal" : "法的文書",
-         "privacy-policy" : "プライバシーポリシー",
-         "refund-policy" : "返金ポリシー",
-         "sctl-indications" : "特商法取引に基づく表示",
-         "secure-connection" : "安全な接続",
-         "status.error.title" : "決済失敗",
-         "status.processing.description" : "決済の完了待ち...",
-         "status.processing.title" : "決済処理中",
-         "status.success.description" : "領収書を{{email}}に送信しました",
-         "status.success.title" : "決済完了",
+         "disclaimer" : "エクソーラはこのコンテンツの正規代理です。購入することにより、あなたは成人であり、<a href={{link}} target='_blank'>EULA<\/a>を読み、理解し、同意したことを確認します。また、本契約が直ちに発効することを承諾し、デジタルコンテンツのダウンロードが開始された時点で、撤回する権利を失うことを了承するものとします。",
          "finance-details-cart-items-checkout-title" : "ゲーム内購入",
          "finance-details-cart-items-sales-tax" : "売上税 {{percent}}%",
          "finance-details-cart-items-vat" : "消費税 {{percent}}%",
@@ -32,7 +22,18 @@
          "finance-details-total-details-vat" : "{{percent}}% 消費税込み",
          "finance-details-total-details-vat-ghana" : "VAT、NHIL、GETFund税及びCovid-19税を含む",
          "finance-details-total-details-vat-india" : "{{percent}}% 商品サービス税込み",
-         "finance-details-total-title" : "合計"
+         "finance-details-total-title" : "合計",
+         "hello" : "こんにちは、世界！",
+         "legal" : "",
+         "privacy-policy" : "プライバシーポリシー",
+         "refund-policy" : "返金ポリシー",
+         "sctl-indications" : "特商法取引に基づく表示",
+         "secure-connection" : "安全な接続",
+         "status.error.title" : "決済失敗",
+         "status.processing.description" : "決済の完了待ち...",
+         "status.processing.title" : "決済処理中",
+         "status.success.description" : "領収書を{{email}}に送信しました",
+         "status.success.title" : "決済完了"
       }
    }
 }

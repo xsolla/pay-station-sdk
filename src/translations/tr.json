@@ -2,17 +2,7 @@
    "tr" : {
       "translation" : {
          "cookie-policy" : "Çerez Politikası",
-         "hello" : "Merhaba dünya!",
-         "legal" : "Yasal",
-         "privacy-policy" : "Gizlilik Politikası",
-         "refund-policy" : "İade Politikası",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Güvenli bağlantı",
-         "status.error.title" : "Ödeme alınamadı",
-         "status.processing.description" : "Ödeme işleminin tamamlanması bekleniyor...",
-         "status.processing.title" : "Ödeme işlemi gerçekleştiriliyor",
-         "status.success.description" : "Makbuzunuzu {{email}} adresine gönderdik",
-         "status.success.title" : "Ödeme alındı",
+         "disclaimer" : "Xsolla, bu içeriğin resmi dağıtıcısıdır. Satın alarak yetişkin olduğunuzu ve <a href={{link}} target='_blank'>EULA<\/a> belgesini okuduğunuzu, anladığınızı, kabul ettiğinizi beyan etmiş olursunuz. Ayrıca dijital içeriğin indirilmeye başladığı anda bu sözleşmenin yürürlüğe girdiğini ve cayma hakkınızdan feragat ettiğinizi kabul etmiş olursunuz.",
          "finance-details-cart-items-checkout-title" : "Oyun içi satın alma",
          "finance-details-cart-items-sales-tax" : "Satış vergisi %{{percent}}",
          "finance-details-cart-items-vat" : "KDV %{{percent}}",
@@ -32,7 +22,18 @@
          "finance-details-total-details-vat" : "%{{percent}} KDV dahildir",
          "finance-details-total-details-vat-ghana" : "KDV, NHIL, GETFund Vergisi ve Covid-19 Vergisi dahil",
          "finance-details-total-details-vat-india" : "%{{percent}} GST dahildir",
-         "finance-details-total-title" : "Toplam"
+         "finance-details-total-title" : "Toplam",
+         "hello" : "Merhaba dünya!",
+         "legal" : "Yasal",
+         "privacy-policy" : "Gizlilik Politikası",
+         "refund-policy" : "İade Politikası",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Güvenli bağlantı",
+         "status.error.title" : "Ödeme alınamadı",
+         "status.processing.description" : "Ödeme işleminin tamamlanması bekleniyor...",
+         "status.processing.title" : "Ödeme işlemi gerçekleştiriliyor",
+         "status.success.description" : "Makbuzunuzu {{email}} adresine gönderdik",
+         "status.success.title" : "Ödeme alındı"
       }
    }
 }

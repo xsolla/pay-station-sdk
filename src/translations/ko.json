@@ -2,17 +2,7 @@
    "ko" : {
       "translation" : {
          "cookie-policy" : "쿠키 정책",
-         "hello" : "안녕하세요 세상!",
-         "legal" : "법률",
-         "privacy-policy" : "개인정보 보호정책",
-         "refund-policy" : "환불 정책",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "보안 연결",
-         "status.error.title" : "결제 실패함",
-         "status.processing.description" : "결제 완료 대기 중...",
-         "status.processing.title" : "결제 처리 중",
-         "status.success.description" : "{{email}}(으)로 영수증을 보내드렸습니다.",
-         "status.success.title" : "결제 성공함",
+         "disclaimer" : "이 콘텐츠의 공식 배포자는 엑솔라입니다. 이를 구매함으로써 귀하는 본인이 성인이며 <a href={{link}} target='_blank'>EULA<\/a>를 읽고 이해했으며 이에 동의했음을 확인합니다. 또한 귀하는 계약이 즉시 효력을 발생한다는 사실에 동의하며 디지털 콘텐츠의 다운로드가 시작되면 철회할 수 있는 권리를 상실하게 된다는 사실을 인정합니다.",
          "finance-details-cart-items-checkout-title" : "인게임 구매",
          "finance-details-cart-items-sales-tax" : "판매 세금 {{percent}}%",
          "finance-details-cart-items-vat" : "VAT {{percent}}%",
@@ -32,7 +22,18 @@
          "finance-details-total-details-vat" : "{{percent}}% VAT 포함",
          "finance-details-total-details-vat-ghana" : "VAT, NHIL, GETFund Levy 및 Covid-19 Levy 등 포함",
          "finance-details-total-details-vat-india" : "{{percent}}% GST 포함",
-         "finance-details-total-title" : "합계"
+         "finance-details-total-title" : "합계",
+         "hello" : "안녕하세요 세상!",
+         "legal" : "법률",
+         "privacy-policy" : "개인정보 보호정책",
+         "refund-policy" : "환불 정책",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "보안 연결",
+         "status.error.title" : "결제 실패함",
+         "status.processing.description" : "결제 완료 대기 중...",
+         "status.processing.title" : "결제 처리 중",
+         "status.success.description" : "{{email}}(으)로 영수증을 보내드렸습니다.",
+         "status.success.title" : "결제 성공함"
       }
    }
 }
