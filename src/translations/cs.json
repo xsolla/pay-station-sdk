@@ -2,6 +2,7 @@
    "cs" : {
       "translation" : {
          "cookie-policy" : "Zásady používání cookies",
+         "disclaimer" : "Oficiálním distributorem tohoto obsahu je společnost Xsolla. Nákupem potvrzujete, že jste dospělá osoba a že jste si přečetli smlouvu <a href={{link}} target='_blank'>EULA<\/a>, porozuměli jí a přijali ji. Souhlasíte také s tím, že smlouva nabývá účinnosti okamžitě, a berete na vědomí, že jakmile se digitální obsah začne stahovat, ztrácíte právo na odstoupení od smlouvy.",
          "finance-details-cart-items-checkout-title" : "Nákup ve hře",
          "finance-details-cart-items-sales-tax" : "Daň z obratu {{percent}} %",
          "finance-details-cart-items-vat" : "DPH {{percent}} %",

@@ -2,6 +2,7 @@
    "fr" : {
       "translation" : {
          "cookie-policy" : "Politique en matière de cookies",
+         "disclaimer" : "Xsolla agit en tant que distributeur officiel de ce contenu. En procédant à l'achat, vous confirmez être un adulte et déclarez avoir lu, compris et accepté les termes du <a href={{link}} target='_blank'>CLUF<\/a>. Vous consentez également à ce que ce contrat entre immédiatement en vigueur et reconnaissez que vous renoncez à tout droit de rétractation dès le début du téléchargement du contenu numérique.",
          "finance-details-cart-items-checkout-title" : "Achat intégré",
          "finance-details-cart-items-sales-tax" : "Taxe de vente de {{percent}} %",
          "finance-details-cart-items-vat" : "TVA de {{percent}} %",
