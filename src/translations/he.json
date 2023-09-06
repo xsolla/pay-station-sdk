@@ -2,17 +2,7 @@
    "he" : {
       "translation" : {
          "cookie-policy" : "מדיניות בנושא קובצי Cookie",
-         "hello" : "שלום עולם!",
-         "legal" : "משפטי",
-         "privacy-policy" : "מדיניות פרטיות",
-         "refund-policy" : "מדיניות החזרים כספיים",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "חיבור מאובטח",
-         "status.error.title" : "התשלום נכשל",
-         "status.processing.description" : "בהמתנה לסיום התשלום...",
-         "status.processing.title" : "התשלום בעיבוד",
-         "status.success.description" : "שלחנו את הקבלה אל {{email}}",
-         "status.success.title" : "התשלום התקבל",
+         "disclaimer" : "‏Xsolla היא המפיצה הרשמית של התוכן הזה. קנייה מבטאת אישור שלך שאינך קטין\/ה ושקראת את <a href={{link}} target='_blank'>הסכם משתמש הקצה<\/a>, הבנת אותו והסכמת לתנאיו. כמו כן, ניתנת ההסכמה שלך שהסכם זה נכנס לתוקף מיידי וידוע לך שאחרי תחילת ההורדה של התוכן הדיגיטלי לא תהיה לך זכות לבטל את הקנייה.",
          "finance-details-cart-items-checkout-title" : "רכישה מתוך המשחק",
          "finance-details-cart-items-sales-tax" : "מס מכירה {{percent}}%",
          "finance-details-cart-items-vat" : "מע\"מ {{percent}}%",
@@ -32,7 +22,18 @@
          "finance-details-total-details-vat" : "כולל {{percent}}% מע\"מ",
          "finance-details-total-details-vat-ghana" : "כולל מע\"מ,‏ NHIL, מס GETFund ומס Covid-19",
          "finance-details-total-details-vat-india" : "כולל {{percent}}% מס סחורות ושירותים",
-         "finance-details-total-title" : "סה\"כ"
+         "finance-details-total-title" : "סה\"כ",
+         "hello" : "שלום עולם!",
+         "legal" : "משפטי",
+         "privacy-policy" : "מדיניות פרטיות",
+         "refund-policy" : "מדיניות החזרים כספיים",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "חיבור מאובטח",
+         "status.error.title" : "התשלום נכשל",
+         "status.processing.description" : "בהמתנה לסיום התשלום...",
+         "status.processing.title" : "התשלום בעיבוד",
+         "status.success.description" : "שלחנו את הקבלה אל {{email}}",
+         "status.success.title" : "התשלום התקבל"
       }
    }
 }

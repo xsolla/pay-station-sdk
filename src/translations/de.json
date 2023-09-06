@@ -2,17 +2,7 @@
    "de" : {
       "translation" : {
          "cookie-policy" : "Cookie-Richtlinie",
-         "hello" : "Hallo Welt!",
-         "legal" : "Rechtliches",
-         "privacy-policy" : "Datenschutzerklärung",
-         "refund-policy" : "Erstattungsrichtlinie",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "Sichere Verbindung",
-         "status.error.title" : "Zahlung fehlgeschlagen",
-         "status.processing.description" : "Zahlung wird durchgeführt …",
-         "status.processing.title" : "Zahlung wird verarbeitet",
-         "status.success.description" : "Wir haben den Beleg an {{email}} gesendet",
-         "status.success.title" : "Zahlung erfolgreich",
+         "disclaimer" : "Xsolla ist der offizielle Vertreiber dieses Inhalts. Mit dem Kauf bestätigst du, dass du volljährig bist und die <a href={{link}} target='_blank'>EULA<\/a> gelesen und verstanden hast und damit einverstanden bist. Du akzeptierst außerdem, dass die Vereinbarung sofort in Kraft tritt und dass du dein Widerrufsrecht verlierst, sobald der Download des digitalen Inhalts beginnt.",
          "finance-details-cart-items-checkout-title" : "Ingame-Kauf",
          "finance-details-cart-items-sales-tax" : "{{percent}} % Umsatzsteuer",
          "finance-details-cart-items-vat" : "{{percent}} % MwSt.",
@@ -21,7 +11,7 @@
          "finance-details-hrk-equal" : "Entspricht {{value}} HRK",
          "finance-details-hrk-exchange-rate" : "Wechselkurs: 1 EUR = 7,5345 HRK",
          "finance-details-subtotal-details-discount" : "Rabatt",
-         "finance-details-subtotal-details-fee" : "Zahlungssystemgebühr",
+         "finance-details-subtotal-details-fee" : "",
          "finance-details-subtotal-details-sales-tax" : "Sales Tax",
          "finance-details-subtotal-details-user-balance" : "Guthaben",
          "finance-details-subtotal-details-vat" : "{{percent}} % MwSt.",
@@ -32,7 +22,18 @@
          "finance-details-total-details-vat" : "Einschließlich {{percent}} % MWSt.",
          "finance-details-total-details-vat-ghana" : "Inklusive VAT, NHIL, GETFund Levy und Covid-19 Levy",
          "finance-details-total-details-vat-india" : "Inklusive {{percent}} % GST",
-         "finance-details-total-title" : "Summe"
+         "finance-details-total-title" : "Summe",
+         "hello" : "Hallo Welt!",
+         "legal" : "Rechtliches",
+         "privacy-policy" : "Datenschutzerklärung",
+         "refund-policy" : "Erstattungsrichtlinie",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "Sichere Verbindung",
+         "status.error.title" : "Zahlung fehlgeschlagen",
+         "status.processing.description" : "Zahlung wird durchgeführt …",
+         "status.processing.title" : "Zahlung wird verarbeitet",
+         "status.success.description" : "Wir haben den Beleg an {{email}} gesendet",
+         "status.success.title" : "Zahlung erfolgreich"
       }
    }
 }
