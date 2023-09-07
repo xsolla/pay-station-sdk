@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
@@ -18,10 +18,8 @@
     "module": "es2020",
     "lib": ["es2018", "dom", "dom.iterable"],
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowJs": true
+    "esModuleInterop": true
   },
   "allowSyntheticDefaultImports": true,
-  "exclude": ["node_modules"],
-  "include": ["src/**/*"]
+  "exclude": ["node_modules"]
 }
