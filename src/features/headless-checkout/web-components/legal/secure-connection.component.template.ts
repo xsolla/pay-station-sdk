@@ -3,10 +3,11 @@ import logo from '../../../../assets/icons/logo.svg';
 import { LegalComponentConfig } from './legal-component.config.interface';
 
 export const getSecureConnectionTemplate = (
-  secureConnection?: LegalComponentConfig['secureConnection']
+  secureConnection?: LegalComponentConfig['secureConnection'],
 ): string => {
   const isWhiteLabel = secureConnection?.isWhiteLabel;
   const secureConnectionUrl = secureConnection?.secureConnectionUrl;
+
   return `
   <div class="info">
   <div class="company">

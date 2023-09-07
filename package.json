@@ -2,13 +2,13 @@
   "name": "@xsolla/pay-station-sdk",
   "version": "0.0.1",
   "description": "Pay Station SDK",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=16"
   },
   "scripts": {
-    "build": "webpack --mode=production && tsc",
+    "build": "webpack --mode=production",
     "dev": "webpack --mode=development --watch",
     "test": "karma start --single-run",
     "test:dev": "karma start --auto-watch",
