@@ -2,17 +2,7 @@
    "th" : {
       "translation" : {
          "cookie-policy" : "นโยบายคุกกี้",
-         "hello" : "สวัสดีชาวโลก!",
-         "legal" : "ข้อมูลด้านกฎหมาย",
-         "privacy-policy" : "นโยบายความเป็นส่วนตัว",
-         "refund-policy" : "นโยบายการคืนเงิน",
-         "sctl-indications" : "SCTL Indications",
-         "secure-connection" : "การเชื่อมต่อที่ปลอดภัย",
-         "status.error.title" : "ชำระเงินไม่สำเร็จ",
-         "status.processing.description" : "กำลังรอการชำระเงินให้เสร็จสิ้น...",
-         "status.processing.title" : "กำลังดำเนินการชำระเงิน",
-         "status.success.description" : "เราส่งใบเสร็จรับเงินไปยัง {{email}} แล้ว",
-         "status.success.title" : "ชำระเงินสำเร็จแล้ว",
+         "disclaimer" : "เอ็กซ์โซลล่าเป็นผู้จัดจำหน่ายเนื้อหานี้อย่างเป็นทางการ การซื้อหมายความว่าคุณยืนยันว่าคุณเป็นผู้ใหญ่ รวมถึง คุณได้อ่าน เข้าใจ และยอมรับต่อ <a href={{link}} target='_blank'>ข้อตกลงให้ใช้สิทธิผู้ใช้ <\/a> แล้ว นอกจากนี้ คุณยังยอมรับว่าข้อตกลงมีผลบังคับใช้ทันที และรับทราบว่าคุณจะสูญเสียสิทธิ์ในการเพิกถอนเมื่อเริ่มดาวน์โหลดเนื้อหาดิจิทัล",
          "finance-details-cart-items-checkout-title" : "การซื้อภายในเกม",
          "finance-details-cart-items-sales-tax" : "ภาษีขาย {{percent}}%",
          "finance-details-cart-items-vat" : "VAT {{percent}}%",
@@ -27,12 +17,23 @@
          "finance-details-subtotal-details-vat" : "VAT {{percent}}%",
          "finance-details-subtotal-details-vat-ghana" : "การจัดเก็บภาษี VAT, NHIL, GETFund และ Covid-19",
          "finance-details-subtotal-details-vat-india" : "GST {{percent}}%",
-         "finance-details-subtotal-title" : "ยอดรวมย่อย",
+         "finance-details-subtotal-title" : "",
          "finance-details-total-details-sales-tax" : "รวมภาษีการขายแล้ว",
          "finance-details-total-details-vat" : "รวม VAT {{percent}}% ",
          "finance-details-total-details-vat-ghana" : "รวมถึง การจัดเก็บภาษี VAT, NHIL, GETFund และ Covid-19",
          "finance-details-total-details-vat-india" : "รวม GST {{percent}}%",
-         "finance-details-total-title" : "ยอดรวม"
+         "finance-details-total-title" : "",
+         "hello" : "สวัสดีชาวโลก!",
+         "legal" : "",
+         "privacy-policy" : "นโยบายความเป็นส่วนตัว",
+         "refund-policy" : "นโยบายการคืนเงิน",
+         "sctl-indications" : "SCTL Indications",
+         "secure-connection" : "การเชื่อมต่อที่ปลอดภัย",
+         "status.error.title" : "ชำระเงินไม่สำเร็จ",
+         "status.processing.description" : "กำลังรอการชำระเงินให้เสร็จสิ้น...",
+         "status.processing.title" : "กำลังดำเนินการชำระเงิน",
+         "status.success.description" : "เราส่งใบเสร็จรับเงินไปยัง {{email}} แล้ว",
+         "status.success.title" : "ชำระเงินสำเร็จแล้ว"
       }
    }
 }

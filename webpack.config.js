@@ -22,7 +22,7 @@ const config = {
       },
       {
         test: /\.(svg|png)$/,
-        type: 'asset/resource',
+        type: 'asset/inline',
       },
     ],
   },
@@ -30,10 +30,13 @@ const config = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    library: 'PayStationSdk',
+    library: {
+      name: 'PayStationSdk',
+      type: 'umd',
+    },
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'assets/[name].[ext]',
+    assetModuleFilename: 'assets/[name][ext]',
     clean: true,
   },
   plugins: [

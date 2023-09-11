@@ -2,6 +2,7 @@
    "tr" : {
       "translation" : {
          "cookie-policy" : "Çerez Politikası",
+         "disclaimer" : "Xsolla, bu içeriğin resmi dağıtıcısıdır. Satın alarak yetişkin olduğunuzu ve <a href={{link}} target='_blank'>EULA<\/a> belgesini okuduğunuzu, anladığınızı, kabul ettiğinizi beyan etmiş olursunuz. Ayrıca dijital içeriğin indirilmeye başladığı anda bu sözleşmenin yürürlüğe girdiğini ve cayma hakkınızdan feragat ettiğinizi kabul etmiş olursunuz.",
          "finance-details-cart-items-checkout-title" : "Oyun içi satın alma",
          "finance-details-cart-items-sales-tax" : "Satış vergisi %{{percent}}",
          "finance-details-cart-items-vat" : "KDV %{{percent}}",
