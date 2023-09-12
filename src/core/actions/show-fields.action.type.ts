@@ -6,8 +6,8 @@ import { FormError } from '../form/form-error.interface';
 export type ShowFieldsActionType = 'show_fields';
 export interface ShowFieldsActionData {
   fields: Field[];
-  errors: FormMessage[] | null;
-  messages: FormError[] | undefined;
+  errors: FormError[] | undefined;
+  messages: FormMessage[] | null;
   order?: object;
 }
 export type ShowFieldsAction = Action<
