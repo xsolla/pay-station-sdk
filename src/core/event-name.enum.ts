@@ -15,4 +15,5 @@ export const enum EventName {
   nextAction = 'nextAction',
   warning = 'warning',
   getTextComponentConfig = 'getTextComponentConfig',
+  setSecureComponentStyles = 'setSecureComponentStyles',
 }
