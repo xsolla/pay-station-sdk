@@ -125,6 +125,12 @@ describe('HeadlessCheckout', () => {
     expect(spy).toHaveBeenCalled();
   });
 
+  it('Should set secure component styles', async () => {
+    const spy = spyOn(postMessagesClient, 'send');
+    await headlessCheckout.setSecureComponentStyles('styles');
+    expect(spy).toHaveBeenCalled();
+  });
+
   it('Should throw exception if empty token', async () => {
     try {
       await headlessCheckout.setToken('');

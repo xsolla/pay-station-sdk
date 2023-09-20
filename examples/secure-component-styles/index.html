@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Secure component styles</title>
+
+    <style>
+      /* Global styles */
+      #form-container {
+        padding: 12px 0;
+      }
+
+      psdk-text {
+        display: block;
+        width: 400px;
+        height: 40px;
+        margin-bottom: 12px;
+      }
+
+      psdk-text iframe {
+        border: none;
+        width: inherit;
+        height: inherit;
+      }
+    </style>
+
+    <!--
+    Link the SDK bundle.
+    NOTE: In this example, we use a local build just for convenience purposes.
+    -->
+    <script src="./dist/main.js"></script>
+    <!-- <script src="../../dist/main.js"></script> -->
+  </head>
+
+  <body>
+    <h1>Secure component styles</h1>
+
+    <div id="form-container">
+      <psdk-text name="email"></psdk-text>
+      <psdk-text name="zip"></psdk-text>
+    </div>
+
+    <!--
+      Add legal component to provide links to legal documents
+    -->
+    <psdk-legal></psdk-legal>
+
+    <!-- Initialization script -->
+    <script>
+      if (typeof PayStationSdk === 'undefined') {
+        alert(`
+It seems SDK library is undefined.
+Please, link CDN source or create local build (recommended to test purposes only).
+        `);
+        throw new Error('PayStationSdk not found');
+      }
+      /**
+       * To learn more about creating tokens,
+       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       */
+      const accessToken = '8sogVNwcYkzm6UeULtAJOYMPMCBaXvI1_lc_en';
+
+      if (!accessToken) {
+        alert('No token provided. Please, check the documentation');
+        throw new Error('No token provided');
+      }
+
+      /**
+       * The SDK is available under the PayStationSdk namespace.
+       * To begin initialization, obtain a reference to the headlessCheckout object.
+       */
+      const { headlessCheckout } = PayStationSdk;
+
+      async function initPayStationSdk() {
+        /**
+         * Call the `init()` method with the provided environment object.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a webview or not.
+         * You can set sandbox payment mode with `sandbox` parameter
+         * Please note that this command executes asynchronously.
+         */
+        await headlessCheckout.init({
+          isWebView: false,
+          sandbox: true,
+        });
+
+        /**
+         * Set styles for secure components
+         */
+        await headlessCheckout.setSecureComponentStyles(`
+          @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+          input {
+            padding: 12px;
+            border: 1px solid grey;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+          }
+
+          input:focus {
+            outline: none;
+          }
+        `);
+
+        /**
+         * After the Payments SDK has been initialized, the next step is setting the token.
+         * To learn more about creating tokens,
+         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         */
+        await headlessCheckout.setToken(accessToken);
+
+        /**
+         * Define payment method id.
+         * To get lists of payment methods use psdk-payment-methods.
+         * Please see `examples/select-method` for more details
+         */
+        const paypalPaymentMethodId = 24;
+
+        /**
+         * Initialize payment.
+         * returnUrl will be opened after payment completed on PayPal side.
+         * Please see `examples/paypal/return.html` for more details
+         */
+        const form = await headlessCheckout.form.init({
+          paymentMethodId: paypalPaymentMethodId,
+          returnUrl: 'http://return',
+        });
+      }
+
+      // initialize sdk
+      initPayStationSdk();
+    </script>
+  </body>
+</html>
