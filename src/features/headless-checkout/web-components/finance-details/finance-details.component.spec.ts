@@ -22,9 +22,9 @@ class HeadlessCheckoutMock {
     [];
 
   public addEventListener(
-    calback: (value: FinanceDetails | null) => void
+    callback: (value: FinanceDetails | null) => void
   ): void {
-    this.listenerts.push(calback);
+    this.listenerts.push(callback);
   }
 
   public emitEvent(value: FinanceDetails | null): void {
@@ -72,6 +72,8 @@ describe('FinanceDetailsComponent', () => {
         return;
       },
     } as unknown as HeadlessCheckoutSpy;
+
+    container.clearInstances();
 
     container
       .register<HeadlessCheckoutSpy>(HeadlessCheckoutSpy, {

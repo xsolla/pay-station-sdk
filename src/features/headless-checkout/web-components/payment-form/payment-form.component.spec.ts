@@ -6,10 +6,11 @@ import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { PaymentFormFieldsService } from './payment-form-fields.service';
 import { PaymentFormComponent } from './payment-form.component';
 import { Field } from '../../../../core/form/field.interface';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.PaymentFormComponent
+    WebComponentTagName.PaymentFormComponent,
   );
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
@@ -28,7 +29,7 @@ const getTextInputElements = (names: string[]): NodeListOf<Element> => {
   const mockContainer = document.createElement('div');
   for (const name of names) {
     const mockElement = document.createElement(
-      WebComponentTagName.TextComponent
+      WebComponentTagName.TextComponent,
     );
     mockElement.setAttribute('name', name);
     mockContainer.appendChild(mockElement);
@@ -41,11 +42,12 @@ describe('PaymentFormComponent', () => {
   let headlessCheckout: HeadlessCheckout;
   let formSpy: FormSpy;
   let paymentFormFieldsManager: PaymentFormFieldsService;
+  let postMessagesClient: PostMessagesClient;
   let windowService: Window;
 
   window.customElements.define(
     WebComponentTagName.PaymentFormComponent,
-    PaymentFormComponent
+    PaymentFormComponent,
   );
 
   beforeEach(() => {
@@ -54,6 +56,9 @@ describe('PaymentFormComponent', () => {
     headlessCheckout = {
       events: {
         send: noopStub,
+      },
+      form: {
+        onNextAction: noopStub,
       },
     } as unknown as HeadlessCheckout;
 
@@ -73,7 +78,13 @@ describe('PaymentFormComponent', () => {
       removeEmptyNameFields: noopStub,
     } as unknown as PaymentFormFieldsService;
 
+    postMessagesClient = {
+      send: noopStub,
+    } as unknown as PostMessagesClient;
+
     windowService = window;
+
+    container.clearInstances();
 
     container
       .register<FormSpy>(FormSpy, {
@@ -85,6 +96,9 @@ describe('PaymentFormComponent', () => {
       .register<PaymentFormFieldsService>(PaymentFormFieldsService, {
         useValue: paymentFormFieldsManager,
       })
+      .register<PostMessagesClient>(PostMessagesClient, {
+        useValue: postMessagesClient,
+      })
       .register<Window>(Window, { useValue: windowService });
   });
 
@@ -95,7 +109,7 @@ describe('PaymentFormComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.PaymentFormComponent)
+      document.querySelector(WebComponentTagName.PaymentFormComponent),
     ).toBeDefined();
   });
 
@@ -125,7 +139,7 @@ describe('PaymentFormComponent', () => {
 
     const textInputElements = getTextInputElements(['zip']);
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements
+      textInputElements,
     );
 
     const spy = spyOn(paymentFormFieldsManager, 'createMissedFields');
@@ -150,7 +164,7 @@ describe('PaymentFormComponent', () => {
 
     const textInputElements = getTextInputElements(['zip', 'zip']);
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements
+      textInputElements,
     );
 
     const spy = spyOn(paymentFormFieldsManager, 'removeExtraFields');
