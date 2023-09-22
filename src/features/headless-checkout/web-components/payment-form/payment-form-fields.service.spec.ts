@@ -23,7 +23,6 @@ describe('PaymentFormFieldsManager', () => {
 
   beforeEach(() => {
     windowService = window;
-
     container.clearInstances();
 
     container.register<Window>(Window, { useValue: windowService });

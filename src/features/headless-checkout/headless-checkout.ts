@@ -28,6 +28,7 @@ import { headlessCheckoutAppUrl } from './environment';
 import { FinanceDetails } from '../../core/finance-details/finance-details.interface';
 import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
 import { FormStatus } from '../../core/status/form-status.enum';
+import { setSecureComponentStylesHandler } from './post-messages-handlers/set-secure-component-styles.handler';
 
 @singleton()
 export class HeadlessCheckout {
@@ -52,7 +53,7 @@ export class HeadlessCheckout {
     onCoreEvent: <T>(
       eventName: EventName,
       handler: Handler<T>,
-      callback: (value?: T) => void
+      callback: (value?: T) => void,
     ): (() => void) => {
       return this.postMessagesClient.listen(eventName, handler, callback);
     },
@@ -81,7 +82,7 @@ export class HeadlessCheckout {
           }
           this.formSpy.formWasInit = true;
           this.formStatus = FormStatus.active;
-        })
+        }),
       ) as Promise<Form>;
     },
 
@@ -93,7 +94,7 @@ export class HeadlessCheckout {
           if (nextAction) {
             callbackFn(nextAction);
           }
-        }
+        },
       );
     },
 
@@ -124,7 +125,7 @@ export class HeadlessCheckout {
     private readonly postMessagesClient: PostMessagesClient,
     private readonly localizeService: LocalizeService,
     private readonly headlessCheckoutSpy: HeadlessCheckoutSpy,
-    private readonly formSpy: FormSpy
+    private readonly formSpy: FormSpy,
   ) {}
 
   public async init(environment: {
@@ -145,7 +146,7 @@ export class HeadlessCheckout {
       getErrorHandler,
       (error) => {
         throw new Error(error);
-      }
+      },
     );
   }
 
@@ -173,7 +174,17 @@ export class HeadlessCheckout {
     return this.postMessagesClient.send<void>(msg, (message) =>
       setTokenHandler(message, () => {
         this.headlessCheckoutSpy.appWasInit = true;
-      })
+      }),
+    );
+  }
+
+  public async setSecureComponentStyles(styles: string): Promise<void> {
+    return this.postMessagesClient.send(
+      {
+        name: EventName.setSecureComponentStyles,
+        data: styles,
+      },
+      setSecureComponentStylesHandler,
     );
   }
 
@@ -188,7 +199,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<FinanceDetails | null>(
       msg,
-      getFinanceDetailsHandler
+      getFinanceDetailsHandler,
     ) as Promise<FinanceDetails | null>;
   }
 
@@ -208,7 +219,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<PaymentMethod[]>(
       msg,
-      getRegularMethodsHandler
+      getRegularMethodsHandler,
     ) as Promise<PaymentMethod[]>;
   }
 
@@ -228,7 +239,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<PaymentMethod[]>(
       msg,
-      getQuickMethodsHandler
+      getQuickMethodsHandler,
     ) as Promise<PaymentMethod[]>;
   }
 
@@ -239,7 +250,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<SavedMethod[]>(
       msg,
-      getSavedMethodsHandler
+      getSavedMethodsHandler,
     ) as Promise<SavedMethod[]>;
   }
 
@@ -250,7 +261,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<UserBalance>(
       msg,
-      getUserBalanceHandler
+      getUserBalanceHandler,
     ) as Promise<UserBalance>;
   }
 
@@ -263,7 +274,7 @@ export class HeadlessCheckout {
     };
 
     return this.postMessagesClient.send<Status>(msg, (message) =>
-      getPaymentStatusHandler(message)
+      getPaymentStatusHandler(message),
     ) as Promise<Status>;
   }
 
