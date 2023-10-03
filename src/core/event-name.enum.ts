@@ -16,4 +16,5 @@ export const enum EventName {
   warning = 'warning',
   getTextComponentConfig = 'getTextComponentConfig',
   setSecureComponentStyles = 'setSecureComponentStyles',
+  formFieldsStatusChanged = 'formFieldsStatusChanged',
 }

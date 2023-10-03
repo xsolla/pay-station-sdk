@@ -5,19 +5,57 @@ import { noopStub } from '../../../../tests/stubs/noop.stub';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { TextComponent } from './text.component';
+import { FormFieldsStatus } from '../../../../core/form/form-fields-status.interface';
 
-function createComponent(): void {
+const fieldName = 'zip';
+
+const emptyFieldsStatus: FormFieldsStatus = {};
+
+const validFieldsStatus: FormFieldsStatus = {
+  [fieldName]: {
+    name: fieldName,
+    validationStatus: 'VALID',
+    errors: null,
+  },
+};
+
+const invalidFieldsStatus: FormFieldsStatus = {
+  [fieldName]: {
+    name: fieldName,
+    validationStatus: 'INVALID',
+    errors: {
+      errorName: {
+        message: 'message',
+      },
+    },
+  },
+};
+
+const focusedInvalidFieldsStatus: FormFieldsStatus = {
+  [fieldName]: {
+    name: fieldName,
+    validationStatus: 'INVALID',
+    isFocused: true,
+    errors: {
+      errorName: {
+        message: 'message',
+      },
+    },
+  },
+};
+
+function createComponent(): HTMLElement {
   const element = document.createElement(WebComponentTagName.TextComponent);
-  element.setAttribute('name', 'zip');
+  element.setAttribute('name', fieldName);
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
+  return element;
 }
 
 describe('TextComponent', () => {
   let postMessagesClient: PostMessagesClient;
   let headlessCheckout: HeadlessCheckout;
   let formSpy: FormSpy;
-  let windowMock: Window;
 
   window.customElements.define(
     WebComponentTagName.TextComponent,
@@ -33,7 +71,7 @@ describe('TextComponent', () => {
 
     headlessCheckout = {
       form: {
-        onNextAction: noopStub,
+        onFieldsStatusChange: noopStub,
       },
     } as unknown as HeadlessCheckout;
 
@@ -43,13 +81,6 @@ describe('TextComponent', () => {
         return;
       },
     } as unknown as FormSpy;
-
-    windowMock = {
-      addEventListener: noopStub,
-      document: {
-        createElement: noopStub,
-      },
-    } as unknown as Window;
 
     container.clearInstances();
 
@@ -64,7 +95,7 @@ describe('TextComponent', () => {
         useValue: headlessCheckout,
       })
       .register<Window>(Window, {
-        useValue: windowMock,
+        useValue: window,
       });
   });
 
@@ -81,5 +112,97 @@ describe('TextComponent', () => {
     expect(document.querySelector('iframe')).toBeDefined();
     expect(document.getElementsByClassName('label')).toBeDefined();
     expect(postMessageSpy).toHaveBeenCalled();
+  });
+
+  it('Should not render error element for valid field state', (done) => {
+    let element: HTMLElement = document.createElement('div');
+    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
+    spyOn(postMessagesClient, 'send').and.resolveTo({
+      name: fieldName,
+    });
+    spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
+      (callbackFn) => {
+        setTimeout(() => (callback = callbackFn));
+      },
+    );
+
+    element = createComponent();
+
+    setTimeout(() => {
+      callback(validFieldsStatus);
+      expect(element.getElementsByClassName('field-error')[0]).toBeUndefined();
+      done();
+    });
+  });
+
+  it('Should not render error element if no current field state', (done) => {
+    let element: HTMLElement = document.createElement('div');
+    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
+    spyOn(postMessagesClient, 'send').and.resolveTo({
+      name: fieldName,
+    });
+    spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
+      (callbackFn) => {
+        setTimeout(() => (callback = callbackFn));
+      },
+    );
+
+    element = createComponent();
+
+    setTimeout(() => {
+      callback(emptyFieldsStatus);
+      expect(element.getElementsByClassName('field-error')[0]).toBeUndefined();
+      done();
+    });
+  });
+
+  it('Should render error element', (done) => {
+    let element: HTMLElement = document.createElement('div');
+    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
+    spyOn(postMessagesClient, 'send').and.resolveTo({
+      name: fieldName,
+    });
+    spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
+      (callbackFn) => {
+        setTimeout(() => (callback = callbackFn));
+      },
+    );
+
+    element = createComponent();
+
+    setTimeout(() => {
+      callback(invalidFieldsStatus);
+      expect(element.getElementsByClassName('field-error')[0]).toBeDefined();
+      done();
+    });
+  });
+
+  it('Should remove error element', (done) => {
+    let element: HTMLElement = document.createElement('div');
+    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
+    spyOn(postMessagesClient, 'send').and.resolveTo({
+      name: fieldName,
+    });
+    spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
+      (callbackFn) => {
+        setTimeout(() => (callback = callbackFn));
+      },
+    );
+
+    element = createComponent();
+
+    setTimeout(() => {
+      callback(invalidFieldsStatus);
+      expect(element.getElementsByClassName('field-error')[0]).toBeDefined();
+
+      callback(focusedInvalidFieldsStatus);
+      expect(element.getElementsByClassName('field-error')[0]).toBeUndefined();
+
+      done();
+    });
   });
 });
