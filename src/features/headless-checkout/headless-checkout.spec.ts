@@ -7,6 +7,7 @@ import { Handler } from '../../core/post-messages-client/handler.type';
 import { LocalizeService } from '../../core/i18n/localize.service';
 import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
 import { FormStatus } from '../../core/status/form-status.enum';
+import { noopStub } from '../../tests/stubs/noop.stub';
 
 const mockMessage: Message = {
   name: EventName.initPayment,
@@ -217,5 +218,11 @@ describe('HeadlessCheckout', () => {
     await formInitPromise.then();
 
     expect(headlessCheckout.form.getStatus()).toEqual(FormStatus.active);
+  });
+
+  it('Should listen form fields status changed events', () => {
+    const spy = spyOn(postMessagesClient, 'listen');
+    headlessCheckout.form.onFieldsStatusChange(noopStub);
+    expect(spy).toHaveBeenCalled();
   });
 });

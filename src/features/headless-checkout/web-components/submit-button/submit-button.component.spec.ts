@@ -3,12 +3,11 @@ import { SubmitButtonComponent } from './submit-button.component';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
 import { HeadlessCheckout } from '../../headless-checkout';
-import { NextAction } from '../../../../core/actions/next-action.interface';
 import { noopStub } from '../../../../tests/stubs/noop.stub';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.SubmitButtonComponent
+    WebComponentTagName.SubmitButtonComponent,
   );
   element.setAttribute('text', 'Pay Now');
   element.setAttribute('id', 'test');
@@ -21,7 +20,7 @@ describe('SubmitButtonComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.SubmitButtonComponent,
-    SubmitButtonComponent
+    SubmitButtonComponent,
   );
 
   beforeEach(() => {
@@ -61,18 +60,6 @@ describe('SubmitButtonComponent', () => {
 
   it('Should sendPostMessage event', () => {
     const spy = spyOn(postMessagesClient, 'send');
-    const onNextActionSpy = spyOn(headlessCheckout.form, 'onNextAction');
-
-    const nextAction = {
-      type: 'show_field_state',
-      data: { error: 'Some error' },
-    } as unknown as NextAction;
-
-    onNextActionSpy.and.callFake(
-      (callback: (nextAction: NextAction) => void) => {
-        callback(nextAction);
-      }
-    );
 
     createComponent();
 

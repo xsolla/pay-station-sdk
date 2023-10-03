@@ -58,7 +58,7 @@ describe('PaymentFormComponent', () => {
         send: noopStub,
       },
       form: {
-        onNextAction: noopStub,
+        onFieldsStatusChange: noopStub,
       },
     } as unknown as HeadlessCheckout;
 

@@ -9,6 +9,7 @@ import { Message } from '../../../../core/message.interface';
 import { TextComponentConfig } from './text.component.config.interface';
 import { getTextComponentConfigHandler } from './get-text-component-config.handler';
 import { HeadlessCheckout } from '../../headless-checkout';
+import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
 
 export class TextComponent extends SecureComponentAbstract {
   private readonly formSpy: FormSpy;
@@ -16,6 +17,7 @@ export class TextComponent extends SecureComponentAbstract {
   private config?: TextComponentConfig;
   private readonly postMessagesClient: PostMessagesClient;
   private readonly headlessCheckout: HeadlessCheckout;
+  private isListeningFieldStatusChange = false;
 
   public constructor() {
     super();
@@ -39,7 +41,7 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected async getTextComponentConfig(
-    inputName: string
+    inputName: string,
   ): Promise<TextComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getTextComponentConfig,
@@ -57,7 +59,7 @@ export class TextComponent extends SecureComponentAbstract {
 
   protected readonly configLoadedHandler = (
     config: TextComponentConfig,
-    componentName: string
+    componentName: string,
   ): void => {
     this.config = config;
     this.componentName = componentName;
@@ -85,22 +87,28 @@ export class TextComponent extends SecureComponentAbstract {
       return;
     }
 
-    this.listenFieldChange(inputName);
+    this.listenFieldStatusChange(inputName);
 
     void this.getTextComponentConfig(inputName).then((config) => {
       this.configLoadedHandler(config, `text-input/${inputName}`);
     });
   }
 
-  private listenFieldChange(controlName: string): void {
-    this.headlessCheckout.form.onNextAction((nextAction) => {
-      if (
-        nextAction.type === 'show_field_state' &&
-        controlName === nextAction.data.fieldName
-      ) {
-        this.config!.error = nextAction.data.error?.message;
-        this.updateError(nextAction.data.isFocused);
+  private listenFieldStatusChange(controlName: string): void {
+    if (this.isListeningFieldStatusChange) {
+      return;
+    }
+
+    this.isListeningFieldStatusChange = true;
+    this.headlessCheckout.form.onFieldsStatusChange((fieldsStatus) => {
+      const fieldStatus = fieldsStatus[controlName];
+
+      if (!this.config || !fieldStatus) {
+        return;
       }
+
+      this.config.error = this.getFirstError(fieldStatus.errors);
+      this.updateError(fieldStatus.isFocused);
     });
   }
 
@@ -108,7 +116,7 @@ export class TextComponent extends SecureComponentAbstract {
     const rootElement = this.shadowRoot ?? this;
     const errorElement = rootElement.querySelector('.field-error');
 
-    if (this.config?.error && isFieldInFocus) {
+    if (this.config?.error && !isFieldInFocus) {
       if (!errorElement) {
         const newErrorElement = this.window.document.createElement('div');
         newErrorElement.classList.add('field-error');
@@ -122,5 +130,14 @@ export class TextComponent extends SecureComponentAbstract {
         errorElement.remove();
       }
     }
+  }
+
+  private getFirstError(errors: ValidationErrors | null): string | null {
+    if (!errors) {
+      return null;
+    }
+
+    const firstErrorKey: string = Object.keys(errors)[0];
+    return errors[firstErrorKey]?.message ?? null;
   }
 }
