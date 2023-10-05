@@ -29,6 +29,8 @@ import { FinanceDetails } from '../../core/finance-details/finance-details.inter
 import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
 import { FormStatus } from '../../core/status/form-status.enum';
 import { setSecureComponentStylesHandler } from './post-messages-handlers/set-secure-component-styles.handler';
+import { formFieldsStatusChangedHandler } from './post-messages-handlers/form-fields-status-changed.handler';
+import { FormFieldsStatus } from '../../core/form/form-fields-status.interface';
 
 @singleton()
 export class HeadlessCheckout {
@@ -93,6 +95,20 @@ export class HeadlessCheckout {
         (nextAction) => {
           if (nextAction) {
             callbackFn(nextAction);
+          }
+        },
+      );
+    },
+
+    onFieldsStatusChange: (
+      callbackFn: (fieldsStatus: FormFieldsStatus) => void,
+    ): void => {
+      this.postMessagesClient.listen<FormFieldsStatus>(
+        EventName.formFieldsStatusChanged,
+        formFieldsStatusChangedHandler,
+        (fieldsStatus) => {
+          if (fieldsStatus) {
+            callbackFn(fieldsStatus);
           }
         },
       );

@@ -12,7 +12,7 @@ const getDescriptionTemplate = (tooltip?: string): string => {
   return tooltip ? `<div class="description">${tooltip}</div>` : '';
 };
 
-const getErrorsTemplate = (error?: string): string => {
+const getErrorsTemplate = (error?: string | null): string => {
   return error ? `<div class="field-error">${error}</div>` : '';
 };
 
