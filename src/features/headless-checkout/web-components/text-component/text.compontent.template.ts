@@ -21,12 +21,16 @@ export const getTextComponentTemplate = ({
   title,
   error,
   tooltip,
+  additionalControls,
 }: TextComponentData): string => {
   return `
   ${getLabelTemplate(title)}
   ${getDescriptionTemplate(tooltip)}
-  <div class="wrapper">
+  <div class="wrapper ${
+    additionalControls ? 'wrapper--additional-controls' : ''
+  }">
   ${secureHtml}
+  ${additionalControls ? additionalControls : ''}
   </div>
   ${getErrorsTemplate(error)}`;
 };
