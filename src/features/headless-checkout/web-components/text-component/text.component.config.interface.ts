@@ -3,4 +3,5 @@ export interface TextComponentConfig {
   title?: string;
   tooltip?: string;
   error?: string | null;
+  additionalControls?: string;
 }

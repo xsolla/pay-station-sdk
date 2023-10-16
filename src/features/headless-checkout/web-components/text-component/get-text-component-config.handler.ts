@@ -3,7 +3,7 @@ import { TextComponentConfig } from './text.component.config.interface';
 import { Message } from '../../../../core/message.interface';
 import { isTextConfigEventMessage } from '../../../../core/guards/text-config-event-message.guard';
 
-export const getTextComponentConfigHandler: Handler<TextComponentConfig> = (
+export const getControlComponentConfigHandler: Handler<TextComponentConfig> = (
   message: Message,
   callback?: (args?: unknown) => boolean | void
 ): { isHandled: boolean; value: TextComponentConfig } | null => {
