@@ -18,4 +18,6 @@ export const enum EventName {
   setSecureComponentStyles = 'setSecureComponentStyles',
   formFieldsStatusChanged = 'formFieldsStatusChanged',
   updateCreditCardType = 'updateCreditCardType',
+  publicControlChangeState = 'publicControlChangeState',
+  publicControlOnValueChanges = 'publicControlOnValueChanges',
 }
