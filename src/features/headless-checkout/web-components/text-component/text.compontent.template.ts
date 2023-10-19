@@ -1,7 +1,7 @@
 import { TextConfigTooltip } from './text-config-tooltip.interface';
-import { TextComponentConfig } from './text.component.config.interface';
+import { ControlComponentConfig } from '../control-component-config.interface';
 
-export interface TextComponentData extends TextComponentConfig {
+export interface TextComponentData extends ControlComponentConfig {
   secureHtml: string;
 }
 
