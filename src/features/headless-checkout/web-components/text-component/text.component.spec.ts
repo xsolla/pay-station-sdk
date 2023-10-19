@@ -59,7 +59,7 @@ describe('TextComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.TextComponent,
-    TextComponent,
+    TextComponent
   );
 
   beforeEach(() => {
@@ -116,7 +116,7 @@ describe('TextComponent', () => {
 
   it('Should not render error element for valid field state', (done) => {
     let element: HTMLElement = document.createElement('div');
-    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    let callback: (fieldsStatus: FormFieldsStatus) => void = noopStub;
     spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
     spyOn(postMessagesClient, 'send').and.resolveTo({
       name: fieldName,
@@ -124,7 +124,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();
@@ -138,7 +138,7 @@ describe('TextComponent', () => {
 
   it('Should not render error element if no current field state', (done) => {
     let element: HTMLElement = document.createElement('div');
-    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    let callback: (fieldsStatus: FormFieldsStatus) => void = noopStub;
     spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
     spyOn(postMessagesClient, 'send').and.resolveTo({
       name: fieldName,
@@ -146,7 +146,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();
@@ -160,7 +160,7 @@ describe('TextComponent', () => {
 
   it('Should render error element', (done) => {
     let element: HTMLElement = document.createElement('div');
-    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    let callback: (fieldsStatus: FormFieldsStatus) => void = noopStub;
     spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
     spyOn(postMessagesClient, 'send').and.resolveTo({
       name: fieldName,
@@ -168,7 +168,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();
@@ -182,7 +182,7 @@ describe('TextComponent', () => {
 
   it('Should remove error element', (done) => {
     let element: HTMLElement = document.createElement('div');
-    let callback: (fieldsStatus: FormFieldsStatus) => void = () => {};
+    let callback: (fieldsStatus: FormFieldsStatus) => void = noopStub;
     spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
     spyOn(postMessagesClient, 'send').and.resolveTo({
       name: fieldName,
@@ -190,7 +190,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();

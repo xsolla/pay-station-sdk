@@ -5,6 +5,7 @@ import { LegalComponent } from './features/headless-checkout/web-components/lega
 import { StatusComponent } from './features/headless-checkout/web-components/status/status.component';
 import { FinanceDetailsComponent } from './features/headless-checkout/web-components/finance-details/finance-details.component';
 import { PriceTextComponent } from './features/headless-checkout/web-components/finance-details/price-text/price-text.component';
+import { PhoneComponent } from './features/headless-checkout/web-components/phone-component/phone.component';
 
 export {
   SubmitButtonComponent,
@@ -14,4 +15,5 @@ export {
   FinanceDetailsComponent,
   LegalComponent,
   StatusComponent,
+  PhoneComponent,
 };
