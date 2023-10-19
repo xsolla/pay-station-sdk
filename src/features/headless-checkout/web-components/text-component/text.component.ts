@@ -6,15 +6,15 @@ import { getTextComponentTemplate } from './text.compontent.template';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { EventName } from '../../../../core/event-name.enum';
 import { Message } from '../../../../core/message.interface';
-import { TextComponentConfig } from './text.component.config.interface';
-import { getTextComponentConfigHandler } from './get-text-component-config.handler';
+import { ControlComponentConfig } from '../control-component-config.interface';
+import { getControlComponentConfigHandler } from '../get-control-component-config.handler';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
 
 export class TextComponent extends SecureComponentAbstract {
   private readonly formSpy: FormSpy;
   private readonly window: Window;
-  private config?: TextComponentConfig;
+  private config?: ControlComponentConfig;
   private readonly postMessagesClient: PostMessagesClient;
   private readonly headlessCheckout: HeadlessCheckout;
   private isListeningFieldStatusChange = false;
@@ -41,25 +41,28 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected async getTextComponentConfig(
-    inputName: string,
-  ): Promise<TextComponentConfig> {
+    inputName: string
+  ): Promise<ControlComponentConfig> {
     const msg: Message<{ inputName: string }> = {
-      name: EventName.getTextComponentConfig,
+      name: EventName.getControlComponentConfig,
       data: {
         inputName,
       },
     };
 
-    return this.postMessagesClient.send<TextComponentConfig>(msg, (message) => {
-      return getTextComponentConfigHandler(message, (controlName) => {
-        return msg.data?.inputName === controlName;
-      });
-    }) as Promise<TextComponentConfig>;
+    return this.postMessagesClient.send<ControlComponentConfig>(
+      msg,
+      (message) => {
+        return getControlComponentConfigHandler(message, (controlName) => {
+          return msg.data?.inputName === controlName;
+        });
+      }
+    ) as Promise<ControlComponentConfig>;
   }
 
   protected readonly configLoadedHandler = (
-    config: TextComponentConfig,
-    componentName: string,
+    config: ControlComponentConfig,
+    componentName: string
   ): void => {
     this.config = config;
     this.componentName = componentName;

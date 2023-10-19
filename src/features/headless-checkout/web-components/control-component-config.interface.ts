@@ -1,4 +1,4 @@
-export interface TextComponentConfig {
+export interface ControlComponentConfig {
   name?: string;
   title?: string;
   tooltip?: string;

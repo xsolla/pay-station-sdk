@@ -7,4 +7,6 @@ export enum WebComponentTagName {
   LegalComponent = 'psdk-legal',
   PaymentFormComponent = 'psdk-payment-form',
   StatusComponent = 'psdk-status',
+  SelectComponent = 'psdk-select',
+  CheckboxComponent = 'psdk-checkbox',
 }

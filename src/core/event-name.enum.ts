@@ -14,7 +14,9 @@ export const enum EventName {
   financeDetails = 'financeDetails',
   nextAction = 'nextAction',
   warning = 'warning',
-  getTextComponentConfig = 'getTextComponentConfig',
+  getControlComponentConfig = 'getControlComponentConfig',
   setSecureComponentStyles = 'setSecureComponentStyles',
   formFieldsStatusChanged = 'formFieldsStatusChanged',
+  publicControlChangeState = 'publicControlChangeState',
+  publicControlOnValueChanges = 'publicControlOnValueChanges',
 }
