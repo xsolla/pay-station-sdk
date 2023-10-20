@@ -3,22 +3,19 @@ import { CartLine } from '../../../../core/finance-details/cart-line.interface';
 import { CartSummary } from '../../../../core/finance-details/cart-summary.interface';
 import { XpsFinance } from '../../../../core/finance-details/xps-finance.interface';
 import { getPriceTextTemplate } from './price-text.template';
+import { taxTranslationMap } from './tax-translation-map.const';
 
 const translationMap = new Map<string, string>([
+  ...taxTranslationMap,
   ['fee', 'finance-details-subtotal-details-fee'],
   ['discount', 'finance-details-subtotal-details-discount'],
   ['user-balance', 'finance-details-subtotal-details-user-balance'],
-  ['vat', 'finance-details-subtotal-details-vat'],
-  ['vat-india', 'finance-details-subtotal-details-vat-india'],
-  ['vat-ghana', 'finance-details-subtotal-details-vat-ghana'],
-  ['sales-tax', 'finance-details-subtotal-details-sales-tax'],
 ]);
 
 function translateSubtotalDetails(
   finance: XpsFinance,
   items: CartLine[] = [],
 ): CartLine[] {
-  const vatPercent = finance.vat_user?.percent;
   return items.map((item) => {
     if (!item.key || !translationMap.has(item.key)) {
       return item;
@@ -27,7 +24,7 @@ function translateSubtotalDetails(
     return {
       ...item,
       title: i18next.t(translationMap.get(item.key)!, {
-        percent: vatPercent,
+        percent: finance?.vat_user?.percent,
       }),
     } as CartLine;
   });
