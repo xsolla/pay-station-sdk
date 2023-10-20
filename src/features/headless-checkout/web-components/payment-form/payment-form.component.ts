@@ -8,6 +8,7 @@ import { getMissedFieldsNames } from './get-missed-fields-names.function';
 import { getInvalidFieldsNames } from './get-invalid-fields-names.function';
 import { PaymentFormFieldsService } from './payment-form-fields.service';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
+import { formControlsTags } from './form-controls-tags.list';
 
 export class PaymentFormComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -90,12 +91,21 @@ export class PaymentFormComponent extends WebComponentAbstract {
   }
 
   private getExistsControlsNames(): Array<string | null> {
-    const formInputs = this.window.document.querySelectorAll(
-      WebComponentTagName.TextComponent
-    );
-    return Array.from(formInputs).map((formInput) =>
-      formInput.getAttribute('name')
-    );
+    const existsControlsNames: Array<string | null> = [];
+
+    formControlsTags.forEach((tag: WebComponentTagName) => {
+      const formInputs = this.window.document.querySelectorAll(tag);
+
+      const controlsNames = Array.from(formInputs).map((formInput) =>
+        formInput.getAttribute('name')
+      );
+
+      controlsNames.forEach((name: string | null) =>
+        existsControlsNames.push(name)
+      );
+    });
+
+    return existsControlsNames;
   }
 
   private logMissedFields(missedFieldsNames: string[]): void {
