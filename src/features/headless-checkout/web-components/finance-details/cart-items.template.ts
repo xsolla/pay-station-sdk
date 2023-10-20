@@ -1,28 +1,24 @@
 import i18next from 'i18next';
 import { CartItem } from '../../../../core/finance-details/cart-item.interface';
 import { getPriceTextTemplate } from './price-text.template';
+import { taxTranslationMap } from './tax-translation-map.const';
 
-const titleTranslationMap = new Map<string, string>([
+const cartItemTitleTranslationMap = new Map<string, string>([
   ['checkout', 'finance-details-cart-items-checkout-title'],
 ]);
 
-const taxTranslationMap = new Map<string, string>([
-  ['vat', 'finance-details-cart-items-vat'],
-  ['vat-india', 'finance-details-cart-items-vat-india'],
-  ['vat-ghana', 'finance-details-cart-items-vat-ghana'],
-  ['sales-tax', 'finance-details-cart-items-sales-tax'],
-]);
+const cartItemTaxTranslationMap = new Map<string, string>(taxTranslationMap);
 
 function translateCartItems(items: CartItem[] = []): CartItem[] {
   return items.map((item) => {
     const title =
-      !item.title && item.key && titleTranslationMap.has(item.key)
-        ? i18next.t(titleTranslationMap.get(item.key)!)
+      !item.title && item.key && cartItemTitleTranslationMap.has(item.key)
+        ? i18next.t(cartItemTitleTranslationMap.get(item.key)!)
         : item.title;
 
     const content =
-      item.tax?.key && taxTranslationMap.has(item.tax.key)
-        ? i18next.t(taxTranslationMap.get(item.tax.key)!, {
+      item.tax?.key && cartItemTaxTranslationMap.has(item.tax.key)
+        ? i18next.t(cartItemTaxTranslationMap.get(item.tax.key)!, {
             percent: item.tax.rate,
           })
         : item.tax?.content;
@@ -71,7 +67,7 @@ function getCartItemText(item: CartItem): string {
           ? getPriceTextTemplate(
               null,
               item.priceBeforeDiscount,
-              'price-before-discount'
+              'price-before-discount',
             )
           : ''
       }
