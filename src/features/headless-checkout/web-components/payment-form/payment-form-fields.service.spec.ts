@@ -8,7 +8,7 @@ const getTextInputElements = (names: string[]): NodeListOf<Element> => {
   const mockContainer = document.createElement('div');
   for (const name of names) {
     const mockElement = document.createElement(
-      WebComponentTagName.TextComponent,
+      WebComponentTagName.TextComponent
     );
     mockElement.setAttribute('name', name);
     mockContainer.appendChild(mockElement);
@@ -34,14 +34,14 @@ describe('PaymentFormFieldsManager', () => {
   it('Should create missed fields and append them into body', () => {
     const textInputElements = getTextInputElements([]);
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements,
+      textInputElements
     );
     const missedFields = ['card'];
     const mockBody = {
       appendChild: noopStub,
     } as unknown as HTMLElement;
     spyOn(windowService.document, 'querySelector').and.returnValue(
-      mockBody as unknown as Element,
+      mockBody as unknown as Element
     );
     const spy = spyOn(mockBody, 'appendChild');
     paymentFormFieldsManager.createMissedFields(missedFields, mockBody);
@@ -54,7 +54,7 @@ describe('PaymentFormFieldsManager', () => {
       remove: noopStub,
     };
     spyOn(windowService.document, 'querySelector').and.returnValue(
-      mockElement as unknown as Element,
+      mockElement as unknown as Element
     );
     const spy = spyOn(mockElement, 'remove');
     paymentFormFieldsManager.removeExtraFields(extraFields);
@@ -67,7 +67,7 @@ describe('PaymentFormFieldsManager', () => {
       element.removeAttribute('name');
     });
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements,
+      textInputElements
     );
     const spy = spyOn(textInputElements[0], 'remove');
     paymentFormFieldsManager.removeEmptyNameFields();

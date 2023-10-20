@@ -1,5 +1,6 @@
 import { injectable } from 'tsyringe';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
+import { getWebComponentByFieldName } from './get-web-component-by-field-name.function';
 
 @injectable()
 export class PaymentFormFieldsService {
@@ -13,7 +14,7 @@ export class PaymentFormFieldsService {
 
     for (const name of missedFieldsNames) {
       const formElement = this.window.document.createElement(
-        WebComponentTagName.TextComponent
+        getWebComponentByFieldName(name)
       );
       formElement.setAttribute('name', name);
       documentFragment.append(formElement);

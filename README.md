@@ -189,7 +189,7 @@ Using SDK components is straightforward: you only need to paste the HTML tag of 
 | **Component**         | **Selector** | **Status** |
 | --------------------- | ------------ | ---------- |
 | Text Component        | psdk-text    | ✅         |
-| Phone Component       | ❔           | 🕑         |
+| Phone Component       | psdk-phone   | ✅         |
 | Card Number Component | ❔           | 🕑         |
 
 ![SDK secure componentscheme](./readme_images/secure_component_scheme.png 'SDK secure componentscheme')
