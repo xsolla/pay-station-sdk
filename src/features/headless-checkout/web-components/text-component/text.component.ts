@@ -12,7 +12,7 @@ import { HeadlessCheckout } from '../../headless-checkout';
 import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
 
 export class TextComponent extends SecureComponentAbstract {
-  protected config?: TextComponentConfig;
+  protected config?: ControlComponentConfig;
   protected readonly postMessagesClient: PostMessagesClient;
   protected readonly window: Window;
   private readonly formSpy: FormSpy;
@@ -42,7 +42,7 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected async getControlComponentConfig(
-    inputName: string
+    inputName: string,
   ): Promise<ControlComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getControlComponentConfig,
@@ -51,11 +51,14 @@ export class TextComponent extends SecureComponentAbstract {
       },
     };
 
-    return this.postMessagesClient.send<ControlComponentConfig>(msg, (message) => {
-      return getControlComponentConfigHandler(message, (controlName) => {
-        return msg.data?.inputName === controlName;
-      });
-    }) as Promise<ControlComponentConfig>;
+    return this.postMessagesClient.send<ControlComponentConfig>(
+      msg,
+      (message) => {
+        return getControlComponentConfigHandler(message, (controlName) => {
+          return msg.data?.inputName === controlName;
+        });
+      },
+    ) as Promise<ControlComponentConfig>;
   }
 
   protected readonly configLoadedHandler = (
