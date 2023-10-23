@@ -1,4 +1,4 @@
-import { ControlComponentConfig } from '../control-component-config.interface';
+import { SelectComponentConfig } from './select-component.config.interface';
 
 export const getSelectOptionTemplate = (option: {
   label: string;
@@ -14,7 +14,7 @@ export const getSelectOptionTemplate = (option: {
 };
 
 export const getSelectComponentTemplate = (
-  config: ControlComponentConfig,
+  config: SelectComponentConfig
 ): string => {
   return `
     <div class="wrapper">

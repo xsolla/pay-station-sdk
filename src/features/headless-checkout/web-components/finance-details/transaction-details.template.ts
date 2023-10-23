@@ -26,7 +26,7 @@ function getItemByKey(items: CartLine[], key: string): CartLine | undefined {
 }
 
 export const getTransactionDetailsTemplate = (
-  detailsItems?: CartLine[],
+  detailsItems?: CartLine[]
 ): string => {
   if (!detailsItems?.length) {
     return '';
@@ -39,7 +39,7 @@ export const getTransactionDetailsTemplate = (
   const invoiceItem = getItemByKey(items, 'invoice');
   const timeItem = getItemByKey(items, 'time');
 
-  if (invoiceItem) {
+  if (invoiceItem?.title && invoiceItem.content) {
     lines.push(`
       <div class="transaction-invoice">
         <div class="title">${invoiceItem.title}</div>
@@ -48,7 +48,7 @@ export const getTransactionDetailsTemplate = (
     `);
   }
 
-  if (timeItem?.content) {
+  if (timeItem?.title && timeItem.content) {
     const localDate = datePipe.transform(timeItem.content);
     lines.push(`
       <div class="transaction-invoice">

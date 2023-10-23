@@ -3,13 +3,13 @@ import {
   getSelectComponentTemplate,
   getSelectOptionTemplate,
 } from './select.template';
-import { ControlComponentConfig } from '../control-component-config.interface';
 import { SelectAttributes } from './select-attributes.enum';
+import { SelectComponentConfig } from './select-component.config.interface';
 
-export class SelectComponent extends BaseControl {
-  protected config: ControlComponentConfig | null = null;
+export class SelectComponent extends BaseControl<SelectComponentConfig> {
+  protected config: SelectComponentConfig | null = null;
 
-  private selectedOptionValue: string = '';
+  private selectedOptionValue = '';
   private isOpened = false;
 
   private get rootElement(): this | ShadowRoot {
@@ -108,14 +108,14 @@ export class SelectComponent extends BaseControl {
 
     if (button) {
       this.addEventListenerToElement(button, 'click', () =>
-        this.onButtonClick(),
+        this.onButtonClick()
       );
       this.addEventListenerToElement(button, 'blur', () => this.onButtonBlur());
     }
 
     if (options) {
       this.addEventListenerToElement(options, 'click', (event) =>
-        this.onSelectOption(event),
+        this.onSelectOption(event)
       );
     }
 
@@ -123,7 +123,7 @@ export class SelectComponent extends BaseControl {
     this.addEventListenerToElement(
       this.window as unknown as Element,
       'click',
-      (event) => this.onClickOutside(event),
+      (event) => this.onClickOutside(event)
     );
   }
 
@@ -182,7 +182,7 @@ export class SelectComponent extends BaseControl {
     const selectedOptionElement =
       this.rootElement.querySelector('#select-content');
     const selectedOption = this.config?.options?.find(
-      (option) => this.selectedOptionValue === option.value,
+      (option) => this.selectedOptionValue === option.value
     );
 
     if (selectedOptionElement) {
