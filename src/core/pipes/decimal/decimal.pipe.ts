@@ -2,7 +2,7 @@ import i18next from 'i18next';
 import { singleton } from 'tsyringe';
 import { Lang } from '../../../core/i18n/lang.enum';
 import { PipeTransform } from '../pipe-transform.interface';
-import { localeValidator } from './locale.validator';
+import { localeValidator } from '../../../core/validators/locale/locale.validator';
 
 @singleton()
 export class DecimalPipe implements PipeTransform {
@@ -11,7 +11,7 @@ export class DecimalPipe implements PipeTransform {
     minIntegerDigits = 1,
     minFracDigits = 2,
     maxFracDigits = 2,
-    locale: Lang | null = null
+    locale: Lang | null = null,
   ): string {
     value = Number(value);
 
