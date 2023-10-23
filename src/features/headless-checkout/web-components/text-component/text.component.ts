@@ -10,9 +10,10 @@ import { ControlComponentConfig } from '../control-component-config.interface';
 import { getControlComponentConfigHandler } from '../get-control-component-config.handler';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
+import { TextComponentConfig } from './text-component.config.interface';
 
 export class TextComponent extends SecureComponentAbstract {
-  protected config?: ControlComponentConfig;
+  protected config?: TextComponentConfig;
   protected readonly postMessagesClient: PostMessagesClient;
   protected readonly window: Window;
   private readonly formSpy: FormSpy;
@@ -42,8 +43,8 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected async getControlComponentConfig(
-    inputName: string,
-  ): Promise<ControlComponentConfig> {
+    inputName: string
+  ): Promise<TextComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getControlComponentConfig,
       data: {
@@ -57,13 +58,13 @@ export class TextComponent extends SecureComponentAbstract {
         return getControlComponentConfigHandler(message, (controlName) => {
           return msg.data?.inputName === controlName;
         });
-      },
-    ) as Promise<ControlComponentConfig>;
+      }
+    ) as Promise<TextComponentConfig>;
   }
 
   protected readonly configLoadedHandler = (
-    config: ControlComponentConfig,
-    componentName: string,
+    config: TextComponentConfig,
+    componentName: string
   ): void => {
     this.config = config;
     this.componentName = componentName;

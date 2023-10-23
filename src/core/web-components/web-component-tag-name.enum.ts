@@ -11,4 +11,5 @@ export enum WebComponentTagName {
   CardNumberComponent = 'psdk-card-number',
   ThreeDsComponent = 'psdk-3ds',
   SelectComponent = 'psdk-select',
+  CheckboxComponent = 'psdk-checkbox',
 }

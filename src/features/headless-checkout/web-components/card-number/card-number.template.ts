@@ -1,9 +1,7 @@
-import {
-  TextComponentData,
-  getTextComponentTemplate,
-} from '../text-component/text.compontent.template';
+import { getTextComponentTemplate } from '../text-component/text.compontent.template';
+import { TextComponentConfig } from '../text-component/text-component.config.interface';
 
-export interface CardNumberComponentData extends TextComponentData {
+export interface CardNumberComponentData extends TextComponentConfig {
   secureHtml: string;
   isCardIconShown: boolean;
 }

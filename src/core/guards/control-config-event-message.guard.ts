@@ -1,11 +1,10 @@
-import { ControlComponentConfig } from '../../features/headless-checkout/web-components/control-component-config.interface';
 import { Message } from '../message.interface';
 import { EventName } from '../event-name.enum';
 import { isEventMessage } from './event-message.guard';
 
-export const isControlConfigEventMessage = (
-  messageData: unknown,
-): messageData is Message<{ config: ControlComponentConfig }> => {
+export const isControlConfigEventMessage = <T>(
+  messageData: unknown
+): messageData is Message<{ config: T }> => {
   if (isEventMessage(messageData)) {
     return (
       messageData.name === EventName.getControlComponentConfig &&

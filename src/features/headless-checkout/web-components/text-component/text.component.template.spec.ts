@@ -1,9 +1,7 @@
-import {
-  getTextComponentTemplate,
-  TextComponentData,
-} from './text.compontent.template';
+import { getTextComponentTemplate } from './text.compontent.template';
+import { TextComponentConfig } from './text-component.config.interface';
 
-const mockedData: TextComponentData = {
+const mockedData: TextComponentConfig = {
   secureHtml: 'secureHtml',
   title: 'title',
   tooltip: { text: 'tooltip' },

@@ -11,6 +11,7 @@ import { CardNumberComponent } from '../../features/headless-checkout/web-compon
 import { ThreeDsComponent } from '../../features/headless-checkout/web-components/three-ds/three-ds.component';
 import { PhoneComponent } from '../../features/headless-checkout/web-components/phone-component/phone.component';
 import { SelectComponent } from '../../features/headless-checkout/web-components/select/select.component';
+import { CheckboxComponent } from '../../features/headless-checkout/web-components/checkbox/checkbox.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -27,4 +28,5 @@ export const webComponents: {
   [WebComponentTagName.ThreeDsComponent]: ThreeDsComponent,
   [WebComponentTagName.PhoneComponent]: PhoneComponent,
   [WebComponentTagName.SelectComponent]: SelectComponent,
+  [WebComponentTagName.CheckboxComponent]: CheckboxComponent,
 };

@@ -13,13 +13,15 @@ import {
 } from './element.handlers';
 import { ElementEventName } from './element-events.enum';
 
-export abstract class BaseControl extends WebComponentAbstract {
+export abstract class BaseControl<
+  Config extends ControlComponentConfig
+> extends WebComponentAbstract {
   protected postMessagesClient: PostMessagesClient;
   protected headlessCheckout: HeadlessCheckout;
   protected window: Window;
 
   protected controlName!: string;
-  protected config: ControlComponentConfig | null = null;
+  protected config: Config | null = null;
   protected isListeningFieldStatusChange = false;
 
   protected constructor() {
@@ -31,7 +33,7 @@ export abstract class BaseControl extends WebComponentAbstract {
   }
 
   protected async getComponentConfig(
-    inputName: string,
+    inputName: string
   ): Promise<ControlComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getControlComponentConfig,
@@ -46,7 +48,7 @@ export abstract class BaseControl extends WebComponentAbstract {
         return getControlComponentConfigHandler(message, (controlName) => {
           return msg.data?.inputName === controlName;
         });
-      },
+      }
     ) as Promise<ControlComponentConfig>;
   }
 
@@ -59,7 +61,7 @@ export abstract class BaseControl extends WebComponentAbstract {
           value,
         },
       },
-      publicControlOnValueChanges,
+      publicControlOnValueChanges
     );
   }
 
@@ -72,7 +74,7 @@ export abstract class BaseControl extends WebComponentAbstract {
           event: ElementEventName.focus,
         },
       },
-      publicControlChangeState,
+      publicControlChangeState
     );
   }
 
@@ -85,7 +87,7 @@ export abstract class BaseControl extends WebComponentAbstract {
           event: ElementEventName.blur,
         },
       },
-      publicControlChangeState,
+      publicControlChangeState
     );
   }
 
@@ -108,7 +110,7 @@ export abstract class BaseControl extends WebComponentAbstract {
   }
 
   protected getErrorFromFieldStatus(
-    errors: ValidationErrors | null,
+    errors: ValidationErrors | null
   ): string | null {
     if (!errors) {
       return null;
