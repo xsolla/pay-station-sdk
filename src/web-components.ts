@@ -5,6 +5,7 @@ import { LegalComponent } from './features/headless-checkout/web-components/lega
 import { StatusComponent } from './features/headless-checkout/web-components/status/status.component';
 import { FinanceDetailsComponent } from './features/headless-checkout/web-components/finance-details/finance-details.component';
 import { PriceTextComponent } from './features/headless-checkout/web-components/finance-details/price-text/price-text.component';
+import { CardNumberComponent } from './features/headless-checkout/web-components/card-number/card-number.component';
 import { ThreeDsComponent } from './features/headless-checkout/web-components/three-ds/three-ds.component';
 import { PhoneComponent } from './features/headless-checkout/web-components/phone-component/phone.component';
 
@@ -16,6 +17,7 @@ export {
   FinanceDetailsComponent,
   LegalComponent,
   StatusComponent,
+  CardNumberComponent,
   ThreeDsComponent,
   PhoneComponent,
 };

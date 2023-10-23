@@ -8,7 +8,7 @@ export const isTextConfigEventMessage = (
 ): messageData is Message<{ config: TextComponentConfig }> => {
   if (isEventMessage(messageData)) {
     return (
-      messageData.name === EventName.getTextComponentConfig &&
+      messageData.name === EventName.getControlComponentConfig &&
       (messageData.data as { [key: string]: unknown })?.config !== undefined
     );
   }
