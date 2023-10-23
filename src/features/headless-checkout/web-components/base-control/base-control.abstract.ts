@@ -2,24 +2,32 @@ import { container } from 'tsyringe';
 import { WebComponentAbstract } from '../../../../core/web-components/web-component.abstract';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { EventName } from '../../../../core/event-name.enum';
-import { ElementEventName } from './element-events.enum';
+import { Message } from '../../../../core/message.interface';
+import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
+import { HeadlessCheckout } from '../../headless-checkout';
+import { ControlComponentConfig } from '../control-component-config.interface';
+import { getControlComponentConfigHandler } from '../get-control-component-config.handler';
 import {
   publicControlChangeState,
   publicControlOnValueChanges,
 } from './element.handlers';
-import { ControlComponentConfig } from '../control-component-config.interface';
-import { Message } from '../../../../core/message.interface';
-import { getControlComponentConfigHandler } from '../get-control-component-config.handler';
+import { ElementEventName } from './element-events.enum';
 
 export abstract class BaseControl extends WebComponentAbstract {
   protected postMessagesClient: PostMessagesClient;
+  protected headlessCheckout: HeadlessCheckout;
+  protected window: Window;
 
   protected controlName!: string;
+  protected config: ControlComponentConfig | null = null;
+  protected isListeningFieldStatusChange = false;
 
   protected constructor() {
     super();
 
     this.postMessagesClient = container.resolve(PostMessagesClient);
+    this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.window = container.resolve(Window);
   }
 
   protected async getComponentConfig(
@@ -79,5 +87,54 @@ export abstract class BaseControl extends WebComponentAbstract {
       },
       publicControlChangeState,
     );
+  }
+
+  protected listenFieldStatusChange(): void {
+    if (this.isListeningFieldStatusChange) {
+      return;
+    }
+
+    this.isListeningFieldStatusChange = true;
+    this.headlessCheckout.form.onFieldsStatusChange((fieldsStatus) => {
+      const fieldStatus = fieldsStatus[this.controlName];
+
+      if (!this.config || !fieldStatus) {
+        return;
+      }
+
+      this.config.error = this.getErrorFromFieldStatus(fieldStatus.errors);
+      this.updateError(fieldStatus.isFocused);
+    });
+  }
+
+  protected getErrorFromFieldStatus(
+    errors: ValidationErrors | null,
+  ): string | null {
+    if (!errors) {
+      return null;
+    }
+
+    const firstErrorKey: string = Object.keys(errors)[0];
+    return errors[firstErrorKey]?.message ?? null;
+  }
+
+  protected updateError(isFieldInFocus: boolean | undefined): void {
+    const rootElement = this.shadowRoot ?? this;
+    const errorElement = rootElement.querySelector('.field-error');
+
+    if (this.config?.error && !isFieldInFocus) {
+      if (!errorElement) {
+        const newErrorElement = this.window.document.createElement('div');
+        newErrorElement.classList.add('field-error');
+        newErrorElement.textContent = this.config.error;
+        rootElement.appendChild(newErrorElement);
+      } else {
+        errorElement.textContent = this.config.error;
+      }
+    } else {
+      if (errorElement) {
+        errorElement.remove();
+      }
+    }
   }
 }

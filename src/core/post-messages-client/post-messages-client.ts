@@ -49,7 +49,7 @@ export class PostMessagesClient {
   public listen<T>(
     eventName: EventName,
     handler: Handler<T>,
-    callback: (value?: T) => void
+    callback: (value?: T) => void,
   ): () => void {
     const handlerWrapper = (message: MessageEvent): void => {
       if (this.isSameOrigin(message.origin)) {
@@ -68,7 +68,7 @@ export class PostMessagesClient {
   private sendMessage(message: Message): void {
     this.recipient.contentWindow?.postMessage(
       JSON.stringify(message),
-      this.recipientUrl
+      this.recipientUrl,
     );
   }
 

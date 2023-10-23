@@ -3,4 +3,5 @@ import { WebComponentTagName } from '../../../../core/web-components/web-compone
 export const webComponentsFieldsNamesMap: { [k: string]: WebComponentTagName } =
   {
     phone: WebComponentTagName.PhoneComponent,
+    select: WebComponentTagName.SelectComponent,
   };
