@@ -26,7 +26,7 @@ export class FinanceDetailsComponent extends WebComponentAbstract {
     void this.headlessCheckout.events.onCoreEvent(
       EventName.financeDetails,
       getFinanceDetailsHandler,
-      (financeDetails) => this.financeDetailsLoadedHandler(financeDetails)
+      (financeDetails) => this.financeDetailsLoadedHandler(financeDetails),
     );
   }
 
@@ -39,7 +39,7 @@ export class FinanceDetailsComponent extends WebComponentAbstract {
   }
 
   private readonly financeDetailsLoadedHandler = (
-    financeDetails?: FinanceDetails | null
+    financeDetails?: FinanceDetails | null,
   ): void => {
     this.financeDetails = financeDetails;
 

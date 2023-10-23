@@ -1,3 +1,4 @@
+import { TextConfigTooltip } from './text-config-tooltip.interface';
 import { TextComponentConfig } from './text.component.config.interface';
 
 export interface TextComponentData extends TextComponentConfig {
@@ -8,8 +9,8 @@ const getLabelTemplate = (title?: string): string => {
   return title ? `<div class="label">${title}</div>` : '';
 };
 
-const getDescriptionTemplate = (tooltip?: string): string => {
-  return tooltip ? `<div class="description">${tooltip}</div>` : '';
+const getDescriptionTemplate = (tooltip?: TextConfigTooltip): string => {
+  return tooltip?.text ? `<div class="description">${tooltip.text}</div>` : '';
 };
 
 const getErrorsTemplate = (error?: string | null): string => {

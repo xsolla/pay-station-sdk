@@ -5,16 +5,20 @@ import { getShippingTemplate } from './shipping.template';
 import { getSubtotalDetailsTemplate } from './subtotal-details.template';
 import { getTotalDetailsTemplate } from './total-details.template';
 import { getTotalRowTemplate } from './total-row.template';
+import { getTransactionDetailsTemplate } from './transaction-details.template';
 
 export const getFinanceDetailsTemplate = (
-  financeDetails: FinanceDetails
+  financeDetails: FinanceDetails,
 ): string => {
   return [
+    getTransactionDetailsTemplate(
+      financeDetails.cartSummary?.transactionDetails,
+    ),
     getCartItemsTemplate(financeDetails.cartItems),
     getShippingTemplate(financeDetails.cartSummary),
     getSubtotalDetailsTemplate(
       financeDetails.finance,
-      financeDetails.cartSummary
+      financeDetails.cartSummary,
     ),
     getTotalRowTemplate(financeDetails.cartSummary),
     getCroatianExchangeRateTemplate(financeDetails),

@@ -6,7 +6,7 @@ import {
 const mockedData: TextComponentData = {
   secureHtml: 'secureHtml',
   title: 'title',
-  tooltip: 'tooltip',
+  tooltip: { text: 'tooltip' },
   error: 'error',
 };
 

@@ -1,3 +1,4 @@
+import { StatusFinanceInfo } from './status-finance-info.interface';
 import { StatusEnum } from './status.enum';
 import { TitleClass } from './title-class.enum';
 
@@ -8,13 +9,7 @@ export interface Status {
   postMessageStatus?: string;
   virtualCurrencyAmount?: number;
   email?: string;
-  financeInfo?: {
-    [key: string]: {
-      key?: string;
-      pref?: string;
-      value?: string;
-    };
-  };
+  financeInfo?: StatusFinanceInfo;
   isCancelUser?: boolean;
   backUrlSettings?: {
     backUrl: string;
