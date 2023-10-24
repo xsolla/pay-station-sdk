@@ -8,8 +8,9 @@ export const getCheckboxComponentTemplate = (
   const placeholder = config.placeholder;
 
   return `
-    <label for='${config.name}'>
+    <label for='${config.name}' class='wrapper'>
        <input
+        class='checkbox'
         type='checkbox'
         id='${config.name}'
         name='${config.name}'

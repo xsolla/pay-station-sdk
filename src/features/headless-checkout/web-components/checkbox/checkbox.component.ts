@@ -6,6 +6,7 @@ import { CheckboxComponentConfig } from './checkbox-component-config.interface';
 
 export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
   protected config: CheckboxComponentConfig | null = null;
+
   public constructor() {
     super();
   }
@@ -46,8 +47,6 @@ export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
   }
 
   protected getHtml(): string {
-    console.info('checkbox config', this.config);
-
     if (!this.config) {
       return '';
     }
