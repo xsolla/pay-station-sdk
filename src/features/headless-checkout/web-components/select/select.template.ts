@@ -14,7 +14,7 @@ export const getSelectOptionTemplate = (option: {
 };
 
 export const getSelectComponentTemplate = (
-  config: SelectComponentConfig
+  config: SelectComponentConfig,
 ): string => {
   return `
     <div class="wrapper">
@@ -28,7 +28,7 @@ export const getSelectComponentTemplate = (
         </button>
         
         <div class="arrow-wrapper">
-          <div id="dropdown-icon" class="arrow"></div>
+          <div id="dropdown-icon" class="arrow arrow-down"></div>
         </div>
       </div>
       <div id="dropdown-wrapper" class="dropdown-wrapper">
