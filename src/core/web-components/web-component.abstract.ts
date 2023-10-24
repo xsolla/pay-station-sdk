@@ -1,6 +1,6 @@
 export abstract class WebComponentAbstract extends HTMLElement {
   protected eventListeners: Array<{
-    element: HTMLElement;
+    element: Element;
     eventType: string;
     listener(event: Event): void;
   }> = [];
@@ -16,9 +16,9 @@ export abstract class WebComponentAbstract extends HTMLElement {
   }
 
   protected addEventListenerToElement(
-    element: HTMLElement,
+    element: Element,
     eventType: string,
-    listener: (event: Event) => void,
+    listener: (event: Event) => void
   ): void {
     element.addEventListener(eventType, listener);
     this.eventListeners.push({ element, eventType, listener });
