@@ -3,4 +3,6 @@ import { WebComponentTagName } from '../../../../core/web-components/web-compone
 export const formControlsTags = [
   WebComponentTagName.TextComponent,
   WebComponentTagName.PhoneComponent,
+  WebComponentTagName.SelectComponent,
+  WebComponentTagName.CheckboxComponent,
 ];

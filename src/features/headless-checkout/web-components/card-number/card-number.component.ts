@@ -8,8 +8,7 @@ import { CardNumberComponentAttributes } from './card-number-component-attribute
 import { TextComponent } from '../text-component/text.component';
 
 export class CardNumberComponent extends TextComponent {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  private cardType: string = 'default';
+  private cardType = 'default';
 
   private isCardIconShown = true;
 

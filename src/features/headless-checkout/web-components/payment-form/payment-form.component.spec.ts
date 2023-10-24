@@ -170,6 +170,15 @@ describe('PaymentFormComponent', () => {
     const spy = spyOn(paymentFormFieldsManager, 'removeExtraFields');
     createComponent();
 
-    expect(spy).toHaveBeenCalledWith(['zip', 'zip', 'zip']);
+    // rewrite querySelectorAll mock
+    expect(spy).toHaveBeenCalledWith([
+      'zip',
+      'zip',
+      'zip',
+      'zip',
+      'zip',
+      'zip',
+      'zip',
+    ]);
   });
 });

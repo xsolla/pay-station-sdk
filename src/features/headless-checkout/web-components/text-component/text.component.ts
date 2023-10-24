@@ -6,10 +6,11 @@ import { getTextComponentTemplate } from './text.compontent.template';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { EventName } from '../../../../core/event-name.enum';
 import { Message } from '../../../../core/message.interface';
-import { TextComponentConfig } from './text.component.config.interface';
-import { getControlComponentConfigHandler } from './get-text-component-config.handler';
+import { ControlComponentConfig } from '../control-component-config.interface';
+import { getControlComponentConfigHandler } from '../get-control-component-config.handler';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
+import { TextComponentConfig } from './text-component.config.interface';
 
 export class TextComponent extends SecureComponentAbstract {
   protected config?: TextComponentConfig;
@@ -51,11 +52,14 @@ export class TextComponent extends SecureComponentAbstract {
       },
     };
 
-    return this.postMessagesClient.send<TextComponentConfig>(msg, (message) => {
-      return getControlComponentConfigHandler(message, (controlName) => {
-        return msg.data?.inputName === controlName;
-      });
-    }) as Promise<TextComponentConfig>;
+    return this.postMessagesClient.send<ControlComponentConfig>(
+      msg,
+      (message) => {
+        return getControlComponentConfigHandler(message, (controlName) => {
+          return msg.data?.inputName === controlName;
+        });
+      }
+    ) as Promise<TextComponentConfig>;
   }
 
   protected readonly configLoadedHandler = (
