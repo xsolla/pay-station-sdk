@@ -108,14 +108,14 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
 
     if (button) {
       this.addEventListenerToElement(button, 'click', () =>
-        this.onButtonClick()
+        this.onButtonClick(),
       );
       this.addEventListenerToElement(button, 'blur', () => this.onButtonBlur());
     }
 
     if (options) {
       this.addEventListenerToElement(options, 'click', (event) =>
-        this.onSelectOption(event)
+        this.onSelectOption(event),
       );
     }
 
@@ -123,7 +123,7 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
     this.addEventListenerToElement(
       this.window as unknown as Element,
       'click',
-      (event) => this.onClickOutside(event)
+      (event) => this.onClickOutside(event),
     );
   }
 
@@ -182,7 +182,7 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
     const selectedOptionElement =
       this.rootElement.querySelector('#select-content');
     const selectedOption = this.config?.options?.find(
-      (option) => this.selectedOptionValue === option.value
+      (option) => this.selectedOptionValue == option.value,
     );
 
     if (selectedOptionElement) {
