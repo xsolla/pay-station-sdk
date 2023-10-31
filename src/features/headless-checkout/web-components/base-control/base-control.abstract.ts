@@ -14,7 +14,7 @@ import {
 import { ElementEventName } from './element-events.enum';
 
 export abstract class BaseControl<
-  Config extends ControlComponentConfig
+  Config extends ControlComponentConfig,
 > extends WebComponentAbstract {
   protected postMessagesClient: PostMessagesClient;
   protected headlessCheckout: HeadlessCheckout;
@@ -33,7 +33,7 @@ export abstract class BaseControl<
   }
 
   protected async getComponentConfig(
-    inputName: string
+    inputName: string,
   ): Promise<ControlComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getControlComponentConfig,
@@ -48,7 +48,7 @@ export abstract class BaseControl<
         return getControlComponentConfigHandler(message, (controlName) => {
           return msg.data?.inputName === controlName;
         });
-      }
+      },
     ) as Promise<ControlComponentConfig>;
   }
 
@@ -61,7 +61,7 @@ export abstract class BaseControl<
           value,
         },
       },
-      publicControlOnValueChanges
+      publicControlOnValueChanges,
     );
   }
 
@@ -74,7 +74,7 @@ export abstract class BaseControl<
           event: ElementEventName.focus,
         },
       },
-      publicControlChangeState
+      publicControlChangeState,
     );
   }
 
@@ -87,7 +87,7 @@ export abstract class BaseControl<
           event: ElementEventName.blur,
         },
       },
-      publicControlChangeState
+      publicControlChangeState,
     );
   }
 
@@ -110,7 +110,7 @@ export abstract class BaseControl<
   }
 
   protected getErrorFromFieldStatus(
-    errors: ValidationErrors | null
+    errors: ValidationErrors | null,
   ): string | null {
     if (!errors) {
       return null;
@@ -128,10 +128,10 @@ export abstract class BaseControl<
       if (!errorElement) {
         const newErrorElement = this.window.document.createElement('div');
         newErrorElement.classList.add('field-error');
-        newErrorElement.textContent = this.config.error;
+        newErrorElement.innerHTML = this.config.error;
         rootElement.appendChild(newErrorElement);
       } else {
-        errorElement.textContent = this.config.error;
+        errorElement.innerHTML = this.config.error;
       }
     } else {
       if (errorElement) {

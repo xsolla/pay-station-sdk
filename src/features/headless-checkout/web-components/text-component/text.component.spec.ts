@@ -23,6 +23,7 @@ const invalidFieldsStatus: FormFieldsStatus = {
   [fieldName]: {
     name: fieldName,
     validationStatus: 'INVALID',
+    isTouched: true,
     errors: {
       errorName: {
         message: 'message',
@@ -59,7 +60,7 @@ describe('TextComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.TextComponent,
-    TextComponent
+    TextComponent,
   );
 
   beforeEach(() => {
@@ -124,7 +125,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      }
+      },
     );
 
     element = createComponent();
@@ -146,7 +147,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      }
+      },
     );
 
     element = createComponent();
@@ -168,7 +169,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      }
+      },
     );
 
     element = createComponent();
@@ -190,7 +191,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      }
+      },
     );
 
     element = createComponent();
