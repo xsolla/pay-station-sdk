@@ -5,4 +5,5 @@ export interface FieldStatus {
   validationStatus: 'VALID' | 'INVALID' | 'PENDING' | 'DISABLED';
   errors: ValidationErrors | null;
   isFocused?: boolean;
+  isTouched?: boolean;
 }
