@@ -11,13 +11,10 @@ import { HeadlessCheckout } from '../../headless-checkout';
 import { getStatusComponentTemplate } from './status.component.template';
 import { StatusComponentConfig } from './status.component.config.interface';
 import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
-import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 
 export class StatusComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly headlessCheckoutSpy: HeadlessCheckoutSpy;
-  private readonly formSpy: FormSpy;
-
   private statusConfig: StatusComponentConfig | null = null;
   private prevStatusUpdate: StatusUpdatedAction | null = null;
 
@@ -26,7 +23,6 @@ export class StatusComponent extends WebComponentAbstract {
 
     this.headlessCheckout = container.resolve(HeadlessCheckout);
     this.headlessCheckoutSpy = container.resolve(HeadlessCheckoutSpy);
-    this.formSpy = container.resolve(FormSpy);
   }
 
   protected connectedCallback(): void {
@@ -47,11 +43,6 @@ export class StatusComponent extends WebComponentAbstract {
   }
 
   private listenFormInit(): void {
-    if (!this.formSpy.formWasInit) {
-      this.formSpy.listenFormInit(() => this.listenFormInit());
-      return;
-    }
-
     this.headlessCheckout.form.onNextAction((nextAction) => {
       if (
         isStatusUpdatedAction(nextAction) &&
@@ -65,7 +56,7 @@ export class StatusComponent extends WebComponentAbstract {
   }
 
   private statusLoadedHandler(
-    statusConfig: StatusComponentConfig | null
+    statusConfig: StatusComponentConfig | null,
   ): void {
     this.statusConfig = statusConfig;
 
