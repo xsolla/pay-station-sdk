@@ -186,10 +186,10 @@ Using SDK components is straightforward: you only need to paste the HTML tag of 
 
 ### Secure components
 
-| **Component**         | **Selector** | **Status** |
-| --------------------- | ------------ | ---------- |
-| Text Component        | psdk-text    | ✅         |
-| Phone Component       | psdk-phone   | ✅         |
+| **Component**         | **Selector**     | **Status** |
+| --------------------- | ---------------- | ---------- |
+| Text Component        | psdk-text        | ✅         |
+| Phone Component       | psdk-phone       | ✅         |
 | Card Number Component | psdk-card-number | ✅         |
 
 ![SDK secure componentscheme](./readme_images/secure_component_scheme.png 'SDK secure componentscheme')
@@ -250,7 +250,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 6. (Optional) Select the Pay Station components as regular HTML tags and subscribe on their events to implement additional logic using callbacks.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -367,3 +367,34 @@ Integration flow:
    - Redirect the user to the PayPal payment system using the generated URL.
    - You can redirect to the PayPal URL in the same window or create a new window and keep the payment form in a separate tab. Once payment is completed on PayPal’s side, a user is redirected to `returnUrl`.
 1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
+
+## Credit card integration guide
+
+> A working example can be found [here](./examples/credit-card).
+> Note: The 3-D Secure flow doesn't work in a sandbox environment.
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
+   - The financial details component are updated with transaction details once the payment is completed.
+1. Initialize the SDK with your environment parameters.
+1. Set the access token for the initialized SDK.
+1. Initialize the payment form with the Credit Card payment method ID and return URL (necessary for 3-D Secure transactions).
+   - The return URL redirects the user once payment is completed on the 3-D Secure’s side.
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
+   - The Next action with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. A partner must remove previously added fields and render new fields for this step.
+   - The Next action with the `redirect` type means the form is redirected to complete payment according to the **3DS 1.0** secure procedure. The correct return URL must be provided to return from the 3-D Secure verification flow when it is completed.
+   - The Next action with the `3DS` type means the user card must be checked according to the **3DS 2.0** procedure. The partner is responsible for opening a 3-D Secure window.
+1. Add the form fields component to the HTML markup.
+   - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
+   - Use fields with the `isMandatory` flag to get required fields only.
+   - Use the `<psdk-text>` component to render form fields if required. For a field named `card_number` you must use the `<psdk-card-number>` component.
+1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
+1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
+1. Create a `return` page.
+1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
+1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
