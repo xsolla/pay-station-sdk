@@ -1,4 +1,5 @@
 import { CheckStatusAction } from './check-status.action.type';
+import { RedirectAction } from './redirect/redirect.action.type';
 import { ShowErrorsAction } from './show-errors.action.type';
 import { ShowFieldsAction } from './show-fields.action.type';
 import { StatusUpdatedAction } from './status-updated.action.type';
@@ -9,4 +10,5 @@ export type NextAction =
   | ShowFieldsAction
   | StatusUpdatedAction
   | ShowErrorsAction
+  | RedirectAction
   | ThreeDsAction;

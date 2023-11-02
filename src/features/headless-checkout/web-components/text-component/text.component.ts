@@ -11,6 +11,7 @@ import { getControlComponentConfigHandler } from '../get-control-component-confi
 import { HeadlessCheckout } from '../../headless-checkout';
 import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
 import { TextComponentConfig } from './text-component.config.interface';
+import { FieldStatus } from '../../../../core/form/field-status.interface';
 
 export class TextComponent extends SecureComponentAbstract {
   protected config?: TextComponentConfig;
@@ -43,7 +44,7 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected async getControlComponentConfig(
-    inputName: string
+    inputName: string,
   ): Promise<TextComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getControlComponentConfig,
@@ -58,13 +59,13 @@ export class TextComponent extends SecureComponentAbstract {
         return getControlComponentConfigHandler(message, (controlName) => {
           return msg.data?.inputName === controlName;
         });
-      }
+      },
     ) as Promise<TextComponentConfig>;
   }
 
   protected readonly configLoadedHandler = (
     config: TextComponentConfig,
-    componentName: string
+    componentName: string,
   ): void => {
     this.config = config;
     this.componentName = componentName;
@@ -113,22 +114,22 @@ export class TextComponent extends SecureComponentAbstract {
       }
 
       this.config.error = this.getFirstError(fieldStatus.errors);
-      this.updateError(fieldStatus.isFocused);
+      this.updateError(fieldStatus);
     });
   }
 
-  private updateError(isFieldInFocus: boolean | undefined): void {
+  private updateError(fieldStatus: FieldStatus): void {
     const rootElement = this.shadowRoot ?? this;
     const errorElement = rootElement.querySelector('.field-error');
 
-    if (this.config?.error && !isFieldInFocus) {
+    if (this.config?.error && fieldStatus.isTouched && !fieldStatus.isFocused) {
       if (!errorElement) {
         const newErrorElement = this.window.document.createElement('div');
         newErrorElement.classList.add('field-error');
-        newErrorElement.textContent = this.config.error;
+        newErrorElement.innerHTML = this.config.error;
         rootElement.appendChild(newErrorElement);
       } else {
-        errorElement.textContent = this.config.error;
+        errorElement.innerHTML = this.config.error;
       }
     } else {
       if (errorElement) {
