@@ -34,6 +34,7 @@ describe('SubmitButtonComponent', () => {
     headlessCheckout = {
       form: {
         onNextAction: noopStub,
+        onFieldsStatusChange: noopStub,
       },
     } as unknown as HeadlessCheckout;
 
