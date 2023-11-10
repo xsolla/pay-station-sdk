@@ -1,5 +1,5 @@
 /**
- * Run `buildPaymentFlow` function only when `DOMContentLoaded` to access all the DOM nodes needed.
+ * Run the `buildPaymentFlow` function on `DOMContentLoaded` to access all the DOM nodes needed.
  */
 document.addEventListener('DOMContentLoaded', buildPaymentFlow);
 
@@ -13,8 +13,8 @@ function buildPaymentFlow() {
   }
 
   /**
-   * To learn more about creating tokens,
-   * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+   * For more information about creating tokens,
+   * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
   const accessToken = '';
 
@@ -38,6 +38,6 @@ function buildPaymentFlow() {
     await headlessCheckout.setToken(accessToken);
   }
 
-  // initialize sdk
+  // Initialize SDK.
   initPayStationSdk();
 }

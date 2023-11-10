@@ -1,5 +1,5 @@
 /**
- * Run `buildPaymentFlow` function only when `DOMContentLoaded` to access all the DOM nodes needed.
+ * Run the `buildPaymentFlow` function on `DOMContentLoaded` to access all the DOM nodes needed.
  */
 document.addEventListener('DOMContentLoaded', buildPaymentFlow);
 
@@ -13,7 +13,7 @@ function buildPaymentFlow() {
   }
   /**
    * To learn more about creating tokens,
-   * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+   * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
   const accessToken = '';
 
@@ -30,7 +30,7 @@ function buildPaymentFlow() {
 
   function handleRedirectAction(redirectAction) {
     /**
-     * Handle redirect to 3DS secure procedure.
+     * Handle redirect to 3-D Secure procedure.
      */
     const url = new URL(redirectAction.data.redirect.redirectUrl);
     const params = Object.entries(redirectAction.data.redirect.data);
@@ -40,18 +40,18 @@ function buildPaymentFlow() {
     });
 
     /**
-     * Open 3DS Secure.
+     * Open 3-D Secure.
      */
     this.window.location.href = url.toString();
   }
 
   function renderRequiredFields(requiredFields, formElement) {
     /**
-     * It's important to render every required field as a component according to its own type or
+     * It is important to render every every required field as a component according to its own type or
      * other specific parameters. In the current case, we could encounter fields of the following types:
-     * 'text', 'select', or a 'text' field with the name 'card_number'.
+     * 'text', 'select', or 'text' with the name 'card_number'.
      *
-     * Every type is mapped to a suitable component, and then the component is rendered into the DOM.
+     * Every type is mapped to a suitable component, and then the component is rendered in the DOM.
      */
     requiredFields.forEach((field) => {
       if (field.type === 'text' && field.name === 'card_number') {
@@ -71,7 +71,7 @@ function buildPaymentFlow() {
 
   function renderCardNumberComponent(formElement, field) {
     /**
-     * You can use <psdk-card-number icon="true" name="field.name"></psdk-card-number> as well
+     * You can use <psdk-card-number icon="true" name="field.name"></psdk-card-number> as well.
      */
     const input = new PayStationSdk.CardNumberComponent();
     input.setAttribute('name', field.name);
@@ -80,7 +80,7 @@ function buildPaymentFlow() {
 
   function renderSelectComponent(formElement, field) {
     /**
-     * You can use <psdk-select name="field.name"></psdk-select> as well
+     * You can use <psdk-select name="field.name"></psdk-select> as well.
      */
     const input = new PayStationSdk.SelectComponent();
     input.setAttribute('name', field.name);
@@ -89,7 +89,7 @@ function buildPaymentFlow() {
 
   function renderTextComponent(formElement, field) {
     /**
-     * You can use <psdk-text name="field.name"></psdk-text> as well
+     * You can use <psdk-text name="field.name"></psdk-text> as well.
      */
     const input = new PayStationSdk.TextComponent();
     input.setAttribute('name', field.name);
@@ -98,8 +98,8 @@ function buildPaymentFlow() {
 
   function renderSubmitButton(formElement) {
     /**
-     * Render submit form button.
-     * You can use <psdk-submit-button></psdk-submit-button> as well
+     * Render the submit form button.
+     * You can use <psdk-submit-button></psdk-submit-button> as well.
      */
     const submitButton = new PayStationSdk.SubmitButtonComponent();
     submitButton.setAttribute('text', 'Pay Now');
@@ -108,8 +108,8 @@ function buildPaymentFlow() {
 
   function handle3dsAction(threeDsAction) {
     /**
-     * Create 3ds component. It will be handle 3ds verification flow.
-     * You can use <psdk-3ds></psdk-3ds> component as well
+     * Create the 3-D Secure component. It will handle the 3-D Secure verification flow.
+     * You can use the <psdk-3ds></psdk-3ds> component as well.
      */
 
     const threeDsComponent = new PayStationSdk.ThreeDsComponent();
@@ -124,8 +124,8 @@ function buildPaymentFlow() {
 
   function renderStatusComponent(statusElement) {
     /**
-     * Create status component. It will be updated once payment status changed.
-     * You can use <psdk-status></psdk-status> component as well
+     * Create the status component. It will be updated once a payment status changed.
+     * You can use the <psdk-status></psdk-status> component as well.
      */
     const statusComponent = new PayStationSdk.StatusComponent();
     statusElement.append(statusComponent);
@@ -136,7 +136,7 @@ function buildPaymentFlow() {
      * In some cases, we need to remove all form fields that were rendered before.
      * This may be necessary when processing Brazilian credit cards, because
      * they also have a second step with extra fields that need to be filled.
-     * To create a fluent user experience, it would be good practice to clear fields already submitted and
+     * To create a fluent user experience, clear submitted fields and
      * render new fields in the same place.
      */
     formElement.innerHTML = '';
@@ -144,8 +144,8 @@ function buildPaymentFlow() {
 
   function getRequiredFields(fields) {
     /**
-     * form.fields provide available fields for selected payment method.
-     * You can filter it by `isMandatory` flag to get required fields only
+     * form.fields provide available fields for the selected payment method.
+     * You can filter it by the `isMandatory` flag to get required fields only.
      */
     return fields.filter((field) => field.isMandatory === '1');
   }
@@ -154,9 +154,9 @@ function buildPaymentFlow() {
     /**
      * Call the `init()` method with the provided environment object.
      * The isWebView parameter is required and indicates whether your
-     * integration type is a webview or not.
-     * You can set sandbox payment mode with `sandbox` parameter
-     * Please note that this command executes asynchronously.
+     * integration type is a WebView.
+     * You can set sandbox payment mode with the `sandbox` parameter.
+     * Note that this command executes asynchronously.
      */
     await headlessCheckout.init({
       isWebView: false,
@@ -164,7 +164,7 @@ function buildPaymentFlow() {
     });
 
     /**
-     * Set styles for secure components
+     * Set styles for secure components.
      */
     await headlessCheckout.setSecureComponentStyles(`
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
@@ -185,43 +185,43 @@ function buildPaymentFlow() {
 
     /**
      * After the Payments SDK has been initialized, the next step is setting the token.
-     * To learn more about creating tokens,
-     * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+     * For more information about creating tokens,
+     * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
      */
     await headlessCheckout.setToken(accessToken);
 
     /**
-     * Define payment method id.
-     * To get lists of payment methods use psdk-payment-methods.
-     * Please see `examples/select-method` for more details
+     * Define payment method ID.
+     * To get lists of payment methods, use psdk-payment-methods.
+     * Refer to `examples/select-method` for more details.
      */
     const creditCardMethodId = 1380;
 
     /**
      * Initialize payment.
-     * `returnUrl` will be opened after payment completed on 3DS secure side.
+     * `returnUrl` is opened after the payment is completed on 3-D Secure’s side.
      */
     const form = await headlessCheckout.form.init({
       paymentMethodId: creditCardMethodId,
       /*
-       * This return url means you start current example on localhost with 3000 port.
+       * This return URL means you start the current example on localhost with the 3000 port.
        * */
       returnUrl: 'http://localhost:3000/return.html',
     });
 
     /**
-     * Retrieving DOM elements to render form fields and display status messages.
+     *  Retrieving DOM elements to render form fields and display status messages.
      */
     const formElement = document.querySelector('#form-container');
     const statusElement = document.querySelector('#status-container');
 
     /**
-     * Subscribe to payment actions
+     * Subscribe to payment actions.
      */
     headlessCheckout.form.onNextAction((nextAction) => {
       switch (nextAction.type) {
         /**
-         * Handle 'show_fields' action.
+         * Handle the 'show_fields' action.
          */
         case 'show_fields':
           clearFormFields(formElement);
@@ -230,7 +230,7 @@ function buildPaymentFlow() {
           break;
 
         /**
-         * Handle 'check_status' action.
+         * Handle the 'check_status' action.
          */
         case 'check_status':
           /**
@@ -241,14 +241,14 @@ function buildPaymentFlow() {
           break;
 
         /**
-         * Handle '3DS' action.
+         * Handle the '3DS' action.
          */
         case '3DS':
           handle3dsAction(nextAction);
           break;
 
         /**
-         * Handle 'redirect' action.
+         * Handle the 'redirect' action.
          */
         case 'redirect':
           handleRedirectAction(nextAction);
@@ -259,13 +259,13 @@ function buildPaymentFlow() {
     const requiredFields = getRequiredFields(form.fields);
 
     /**
-     * Render requried fields
+     * Render the required fields.
      */
     renderRequiredFields(requiredFields, formElement);
 
     renderSubmitButton(formElement);
   }
 
-  // initialize sdk
+  // Initialize SDK.
   initPayStationSdk();
 }

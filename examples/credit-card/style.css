@@ -44,7 +44,7 @@ psdk-card-number iframe {
     color: #f30;
 }
 
-/* select style: dropdown will be hidden */
+/* Select style: the drop-down list will be hidden. */
 psdk-select button.select {
     width: 100%;
     max-width: 200px;
@@ -54,7 +54,7 @@ psdk-select button.select {
     display: none;
 }
 
-/* select style: dropdown will be opened */
+/* Select style: the drop-down list will be opened. */
 .dropdown-wrapper.dropdown-opened {
     display: block;
 }
