@@ -371,7 +371,7 @@ Integration flow:
 ## Credit card integration guide
 
 > A working example can be found [here](./examples/credit-card).
-> Note: 3The 3-D Secure flow doesn't work in a sandbox environment.
+> Note: The 3-D Secure flow doesn't work in a sandbox environment.
 
 Integration flow:
 
@@ -397,4 +397,4 @@ Integration flow:
 1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
 1. Create a `return` page.
 1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
-1. Initialize `headlessCheckout.init` to initialization library and set accessToken at `headlessCheckout.setToken`.
+1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
