@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -56,6 +56,9 @@ Please, link CDN source or create local build (recommended to test purposes only
        * To begin initialization, obtain a reference to the headlessCheckout object.
        */
       const { headlessCheckout } = PayStationSdk;
+
+      const paymentWindowName = 'paypal-window';
+      let paymentWindowRef = null;
 
       async function initPayStationSdk() {
         /**
@@ -118,7 +121,7 @@ Please, link CDN source or create local build (recommended to test purposes only
             /**
              * Open PayPal payment system.
              */
-            window.location.href = url;
+            window.open(url, paymentWindowRef?.name);
 
             /**
              * Create status component. It will be updated once payment status changed.
@@ -126,6 +129,13 @@ Please, link CDN source or create local build (recommended to test purposes only
              */
             const statusComponent = new PayStationSdk.StatusComponent();
             statusContainer.append(statusComponent);
+          }
+
+          if (
+            nextAction.type === 'status_updated' &&
+            nextAction.data.statusState === 'done'
+          ) {
+            paymentWindowRef?.close();
           }
         });
 
@@ -139,7 +149,7 @@ Please, link CDN source or create local build (recommended to test purposes only
          * You can filter it by `isMandatory` flag to get required fields only
          */
         const requiredFields = form.fields.filter(
-          (field) => field.isMandatory === '1'
+          (field) => field.isMandatory === '1',
         );
         console.log('Required form fields', requiredFields);
 
@@ -164,6 +174,12 @@ Please, link CDN source or create local build (recommended to test purposes only
         const submitButton = new PayStationSdk.SubmitButtonComponent();
         submitButton.setAttribute('text', 'Pay Now');
         formElement.append(submitButton);
+
+        submitButton.addEventListener('click', () => onSubmit());
+      }
+
+      function onSubmit() {
+        paymentWindowRef = window.open('about:blank', paymentWindowName);
       }
 
       // initialize sdk
