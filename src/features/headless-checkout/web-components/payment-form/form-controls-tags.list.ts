@@ -5,4 +5,5 @@ export const formControlsTags = [
   WebComponentTagName.PhoneComponent,
   WebComponentTagName.SelectComponent,
   WebComponentTagName.CheckboxComponent,
+  WebComponentTagName.CardNumberComponent,
 ];

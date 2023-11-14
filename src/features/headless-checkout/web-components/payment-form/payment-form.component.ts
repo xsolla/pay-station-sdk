@@ -14,13 +14,7 @@ export class PaymentFormComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly formSpy: FormSpy;
   private readonly paymentFormFieldsManager: PaymentFormFieldsService;
-
-  private formExpectedFields?: Field[];
   private readonly window: Window;
-  private existsControlsNames?: Array<string | null>;
-  private expectedFieldsNames!: string[];
-  private missedFieldsNames!: string[];
-  private invalidFieldsNames!: string[];
 
   private get elementRef(): HTMLElement {
     return this.querySelector('div')! as HTMLElement;
@@ -39,16 +33,20 @@ export class PaymentFormComponent extends WebComponentAbstract {
       this.formSpy.listenFormInit(() => this.connectedCallback());
       return;
     }
-    this.formExpectedFields = this.formSpy.formFields;
+    const formExpectedFields = this.formSpy.formFields;
+    const formRequriedFields = this.getRequriedFields(this.formSpy.formFields);
 
     super.render();
-    if (this.formExpectedFields) {
-      this.expectedFieldsNames = this.getExpectedControlsNames(
-        this.formExpectedFields
-      );
-      this.existsControlsNames = this.getExistsControlsNames();
+    if (formExpectedFields) {
+      const expectedFieldsNames = this.getFieldsNames(formExpectedFields);
+      const requriedFieldsNames = this.getFieldsNames(formRequriedFields);
+      const existsControlsNames = this.getExistsControlsNames();
 
-      this.setupFormFields(this.expectedFieldsNames, this.existsControlsNames);
+      this.setupFormFields(
+        expectedFieldsNames,
+        requriedFieldsNames,
+        existsControlsNames,
+      );
     }
   }
 
@@ -58,24 +56,26 @@ export class PaymentFormComponent extends WebComponentAbstract {
 
   private setupFormFields(
     expectedFieldsNames: string[],
-    existsControlsNames: Array<string | null>
+    requiredFieldsNames: string[],
+    existsControlsNames: Array<string | null>,
   ): void {
-    this.missedFieldsNames = getMissedFieldsNames(
-      expectedFieldsNames,
-      existsControlsNames
+    const missedFieldsNames = getMissedFieldsNames(
+      requiredFieldsNames,
+      existsControlsNames,
     );
-    this.setupMissedFields(this.missedFieldsNames);
+    this.setupMissedFields(missedFieldsNames);
 
-    this.invalidFieldsNames = getInvalidFieldsNames(
+    const invalidFieldsNames = getInvalidFieldsNames(
       expectedFieldsNames,
-      existsControlsNames
+      existsControlsNames,
     );
-    this.setupInvalidFields(this.invalidFieldsNames);
+    this.setupInvalidFields(invalidFieldsNames);
   }
+
   private setupMissedFields(missedFieldsNames: string[]): void {
     this.paymentFormFieldsManager.createMissedFields(
       missedFieldsNames,
-      this.elementRef
+      this.elementRef,
     );
     this.logMissedFields(missedFieldsNames);
   }
@@ -86,7 +86,11 @@ export class PaymentFormComponent extends WebComponentAbstract {
     this.logExtraFields(missedFieldsNames);
   }
 
-  private getExpectedControlsNames(fields: Field[]): string[] {
+  private getRequriedFields(fields: Field[] = []): Field[] {
+    return fields.filter((field) => field.isMandatory === '1');
+  }
+
+  private getFieldsNames(fields: Field[]): string[] {
     return fields.map((field) => field.name);
   }
 
@@ -97,11 +101,11 @@ export class PaymentFormComponent extends WebComponentAbstract {
       const formInputs = this.window.document.querySelectorAll(tag);
 
       const controlsNames = Array.from(formInputs).map((formInput) =>
-        formInput.getAttribute('name')
+        formInput.getAttribute('name'),
       );
 
       controlsNames.forEach((name: string | null) =>
-        existsControlsNames.push(name)
+        existsControlsNames.push(name),
       );
     });
 
@@ -113,12 +117,12 @@ export class PaymentFormComponent extends WebComponentAbstract {
       return;
     }
     const message = `This fields were auto created: [${missedFieldsNames.join(
-      ', '
+      ', ',
     )}]. They are mandatory for a payment flow`;
     console.warn(message);
     void this.headlessCheckout.events.send<{ message: string }>(
       { name: EventName.warning, data: { message } },
-      () => null
+      () => null,
     );
   }
 
@@ -127,12 +131,12 @@ export class PaymentFormComponent extends WebComponentAbstract {
       return;
     }
     const message = `This fields were auto removed: [${extraFieldsNames.join(
-      ', '
+      ', ',
     )}]. They are useless for a payment flow`;
     console.warn(message);
     void this.headlessCheckout.events.send<{ message: string }>(
       { name: EventName.warning, data: { message } },
-      () => null
+      () => null,
     );
   }
 }
