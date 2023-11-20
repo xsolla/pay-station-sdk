@@ -165,8 +165,8 @@ declare const headlessCheckout: {
 | Payment Methods       | psdk-payment-methods | ✅         |
 | Saved Methods         | ❔                   | 🕑         |
 | Payment Form Messages | ❔                   | 🕑         |
-| Checkbox              | ❔                   | 🕑         |
-| Select                | ❔                   | 🕑         |
+| Checkbox              | psdk-checkbox        | ✅         |
+| Select                | psdk-select          | ✅         |
 | Apple Pay Button      | ❔                   | 🕑         |
 | Google Pay Button     | ❔                   | 🕑         |
 | Delete Account Button | ❔                   | 🕑         |
@@ -174,7 +174,6 @@ declare const headlessCheckout: {
 | User Balance          | ❔                   | 🕑         |
 | Finance Details       | psdk-finance-details | ✅         |
 | Status                | psdk-status          | ✅         |
-| Receipt               | ❔                   | 🕑         |
 
 ![Regular SDK web components](./readme_images/sdk_web_components_scheme.png 'Regular SDK web components')
 
@@ -206,10 +205,13 @@ Secure components have access to sensitive user data, and are encapsulated in if
 | ------------- | ----------------- | ---------- |
 | Legal         | psdk-legal        | ✅         |
 | Payment Form  | psdk-payment-form | ✅         |
+| ThreeDs       | psdk-3ds          | ✅         |
 
 The `Payment Form` component creates missed payment form components to ensure the client does not omit required payment form components. The client receives a warning message from the SDK, but still allows users to complete the payment.
 
 The `Legal` component contains information about Xsolla's legal documents. Client has to include this component and display legal documents in their application in accordance with their agreement with Xsolla. Otherwise, the payment flow is blocked.
+
+The `ThreeDs` component contains the logic required to perform the necessary credit card checks in accordance with the 3DS procedure.
 
 ## Pay Station SDK supported languages
 
