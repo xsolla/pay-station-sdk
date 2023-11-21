@@ -373,7 +373,6 @@ Integration flow:
 ## Credit card integration guide
 
 > A working example can be found [here](./examples/credit-card).
-> Note: The 3-D Secure flow doesn't work in a sandbox environment.
 
 Integration flow:
 
