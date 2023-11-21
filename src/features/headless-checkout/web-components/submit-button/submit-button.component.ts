@@ -25,44 +25,47 @@ export class SubmitButtonComponent extends WebComponentAbstract {
     return [SubmitButtonAttributes.isLoading, SubmitButtonAttributes.text];
   }
 
-  protected connectedCallback(): void {
-    super.render();
+  protected render(): void {
+    this.removeAllEventListeners();
+    this.innerHTML = this.getHtml();
 
-    this.addEventListenerToElement(this.elementRef, 'click', () => {
-      if (this.getAttribute(SubmitButtonAttributes.isLoading)) {
-        return;
-      }
-
-      this.setAttribute(SubmitButtonAttributes.isLoading, 'true');
-
-      let isCheckedFieldStatuses = false;
-      this.headlessCheckout.form.onFieldsStatusChange((fieldsStatus) => {
-        if (isCheckedFieldStatuses) {
+    if (this.elementRef) {
+      this.addEventListenerToElement(this.elementRef, 'click', () => {
+        if (this.getAttribute(SubmitButtonAttributes.isLoading)) {
           return;
         }
 
-        isCheckedFieldStatuses = true;
+        this.setAttribute(SubmitButtonAttributes.isLoading, 'true');
 
-        const isInvalidForm = Object.entries(fieldsStatus).some((fields) => {
-          const [, value] = fields;
+        let isCheckedFieldStatuses = false;
+        this.headlessCheckout.form.onFieldsStatusChange((fieldsStatus) => {
+          if (isCheckedFieldStatuses) {
+            return;
+          }
 
-          return value.validationStatus === 'INVALID';
+          isCheckedFieldStatuses = true;
+
+          const isInvalidForm = Object.entries(fieldsStatus).some((fields) => {
+            const [, value] = fields;
+
+            return value.validationStatus === 'INVALID';
+          });
+
+          if (isInvalidForm) {
+            this.removeAttribute(SubmitButtonAttributes.isLoading);
+
+            this.render();
+          }
         });
 
-        if (isInvalidForm) {
-          this.removeAttribute(SubmitButtonAttributes.isLoading);
+        void this.postMessagesClient.send(
+          { name: EventName.submitForm },
+          submitButtonHandler,
+        );
 
-          super.render();
-        }
+        this.render();
       });
-
-      void this.postMessagesClient.send(
-        { name: EventName.submitForm },
-        submitButtonHandler,
-      );
-
-      super.render();
-    });
+    }
   }
 
   protected getHtml(): string {
