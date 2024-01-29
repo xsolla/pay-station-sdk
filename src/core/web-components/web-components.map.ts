@@ -12,6 +12,7 @@ import { ThreeDsComponent } from '../../features/headless-checkout/web-component
 import { PhoneComponent } from '../../features/headless-checkout/web-components/phone-component/phone.component';
 import { SelectComponent } from '../../features/headless-checkout/web-components/select/select.component';
 import { CheckboxComponent } from '../../features/headless-checkout/web-components/checkbox/checkbox.component';
+import { UserBalanceComponent } from '../../features/headless-checkout/web-components/user-balance-component/user-balance-component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -29,4 +30,5 @@ export const webComponents: {
   [WebComponentTagName.PhoneComponent]: PhoneComponent,
   [WebComponentTagName.SelectComponent]: SelectComponent,
   [WebComponentTagName.CheckboxComponent]: CheckboxComponent,
+  [WebComponentTagName.UserBalanceComponent]: UserBalanceComponent,
 };

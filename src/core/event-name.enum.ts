@@ -7,6 +7,7 @@ export const enum EventName {
   getPaymentQuickMethods = 'getPaymentQuickMethods',
   getSavedMethods = 'getSavedMethods',
   getUserBalance = 'getUserBalance',
+  getUserBalanceValue = 'getUserBalanceValue',
   getLegalComponentConfig = 'getLegalComponentConfig',
   getPaymentStatus = 'getPaymentStatus',
   legalComponentPing = 'legalComponentPing',

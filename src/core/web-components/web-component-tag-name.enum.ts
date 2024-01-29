@@ -12,4 +12,5 @@ export enum WebComponentTagName {
   ThreeDsComponent = 'psdk-3ds',
   SelectComponent = 'psdk-select',
   CheckboxComponent = 'psdk-checkbox',
+  UserBalanceComponent = 'psdk-user-balance',
 }
