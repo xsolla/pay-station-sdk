@@ -12,6 +12,7 @@ import { ThreeDsComponent } from '../../features/headless-checkout/web-component
 import { PhoneComponent } from '../../features/headless-checkout/web-components/phone-component/phone.component';
 import { SelectComponent } from '../../features/headless-checkout/web-components/select/select.component';
 import { CheckboxComponent } from '../../features/headless-checkout/web-components/checkbox/checkbox.component';
+import { SavedMethodsComponent } from '../../features/headless-checkout/web-components/saved-methods/saved-methods.component';
 import { UserBalanceComponent } from '../../features/headless-checkout/web-components/user-balance-component/user-balance-component';
 
 export const webComponents: {
@@ -20,6 +21,7 @@ export const webComponents: {
   [WebComponentTagName.TextComponent]: TextComponent,
   [WebComponentTagName.SubmitButtonComponent]: SubmitButtonComponent,
   [WebComponentTagName.PaymentMethodsComponent]: PaymentMethodsComponent,
+  [WebComponentTagName.SavedMethodsComponent]: SavedMethodsComponent,
   [WebComponentTagName.PriceTextComponent]: PriceTextComponent,
   [WebComponentTagName.FinanceDetailsComponent]: FinanceDetailsComponent,
   [WebComponentTagName.LegalComponent]: LegalComponent,
