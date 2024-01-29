@@ -171,7 +171,7 @@ declare const headlessCheckout: {
 | Google Pay Button     | ❔                   | 🕑         |
 | Delete Account Button | ❔                   | 🕑         |
 | Submit Button         | psdk-submit-button   | ✅         |
-| User Balance          | ❔                   | 🕑         |
+| User Balance          | psdk-user-balance    | ✅         |
 | Finance Details       | psdk-finance-details | ✅         |
 | Status                | psdk-status          | ✅         |
 
@@ -252,7 +252,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 6. (Optional) Select the Pay Station components as regular HTML tags and subscribe on their events to implement additional logic using callbacks.
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
