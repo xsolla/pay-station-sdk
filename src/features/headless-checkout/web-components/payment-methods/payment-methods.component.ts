@@ -50,8 +50,8 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   protected getHtml(): string {
     const paymentMethodsHtml = this.getMethodsHtml();
     return `
-      <input type="text" class="search" placeholder="${this.searchPlaceHolder}">
-      <ul class="payment-methods">
+      <input type='text' class='search' placeholder='${this.searchPlaceHolder}'>
+      <ul class='payment-methods'>
         ${paymentMethodsHtml ? paymentMethodsHtml.join('') : this.notFoundValue}
       </ul>
     `;
