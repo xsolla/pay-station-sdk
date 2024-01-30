@@ -160,20 +160,20 @@ declare const headlessCheckout: {
 
 ### Regular components
 
-| **Component**         | **Selector**         | **Status** |
-| --------------------- |----------------------|-----------|
-| Payment Methods       | psdk-payment-methods | ✅         |
-| Saved Methods         | psdk-saved-methods   | ✅         |
-| Payment Form Messages | ❔                    | 🕑        |
-| Checkbox              | psdk-checkbox        | ✅         |
-| Select                | psdk-select          | ✅         |
-| Apple Pay Button      | ❔                    | 🕑        |
-| Google Pay Button     | ❔                    | 🕑        |
-| Delete Account Button | ❔                    | 🕑        |
-| Submit Button         | psdk-submit-button   | ✅         |
-| User Balance          | psdk-user-balance    | ✅         |
-| Finance Details       | psdk-finance-details | ✅         |
-| Status                | psdk-status          | ✅         |
+| **Component**         | **Selector**               | **Status** |
+| --------------------- | -------------------------- | ---------- |
+| Payment Methods       | psdk-payment-methods       | ✅         |
+| Saved Methods         | psdk-saved-methods         | ✅         |
+| Payment Form Messages | psdk-payment-form-messages | ✅         |
+| Checkbox              | psdk-checkbox              | ✅         |
+| Select                | psdk-select                | ✅         |
+| Apple Pay Button      | ❔                         | 🕑         |
+| Google Pay Button     | ❔                         | 🕑         |
+| Delete Account Button | ❔                         | 🕑         |
+| Submit Button         | psdk-submit-button         | ✅         |
+| User Balance          | psdk-user-balance          | ✅         |
+| Finance Details       | psdk-finance-details       | ✅         |
+| Status                | psdk-status                | ✅         |
 
 ![Regular SDK web components](./readme_images/sdk_web_components_scheme.png 'Regular SDK web components')
 

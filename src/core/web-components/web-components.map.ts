@@ -14,6 +14,7 @@ import { SelectComponent } from '../../features/headless-checkout/web-components
 import { CheckboxComponent } from '../../features/headless-checkout/web-components/checkbox/checkbox.component';
 import { SavedMethodsComponent } from '../../features/headless-checkout/web-components/saved-methods/saved-methods.component';
 import { UserBalanceComponent } from '../../features/headless-checkout/web-components/user-balance-component/user-balance-component';
+import { PaymentFormMessagesComponent } from '../../features/headless-checkout/web-components/payment-form-messages/payment-form-messages.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -33,4 +34,5 @@ export const webComponents: {
   [WebComponentTagName.SelectComponent]: SelectComponent,
   [WebComponentTagName.CheckboxComponent]: CheckboxComponent,
   [WebComponentTagName.UserBalanceComponent]: UserBalanceComponent,
+  [WebComponentTagName.PaymentFormMessages]: PaymentFormMessagesComponent,
 };
