@@ -10,6 +10,7 @@ import { ThreeDsComponent } from './features/headless-checkout/web-components/th
 import { PhoneComponent } from './features/headless-checkout/web-components/phone-component/phone.component';
 import { SelectComponent } from './features/headless-checkout/web-components/select/select.component';
 import { CheckboxComponent } from './features/headless-checkout/web-components/checkbox/checkbox.component';
+import { UserBalanceComponent } from './features/headless-checkout/web-components/user-balance-component/user-balance-component';
 
 export {
   SubmitButtonComponent,
@@ -24,4 +25,5 @@ export {
   PhoneComponent,
   SelectComponent,
   CheckboxComponent,
+  UserBalanceComponent,
 };
