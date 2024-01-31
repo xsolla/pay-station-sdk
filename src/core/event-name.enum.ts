@@ -21,4 +21,5 @@ export const enum EventName {
   updateCreditCardType = 'updateCreditCardType',
   publicControlChangeState = 'publicControlChangeState',
   publicControlOnValueChanges = 'publicControlOnValueChanges',
+  formMessagesChanged = 'formMessagesChanged',
 }
