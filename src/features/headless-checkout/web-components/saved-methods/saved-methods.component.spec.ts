@@ -5,12 +5,17 @@ import { noopStub } from '../../../../tests/stubs/noop.stub';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { SavedMethodsComponent } from './saved-methods.component';
 import { SavedMethod } from '../../../../core/saved-method.interface';
-import { SavedMethodsEvents } from './saved-methods-events.enum';
+import { EventName } from '../../../../core/event-name.enum';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 
-function createComponent(): void {
+function createComponent(isDeleteMode = false): void {
   const element = document.createElement(
-    WebComponentTagName.SavedMethodsComponent
+    WebComponentTagName.SavedMethodsComponent,
   );
+  if (isDeleteMode) {
+    element.setAttribute('delete-mode', 'true');
+  }
+
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
 }
@@ -38,10 +43,11 @@ const mockSavedMethod: SavedMethod = {
 describe('SavedMethodsComponent', () => {
   let headlessCheckout: HeadlessCheckout;
   let headlessCheckoutSpy: HeadlessCheckoutSpy;
+  let postMessagesClient: PostMessagesClient;
 
   window.customElements.define(
     WebComponentTagName.SavedMethodsComponent,
-    SavedMethodsComponent
+    SavedMethodsComponent,
   );
 
   beforeEach(() => {
@@ -57,6 +63,11 @@ describe('SavedMethodsComponent', () => {
         return;
       },
     } as unknown as HeadlessCheckoutSpy;
+    postMessagesClient = {
+      init: noopStub,
+      send: noopStub,
+      listen: noopStub,
+    } as unknown as PostMessagesClient;
 
     container.clearInstances();
 
@@ -66,6 +77,10 @@ describe('SavedMethodsComponent', () => {
       })
       .register<HeadlessCheckout>(HeadlessCheckout, {
         useValue: headlessCheckout,
+      })
+      .register<Window>(Window, { useValue: window })
+      .register<PostMessagesClient>(PostMessagesClient, {
+        useValue: postMessagesClient,
       });
   });
 
@@ -76,16 +91,16 @@ describe('SavedMethodsComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.SavedMethodsComponent)
+      document.querySelector(WebComponentTagName.SavedMethodsComponent),
     ).toBeDefined();
   });
 
   it('Should load saved methods', () => {
     const spy = spyOn(headlessCheckout, 'getSavedMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     expect(spy).toHaveBeenCalled();
@@ -93,12 +108,12 @@ describe('SavedMethodsComponent', () => {
 
   it('Should load saved methods after init', () => {
     const spy = spyOn(headlessCheckout, 'getSavedMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     const appWasInitSpy = spyOnProperty(
       headlessCheckoutSpy,
       'appWasInit',
-      'get'
+      'get',
     );
     const listenAppInitSpy = spyOn(headlessCheckoutSpy, 'listenAppInit');
     listenAppInitSpy.and.callFake((callback: () => void) => {
@@ -112,10 +127,10 @@ describe('SavedMethodsComponent', () => {
 
   it('Should not load saved methods', () => {
     const spy = spyOn(headlessCheckout, 'getSavedMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      false
+      false,
     );
     createComponent();
     expect(spy).not.toHaveBeenCalled();
@@ -123,10 +138,10 @@ describe('SavedMethodsComponent', () => {
 
   it('Should draw 2 payment methods', async () => {
     spyOn(headlessCheckout, 'getSavedMethods').and.returnValue(
-      Promise.resolve([mockSavedMethod, mockSavedMethod])
+      Promise.resolve([mockSavedMethod, mockSavedMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
@@ -137,10 +152,10 @@ describe('SavedMethodsComponent', () => {
 
   it('Should draw no saved methods', async () => {
     spyOn(headlessCheckout, 'getSavedMethods').and.returnValue(
-      Promise.resolve([])
+      Promise.resolve([]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
@@ -150,23 +165,51 @@ describe('SavedMethodsComponent', () => {
 
   it('Should dispatch custom event', async () => {
     spyOn(headlessCheckout, 'getSavedMethods').and.returnValue(
-      Promise.resolve([mockSavedMethod])
+      Promise.resolve([mockSavedMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
 
     await Promise.resolve();
     document
       .querySelector(WebComponentTagName.SavedMethodsComponent)!
-      .addEventListener(SavedMethodsEvents.savedMethodSelected, (event) => {
+      .addEventListener(EventName.savedMethodSelected, (event) => {
         expect((event as CustomEvent).detail).toEqual({
           paymentMethodId: String(mockSavedMethod.pid),
           savedMethodId: String(mockSavedMethod.id),
+          type: String(mockSavedMethod.type),
         });
       });
 
     document.querySelector('a')!.click();
+  });
+
+  it('Should dispatch custom delete event', async () => {
+    spyOn(postMessagesClient, 'send').and.returnValue(Promise.resolve(true));
+
+    spyOn(headlessCheckout, 'getSavedMethods').and.returnValue(
+      Promise.resolve([mockSavedMethod]),
+    );
+
+    spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
+      true,
+    );
+
+    createComponent(true);
+
+    await Promise.resolve();
+    document
+      .querySelector(WebComponentTagName.SavedMethodsComponent)!
+      .addEventListener(EventName.deleteSavedMethod, (event) => {
+        expect((event as CustomEvent).detail).toEqual({
+          paymentMethodId: String(mockSavedMethod.pid),
+          savedMethodId: String(mockSavedMethod.id),
+          type: String(mockSavedMethod.type),
+        });
+      });
+
+    document.querySelector('button')!.click();
   });
 });

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 export abstract class WebComponentAbstract extends HTMLElement {
   protected eventListeners: Array<{
     element: Element;
@@ -39,7 +41,11 @@ export abstract class WebComponentAbstract extends HTMLElement {
     return [];
   }
 
-  protected attributeChangedCallback(): void {
+  protected attributeChangedCallback(
+    name?: string,
+    oldValue?: string,
+    newValue?: string,
+  ): void {
     this.render();
   }
 
