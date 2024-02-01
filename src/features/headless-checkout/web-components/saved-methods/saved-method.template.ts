@@ -5,7 +5,10 @@ import { getCutterName } from './pipes/name-cutter.pipe';
 
 const iconsPath = `${cdnUrl}/paystation4/brand-logos`;
 
-export const getSavedMethodTemplate = (method: SavedMethod): string => {
+export const getSavedMethodTemplate = (
+  method: SavedMethod,
+  isDeleteMode?: boolean,
+): string => {
   const expireDate = getExpireDate(method.cardExpiryDate);
   const name = getCutterName(method);
   let iconName: string;
@@ -18,7 +21,9 @@ export const getSavedMethodTemplate = (method: SavedMethod): string => {
 
   return `<li class='saved-method' data-payment-method-id='${
     method.pid
-  }' data-saved-method-id='${method.id}'>
+  }' data-saved-method-id='${method.id}' data-saved-method-type='${
+    method.type
+  }'>
     <a tabindex='0' href='${method.id}'>
       <span class='icon'>
         <img src='${iconsPath}/${iconName}' alt='${method.name}'>
@@ -26,6 +31,11 @@ export const getSavedMethodTemplate = (method: SavedMethod): string => {
         <span class='payment-method-name'>${method.psName}</span>
         <span class='name'>${name}</span>
         ${expireDate ? `<span class='expire-date'>${expireDate}</span>` : ''}
+        ${
+          isDeleteMode
+            ? `<button class='psdk-delete-saved-method-button'>delete</button>`
+            : ''
+        }
     </a>
 </li>`;
 };

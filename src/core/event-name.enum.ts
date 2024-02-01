@@ -22,4 +22,7 @@ export const enum EventName {
   publicControlChangeState = 'publicControlChangeState',
   publicControlOnValueChanges = 'publicControlOnValueChanges',
   formMessagesChanged = 'formMessagesChanged',
+  savedMethodSelected = 'savedMethodSelected',
+  deleteSavedMethod = 'deleteSavedMethod',
+  deletedSavedMethodStatus = 'deletedSavedMethodStatus',
 }
