@@ -6,11 +6,16 @@ import { SavedMethod } from '../../../../core/saved-method.interface';
 import { getSavedMethodTemplate } from './saved-method.template';
 import { SavedMethodsAttributes } from './saved-methods-attributes.enum';
 import { SavedMethodAttributes } from './saved-method-attributes.enum';
-import { SavedMethodsEvents } from './saved-methods-events.enum';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
+import { deleteSavedMethodHandler } from '../../post-messages-handlers/delete-saved-method.handler';
+import { EventName } from '../../../../core/event-name.enum';
 
 export class SavedMethodsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly headlessCheckoutSpy: HeadlessCheckoutSpy;
+  private readonly window: Window;
+  private readonly postMessagesClient: PostMessagesClient;
+
   private savedMethods?: SavedMethod[];
 
   private get listRef(): HTMLElement {
@@ -21,11 +26,45 @@ export class SavedMethodsComponent extends WebComponentAbstract {
     return this.getAttribute(SavedMethodsAttributes.notFound) ?? '';
   }
 
+  private get deleteMode(): string {
+    return this.getAttribute(SavedMethodsAttributes.deleteMode) ?? '';
+  }
+
   public constructor() {
     super();
 
     this.headlessCheckoutSpy = container.resolve(HeadlessCheckoutSpy);
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.window = container.resolve(Window);
+    this.postMessagesClient = container.resolve(PostMessagesClient);
+  }
+
+  public static get observedAttributes(): string[] {
+    return [SavedMethodsAttributes.deleteMode];
+  }
+
+  protected attributeChangedCallback(
+    name: string,
+    oldValue: string,
+    newValue: string,
+  ): void {
+    if (
+      !this.headlessCheckoutSpy.appWasInit ||
+      name !== SavedMethodsAttributes.deleteMode
+    ) {
+      return;
+    }
+    if (this.isDeleteMode(newValue)) {
+      const savedMethodLinks = this.querySelectorAll('.saved-method a');
+
+      savedMethodLinks.forEach((el) => {
+        el.appendChild(this.createDeleteButton());
+      });
+
+      return;
+    }
+
+    this.removeAllDeleteButton();
   }
 
   protected connectedCallback(): void {
@@ -52,7 +91,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   }
 
   private readonly savedMethodsLoadedHandler = (
-    savedMethods: SavedMethod[]
+    savedMethods: SavedMethod[],
   ): void => {
     this.savedMethods = savedMethods;
 
@@ -62,7 +101,9 @@ export class SavedMethodsComponent extends WebComponentAbstract {
 
   private getMethodsHtml(): string[] | null {
     if (this.savedMethods?.length) {
-      return this.savedMethods.map((method) => getSavedMethodTemplate(method));
+      return this.savedMethods.map((method) =>
+        getSavedMethodTemplate(method, this.isDeleteMode(this.deleteMode)),
+      );
     }
 
     return null;
@@ -71,7 +112,16 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   private listenClicks(): void {
     this.addEventListenerToElement(this.listRef, 'click', (event) => {
       event.preventDefault();
-      if (event.target instanceof HTMLElement) {
+
+      if (event.target instanceof HTMLButtonElement) {
+        this.deleteButtonClick(event.target);
+        return;
+      }
+
+      if (
+        event.target instanceof HTMLElement &&
+        !this.isDeleteMode(this.deleteMode)
+      ) {
         this.dispatchSelectionEvent(event.target);
       }
     });
@@ -87,13 +137,28 @@ export class SavedMethodsComponent extends WebComponentAbstract {
     };
 
     this.listRef.dispatchEvent(
-      new CustomEvent(SavedMethodsEvents.savedMethodSelected, eventOptions)
+      new CustomEvent(EventName.savedMethodSelected, eventOptions),
+    );
+  }
+
+  private dispatchDeleteMethodStatus(isDeleteSuccessful: boolean): void {
+    const eventOptions = {
+      bubbles: true,
+      composed: true,
+      detail: {
+        isDeleteSuccessful,
+      },
+    };
+
+    this.listRef.dispatchEvent(
+      new CustomEvent(EventName.deletedSavedMethodStatus, eventOptions),
     );
   }
 
   private getSavedMethodData(target: HTMLElement): {
     paymentMethodId: string | null | undefined;
     savedMethodId: string | null | undefined;
+    type: string | null | undefined;
   } {
     return {
       paymentMethodId: target
@@ -102,6 +167,53 @@ export class SavedMethodsComponent extends WebComponentAbstract {
       savedMethodId: target
         .closest('li')
         ?.getAttribute(SavedMethodAttributes.savedMethodId),
+      type: target.closest('li')?.getAttribute(SavedMethodAttributes.type),
     };
+  }
+
+  private removeAllDeleteButton(): void {
+    const buttons = this.querySelectorAll('.psdk-delete-saved-method-button');
+
+    for (const button of buttons) {
+      button.remove();
+    }
+  }
+
+  private deleteButtonClick(target: HTMLButtonElement): void {
+    const savedMethodData = this.getSavedMethodData(target);
+    void this.postMessagesClient
+      .send(
+        {
+          name: EventName.deleteSavedMethod,
+          data: { ...savedMethodData },
+        },
+        deleteSavedMethodHandler,
+      )
+      .then((isDeleteSuccessful) => {
+        this.dispatchDeleteMethodStatus(isDeleteSuccessful as boolean);
+
+        if (isDeleteSuccessful) {
+          this.removeSavedMethodFromList(savedMethodData.savedMethodId!);
+        }
+      });
+  }
+
+  private removeSavedMethodFromList(savedMethodId: string): void {
+    this.querySelector(
+      `li[${SavedMethodAttributes.savedMethodId}="${savedMethodId}"]`,
+    )?.remove();
+  }
+
+  private createDeleteButton(): HTMLButtonElement {
+    const button = this.window.document.createElement('button');
+    button.className = 'psdk-delete-saved-method-button';
+    button.textContent = 'delete';
+    button.style.cursor = 'pointer';
+
+    return button;
+  }
+
+  private isDeleteMode(attributeValue: string): boolean {
+    return attributeValue === 'true';
   }
 }

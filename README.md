@@ -161,15 +161,14 @@ declare const headlessCheckout: {
 ### Regular components
 
 | **Component**         | **Selector**               | **Status** |
-| --------------------- | -------------------------- | ---------- |
+| --------------------- |----------------------------| ---------- |
 | Payment Methods       | psdk-payment-methods       | ✅         |
 | Saved Methods         | psdk-saved-methods         | ✅         |
 | Payment Form Messages | psdk-payment-form-messages | ✅         |
 | Checkbox              | psdk-checkbox              | ✅         |
 | Select                | psdk-select                | ✅         |
-| Apple Pay Button      | ❔                         | 🕑         |
-| Google Pay Button     | ❔                         | 🕑         |
-| Delete Account Button | ❔                         | 🕑         |
+| Apple Pay Button      | ❔                          | 🕑         |
+| Google Pay Button     | ❔                          | 🕑         |
 | Submit Button         | psdk-submit-button         | ✅         |
 | User Balance          | psdk-user-balance          | ✅         |
 | Finance Details       | psdk-finance-details       | ✅         |

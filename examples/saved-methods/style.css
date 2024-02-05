@@ -1,0 +1,12 @@
+.saved-method > a {
+    display: flex;
+    align-items: center;
+}
+
+.psdk-delete-saved-method-button {
+    margin-left: 8px;
+}
+
+ul {
+    list-style-type: none;
+}

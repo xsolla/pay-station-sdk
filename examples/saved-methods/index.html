@@ -1,91 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <!--
-  Link the SDK bundle.
-  NOTE: In this example, we use a local build just for convenience purposes.
-  -->
-    <script src="../../dist/main.js"></script>
-  </head>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta
+    name='viewport'
+    content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'
+  />
+  <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+  <title>Document</title>
+  <!--
+Link the SDK bundle.
+NOTE: In this example, we use a local build just for convenience purposes.
+-->
+  <script src='../../dist/main.js'></script>
+  <link rel='stylesheet' href='style.css' />
+</head>
 
-  <body>
-    <h1>Pay Station SDK</h1>
+<body>
+<h1>Pay Station SDK</h1>
 
-    <!--
+<!--
 Define a specific Saved methods component in the HTML markup, e.g., `psdk-saved-methods`.
 The `country` attribute indicates the country for which the saved methods are being loaded.
 -->
-    <psdk-saved-methods not-found="Methods not found"></psdk-saved-methods>
+<psdk-saved-methods not-found='Methods not found'></psdk-saved-methods>
+<button id='edit-saved-methods'>toggle edit saved methods</button>
 
-    <!-- Initialization script -->
-    <script>
-      if (typeof PayStationSdk === 'undefined') {
-        alert(`
+<!-- Initialization script -->
+<script>
+  if (typeof PayStationSdk === 'undefined') {
+    alert(`
 It seems SDK library is undefined.
 Please, link CDN source or create local build (recommended to test purposes only).
         `);
-        throw new Error('PayStationSdk not found');
+    throw new Error('PayStationSdk not found');
+  }
+  /**
+   * To learn more about creating tokens,
+   * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+   */
+  const accessToken = '';
+
+  if (!accessToken) {
+    alert(`No token provided. Please, check the documentation`);
+    throw new Error('No token provided');
+  }
+
+  async function initPayStationSdk() {
+    /**
+     * The SDK is available under the PayStationSdk namespace.
+     * To begin initialization, obtain a reference to the headlessCheckout object.
+     */
+    const { headlessCheckout } = PayStationSdk;
+
+    /**
+     * Call the `init()` method with the provided environment object.
+     * The isWebView parameter is required and indicates whether your
+     * integration type is a webview or not.
+     * Please note that this command executes asynchronously.
+     */
+    await headlessCheckout.init({
+      isWebView: false,
+      sandbox: true
+    });
+
+    /**
+     * After the Payments SDK has been initialized, the next step is setting the token.
+     * To learn more about creating tokens,
+     * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+     */
+    await headlessCheckout.setToken(accessToken);
+
+    /**
+     * To gain more control over Pay Station components,
+     * you can access them as regular HTML elements.
+     */
+    const savedMethods = document.querySelector('psdk-saved-methods');
+
+    /**
+     * To add extra logic to a component, you can subscribe to
+     * its events and place your code in a callback function.
+     */
+    savedMethods.addEventListener('savedMethodSelected', (event) => {
+      console.log(event.detail);
+    });
+
+    savedMethods.addEventListener('deletedSavedMethodStatus', (event) => {
+      console.log(event.detail);
+    });
+
+    const button = document.querySelector('#edit-saved-methods');
+    button.addEventListener('click', () => {
+      if (savedMethods.getAttribute('delete-mode')) {
+        savedMethods.removeAttribute('delete-mode');
+        return;
       }
-      /**
-       * To learn more about creating tokens,
-       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
-       */
-      const accessToken = '';
 
-      if (!accessToken) {
-        alert(`No token provided. Please, check the documentation`);
-        throw new Error('No token provided');
-      }
+      savedMethods.setAttribute('delete-mode', 'true');
+    });
+  }
 
-      async function initPayStationSdk() {
-        /**
-         * The SDK is available under the PayStationSdk namespace.
-         * To begin initialization, obtain a reference to the headlessCheckout object.
-         */
-        const { headlessCheckout } = PayStationSdk;
-
-        /**
-         * Call the `init()` method with the provided environment object.
-         * The isWebView parameter is required and indicates whether your
-         * integration type is a webview or not.
-         * Please note that this command executes asynchronously.
-         */
-        await headlessCheckout.init({
-          isWebView: false,
-          sandbox: false,
-        });
-
-        /**
-         * After the Payments SDK has been initialized, the next step is setting the token.
-         * To learn more about creating tokens,
-         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
-         */
-        await headlessCheckout.setToken(accessToken);
-
-        /**
-         * To gain more control over Pay Station components,
-         * you can access them as regular HTML elements.
-         */
-        const savedMethods = document.querySelector('psdk-saved-methods');
-
-        /**
-         * To add extra logic to a component, you can subscribe to
-         * its events and place your code in a callback function.
-         */
-        savedMethods.addEventListener('savedMethodSelected', (event) => {
-          console.log(event.detail);
-        });
-      }
-
-      // run initialization script
-      initPayStationSdk();
-    </script>
-  </body>
+  // run initialization script
+  initPayStationSdk();
+</script>
+</body>
 </html>
