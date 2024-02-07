@@ -10,7 +10,7 @@
          "finance-details-sales-tax-including" : "Inklusive Sales Tax",
          "finance-details-sales-tax-percent" : "{{percent}} % Umsatzsteuer",
          "finance-details-subtotal-details-discount" : "Rabatt",
-         "finance-details-subtotal-details-fee" : "",
+         "finance-details-subtotal-details-fee" : "Zahlungssystemgebühr",
          "finance-details-subtotal-details-user-balance" : "Guthaben",
          "finance-details-subtotal-title" : "Zwischensumme",
          "finance-details-total-title" : "Summe",
