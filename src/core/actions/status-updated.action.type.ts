@@ -1,5 +1,6 @@
 import { Action } from './action.interface';
 import { StatusEnum } from '../status/status.enum';
+import { SavePaymentMethodStatus } from './save-payment-method-status.enum';
 
 export type StatusUpdatedActionType = 'status_updated';
 
@@ -9,6 +10,8 @@ export interface StatusUpdatedActionData {
   isCanceled?: boolean;
   isSuccess?: boolean;
   invoice?: number;
+  isSavePaymentMethodMode?: boolean;
+  savePaymentMethodStatus?: SavePaymentMethodStatus;
 }
 
 export type StatusUpdatedAction = Action<
