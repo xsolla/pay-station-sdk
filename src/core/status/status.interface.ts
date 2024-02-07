@@ -58,4 +58,5 @@ export interface Status {
       user_vat?: boolean;
     };
   };
+  isSavePaymentAccount?: boolean;
 }

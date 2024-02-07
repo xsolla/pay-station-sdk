@@ -11,6 +11,7 @@ import { HeadlessCheckout } from '../../headless-checkout';
 import { getStatusComponentTemplate } from './status.component.template';
 import { StatusComponentConfig } from './status.component.config.interface';
 import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
+import { StatusState } from './status-state.enum';
 
 export class StatusComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -56,7 +57,7 @@ export class StatusComponent extends WebComponentAbstract {
   }
 
   private statusLoadedHandler(
-    statusConfig: StatusComponentConfig | null,
+    statusConfig: StatusComponentConfig | null
   ): void {
     this.statusConfig = statusConfig;
 
@@ -67,7 +68,6 @@ export class StatusComponent extends WebComponentAbstract {
     const status = await this.headlessCheckout.getStatus();
 
     const statusConfig = this.getStatusConfig(status);
-
     this.statusLoadedHandler(statusConfig);
   }
 
@@ -76,20 +76,57 @@ export class StatusComponent extends WebComponentAbstract {
       return null;
     }
 
+    const statusState = this.getStatusState(status);
+
+    if (!statusState) {
+      return null;
+    }
+
+    if (status.isSavePaymentAccount) {
+      return this.getSavingMethodStatusConfig(statusState);
+    }
+    return this.getPaymentStatusConfig(statusState, status);
+  }
+
+  private getStatusState(status: Status): StatusState | null {
     const isProcessing = [
       StatusEnum.processing,
       StatusEnum.created,
       StatusEnum.held,
     ].includes(status.statusState);
+    if (isProcessing) {
+      return StatusState.isProcessing;
+    }
+
     const isCanceled =
       status.statusState === StatusEnum.canceled || status.isCancelUser;
+
+    if (isCanceled) {
+      return StatusState.isCanceled;
+    }
+
     const isError = status.statusState === StatusEnum.error;
+
+    if (isError) {
+      return StatusState.isError;
+    }
+
     const isSuccess =
-      status.statusState === StatusEnum.done ??
+      status.statusState === StatusEnum.done ||
       status.statusState === StatusEnum.authorized;
 
+    if (isSuccess) {
+      return StatusState.isSuccess;
+    }
+    return null;
+  }
+
+  private getPaymentStatusConfig(
+    statusState: StatusState,
+    status: Status
+  ): StatusComponentConfig | null {
     // check cancel before processing since canceled invoice has status state "created"
-    if (isCanceled) {
+    if (statusState === StatusState.isCanceled) {
       return {
         image: failedImage,
         title: i18next.t('status.error.title'),
@@ -98,7 +135,7 @@ export class StatusComponent extends WebComponentAbstract {
       };
     }
 
-    if (isProcessing) {
+    if (statusState === StatusState.isProcessing) {
       return {
         image: null,
         title: i18next.t('status.processing.title'),
@@ -107,7 +144,7 @@ export class StatusComponent extends WebComponentAbstract {
       };
     }
 
-    if (isError) {
+    if (statusState === StatusState.isError) {
       return {
         image: failedImage,
         title: i18next.t('status.error.title'),
@@ -116,7 +153,7 @@ export class StatusComponent extends WebComponentAbstract {
       };
     }
 
-    if (isSuccess) {
+    if (statusState === StatusState.isSuccess) {
       return {
         image: successImage,
         title: i18next.t('status.success.title'),
@@ -124,6 +161,52 @@ export class StatusComponent extends WebComponentAbstract {
           email: status.email,
         }),
         showDescription: !!status.email,
+      };
+    }
+
+    return null;
+  }
+
+  private getSavingMethodStatusConfig(
+    statusState: StatusState
+  ): StatusComponentConfig | null {
+    if (statusState === StatusState.isCanceled) {
+      return {
+        image: failedImage,
+        title: i18next.t('saving-status.error.title'),
+        description: '',
+        showDescription: false,
+        isSavePaymentAccount: true,
+      };
+    }
+
+    if (statusState === StatusState.isProcessing) {
+      return {
+        image: null,
+        title: i18next.t('saving-status.processing.title'),
+        description: i18next.t('saving-status.processing.description'),
+        showDescription: true,
+        isSavePaymentAccount: true,
+      };
+    }
+
+    if (statusState === StatusState.isError) {
+      return {
+        image: failedImage,
+        title: i18next.t('saving-status.error.title'),
+        description: '',
+        showDescription: false,
+        isSavePaymentAccount: true,
+      };
+    }
+
+    if (statusState === StatusState.isSuccess) {
+      return {
+        image: successImage,
+        title: i18next.t('saving-status.success.title'),
+        description: '',
+        showDescription: false,
+        isSavePaymentAccount: true,
       };
     }
 

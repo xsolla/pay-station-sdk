@@ -4,4 +4,5 @@ export interface FormConfiguration {
   country?: string;
   paymentWithSavedMethod?: boolean;
   savedMethodId?: number;
+  savePaymentMethod?: boolean;
 }

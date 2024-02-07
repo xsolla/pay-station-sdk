@@ -28,6 +28,10 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
     return this.getAttribute(PaymentMethodsAttributes.searchPlaceholder) ?? '';
   }
 
+  private get isSaveMethodMode(): boolean {
+    return !!this.getAttribute(PaymentMethodsAttributes.saveMethodMode);
+  }
+
   public constructor() {
     super();
 
@@ -68,7 +72,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
     const country =
       this.getAttribute(PaymentMethodsAttributes.country) ?? undefined;
     void this.headlessCheckout
-      .getRegularMethods(country)
+      .getRegularMethods({ country, isSaveMethodMode: this.isSaveMethodMode })
       .then(this.paymentMethodsLoadedHandler);
   }
 
