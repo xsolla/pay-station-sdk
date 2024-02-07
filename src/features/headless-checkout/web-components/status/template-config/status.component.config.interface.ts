@@ -3,4 +3,5 @@ export interface StatusComponentConfig {
   image: string | null;
   description: string;
   showDescription: boolean;
+  isSavePaymentAccount?: boolean;
 }

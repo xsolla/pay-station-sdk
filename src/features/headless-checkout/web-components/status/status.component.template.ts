@@ -1,4 +1,4 @@
-import { StatusComponentConfig } from './status.component.config.interface';
+import { StatusComponentConfig } from './template-config/status.component.config.interface';
 
 export const getStatusComponentTemplate = (
   statusConfig: StatusComponentConfig
@@ -13,11 +13,11 @@ export const getStatusComponentTemplate = (
     </div>`
         : ''
     }
-    
+
     <div class="title">
       <h2 class="title-text">${statusConfig.title}</h2>
     </div>
-    
+
     ${
       statusConfig.showDescription
         ? `<p class="description">${statusConfig.description}</p>`
