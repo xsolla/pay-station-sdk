@@ -10,7 +10,7 @@ import { PostMessagesClient } from '../../../../core/post-messages-client/post-m
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.PaymentFormComponent,
+    WebComponentTagName.PaymentFormComponent
   );
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
@@ -29,7 +29,7 @@ const getTextInputElements = (names: string[]): NodeListOf<Element> => {
   const mockContainer = document.createElement('div');
   for (const name of names) {
     const mockElement = document.createElement(
-      WebComponentTagName.TextComponent,
+      WebComponentTagName.TextComponent
     );
     mockElement.setAttribute('name', name);
     mockContainer.appendChild(mockElement);
@@ -47,7 +47,7 @@ describe('PaymentFormComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.PaymentFormComponent,
-    PaymentFormComponent,
+    PaymentFormComponent
   );
 
   beforeEach(() => {
@@ -56,6 +56,7 @@ describe('PaymentFormComponent', () => {
     headlessCheckout = {
       events: {
         send: noopStub,
+        onCoreEvent: noopStub,
       },
       form: {
         onFieldsStatusChange: noopStub,
@@ -109,7 +110,7 @@ describe('PaymentFormComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.PaymentFormComponent),
+      document.querySelector(WebComponentTagName.PaymentFormComponent)
     ).toBeDefined();
   });
 
@@ -139,7 +140,7 @@ describe('PaymentFormComponent', () => {
 
     const textInputElements = getTextInputElements(['zip']);
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements,
+      textInputElements
     );
 
     const spy = spyOn(paymentFormFieldsManager, 'createMissedFields');
@@ -164,7 +165,7 @@ describe('PaymentFormComponent', () => {
 
     const textInputElements = getTextInputElements(['zip', 'zip']);
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements,
+      textInputElements
     );
 
     const spy = spyOn(paymentFormFieldsManager, 'removeExtraFields');

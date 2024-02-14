@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { isLoadingCssClassName } from '../../shared/loading-state/is-loading-css-class-name.const';
+import { createFinishLoadingEvent } from '../../shared/loading-state/dispatch-finish-loading-event.function';
 
 export abstract class WebComponentAbstract extends HTMLElement {
   protected eventListeners: Array<{
@@ -20,7 +22,7 @@ export abstract class WebComponentAbstract extends HTMLElement {
   protected addEventListenerToElement(
     element: Element,
     eventType: string,
-    listener: (event: Event) => void,
+    listener: (event: Event) => void
   ): void {
     element.addEventListener(eventType, listener);
     this.eventListeners.push({ element, eventType, listener });
@@ -44,7 +46,7 @@ export abstract class WebComponentAbstract extends HTMLElement {
   protected attributeChangedCallback(
     name?: string,
     oldValue?: string,
-    newValue?: string,
+    newValue?: string
   ): void {
     this.render();
   }
@@ -71,5 +73,18 @@ export abstract class WebComponentAbstract extends HTMLElement {
     } catch (err: unknown) {
       return null;
     }
+  }
+
+  protected startLoadingComponentHandler(): void {
+    this.classList.add(isLoadingCssClassName);
+  }
+
+  protected finishLoadingComponentHandler(componentName: string): void {
+    this.classList.remove(isLoadingCssClassName);
+    this.dispatchFinishLoadingEvent(componentName);
+  }
+
+  protected dispatchFinishLoadingEvent(componentName: string): void {
+    this.dispatchEvent(createFinishLoadingEvent(componentName));
   }
 }

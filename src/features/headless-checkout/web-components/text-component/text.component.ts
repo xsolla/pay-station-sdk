@@ -12,6 +12,7 @@ import { HeadlessCheckout } from '../../headless-checkout';
 import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
 import { TextComponentConfig } from './text-component.config.interface';
 import { FieldStatus } from '../../../../core/form/field-status.interface';
+import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
 
 export class TextComponent extends SecureComponentAbstract {
   protected config?: TextComponentConfig;
@@ -21,6 +22,7 @@ export class TextComponent extends SecureComponentAbstract {
 
   private readonly headlessCheckout: HeadlessCheckout;
   private isListeningFieldStatusChange = false;
+  private inputName?: string | null;
 
   public constructor() {
     super();
@@ -28,6 +30,16 @@ export class TextComponent extends SecureComponentAbstract {
     this.postMessagesClient = container.resolve(PostMessagesClient);
     this.window = container.resolve(Window);
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+
+    this.headlessCheckout.events.onCoreEvent(
+      EventName.finishLoadComponent,
+      finishLoadComponentHandler,
+      (res) => {
+        if (res?.fieldName && res?.fieldName === this.inputName) {
+          this.finishLoadingComponentHandler(this.inputName);
+        }
+      }
+    );
   }
 
   public static get observedAttributes(): string[] {
@@ -35,6 +47,8 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected connectedCallback(): void {
+    this.startLoadingComponentHandler();
+
     if (!this.formSpy.formWasInit) {
       this.formSpy.listenFormInit(() => this.getConfigFromInputName());
       return;
@@ -44,7 +58,7 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected async getControlComponentConfig(
-    inputName: string,
+    inputName: string
   ): Promise<TextComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getControlComponentConfig,
@@ -59,13 +73,13 @@ export class TextComponent extends SecureComponentAbstract {
         return getControlComponentConfigHandler(message, (controlName) => {
           return msg.data?.inputName === controlName;
         });
-      },
+      }
     ) as Promise<TextComponentConfig>;
   }
 
   protected readonly configLoadedHandler = (
     config: TextComponentConfig,
-    componentName: string,
+    componentName: string
   ): void => {
     this.config = config;
     this.componentName = componentName;
@@ -87,16 +101,15 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   private getConfigFromInputName(): void {
-    const inputName = this.getAttribute(TextComponentAttributes.name);
-
-    if (!inputName) {
+    this.inputName = this.getAttribute(TextComponentAttributes.name);
+    if (!this.inputName) {
       return;
     }
 
-    this.listenFieldStatusChange(inputName);
+    this.listenFieldStatusChange(this.inputName);
 
-    void this.getControlComponentConfig(inputName).then((config) => {
-      this.configLoadedHandler(config, `text-input/${inputName}`);
+    void this.getControlComponentConfig(this.inputName).then((config) => {
+      this.configLoadedHandler(config, `text-input/${this.inputName!}`);
     });
   }
 

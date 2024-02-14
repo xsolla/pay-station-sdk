@@ -6,6 +6,7 @@ import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { TextComponent } from './text.component';
 import { FormFieldsStatus } from '../../../../core/form/form-fields-status.interface';
+import { isLoadingCssClassName } from '../../../../shared/loading-state/is-loading-css-class-name.const';
 
 const fieldName = 'zip';
 
@@ -60,7 +61,7 @@ describe('TextComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.TextComponent,
-    TextComponent,
+    TextComponent
   );
 
   beforeEach(() => {
@@ -73,6 +74,9 @@ describe('TextComponent', () => {
     headlessCheckout = {
       form: {
         onFieldsStatusChange: noopStub,
+      },
+      events: {
+        onCoreEvent: noopStub,
       },
     } as unknown as HeadlessCheckout;
 
@@ -125,7 +129,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();
@@ -147,7 +151,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();
@@ -169,7 +173,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();
@@ -191,7 +195,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
-      },
+      }
     );
 
     element = createComponent();
@@ -205,5 +209,41 @@ describe('TextComponent', () => {
 
       done();
     });
+  });
+
+  it('Should add loading css class', () => {
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
+    spyOn(postMessagesClient, 'send').and.resolveTo({
+      name: fieldName,
+    });
+
+    const element = createComponent();
+    expect(element.classList).toContain(isLoadingCssClassName);
+  });
+
+  it('Should remove loading css class', (done) => {
+    // eslint-disable-next-line prefer-const
+    let element: HTMLElement;
+    let callback: (value?: unknown) => void = noopStub;
+    spyOn(headlessCheckout.events, 'onCoreEvent').and.callFake((...args) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      callback = args[2];
+
+      setTimeout(() => {
+        callback({ fieldName });
+        expect(element?.classList).not.toContain(isLoadingCssClassName);
+
+        done();
+      });
+      return noopStub;
+    });
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
+    spyOn(postMessagesClient, 'send').and.resolveTo({
+      name: fieldName,
+    });
+
+    element = createComponent();
+    expect(element.classList).toContain(isLoadingCssClassName);
   });
 });
