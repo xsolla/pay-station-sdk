@@ -26,4 +26,5 @@ export const enum EventName {
   deleteSavedMethod = 'deleteSavedMethod',
   deletedSavedMethodStatus = 'deletedSavedMethodStatus',
   finishLoadComponent = 'finishLoadComponent',
+  getFormStatus = 'getFormStatus',
 }
