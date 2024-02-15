@@ -25,4 +25,5 @@ export const enum EventName {
   savedMethodSelected = 'savedMethodSelected',
   deleteSavedMethod = 'deleteSavedMethod',
   deletedSavedMethodStatus = 'deletedSavedMethodStatus',
+  finishLoadComponent = 'finishLoadComponent',
 }

@@ -44,6 +44,8 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   }
 
   protected connectedCallback(): void {
+    this.startLoadingComponentHandler();
+
     if (!this.headlessCheckoutSpy.appWasInit) {
       this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
       return;
@@ -86,6 +88,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
     this.filteredMethods = this.visibleMethods.slice();
 
     super.render();
+    this.finishLoadingComponentHandler('payment-methods');
     this.listenClicks();
     this.setupSearch();
   };
