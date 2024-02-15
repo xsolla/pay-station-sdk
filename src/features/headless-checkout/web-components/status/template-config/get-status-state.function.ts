@@ -3,6 +3,13 @@ import { StatusState } from './status-state.enum';
 import { StatusEnum } from '../../../../../core/status/status.enum';
 
 export function getStatusState(status: Status): StatusState | null {
+  const isCanceled =
+    status.statusState === StatusEnum.canceled || status.isCancelUser;
+
+  if (isCanceled) {
+    return StatusState.isCanceled;
+  }
+
   const isProcessing = [
     StatusEnum.processing,
     StatusEnum.created,
@@ -10,13 +17,6 @@ export function getStatusState(status: Status): StatusState | null {
   ].includes(status.statusState);
   if (isProcessing) {
     return StatusState.isProcessing;
-  }
-
-  const isCanceled =
-    status.statusState === StatusEnum.canceled || status.isCancelUser;
-
-  if (isCanceled) {
-    return StatusState.isCanceled;
   }
 
   const isError = status.statusState === StatusEnum.error;

@@ -46,16 +46,13 @@ export class PriceTextComponent extends WebComponentAbstract {
 
   private readAttributes(): void {
     this.priceLineContent = this.getAttribute(
-      PriceTextAttributes.priceLineContent
-    );
-    this.priceLineContent = this.getAttribute(
-      PriceTextAttributes.priceLineContent
+      PriceTextAttributes.priceLineContent,
     );
     this.priceLineAmount = this.getNumberAttribute(
-      PriceTextAttributes.priceLineAmount
+      PriceTextAttributes.priceLineAmount,
     );
     this.priceLineCurrency = this.getAttribute(
-      PriceTextAttributes.priceLineCurrency
+      PriceTextAttributes.priceLineCurrency,
     );
     this.amount = this.getNumberAttribute(PriceTextAttributes.amount);
     this.currency = this.getAttribute(PriceTextAttributes.currency);

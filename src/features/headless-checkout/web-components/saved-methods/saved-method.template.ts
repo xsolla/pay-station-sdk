@@ -28,7 +28,6 @@ export const getSavedMethodTemplate = (
       <span class='icon'>
         <img src='${iconsPath}/${iconName}' alt='${method.name}'>
       </span>
-        <span class='payment-method-name'>${method.psName}</span>
         <span class='name'>${name}</span>
         ${expireDate ? `<span class='expire-date'>${expireDate}</span>` : ''}
         ${

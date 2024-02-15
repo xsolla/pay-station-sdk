@@ -10,9 +10,9 @@ export class CurrencyPipe implements PipeTransform {
 
   public transform(
     value: number | string | null,
-    currencyCode?: string
+    currencyCode?: string,
   ): string | null {
-    if (!value || !currencyCode) {
+    if (!value?.toString() || !currencyCode) {
       return null;
     }
 
@@ -34,7 +34,7 @@ export class CurrencyPipe implements PipeTransform {
 
   private formatCurrency(
     value: number | string,
-    currencyCode: string
+    currencyCode: string,
   ): string | null {
     const currencyConfig = this.getCurrencyConfig(currencyCode);
 
@@ -46,7 +46,7 @@ export class CurrencyPipe implements PipeTransform {
       value,
       1,
       currencyConfig.fractionSize,
-      currencyConfig.fractionSize
+      currencyConfig.fractionSize,
     );
 
     if (!amount) {
@@ -62,7 +62,7 @@ export class CurrencyPipe implements PipeTransform {
 
   private formatCurrencyWithNoConfig(
     value: number | string,
-    currencyCode: string
+    currencyCode: string,
   ): string | null {
     const amount = this.decimalPipe.transform(value, 1, 2, 2);
 
