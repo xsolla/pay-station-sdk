@@ -63,6 +63,7 @@ export class SubmitButtonComponent extends WebComponentAbstract {
             this.render();
           }
         });
+
         void this.postMessagesClient.send(
           { name: EventName.submitForm },
           submitButtonHandler,
