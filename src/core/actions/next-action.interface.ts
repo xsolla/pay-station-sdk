@@ -4,6 +4,7 @@ import { ShowErrorsAction } from './show-errors.action.type';
 import { ShowFieldsAction } from './show-fields.action.type';
 import { StatusUpdatedAction } from './status-updated.action.type';
 import { ThreeDsAction } from './three-ds/three-ds.action.type';
+import { SpecialButtonAction } from './special-button.action.type';
 
 export type NextAction =
   | CheckStatusAction
@@ -11,4 +12,5 @@ export type NextAction =
   | StatusUpdatedAction
   | ShowErrorsAction
   | RedirectAction
-  | ThreeDsAction;
+  | ThreeDsAction
+  | SpecialButtonAction;
