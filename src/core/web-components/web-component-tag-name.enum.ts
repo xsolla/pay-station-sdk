@@ -15,4 +15,5 @@ export enum WebComponentTagName {
   CheckboxComponent = 'psdk-checkbox',
   UserBalanceComponent = 'psdk-user-balance',
   PaymentFormMessages = 'psdk-payment-form-messages',
+  GooglePayButtonComponent = 'psdk-google-pay-button',
 }
