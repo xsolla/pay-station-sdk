@@ -16,6 +16,7 @@ import { SavedMethodsComponent } from '../../features/headless-checkout/web-comp
 import { UserBalanceComponent } from '../../features/headless-checkout/web-components/user-balance-component/user-balance-component';
 import { PaymentFormMessagesComponent } from '../../features/headless-checkout/web-components/payment-form-messages/payment-form-messages.component';
 import { GooglePayButtonComponent } from '../../features/headless-checkout/web-components/pages/google-pay/google-pay-button.component';
+import { ApplePayComponent } from '../../features/headless-checkout/web-components/apple-pay/apple-pay.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -37,4 +38,5 @@ export const webComponents: {
   [WebComponentTagName.UserBalanceComponent]: UserBalanceComponent,
   [WebComponentTagName.PaymentFormMessages]: PaymentFormMessagesComponent,
   [WebComponentTagName.GooglePayButtonComponent]: GooglePayButtonComponent,
+  [WebComponentTagName.ApplePayComponent]: ApplePayComponent,
 };

@@ -16,4 +16,5 @@ export enum WebComponentTagName {
   UserBalanceComponent = 'psdk-user-balance',
   PaymentFormMessages = 'psdk-payment-form-messages',
   GooglePayButtonComponent = 'psdk-google-pay-button',
+  ApplePayComponent = 'psdk-apple-pay',
 }
