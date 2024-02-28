@@ -27,4 +27,5 @@ export const enum EventName {
   deletedSavedMethodStatus = 'deletedSavedMethodStatus',
   finishLoadComponent = 'finishLoadComponent',
   getFormStatus = 'getFormStatus',
+  applePayError = 'applePayError',
 }
