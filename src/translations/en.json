@@ -40,7 +40,9 @@
       "saving-status.processing.title": "Saving payment information",
       "saving-status.processing.description": "Waiting for payment method to save...",
       "saving-status.error.title": "Couldn't save payment method",
-      "saving-status.success.title": "Payment method saved"
+      "saving-status.success.title": "Payment method saved",
+      "apple-pay.errors.payment": "Unable to process your payment. Make sure you’re signed in to Apple on your device and set up Apple Pay before you try again. Changes in Apple settings take a couple of minutes to sync.",
+      "apple-pay.errors.device-is-not-capable": "Apple Pay is available only in Safari browser with installed OS 10.12 Sierra or IOS 10. Please change your browser or select another payment option."
     }
   }
 }
