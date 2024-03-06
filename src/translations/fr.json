@@ -1,6 +1,8 @@
 {
    "fr" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay est disponible uniquement dans le navigateur Safari avec l'OS 10.12 Sierra ou IOS 10 installé. Veuillez changer de navigateur ou sélectionner une autre option de paiement.",
+         "apple-pay.errors.payment" : "Impossible de traiter votre paiement. Vérifiez que vous êtes connecté à Apple sur votre appareil et que vous avez configuré Apple Pay avant de réessayer. La synchronisation des modifications apportées aux paramètres Apple prend quelques minutes.",
          "cookie-policy" : "Politique en matière de cookies",
          "disclaimer" : "Xsolla agit en tant que distributeur officiel de ce contenu. En procédant à l'achat, vous confirmez être un adulte et déclarez avoir lu, compris et accepté les termes du <a href={{link}} target='_blank'>CLUF<\/a>. Vous consentez également à ce que ce contrat entre immédiatement en vigueur et reconnaissez que vous renoncez à tout droit de rétractation dès le début du téléchargement du contenu numérique.",
          "finance-details-cart-items-checkout-title" : "Achat intégré",

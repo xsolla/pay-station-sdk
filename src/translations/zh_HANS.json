@@ -1,6 +1,8 @@
 {
    "zh_HANS" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay只能在OS 10.12 Sierra或IOS 10上的Safari浏览器中使用。请更换浏览器或选择其他支付方式。",
+         "apple-pay.errors.payment" : "无法处理您的支付。请确保已在您的设备上登录Apple并已设置Apple Pay，然后重试。Apple设置的更改可能需要几分钟才能同步。",
          "cookie-policy" : "Cookie政策",
          "disclaimer" : "艾克索拉是此内容的官方分发商。购买即表示您确认您是成年人且已阅读、理解并接受<a href={{link}} target='_blank'>最终用户许可协议<\/a>。您也接受协议立即生效并认可一旦数字内容开始下载，您即丧失任何撤销权。",
          "finance-details-cart-items-checkout-title" : "游戏内购买",

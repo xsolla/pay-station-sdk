@@ -1,6 +1,8 @@
 {
    "tr" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay sadece 10.12 Sierra veya iOS 10 yüklü cihazlarda Safari tarayıcısında kullanılabilir. Lütfen tarayıcınızı değiştirin veya başka bir ödeme yöntemi seçin.",
+         "apple-pay.errors.payment" : "Ödemeniz işleme konulamadı. Tekrar denemeden önce cihazınızda Apple'a giriş yapmış olduğunuzdan emin olun ve Apple Pay'i kurun. Apple ayarlarındaki değişikliklerin senkronize olması birkaç dakika sürer.",
          "cookie-policy" : "Çerez Politikası",
          "disclaimer" : "Xsolla, bu içeriğin resmi dağıtıcısıdır. Satın alarak yetişkin olduğunuzu ve <a href={{link}} target='_blank'>EULA<\/a> belgesini okuduğunuzu, anladığınızı, kabul ettiğinizi beyan etmiş olursunuz. Ayrıca dijital içeriğin indirilmeye başladığı anda bu sözleşmenin yürürlüğe girdiğini ve cayma hakkınızdan feragat ettiğinizi kabul etmiş olursunuz.",
          "finance-details-cart-items-checkout-title" : "Oyun içi satın alma",

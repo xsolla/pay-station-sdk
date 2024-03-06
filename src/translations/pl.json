@@ -1,6 +1,8 @@
 {
    "pl" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Usługa Apple Pay dostępna jest wyłącznie w przeglądarce Safari z zainstalowanym systemem OS 10.12 Sierra lub iOS 10. Zmień przeglądarkę lub wybierz inną metodę płatności.",
+         "apple-pay.errors.payment" : "Nie można przetworzyć Twojej płatności. Upewnij się, że jesteś zalogowany w Apple na swoim urządzeniu i skonfiguruj Apple Pay przed ponowną próbą. Synchronizacja zmian w ustawieniach Apple może potrwać kilka minut.",
          "cookie-policy" : "Polityka plików cookie",
          "disclaimer" : "Xsolla jest oficjalnym dystrybutorem tych treści. Dokonując zakupu potwierdzasz, że jesteś osobą pełnoletnią i przeczytałeś, zrozumiałeś i zaakceptowałeś <a href={{link}} target='_blank'>Umowę licencyjną użytkownika końcowego (EULA)<\/a>. Wyrażasz również zgodę na natychmiastowe wejście w życie postanowień umownych i przyjmujesz do wiadomości, że po rozpoczęciu pobierania treści cyfrowych utracisz prawo odstąpienia od umowy.",
          "finance-details-cart-items-checkout-title" : "Zakup w grze",

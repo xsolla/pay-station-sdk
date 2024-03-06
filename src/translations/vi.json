@@ -1,6 +1,8 @@
 {
    "vi" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay chỉ có thể được sử dụng trên trình duyệt Safari cài đặt với OS 10.12 Sierra hoặc iOS 10. Vui lòng đổi trình duyệt hoặc chọn phương thức thanh toán khác.",
+         "apple-pay.errors.payment" : "Không thể xử lý thanh toán. Hãy đảm bảo bạn đã đăng nhập tài khoản Apple trên thiết bị và thiết lập thanh toán Apple Pay trước khi thử lại. Thay đổi trong thiết lập Apple sẽ mất vài phút để đồng bộ.",
          "cookie-policy" : "Chính sách cookie",
          "disclaimer" : "Xsolla là nhà phân phối chính thức của nội dung này. Bằng việc mua hàng, bạn xác nhận mình là người trưởng thành, đồng thời đã đọc, hiểu và chấp nhận <a href={{link}} target='_blank'>Thỏa thuận dành cho người dùng cuối (EULA)<\/a> của chúng tôi. Ngoài ra, bạn chấp nhận việc thỏa thuận sẽ có hiệu lực tức thị và xác nhận sẽ mất quyền rút lại quyết định ngay khi bắt đầu tải xuống nội dung số này.",
          "finance-details-cart-items-checkout-title" : "Giao dịch trong trò chơi",

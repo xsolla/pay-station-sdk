@@ -1,6 +1,8 @@
 {
    "cs" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay je k dispozici pouze v prohlížeči Safari s nainstalovaným macOS 10.12 Sierra nebo iOS 10. Změňte prosím prohlížeč nebo vyberte jinou možnost platby.",
+         "apple-pay.errors.payment" : "Platbu nelze zpracovat. Než to zkusíte znovu, ujistěte se, že jste na svém zařízení přihlášeni k účtu Apple a máte nastaveno Apple Pay. Synchronizace změn v nastavení Apple trvá několik minut.",
          "cookie-policy" : "Zásady používání cookies",
          "disclaimer" : "Oficiálním distributorem tohoto obsahu je společnost Xsolla. Nákupem potvrzujete, že jste dospělá osoba a že jste si přečetli smlouvu <a href={{link}} target='_blank'>EULA<\/a>, porozuměli jí a přijali ji. Souhlasíte také s tím, že smlouva nabývá účinnosti okamžitě, a berete na vědomí, že jakmile se digitální obsah začne stahovat, ztrácíte právo na odstoupení od smlouvy.",
          "finance-details-cart-items-checkout-title" : "Nákup ve hře",
