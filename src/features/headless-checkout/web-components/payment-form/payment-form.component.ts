@@ -4,11 +4,13 @@ import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { Field } from '../../../../core/form/field.interface';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { EventName } from '../../../../core/event-name.enum';
-import { getMissedFieldsNames } from './get-missed-fields-names.function';
-import { getInvalidFieldsNames } from './get-invalid-fields-names.function';
+import { getMissedFields } from './get-missed-fields.function';
+import { getInvalidFields } from './get-invalid-fields.function';
 import { PaymentFormFieldsService } from './payment-form-fields.service';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
 import { formControlsTags } from './form-controls-tags.list';
+import { isShowFieldsAction } from '../../../../core/actions/is-show-fields-action.function';
+import { FieldSettings } from './field-settings.interface';
 
 export class PaymentFormComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -38,15 +40,12 @@ export class PaymentFormComponent extends WebComponentAbstract {
 
     super.render();
     if (formExpectedFields) {
-      const expectedFieldsNames = this.getFieldsNames(formExpectedFields);
-      const requriedFieldsNames = this.getFieldsNames(formRequriedFields);
-      const existsControlsNames = this.getExistsControlsNames();
+      const expectedFields = this.getFieldsSettings(formExpectedFields);
+      const requiredFields = this.getFieldsSettings(formRequriedFields);
+      const existsControls = this.getExistsControls();
 
-      this.setupFormFields(
-        expectedFieldsNames,
-        requriedFieldsNames,
-        existsControlsNames,
-      );
+      this.setupFormFields(expectedFields, requiredFields, existsControls);
+      this.listenFormInit();
     }
   }
 
@@ -54,48 +53,51 @@ export class PaymentFormComponent extends WebComponentAbstract {
     return '<div></div>';
   }
 
-  private setupFormFields(
-    expectedFieldsNames: string[],
-    requiredFieldsNames: string[],
-    existsControlsNames: Array<string | null>,
-  ): void {
-    const missedFieldsNames = getMissedFieldsNames(
-      requiredFieldsNames,
-      existsControlsNames,
-    );
-    this.setupMissedFields(missedFieldsNames);
-
-    const invalidFieldsNames = getInvalidFieldsNames(
-      expectedFieldsNames,
-      existsControlsNames,
-    );
-    this.setupInvalidFields(invalidFieldsNames);
+  private listenFormInit(): void {
+    this.headlessCheckout.form.onNextAction((nextAction) => {
+      if (isShowFieldsAction(nextAction)) {
+        this.formSpy.formFields = nextAction.data.fields;
+        this.connectedCallback();
+      }
+    });
   }
 
-  private setupMissedFields(missedFieldsNames: string[]): void {
+  private setupFormFields(
+    expectedFields: FieldSettings[],
+    requiredFields: FieldSettings[],
+    existsControls: FieldSettings[],
+  ): void {
+    const missedFields = getMissedFields(requiredFields, existsControls);
+    this.setupMissedFields(missedFields);
+
+    const invalidFields = getInvalidFields(expectedFields, existsControls);
+    this.setupInvalidFields(invalidFields);
+  }
+
+  private setupMissedFields(missedFields: FieldSettings[]): void {
     this.paymentFormFieldsManager.createMissedFields(
-      missedFieldsNames,
+      missedFields,
       this.elementRef,
     );
-    this.logMissedFields(missedFieldsNames);
+    this.logMissedFields(missedFields);
   }
 
-  private setupInvalidFields(missedFieldsNames: string[]): void {
-    this.paymentFormFieldsManager.removeExtraFields(missedFieldsNames);
+  private setupInvalidFields(missedFields: FieldSettings[]): void {
+    this.paymentFormFieldsManager.removeExtraFields(missedFields);
     this.paymentFormFieldsManager.removeEmptyNameFields();
-    this.logExtraFields(missedFieldsNames);
+    this.logExtraFields(missedFields);
   }
 
   private getRequriedFields(fields: Field[] = []): Field[] {
     return fields.filter((field) => field.isMandatory === '1');
   }
 
-  private getFieldsNames(fields: Field[]): string[] {
-    return fields.map((field) => field.name);
+  private getFieldsSettings(fields: Field[]): FieldSettings[] {
+    return fields.map((field) => ({ name: field.name, type: field.type }));
   }
 
-  private getExistsControlsNames(): Array<string | null> {
-    const existsControlsNames: Array<string | null> = [];
+  private getExistsControls(): FieldSettings[] {
+    const existsControlsNames: FieldSettings[] = [];
 
     formControlsTags.forEach((tag: WebComponentTagName) => {
       const formInputs = this.window.document.querySelectorAll(tag);
@@ -104,21 +106,30 @@ export class PaymentFormComponent extends WebComponentAbstract {
         formInput.getAttribute('name'),
       );
 
-      controlsNames.forEach((name: string | null) =>
-        existsControlsNames.push(name),
-      );
+      controlsNames.forEach((name: string | null) => {
+        const existField = this.formSpy.formFields?.find(
+          (field) => field.name === name,
+        );
+
+        if (existField) {
+          existsControlsNames.push({
+            name: existField.name,
+            type: existField.type,
+          });
+        }
+      });
     });
 
     return existsControlsNames;
   }
 
-  private logMissedFields(missedFieldsNames: string[]): void {
-    if (!missedFieldsNames.length) {
+  private logMissedFields(missedFields: FieldSettings[]): void {
+    if (!missedFields.length) {
       return;
     }
-    const message = `This fields were auto created: [${missedFieldsNames.join(
-      ', ',
-    )}]. They are mandatory for a payment flow`;
+    const message = `This fields were auto created: [${missedFields
+      .map((field) => field.name)
+      .join(', ')}]. They are mandatory for a payment flow`;
     console.warn(message);
     void this.headlessCheckout.events.send<{ message: string }>(
       { name: EventName.warning, data: { message } },
@@ -126,13 +137,13 @@ export class PaymentFormComponent extends WebComponentAbstract {
     );
   }
 
-  private logExtraFields(extraFieldsNames: Array<string | null>): void {
-    if (!extraFieldsNames.length) {
+  private logExtraFields(extraFields: FieldSettings[]): void {
+    if (!extraFields.length) {
       return;
     }
-    const message = `This fields were auto removed: [${extraFieldsNames.join(
-      ', ',
-    )}]. They are useless for a payment flow`;
+    const message = `This fields were auto removed: [${extraFields
+      .map((field) => field.name)
+      .join(', ')}]. They are useless for a payment flow`;
     console.warn(message);
     void this.headlessCheckout.events.send<{ message: string }>(
       { name: EventName.warning, data: { message } },
