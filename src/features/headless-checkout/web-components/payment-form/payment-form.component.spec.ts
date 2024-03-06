@@ -7,10 +7,11 @@ import { PaymentFormFieldsService } from './payment-form-fields.service';
 import { PaymentFormComponent } from './payment-form.component';
 import { Field } from '../../../../core/form/field.interface';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
+import { FieldSettings } from './field-settings.interface';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.PaymentFormComponent
+    WebComponentTagName.PaymentFormComponent,
   );
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
@@ -19,9 +20,11 @@ function createComponent(): void {
 const mockFormFields: Field[] = [
   {
     name: 'zip',
+    type: 'text',
   },
   {
     name: 'card',
+    type: 'text',
   },
 ] as unknown as Field[];
 
@@ -29,7 +32,7 @@ const getTextInputElements = (names: string[]): NodeListOf<Element> => {
   const mockContainer = document.createElement('div');
   for (const name of names) {
     const mockElement = document.createElement(
-      WebComponentTagName.TextComponent
+      WebComponentTagName.TextComponent,
     );
     mockElement.setAttribute('name', name);
     mockContainer.appendChild(mockElement);
@@ -47,7 +50,7 @@ describe('PaymentFormComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.PaymentFormComponent,
-    PaymentFormComponent
+    PaymentFormComponent,
   );
 
   beforeEach(() => {
@@ -60,6 +63,7 @@ describe('PaymentFormComponent', () => {
       },
       form: {
         onFieldsStatusChange: noopStub,
+        onNextAction: noopStub,
       },
     } as unknown as HeadlessCheckout;
 
@@ -110,7 +114,7 @@ describe('PaymentFormComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.PaymentFormComponent)
+      document.querySelector(WebComponentTagName.PaymentFormComponent),
     ).toBeDefined();
   });
 
@@ -140,7 +144,7 @@ describe('PaymentFormComponent', () => {
 
     const textInputElements = getTextInputElements(['zip']);
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements
+      textInputElements,
     );
 
     const spy = spyOn(paymentFormFieldsManager, 'createMissedFields');
@@ -165,23 +169,27 @@ describe('PaymentFormComponent', () => {
 
     const textInputElements = getTextInputElements(['zip', 'zip']);
     spyOn(windowService.document, 'querySelectorAll').and.returnValue(
-      textInputElements
+      textInputElements,
     );
 
     const spy = spyOn(paymentFormFieldsManager, 'removeExtraFields');
     createComponent();
 
+    const zip: FieldSettings = {
+      name: 'zip',
+      type: 'text',
+    };
     // rewrite querySelectorAll mock
     expect(spy).toHaveBeenCalledWith([
-      'zip',
-      'zip',
-      'zip',
-      'zip',
-      'zip',
-      'zip',
-      'zip',
-      'zip',
-      'zip',
+      zip,
+      zip,
+      zip,
+      zip,
+      zip,
+      zip,
+      zip,
+      zip,
+      zip,
     ]);
   });
 });

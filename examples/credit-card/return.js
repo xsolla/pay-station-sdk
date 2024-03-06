@@ -16,7 +16,7 @@ function buildPaymentFlow() {
    * For more information about creating tokens,
    * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
-  const accessToken = '';
+  const accessToken = new URL(window.location.href).searchParams.get('token');
 
   if (!accessToken) {
     alert('No token provided. Please, check the documentation');
@@ -32,7 +32,7 @@ function buildPaymentFlow() {
   async function initPayStationSdk() {
     await headlessCheckout.init({
       isWebView: false,
-      sandbox: false,
+      sandbox: true,
     });
 
     await headlessCheckout.setToken(accessToken);
