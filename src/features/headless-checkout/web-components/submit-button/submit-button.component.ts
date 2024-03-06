@@ -9,6 +9,7 @@ import { submitButtonHandler } from './submit-button.handler';
 import { Message } from '../../../../core/message.interface';
 import { Handler } from '../../../../core/post-messages-client/handler.type';
 import { isSubmitButtonLoadingMessage } from '../../../../core/guards/submit-button-loading-message.guard';
+import { isShowFieldsAction } from '../../../../core/actions/is-show-fields-action.function';
 
 export class SubmitButtonComponent extends WebComponentAbstract {
   private readonly postMessagesClient: PostMessagesClient;
@@ -26,6 +27,11 @@ export class SubmitButtonComponent extends WebComponentAbstract {
 
   public static get observedAttributes(): string[] {
     return [SubmitButtonAttributes.isLoading, SubmitButtonAttributes.text];
+  }
+
+  protected connectedCallback(): void {
+    super.connectedCallback();
+    this.listenFormInit();
   }
 
   protected render(): void {
@@ -79,6 +85,15 @@ export class SubmitButtonComponent extends WebComponentAbstract {
     const isLoading = !!this.getAttribute(SubmitButtonAttributes.isLoading);
 
     return getSubmitButtonTemplate(text, isLoading);
+  }
+
+  private listenFormInit(): void {
+    this.headlessCheckout.form.onNextAction((nextAction) => {
+      if (isShowFieldsAction(nextAction)) {
+        this.removeAttribute(SubmitButtonAttributes.isLoading);
+        this.render();
+      }
+    });
   }
 
   private readonly loadingHandler: Handler<void> = (

@@ -19,7 +19,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
 <body>
 <h1>Pay Station SDK</h1>
 
-<h1>GooglePay payment integration (only https)</h1>
+<h1>Payment Form component integration</h1>
 
 <div id='form-container'></div>
 <div id='status-container'></div>
@@ -46,7 +46,7 @@ Please, link CDN source or create local build (recommended to test purposes only
    * To learn more about creating tokens,
    * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
-  const accessToken = '';
+  const accessToken = '8sogGIVUx5xz1vWhRbYR7E0gUEjgN0er_lc_en';
 
   if (!accessToken) {
     alert('No token provided. Please, check the documentation');
@@ -69,7 +69,7 @@ Please, link CDN source or create local build (recommended to test purposes only
      */
     await headlessCheckout.init({
       isWebView: false,
-      sandbox: false
+      sandbox: true
     });
 
     /**
@@ -84,10 +84,10 @@ Please, link CDN source or create local build (recommended to test purposes only
      * To get lists of payment methods use psdk-payment-methods.
      * Please see `examples/select-method` for more details
      */
-    const googlePayPaymentMethodId = 3431;
+    const paymentMethodId = 1380;
 
-    const form = await headlessCheckout.form.init({
-      paymentMethodId: googlePayPaymentMethodId,
+    await headlessCheckout.form.init({
+      paymentMethodId: paymentMethodId,
       returnUrl:
         'http://localhost:3000/pay-station-sdk/examples/credit-card/return.html'
     });
@@ -108,15 +108,6 @@ Please, link CDN source or create local build (recommended to test purposes only
         const statusComponent = new PayStationSdk.StatusComponent();
         statusContainer.append(statusComponent);
       }
-
-      if (nextAction.type === 'special_button') {
-        formElement.innerHTML = '';
-
-        if (nextAction.data.buttonName === 'google-pay') {
-          const googleButton = new PayStationSdk.GooglePayButtonComponent();
-          formElement.append(googleButton);
-        }
-      }
     });
 
     /**
@@ -124,28 +115,8 @@ Please, link CDN source or create local build (recommended to test purposes only
      */
     const formElement = document.querySelector('#form-container');
 
-    /**
-     * form.fields provide available fields for selected payment method.
-     * You can filter it by `isMandatory` flag to get required fields only
-     */
-    const requiredFields = form.fields.filter(
-      (field) => field.isMandatory === '1'
-    );
-    console.log('Required form fields', requiredFields);
-
-    /**
-     * Render requried fields
-     */
-    requiredFields.forEach((field) => {
-      if (field.type === 'text') {
-        /**
-         * You can use <psdk-text name="field.name"></psdk-text> as well
-         */
-        const input = new PayStationSdk.TextComponent();
-        input.setAttribute('name', field.name);
-        formElement.append(input);
-      }
-    });
+    const paymentForm = new PayStationSdk.PaymentFormComponent();
+    formElement.append(paymentForm);
 
     /**
      * Render submit form button.

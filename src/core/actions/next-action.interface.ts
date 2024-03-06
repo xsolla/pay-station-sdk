@@ -6,6 +6,7 @@ import { StatusUpdatedAction } from './status-updated.action.type';
 import { ThreeDsAction } from './three-ds/three-ds.action.type';
 import { SpecialButtonAction } from './special-button.action.type';
 import { ShowQrCodeAction } from './show-qr-code.action.type';
+import { ShowMobilePaymentScreenAction } from './show-mobile-payment-screen.action.type';
 
 export type NextAction =
   | CheckStatusAction
@@ -15,4 +16,5 @@ export type NextAction =
   | RedirectAction
   | ThreeDsAction
   | SpecialButtonAction
-  | ShowQrCodeAction;
+  | ShowQrCodeAction
+  | ShowMobilePaymentScreenAction;
