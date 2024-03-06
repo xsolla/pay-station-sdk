@@ -4,4 +4,5 @@ export const webComponentsFieldsNamesMap: { [k: string]: WebComponentTagName } =
   {
     phone: WebComponentTagName.PhoneComponent,
     select: WebComponentTagName.SelectComponent,
+    allowSubscription: WebComponentTagName.CheckboxComponent,
   };

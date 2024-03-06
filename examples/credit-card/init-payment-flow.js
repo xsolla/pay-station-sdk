@@ -160,7 +160,7 @@ function buildPaymentFlow() {
      */
     await headlessCheckout.init({
       isWebView: false,
-      sandbox: false,
+      sandbox: true,
     });
 
     /**
@@ -206,7 +206,8 @@ function buildPaymentFlow() {
       /*
        * This return URL means you start the current example on localhost with the 3000 port.
        * */
-      returnUrl: 'http://localhost:3000/return.html',
+      returnUrl:
+        'http://localhost:3000/pay-station-sdk/examples/credit-card/return.html',
     });
 
     /**

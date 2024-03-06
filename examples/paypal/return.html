@@ -40,7 +40,7 @@ Please, link CDN source or create local build (recommended to test purposes only
        * To learn more about creating tokens,
        * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
-      const accessToken = '';
+      const accessToken = new URL(window.location.href).searchParams.get('token');
 
       if (!accessToken) {
         alert('No token provided. Please, check the documentation');
