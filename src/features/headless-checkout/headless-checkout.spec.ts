@@ -8,6 +8,7 @@ import { LocalizeService } from '../../core/i18n/localize.service';
 import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
 import { FormStatus } from '../../core/status/form-status.enum';
 import { noopStub } from '../../tests/stubs/noop.stub';
+import { headlessCheckoutAppUrl } from './environment';
 
 const mockMessage: Message = {
   name: EventName.initPayment,
@@ -19,7 +20,6 @@ const mockHandler: Handler<void> = (): null => {
 };
 
 class MockIframeElement {
-  public src = '';
   public width = '';
   public height = '';
   public style = { border: '' };
@@ -46,6 +46,14 @@ describe('HeadlessCheckout', () => {
 
   beforeEach(() => {
     windowService = window;
+    spyOn(windowService, 'addEventListener').and.callFake(
+      (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
+        (handlerWrapper as (message: MessageEvent) => void)({
+          origin: headlessCheckoutAppUrl,
+          data: JSON.stringify({ name: EventName.isReady }),
+        } as MessageEvent);
+      }
+    );
     postMessagesClient = {
       init: stub,
       send: stub,
@@ -75,9 +83,8 @@ describe('HeadlessCheckout', () => {
     const spy = spyOn(postMessagesClient, 'init');
     spyOn(windowService.document.body, 'appendChild');
     spyOn(windowService.document, 'createElement').and.callFake(
-      () => new MockIframeElement() as unknown as HTMLIFrameElement,
+      () => new MockIframeElement() as unknown as HTMLIFrameElement
     );
-
     await headlessCheckout.init({ isWebview: false });
     expect(spy).toHaveBeenCalled();
   });
@@ -85,7 +92,7 @@ describe('HeadlessCheckout', () => {
   it('Should init localization', () => {
     const localizeSpy = spyOn(
       localizeService,
-      'initDictionaries',
+      'initDictionaries'
     ).and.resolveTo();
 
     void headlessCheckout.init({ isWebview: false });
@@ -104,7 +111,7 @@ describe('HeadlessCheckout', () => {
     headlessCheckout.events.onCoreEvent(
       EventName.initPayment,
       mockHandler,
-      stub,
+      stub
     );
     expect(spy).toHaveBeenCalled();
   });
@@ -113,7 +120,7 @@ describe('HeadlessCheckout', () => {
     const spy = spyOn(postMessagesClient, 'listen');
     spyOn(windowService.document.body, 'appendChild');
     spyOn(windowService.document, 'createElement').and.callFake(
-      () => new MockIframeElement() as unknown as HTMLIFrameElement,
+      () => new MockIframeElement() as unknown as HTMLIFrameElement
     );
 
     await headlessCheckout.init({ isWebview: false });
@@ -145,7 +152,7 @@ describe('HeadlessCheckout', () => {
     await headlessCheckout.getFinanceDetails();
     expect(spy).toHaveBeenCalledWith(
       { name: EventName.financeDetails },
-      getFinanceDetailsHandler,
+      getFinanceDetailsHandler
     );
   });
 
@@ -166,7 +173,7 @@ describe('HeadlessCheckout', () => {
     spyOn(windowService.customElements, 'get').and.returnValue(undefined);
     spyOn(windowService.document.body, 'appendChild');
     spyOn(windowService.document, 'createElement').and.callFake(
-      () => new MockIframeElement() as unknown as HTMLIFrameElement,
+      () => new MockIframeElement() as unknown as HTMLIFrameElement
     );
 
     await headlessCheckout.init({ isWebview: false });
@@ -175,11 +182,11 @@ describe('HeadlessCheckout', () => {
 
   it('Should web components not be redefined', async () => {
     spyOn(windowService.customElements, 'get').and.returnValue(
-      CustomElementMock,
+      CustomElementMock
     );
     spyOn(windowService.document.body, 'appendChild');
     spyOn(windowService.document, 'createElement').and.callFake(
-      () => new MockIframeElement() as unknown as HTMLIFrameElement,
+      () => new MockIframeElement() as unknown as HTMLIFrameElement
     );
 
     const spy = spyOn(window.customElements, 'define');

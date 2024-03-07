@@ -1,16 +1,20 @@
-const getLoaderTemplate = (): string => {
-  return `
-    <div class="loader"></div>
-   `;
-};
+import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
+import { DefaultSubmitButtonAttributes } from './default-submit-button/default-submit-button-attributes.enum';
 
 export const getSubmitButtonTemplate = (
   text: string,
-  isLoading: boolean,
+  isLoading: boolean
 ): string => {
+  let attributes = '';
+  if (text) {
+    attributes += `${DefaultSubmitButtonAttributes.text}='${text}'`;
+  }
+  if (isLoading) {
+    attributes += `${DefaultSubmitButtonAttributes.isLoading}=${
+      isLoading && 'true'
+    }`;
+  }
   return `
-    <button>
-      ${isLoading ? getLoaderTemplate() : text}
-    </button>
+    <${WebComponentTagName.DefaultSubmitButtonComponent} ${attributes}></${WebComponentTagName.DefaultSubmitButtonComponent}>
   `;
 };
