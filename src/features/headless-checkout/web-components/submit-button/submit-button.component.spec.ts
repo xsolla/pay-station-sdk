@@ -1,13 +1,16 @@
 import { container } from 'tsyringe';
 import { SubmitButtonComponent } from './submit-button.component';
-import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { noopStub } from '../../../../tests/stubs/noop.stub';
+import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
+import { applePayId } from '../apple-pay/apple-pay-id.const';
+import { FormConfiguration } from '../../../../core/form/form-configuration.interface';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.SubmitButtonComponent,
+    WebComponentTagName.SubmitButtonComponent
   );
   element.setAttribute('text', 'Pay Now');
   element.setAttribute('id', 'test');
@@ -15,12 +18,13 @@ function createComponent(): void {
 }
 
 describe('SubmitButtonComponent', () => {
-  let postMessagesClient: PostMessagesClient;
   let headlessCheckout: HeadlessCheckout;
+  let formSpy: FormSpy;
+  let postMessagesClient: PostMessagesClient;
 
   window.customElements.define(
     WebComponentTagName.SubmitButtonComponent,
-    SubmitButtonComponent,
+    SubmitButtonComponent
   );
 
   beforeEach(() => {
@@ -36,13 +40,32 @@ describe('SubmitButtonComponent', () => {
         onNextAction: noopStub,
         onFieldsStatusChange: noopStub,
       },
+      get formConfiguration() {
+        return null;
+      },
+      events: {
+        onCoreEvent: noopStub,
+      },
     } as unknown as HeadlessCheckout;
+
+    formSpy = {
+      listenFormInit: noopStub,
+      get formWasInit() {
+        return;
+      },
+    } as unknown as FormSpy;
 
     container.clearInstances();
 
     container
+      .register<FormSpy>(FormSpy, {
+        useValue: formSpy,
+      })
       .register<PostMessagesClient>(PostMessagesClient, {
         useValue: postMessagesClient,
+      })
+      .register<Window>(Window, {
+        useValue: window,
       })
       .register<HeadlessCheckout>(HeadlessCheckout, {
         useValue: headlessCheckout,
@@ -51,24 +74,25 @@ describe('SubmitButtonComponent', () => {
 
   afterEach(() => {
     document.body.innerHTML = '';
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
   });
 
-  it('Should set text for button', () => {
+  it('Should draw default button', () => {
     createComponent();
-
-    expect(document.querySelector('button')!.textContent).toContain('Pay Now');
+    expect(
+      document.querySelector(WebComponentTagName.SubmitButtonComponent)!
+        .innerHTML
+    ).toContain(WebComponentTagName.DefaultSubmitButtonComponent);
   });
 
-  it('Should sendPostMessage event', () => {
-    const spy = spyOn(postMessagesClient, 'send');
-
+  it('Should draw apple pay button', () => {
+    spyOnProperty(headlessCheckout, 'formConfiguration', 'get').and.returnValue(
+      { paymentMethodId: applePayId } as FormConfiguration
+    );
     createComponent();
-
-    const button = document.querySelector('button');
-
-    button!.removeAttribute('disabled');
-    button!.click();
-
-    expect(spy).toHaveBeenCalled();
+    expect(
+      document.querySelector(WebComponentTagName.SubmitButtonComponent)!
+        .innerHTML
+    ).toContain(WebComponentTagName.ApplePayComponent);
   });
 });

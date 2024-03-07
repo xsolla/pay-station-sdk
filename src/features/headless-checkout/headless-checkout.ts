@@ -55,7 +55,7 @@ export class HeadlessCheckout {
     onCoreEvent: <T>(
       eventName: EventName,
       handler: Handler<T>,
-      callback: (value?: T) => void,
+      callback: (value?: T) => void
     ): (() => void) => {
       return this.postMessagesClient.listen(eventName, handler, callback);
     },
@@ -68,6 +68,7 @@ export class HeadlessCheckout {
      * @returns {Form} form details
      */
     init: async (configuration: FormConfiguration): Promise<Form> => {
+      this._formConfiguration = configuration;
       this.formStatus = FormStatus.pending;
 
       const msg: Message = {
@@ -84,7 +85,7 @@ export class HeadlessCheckout {
           }
           this.formSpy.formWasInit = true;
           this.formStatus = FormStatus.active;
-        }),
+        })
       ) as Promise<Form>;
     },
 
@@ -96,12 +97,12 @@ export class HeadlessCheckout {
           if (nextAction) {
             callbackFn(nextAction);
           }
-        },
+        }
       );
     },
 
     onFieldsStatusChange: (
-      callbackFn: (fieldsStatus: FormFieldsStatus) => void,
+      callbackFn: (fieldsStatus: FormFieldsStatus) => void
     ): void => {
       this.postMessagesClient.listen<FormFieldsStatus>(
         EventName.formFieldsStatusChanged,
@@ -110,7 +111,7 @@ export class HeadlessCheckout {
           if (fieldsStatus) {
             callbackFn(fieldsStatus);
           }
-        },
+        }
       );
     },
 
@@ -128,6 +129,9 @@ export class HeadlessCheckout {
       this.formStatus = FormStatus.active;
     },
   };
+  public get formConfiguration(): FormConfiguration | undefined {
+    return this._formConfiguration;
+  }
 
   private formStatus: FormStatus = FormStatus.undefined;
   private isWebView?: boolean;
@@ -136,13 +140,14 @@ export class HeadlessCheckout {
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
+  private _formConfiguration?: FormConfiguration;
 
   public constructor(
     private readonly window: Window,
     private readonly postMessagesClient: PostMessagesClient,
     private readonly localizeService: LocalizeService,
     private readonly headlessCheckoutSpy: HeadlessCheckoutSpy,
-    private readonly formSpy: FormSpy,
+    private readonly formSpy: FormSpy
   ) {}
 
   public async init(environment: {
@@ -156,6 +161,7 @@ export class HeadlessCheckout {
 
     await this.localizeService.initDictionaries();
 
+    this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
     await this.setupCoreIframe();
     this.defineComponents();
 
@@ -165,7 +171,7 @@ export class HeadlessCheckout {
       getErrorHandler,
       (error) => {
         throw new Error(error);
-      },
+      }
     );
   }
 
@@ -194,7 +200,7 @@ export class HeadlessCheckout {
     return this.postMessagesClient.send<void>(msg, (message) =>
       setTokenHandler(message, () => {
         this.headlessCheckoutSpy.appWasInit = true;
-      }),
+      })
     );
   }
 
@@ -204,7 +210,7 @@ export class HeadlessCheckout {
         name: EventName.setSecureComponentStyles,
         data: styles,
       },
-      setSecureComponentStylesHandler,
+      setSecureComponentStylesHandler
     );
   }
 
@@ -219,7 +225,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<FinanceDetails | null>(
       msg,
-      getFinanceDetailsHandler,
+      getFinanceDetailsHandler
     ) as Promise<FinanceDetails | null>;
   }
 
@@ -243,7 +249,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<PaymentMethod[]>(
       msg,
-      getRegularMethodsHandler,
+      getRegularMethodsHandler
     ) as Promise<PaymentMethod[]>;
   }
 
@@ -263,7 +269,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<PaymentMethod[]>(
       msg,
-      getQuickMethodsHandler,
+      getQuickMethodsHandler
     ) as Promise<PaymentMethod[]>;
   }
 
@@ -274,7 +280,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<SavedMethod[]>(
       msg,
-      getSavedMethodsHandler,
+      getSavedMethodsHandler
     ) as Promise<SavedMethod[]>;
   }
 
@@ -285,7 +291,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<UserBalance>(
       msg,
-      getUserBalanceHandler,
+      getUserBalanceHandler
     ) as Promise<UserBalance>;
   }
 
@@ -298,7 +304,7 @@ export class HeadlessCheckout {
     };
 
     return this.postMessagesClient.send<Status>(msg, (message) =>
-      getPaymentStatusHandler(message),
+      getPaymentStatusHandler(message)
     ) as Promise<Status>;
   }
 
@@ -311,10 +317,19 @@ export class HeadlessCheckout {
     this.coreIframe.src = `${this.headlessAppUrl}/core`;
     this.coreIframe.name = 'core';
     this.window.document.body.appendChild(this.coreIframe);
+    return this.listenCoreIframeLoading();
+  }
+
+  private async listenCoreIframeLoading(): Promise<void> {
     return new Promise((resolve) => {
-      this.coreIframe.onload = () => {
-        resolve();
+      const handler = (event: MessageEvent): void => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        if (JSON.parse(event.data as string).name === EventName.isReady) {
+          resolve();
+          this.window.removeEventListener('message', handler);
+        }
       };
+      this.window.addEventListener('message', handler);
     });
   }
 

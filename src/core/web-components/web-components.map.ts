@@ -18,6 +18,7 @@ import { PaymentFormMessagesComponent } from '../../features/headless-checkout/w
 import { GooglePayButtonComponent } from '../../features/headless-checkout/web-components/pages/google-pay/google-pay-button.component';
 import { QrCodeComponent } from '../../features/headless-checkout/web-components/qr-code/qr-code.component';
 import { ApplePayComponent } from '../../features/headless-checkout/web-components/apple-pay/apple-pay.component';
+import { DefaultSubmitButtonComponent } from '../../features/headless-checkout/web-components/submit-button/default-submit-button/default-submit-button.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -41,4 +42,6 @@ export const webComponents: {
   [WebComponentTagName.GooglePayButtonComponent]: GooglePayButtonComponent,
   [WebComponentTagName.QrCodeComponent]: QrCodeComponent,
   [WebComponentTagName.ApplePayComponent]: ApplePayComponent,
+  [WebComponentTagName.DefaultSubmitButtonComponent]:
+    DefaultSubmitButtonComponent,
 };

@@ -1,114 +1,59 @@
 import { container } from 'tsyringe';
 import { WebComponentAbstract } from '../../../../core/web-components/web-component.abstract';
-import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
-import { EventName } from '../../../../core/event-name.enum';
 import { HeadlessCheckout } from '../../headless-checkout';
-import { SubmitButtonAttributes } from './submit-button-attributes.enum';
+import { applePayId } from '../apple-pay/apple-pay-id.const';
+import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
+import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
+import { DefaultSubmitButtonAttributes } from './default-submit-button/default-submit-button-attributes.enum';
 import { getSubmitButtonTemplate } from './submit-button.template';
-import { submitButtonHandler } from './submit-button.handler';
-import { Message } from '../../../../core/message.interface';
-import { Handler } from '../../../../core/post-messages-client/handler.type';
-import { isSubmitButtonLoadingMessage } from '../../../../core/guards/submit-button-loading-message.guard';
-import { isShowFieldsAction } from '../../../../core/actions/is-show-fields-action.function';
 
 export class SubmitButtonComponent extends WebComponentAbstract {
-  private readonly postMessagesClient: PostMessagesClient;
   private readonly headlessCheckout: HeadlessCheckout;
+  private readonly formSpy: FormSpy;
+  private wasRendered = false;
+  private get isApplePayButton(): boolean {
+    return (
+      this.headlessCheckout.formConfiguration?.paymentMethodId === applePayId
+    );
+  }
 
-  private get elementRef(): HTMLButtonElement {
-    return this.querySelector('button')! as HTMLButtonElement;
+  public static get observedAttributes(): string[] {
+    return [
+      DefaultSubmitButtonAttributes.isLoading,
+      DefaultSubmitButtonAttributes.text,
+    ];
   }
 
   public constructor() {
     super();
-    this.postMessagesClient = container.resolve(PostMessagesClient);
     this.headlessCheckout = container.resolve(HeadlessCheckout);
-  }
-
-  public static get observedAttributes(): string[] {
-    return [SubmitButtonAttributes.isLoading, SubmitButtonAttributes.text];
+    this.formSpy = container.resolve(FormSpy);
   }
 
   protected connectedCallback(): void {
-    super.connectedCallback();
-    this.listenFormInit();
+    if (!this.formSpy.formWasInit) {
+      this.formSpy.listenFormInit(() => this.connectedCallback());
+      return;
+    }
+
+    this.render();
   }
 
   protected render(): void {
-    this.removeAllEventListeners();
-    this.innerHTML = this.getHtml();
-
-    if (this.elementRef) {
-      this.addEventListenerToElement(this.elementRef, 'click', () => {
-        if (this.getAttribute(SubmitButtonAttributes.isLoading)) {
-          return;
-        }
-
-        void this.postMessagesClient.send(
-          { name: EventName.getFormStatus },
-          this.loadingHandler,
-        );
-
-        let isCheckedFieldStatuses = false;
-        this.headlessCheckout.form.onFieldsStatusChange((fieldsStatus) => {
-          if (isCheckedFieldStatuses) {
-            return;
-          }
-
-          isCheckedFieldStatuses = true;
-
-          const isInvalidForm = Object.entries(fieldsStatus).some((fields) => {
-            const [, value] = fields;
-
-            return value.validationStatus === 'INVALID';
-          });
-
-          if (isInvalidForm) {
-            this.removeAttribute(SubmitButtonAttributes.isLoading);
-
-            this.render();
-          }
-        });
-
-        void this.postMessagesClient.send(
-          { name: EventName.submitForm },
-          submitButtonHandler,
-        );
-
-        this.render();
-      });
+    if (this.isApplePayButton && this.wasRendered) {
+      return;
     }
+    this.wasRendered = true;
+    super.render();
   }
 
   protected getHtml(): string {
-    const text = this.getAttribute(SubmitButtonAttributes.text) ?? '';
-    const isLoading = !!this.getAttribute(SubmitButtonAttributes.isLoading);
-
-    return getSubmitButtonTemplate(text, isLoading);
-  }
-
-  private listenFormInit(): void {
-    this.headlessCheckout.form.onNextAction((nextAction) => {
-      if (isShowFieldsAction(nextAction)) {
-        this.removeAttribute(SubmitButtonAttributes.isLoading);
-        this.render();
-      }
-    });
-  }
-
-  private readonly loadingHandler: Handler<void> = (
-    message: Message,
-  ): { isHandled: boolean } | null => {
-    if (!isSubmitButtonLoadingMessage(message)) return null;
-
-    const isCanClick = message.data?.formStatus === 'VALID';
-
-    if (isCanClick) {
-      this.setAttribute(SubmitButtonAttributes.isLoading, 'true');
-      this.render();
+    if (this.isApplePayButton) {
+      return `<${WebComponentTagName.ApplePayComponent}></${WebComponentTagName.ApplePayComponent}>`;
     }
-    return {
-      isHandled: true,
-    };
-  };
+    return getSubmitButtonTemplate(
+      this.getAttribute(DefaultSubmitButtonAttributes.text) ?? '',
+      !!this.getAttribute(DefaultSubmitButtonAttributes.isLoading)
+    );
+  }
 }

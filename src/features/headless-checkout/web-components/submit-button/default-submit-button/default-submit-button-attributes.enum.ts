@@ -1,4 +1,4 @@
-export enum SubmitButtonAttributes {
+export enum DefaultSubmitButtonAttributes {
   text = 'text',
   isLoading = 'isLoading',
 }
