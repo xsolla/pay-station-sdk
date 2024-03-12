@@ -1,4 +1,5 @@
 export const enum EventName {
+  isReady = 'isReady',
   error = 'error',
   initPayment = 'initPayment',
   initForm = 'initForm',
@@ -28,4 +29,6 @@ export const enum EventName {
   finishLoadComponent = 'finishLoadComponent',
   getFormStatus = 'getFormStatus',
   applePayError = 'applePayError',
+  openApplePayPage = 'openApplePayPage',
+  submitApplePayForm = 'submitApplePayForm',
 }

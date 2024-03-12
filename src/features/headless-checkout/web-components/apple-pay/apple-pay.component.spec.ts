@@ -5,6 +5,7 @@ import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { ApplePayComponent } from './apple-pay.component';
 import { EventName } from '../../../../core/event-name.enum';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 
 function createComponent(): HTMLElement {
   const element = document.createElement(WebComponentTagName.ApplePayComponent);
@@ -14,6 +15,7 @@ function createComponent(): HTMLElement {
 
 describe('ApplePayComponent', () => {
   let headlessCheckout: HeadlessCheckout;
+  let postMessagesClient: PostMessagesClient;
   let formSpy: FormSpy;
 
   window.customElements.define(
@@ -40,6 +42,10 @@ describe('ApplePayComponent', () => {
       },
     } as unknown as FormSpy;
 
+    postMessagesClient = {
+      send: noopStub,
+    } as unknown as PostMessagesClient;
+
     container.clearInstances();
 
     container
@@ -48,6 +54,12 @@ describe('ApplePayComponent', () => {
       })
       .register<HeadlessCheckout>(HeadlessCheckout, {
         useValue: headlessCheckout,
+      })
+      .register<PostMessagesClient>(PostMessagesClient, {
+        useValue: postMessagesClient,
+      })
+      .register<Window>(Window, {
+        useValue: window,
       });
   });
 
