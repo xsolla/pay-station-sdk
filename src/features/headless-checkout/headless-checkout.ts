@@ -55,7 +55,7 @@ export class HeadlessCheckout {
     onCoreEvent: <T>(
       eventName: EventName,
       handler: Handler<T>,
-      callback: (value?: T) => void
+      callback: (value?: T) => void,
     ): (() => void) => {
       return this.postMessagesClient.listen(eventName, handler, callback);
     },
@@ -85,7 +85,7 @@ export class HeadlessCheckout {
           }
           this.formSpy.formWasInit = true;
           this.formStatus = FormStatus.active;
-        })
+        }),
       ) as Promise<Form>;
     },
 
@@ -97,12 +97,12 @@ export class HeadlessCheckout {
           if (nextAction) {
             callbackFn(nextAction);
           }
-        }
+        },
       );
     },
 
     onFieldsStatusChange: (
-      callbackFn: (fieldsStatus: FormFieldsStatus) => void
+      callbackFn: (fieldsStatus: FormFieldsStatus) => void,
     ): void => {
       this.postMessagesClient.listen<FormFieldsStatus>(
         EventName.formFieldsStatusChanged,
@@ -111,7 +111,7 @@ export class HeadlessCheckout {
           if (fieldsStatus) {
             callbackFn(fieldsStatus);
           }
-        }
+        },
       );
     },
 
@@ -129,6 +129,7 @@ export class HeadlessCheckout {
       this.formStatus = FormStatus.active;
     },
   };
+
   public get formConfiguration(): FormConfiguration | undefined {
     return this._formConfiguration;
   }
@@ -136,7 +137,6 @@ export class HeadlessCheckout {
   private formStatus: FormStatus = FormStatus.undefined;
   private isWebView?: boolean;
   private isSandbox?: boolean;
-  private isMobile!: boolean;
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
@@ -147,17 +147,15 @@ export class HeadlessCheckout {
     private readonly postMessagesClient: PostMessagesClient,
     private readonly localizeService: LocalizeService,
     private readonly headlessCheckoutSpy: HeadlessCheckoutSpy,
-    private readonly formSpy: FormSpy
+    private readonly formSpy: FormSpy,
   ) {}
 
   public async init(environment: {
     isWebview?: boolean;
     sandbox?: boolean;
-    isMobile?: boolean;
   }): Promise<void> {
     this.isWebView = environment.isWebview;
     this.isSandbox = environment.sandbox;
-    this.isMobile = !!environment.isMobile;
 
     await this.localizeService.initDictionaries();
 
@@ -171,7 +169,7 @@ export class HeadlessCheckout {
       getErrorHandler,
       (error) => {
         throw new Error(error);
-      }
+      },
     );
   }
 
@@ -192,7 +190,6 @@ export class HeadlessCheckout {
           token,
           isWebView: this.isWebView,
           sandbox: this.isSandbox,
-          isMobile: this.isMobile,
         },
       },
     };
@@ -200,7 +197,7 @@ export class HeadlessCheckout {
     return this.postMessagesClient.send<void>(msg, (message) =>
       setTokenHandler(message, () => {
         this.headlessCheckoutSpy.appWasInit = true;
-      })
+      }),
     );
   }
 
@@ -210,7 +207,7 @@ export class HeadlessCheckout {
         name: EventName.setSecureComponentStyles,
         data: styles,
       },
-      setSecureComponentStylesHandler
+      setSecureComponentStylesHandler,
     );
   }
 
@@ -225,7 +222,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<FinanceDetails | null>(
       msg,
-      getFinanceDetailsHandler
+      getFinanceDetailsHandler,
     ) as Promise<FinanceDetails | null>;
   }
 
@@ -249,7 +246,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<PaymentMethod[]>(
       msg,
-      getRegularMethodsHandler
+      getRegularMethodsHandler,
     ) as Promise<PaymentMethod[]>;
   }
 
@@ -269,7 +266,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<PaymentMethod[]>(
       msg,
-      getQuickMethodsHandler
+      getQuickMethodsHandler,
     ) as Promise<PaymentMethod[]>;
   }
 
@@ -280,7 +277,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<SavedMethod[]>(
       msg,
-      getSavedMethodsHandler
+      getSavedMethodsHandler,
     ) as Promise<SavedMethod[]>;
   }
 
@@ -291,7 +288,7 @@ export class HeadlessCheckout {
 
     return this.postMessagesClient.send<UserBalance>(
       msg,
-      getUserBalanceHandler
+      getUserBalanceHandler,
     ) as Promise<UserBalance>;
   }
 
@@ -304,7 +301,7 @@ export class HeadlessCheckout {
     };
 
     return this.postMessagesClient.send<Status>(msg, (message) =>
-      getPaymentStatusHandler(message)
+      getPaymentStatusHandler(message),
     ) as Promise<Status>;
   }
 
