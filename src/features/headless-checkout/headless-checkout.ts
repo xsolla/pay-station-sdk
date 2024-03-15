@@ -31,6 +31,8 @@ import { FormStatus } from '../../core/status/form-status.enum';
 import { setSecureComponentStylesHandler } from './post-messages-handlers/set-secure-component-styles.handler';
 import { formFieldsStatusChangedHandler } from './post-messages-handlers/form-fields-status-changed.handler';
 import { FormFieldsStatus } from '../../core/form/form-fields-status.interface';
+import { getCombinedPaymentMethodsHandler } from './post-messages-handlers/get-combined-payment-methods.handler';
+import { CombinedPaymentMethods } from '../../core/combined-payment-methods.interface';
 
 @singleton()
 export class HeadlessCheckout {
@@ -268,6 +270,17 @@ export class HeadlessCheckout {
       msg,
       getQuickMethodsHandler,
     ) as Promise<PaymentMethod[]>;
+  }
+
+  public async getCombinedPaymentMethods(): Promise<CombinedPaymentMethods> {
+    const msg: Message = {
+      name: EventName.getCombinedPaymentMethods,
+    };
+
+    return this.postMessagesClient.send<CombinedPaymentMethods>(
+      msg,
+      getCombinedPaymentMethodsHandler,
+    ) as Promise<CombinedPaymentMethods>;
   }
 
   public async getSavedMethods(): Promise<SavedMethod[]> {
