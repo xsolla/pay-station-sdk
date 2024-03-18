@@ -9,6 +9,7 @@ import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/
 import { getLegalComponentConfigHandler } from '../../post-messages-handlers/get-legal-component-config.handler';
 import { LegalComponentConfig } from './legal-component.config.interface';
 import { isEventMessage } from '../../../../core/guards/event-message.guard';
+import './legal.component.scss';
 
 export class LegalComponent extends WebComponentAbstract {
   private readonly postMessagesClient: PostMessagesClient;
@@ -34,7 +35,7 @@ export class LegalComponent extends WebComponentAbstract {
   }
 
   protected readonly configLoadedHandler = (
-    config: LegalComponentConfig
+    config: LegalComponentConfig,
   ): void => {
     this.config = config;
     super.render();
@@ -59,7 +60,7 @@ export class LegalComponent extends WebComponentAbstract {
 
     return this.postMessagesClient.send<LegalComponentConfig>(
       msg,
-      getLegalComponentConfigHandler
+      getLegalComponentConfigHandler,
     ) as Promise<LegalComponentConfig>;
   }
 
@@ -83,7 +84,7 @@ export class LegalComponent extends WebComponentAbstract {
       JSON.stringify({
         name: EventName.legalComponentPong,
       }),
-      message.origin as WindowPostMessageOptions
+      message.origin as WindowPostMessageOptions,
     );
   };
 }

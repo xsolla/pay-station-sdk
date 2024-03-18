@@ -5,6 +5,7 @@ import { container } from 'tsyringe';
 import { EventName } from '../../../../core/event-name.enum';
 import { getFormMessagesHandler } from '../../post-messages-handlers/get-form-messages.handler';
 import { getPaymentFormMessagesTemplate } from './payment-form-messages.template';
+import './payment-form-messages.component.scss';
 
 export class PaymentFormMessagesComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -25,7 +26,7 @@ export class PaymentFormMessagesComponent extends WebComponentAbstract {
     void this.headlessCheckout.events.onCoreEvent(
       EventName.formMessagesChanged,
       getFormMessagesHandler,
-      (messages) => this.messagesLoadedHandler(messages)
+      (messages) => this.messagesLoadedHandler(messages),
     );
   }
 

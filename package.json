@@ -12,7 +12,9 @@
     "dev": "webpack --mode=development --watch",
     "test": "karma start --single-run",
     "test:dev": "karma start --auto-watch",
-    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint": "npm run eslint:lint && npm run stylelint:lint",
+    "eslint:lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "stylelint:lint": "stylelint \"src/**/*.scss\"",
     "prepare": "husky install",
     "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public",
     "prettier": "prettier --write ./src"
@@ -47,6 +49,7 @@
     "lint-staged": "^14.0.1",
     "mini-css-extract-plugin": "^2.7.6",
     "prettier": "3.0.2",
+    "raw-loader": "^4.0.2",
     "reflect-metadata": "^0.1.13",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.66.1",

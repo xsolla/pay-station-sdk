@@ -1,0 +1,5 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+
+psdk-checkbox {
+  @include typo.psdk-typo;
+}

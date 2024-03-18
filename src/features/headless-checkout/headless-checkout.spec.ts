@@ -9,6 +9,7 @@ import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-d
 import { FormStatus } from '../../core/status/form-status.enum';
 import { noopStub } from '../../tests/stubs/noop.stub';
 import { headlessCheckoutAppUrl } from './environment';
+import { ThemesLoader } from '../../core/customization/themes-loader';
 
 const mockMessage: Message = {
   name: EventName.initPayment,
@@ -40,6 +41,7 @@ describe('HeadlessCheckout', () => {
   let headlessCheckout: HeadlessCheckout;
   let postMessagesClient: PostMessagesClient;
   let localizeService: LocalizeService;
+  let themesLoader: ThemesLoader;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const stub = (): void => {};
@@ -64,6 +66,10 @@ describe('HeadlessCheckout', () => {
       initDictionaries: async () => Promise.resolve(),
     } as unknown as LocalizeService;
 
+    themesLoader = {
+      getTheme: () => 'body { margin: 0;}',
+    } as unknown as ThemesLoader;
+
     container.clearInstances();
 
     headlessCheckout = container
@@ -74,6 +80,9 @@ describe('HeadlessCheckout', () => {
       })
       .register<LocalizeService>(LocalizeService, {
         useValue: localizeService,
+      })
+      .register<ThemesLoader>(ThemesLoader, {
+        useValue: themesLoader,
       })
       .registerSingleton(HeadlessCheckout)
       .resolve(HeadlessCheckout);

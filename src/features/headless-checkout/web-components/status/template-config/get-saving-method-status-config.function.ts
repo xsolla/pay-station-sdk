@@ -3,9 +3,11 @@ import { StatusComponentConfig } from './status.component.config.interface';
 import failedImage from '../../../../../assets/statuses/failed.png';
 import i18next from 'i18next';
 import successImage from '../../../../../assets/statuses/success.png';
+import { Status } from '../../../../../core/status/status.interface';
 
 export function getSavingMethodStatusConfig(
-  statusState: StatusState
+  statusState: StatusState,
+  status: Status,
 ): StatusComponentConfig | null {
   if (statusState === StatusState.isCanceled) {
     return {
@@ -14,6 +16,7 @@ export function getSavingMethodStatusConfig(
       description: '',
       showDescription: false,
       isSavePaymentAccount: true,
+      status: status.statusState,
     };
   }
 
@@ -24,6 +27,7 @@ export function getSavingMethodStatusConfig(
       description: i18next.t('saving-status.processing.description'),
       showDescription: true,
       isSavePaymentAccount: true,
+      status: status.statusState,
     };
   }
 
@@ -34,6 +38,7 @@ export function getSavingMethodStatusConfig(
       description: '',
       showDescription: false,
       isSavePaymentAccount: true,
+      status: status.statusState,
     };
   }
 
@@ -44,6 +49,7 @@ export function getSavingMethodStatusConfig(
       description: '',
       showDescription: false,
       isSavePaymentAccount: true,
+      status: status.statusState,
     };
   }
 

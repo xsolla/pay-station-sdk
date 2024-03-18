@@ -1,0 +1,66 @@
+:root {
+  /* stylelint-disable value-keyword-case */
+  --psdk-font-family: GraphikLCWebUikit, system-ui, -apple-system, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  /* stylelint-enable value-keyword-case */
+
+  --psdk-neutral-color: rgba(65, 57, 96, 1);
+  --psdk-success-color: rgba(15, 138, 101, 1);
+  --psdk-alert-color: rgba(153, 0, 66, 1);
+  --psdk-warning-color: rgba(204, 65, 0, 1);
+  --psdk-neutral-bg: rgba(239, 240, 246, 1);
+  --psdk-success-bg: rgba(232, 252, 239, 1);
+  --psdk-alert-bg: rgba(255, 229, 232, 1);
+  --psdk-warning-bg: rgba(255, 245, 229, 1);
+  --psdk-common-border-radius: 4px;
+  --psdk-font-size: 14px;
+  --psdk-font-color: #000;
+  --psdk-line-height: 18px;
+  --psdk-secondary-color: rgba(24, 23, 28, 0.5);
+  --psdk-loader-color: rgb(61, 70, 245);
+  --psdk-bg-secondary: rgb(255, 255, 255);
+
+  // buttons
+  --psdk-button-default-bg: rgb(61, 70, 245);
+  --psdk-button-hover-bg: rgb(13, 13, 242);
+  --psdk-button-press-bg: rgb(110, 123, 247);
+  --psdk-button-disabled-bg: rgb(200, 202, 208);
+  --psdk-button-color: #fff;
+  --psdk-button-border-radius: var(--psdk-common-border-radius);
+
+  // payment-methods
+  --psdk-methods-radius: var(--psdk-common-border-radius);
+  --psdk-methods-border-width: 1px;
+  --psdk-methods-border-color: rgba(0, 0, 0, 0.15);
+
+  // inputs
+  --psdk-input-radius: var(--psdk-common-border-radius);
+  --psdk-input-border-width: 1px;
+  --psdk-input-bg: rgb(255, 255, 255);
+  --psdk-input-default-border-color: rgba(0, 0, 0, 0.15);
+  --psdk-input-hover-border-color: #000;
+  --psdk-input-focus-border-color: rgb(61, 70, 245);
+  --psdk-input-error-border-color: rgb(204, 0, 78);
+  --psdk-input-disabled-border-color: rgba(0, 0, 0, 0.15);
+  --psdk-input-disabled-bg: rgb(200, 202, 208);
+  --psdk-input-disabled-color: rgba(0, 0, 0, 0.35);
+  --psdk-input-placeholder-color: rgba(0, 0, 0, 0.55);
+  --psdk-input-placeholder-focus-color: rgb(0, 0, 0);
+
+  // divider
+  --psdk-divider-color: rgba(0, 0, 0, 0.15);
+
+  // titles
+  --psdk-title2-color: rgba(0, 0, 0);
+  --psdk-title2-font-weight: 500;
+  --psdk-title2-font-size: 14px;
+  --psdk-title2-line-height: 18px;
+
+  // select-list
+  --psdk-select-hover-bg: rgb(61, 70, 245);
+  --psdk-select-hover-color: rgb(255, 255, 255);
+
+  // shadows
+  --psdk-shadow: 0px 6px 10px 4px rgba(7, 7, 8, 0.1),
+    0px 2px 3px rgba(7, 7, 8, 0.2);
+}

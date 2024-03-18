@@ -1,0 +1,68 @@
+@mixin psdk-control-base() {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: var(--psdk-input-border-width) solid
+    var(--psdk-input-default-border-color);
+  border-radius: var(--psdk-input-radius);
+  background: var(--psdk-input-bg);
+  color: var(--psdk-font-color);
+  font-weight: 400;
+  font-size: var(--psdk-font-size);
+  font-family: var(--psdk-font-family);
+  line-height: var(--psdk-line-height);
+}
+
+@mixin psdk-input() {
+  @include psdk-control-base;
+
+  &::placeholder {
+    color: var(--psdk-input-placeholder-color);
+  }
+
+  &:hover {
+    border-color: var(--psdk-input-hover-border-color);
+
+    &::placeholder {
+      color: var(--psdk-input-placeholder-color);
+    }
+  }
+
+  &:focus {
+    border-color: var(--psdk-input-focus-border-color);
+
+    &::placeholder {
+      color: var(--psdk-input-placeholder-focus-color);
+    }
+  }
+
+  &:disabled {
+    border-color: var(--psdk-input-disabled-border-color);
+    background: var(--psdk-input-disabled-bg);
+  }
+}
+
+@mixin psdk-select {
+  @include psdk-control-base;
+
+  &:hover {
+    border-color: var(--psdk-input-hover-border-color);
+
+    &::placeholder {
+      color: var(--psdk-input-placeholder-color);
+    }
+  }
+
+  &:focus {
+    border-color: var(--psdk-input-focus-border-color);
+
+    &::placeholder {
+      color: var(--psdk-input-placeholder-focus-color);
+    }
+  }
+
+  &:disabled {
+    border-color: var(--psdk-input-disabled-border-color);
+    background: var(--psdk-input-disabled-bg);
+  }
+}

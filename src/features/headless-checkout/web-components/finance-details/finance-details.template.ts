@@ -15,6 +15,7 @@ export const getFinanceDetailsTemplate = (
       financeDetails.cartSummary?.transactionDetails,
     ),
     getCartItemsTemplate(financeDetails.cartItems),
+    financeDetails.cartItems && '<hr class="divider">',
     getShippingTemplate(financeDetails.cartSummary),
     getSubtotalDetailsTemplate(
       financeDetails.finance,

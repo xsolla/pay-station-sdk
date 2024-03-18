@@ -1,0 +1,35 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/animation.mixin' as animation;
+
+psdk-default-submit-button {
+  @include typo.psdk-typo;
+
+  button {
+    @include typo.psdk-typo;
+
+    width: 100%;
+    max-width: 360px;
+    height: 40px;
+    border: none;
+    border-radius: var(--psdk-button-border-radius);
+    background: var(--psdk-button-default-bg);
+    color: var(--psdk-button-color);
+    font-weight: 500;
+
+    &:hover {
+      background: var(--psdk-button-hover-bg);
+    }
+
+    &:active {
+      background: var(--psdk-button-press-bg);
+    }
+
+    &:disabled {
+      background: var(--psdk-button-disabled-bg);
+    }
+
+    .loader {
+      @include animation.loader(var(--psdk-button-color));
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+
+psdk-payment-form-messages {
+  @include typo.psdk-typo;
+
+  .form-message {
+    margin: 0;
+    padding: 12px;
+    border-radius: var(--psdk-common-border-radius);
+    background: var(--psdk-neutral-bg);
+    color: var(--psdk-neutral-color);
+
+    &:nth-child(n) {
+      margin-bottom: 4px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    & a {
+      color: var(--psdk-neutral-color);
+    }
+  }
+}

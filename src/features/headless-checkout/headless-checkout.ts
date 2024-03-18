@@ -33,6 +33,8 @@ import { formFieldsStatusChangedHandler } from './post-messages-handlers/form-fi
 import { FormFieldsStatus } from '../../core/form/form-fields-status.interface';
 import { getCombinedPaymentMethodsHandler } from './post-messages-handlers/get-combined-payment-methods.handler';
 import { CombinedPaymentMethods } from '../../core/combined-payment-methods.interface';
+import { themes } from '../../core/customization/themes.map';
+import { ThemesLoader } from '../../core/customization/themes-loader';
 
 @singleton()
 export class HeadlessCheckout {
@@ -139,6 +141,7 @@ export class HeadlessCheckout {
   private formStatus: FormStatus = FormStatus.undefined;
   private isWebView?: boolean;
   private isSandbox?: boolean;
+  private theme?: [keyof typeof themes];
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
@@ -150,14 +153,17 @@ export class HeadlessCheckout {
     private readonly localizeService: LocalizeService,
     private readonly headlessCheckoutSpy: HeadlessCheckoutSpy,
     private readonly formSpy: FormSpy,
+    private readonly themesLoader: ThemesLoader,
   ) {}
 
   public async init(environment: {
     isWebview?: boolean;
     sandbox?: boolean;
+    theme?: [keyof typeof themes];
   }): Promise<void> {
     this.isWebView = environment.isWebview;
     this.isSandbox = environment.sandbox;
+    this.theme = environment.theme;
 
     await this.localizeService.initDictionaries();
 
@@ -166,6 +172,7 @@ export class HeadlessCheckout {
     this.defineComponents();
 
     this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
+    void this.setupSecureStyles(this.theme);
     this.errorsSubscription = this.postMessagesClient.listen<string>(
       EventName.error,
       getErrorHandler,
@@ -355,5 +362,15 @@ export class HeadlessCheckout {
 
       this.window.customElements.define(tagName, component);
     });
+  }
+
+  private async setupSecureStyles(
+    themeName?: [keyof typeof themes],
+  ): Promise<void> {
+    if (!themeName) {
+      return;
+    }
+    const themeStyles = this.themesLoader.getTheme();
+    await this.setSecureComponentStyles(themeStyles);
   }
 }

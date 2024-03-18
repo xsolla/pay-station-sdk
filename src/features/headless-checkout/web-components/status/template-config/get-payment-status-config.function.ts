@@ -7,7 +7,7 @@ import successImage from '../../../../../assets/statuses/success.png';
 
 export function getPaymentStatusConfig(
   statusState: StatusState,
-  status: Status
+  status: Status,
 ): StatusComponentConfig | null {
   // check cancel before processing since canceled invoice has status state "created"
   if (statusState === StatusState.isCanceled) {
@@ -16,6 +16,7 @@ export function getPaymentStatusConfig(
       title: i18next.t('status.error.title'),
       description: '',
       showDescription: false,
+      status: status.statusState,
     };
   }
 
@@ -25,6 +26,7 @@ export function getPaymentStatusConfig(
       title: i18next.t('status.processing.title'),
       description: i18next.t('status.processing.description'),
       showDescription: true,
+      status: status.statusState,
     };
   }
 
@@ -34,6 +36,7 @@ export function getPaymentStatusConfig(
       title: i18next.t('status.error.title'),
       description: '',
       showDescription: false,
+      status: status.statusState,
     };
   }
 
@@ -45,6 +48,7 @@ export function getPaymentStatusConfig(
         email: status.email,
       }),
       showDescription: !!status.email,
+      status: status.statusState,
     };
   }
 

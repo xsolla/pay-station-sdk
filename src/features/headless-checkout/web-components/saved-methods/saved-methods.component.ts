@@ -9,6 +9,7 @@ import { SavedMethodAttributes } from './saved-method-attributes.enum';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { deleteSavedMethodHandler } from '../../post-messages-handlers/delete-saved-method.handler';
 import { EventName } from '../../../../core/event-name.enum';
+import './saved-methods.component.scss';
 
 export class SavedMethodsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -46,7 +47,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   protected attributeChangedCallback(
     name: string,
     oldValue: string,
-    newValue: string
+    newValue: string,
   ): void {
     if (
       !this.headlessCheckoutSpy.appWasInit ||
@@ -92,7 +93,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   }
 
   private readonly savedMethodsLoadedHandler = (
-    savedMethods: SavedMethod[]
+    savedMethods: SavedMethod[],
   ): void => {
     this.savedMethods = savedMethods;
     super.render();
@@ -103,7 +104,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   private getMethodsHtml(): string[] | null {
     if (this.savedMethods?.length) {
       return this.savedMethods.map((method) =>
-        getSavedMethodTemplate(method, this.isDeleteMode(this.deleteMode))
+        getSavedMethodTemplate(method, this.isDeleteMode(this.deleteMode)),
       );
     }
 
@@ -138,7 +139,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
     };
 
     this.listRef.dispatchEvent(
-      new CustomEvent(EventName.savedMethodSelected, eventOptions)
+      new CustomEvent(EventName.savedMethodSelected, eventOptions),
     );
   }
 
@@ -152,7 +153,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
     };
 
     this.listRef.dispatchEvent(
-      new CustomEvent(EventName.deletedSavedMethodStatus, eventOptions)
+      new CustomEvent(EventName.deletedSavedMethodStatus, eventOptions),
     );
   }
 
@@ -188,7 +189,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
           name: EventName.deleteSavedMethod,
           data: { ...savedMethodData },
         },
-        deleteSavedMethodHandler
+        deleteSavedMethodHandler,
       )
       .then((isDeleteSuccessful) => {
         this.dispatchDeleteMethodStatus(isDeleteSuccessful as boolean);
@@ -201,7 +202,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
 
   private removeSavedMethodFromList(savedMethodId: string): void {
     this.querySelector(
-      `li[${SavedMethodAttributes.savedMethodId}="${savedMethodId}"]`
+      `li[${SavedMethodAttributes.savedMethodId}="${savedMethodId}"]`,
     )?.remove();
   }
 
