@@ -6,6 +6,7 @@ export const enum EventName {
   submitForm = 'submitForm',
   getPaymentMethodsList = 'getPaymentMethodsList',
   getPaymentQuickMethods = 'getPaymentQuickMethods',
+  getCombinedPaymentMethods = 'getCombinedPaymentMethods',
   getSavedMethods = 'getSavedMethods',
   getUserBalance = 'getUserBalance',
   getUserBalanceValue = 'getUserBalanceValue',
