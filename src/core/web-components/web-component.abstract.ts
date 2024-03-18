@@ -22,7 +22,7 @@ export abstract class WebComponentAbstract extends HTMLElement {
   protected addEventListenerToElement(
     element: Element,
     eventType: string,
-    listener: (event: Event) => void
+    listener: (event: Event) => void,
   ): void {
     element.addEventListener(eventType, listener);
     this.eventListeners.push({ element, eventType, listener });
@@ -46,7 +46,7 @@ export abstract class WebComponentAbstract extends HTMLElement {
   protected attributeChangedCallback(
     name?: string,
     oldValue?: string,
-    newValue?: string
+    newValue?: string,
   ): void {
     this.render();
   }
