@@ -48,7 +48,6 @@ export class TextComponent extends SecureComponentAbstract {
 
   protected connectedCallback(): void {
     this.startLoadingComponentHandler();
-
     if (!this.formSpy.formWasInit) {
       this.formSpy.listenFormInit(() => this.getConfigFromInputName());
       return;
@@ -87,7 +86,11 @@ export class TextComponent extends SecureComponentAbstract {
   };
 
   protected attributeChangedCallback(): void {
-    this.connectedCallback();
+    if (!this.inputName) {
+      return;
+    }
+
+    super.attributeChangedCallback();
   }
 
   protected getHtml(): string {
