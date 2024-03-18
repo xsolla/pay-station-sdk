@@ -1,0 +1,88 @@
+@use 'src/styles/mixins/controls.mixin' as controls;
+
+psdk-select {
+  .select {
+    @include controls.psdk-select;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .arrow {
+    display: flex;
+
+    &.arrow-up {
+      transform: rotate(180deg);
+    }
+  }
+
+  .select-options {
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+  }
+
+  .dropdown {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    height: 216px;
+    padding: 8px 0;
+    border-radius: 8px;
+    background: var(--psdk-bg-secondary);
+    box-shadow: var(--psdk-shadow);
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: 1px solid transparent;
+      border-radius: 4px;
+      background: var(--psdk-divider-color);
+    }
+
+    ::-webkit-scrollbar-track {
+      border: 4px solid transparent;
+      border-radius: 1px;
+      background: var(--psdk-divider-color);
+    }
+  }
+
+  .dropdown-wrapper {
+    position: relative;
+
+    &.dropdown-opened {
+      & .dropdown {
+        display: flex;
+      }
+    }
+  }
+
+  .option {
+    display: flex;
+
+    :hover {
+      background: var(--psdk-select-hover-bg);
+      color: var(--psdk-select-hover-color);
+    }
+
+    .option-content {
+      width: 100%;
+      height: 100%;
+      padding: 11px 12px;
+      cursor: pointer;
+    }
+  }
+}

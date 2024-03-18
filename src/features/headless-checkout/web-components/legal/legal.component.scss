@@ -1,0 +1,49 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+
+psdk-legal {
+  @include typo.psdk-typo;
+
+  display: flex;
+  flex-direction: column;
+
+  .disclaimer {
+    margin-bottom: 4px;
+  }
+
+  .additional-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  a {
+    color: var(--psdk-font-color);
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .company {
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+      margin-right: 4px;
+    }
+  }
+
+  .legal-links {
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

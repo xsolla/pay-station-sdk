@@ -10,6 +10,7 @@ import { Message } from '../../../../../core/message.interface';
 import { Handler } from '../../../../../core/post-messages-client/handler.type';
 import { isSubmitButtonLoadingMessage } from '../../../../../core/guards/submit-button-loading-message.guard';
 import { isShowFieldsAction } from '../../../../../core/actions/is-show-fields-action.function';
+import './default-submit-button.component.scss';
 
 export class DefaultSubmitButtonComponent extends WebComponentAbstract {
   private readonly postMessagesClient: PostMessagesClient;
@@ -48,7 +49,7 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
 
         void this.postMessagesClient.send(
           { name: EventName.getFormStatus },
-          this.loadingHandler
+          this.loadingHandler,
         );
 
         let isCheckedFieldStatuses = false;
@@ -74,7 +75,7 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
 
         void this.postMessagesClient.send(
           { name: EventName.submitForm },
-          defaultSubmitButtonHandler
+          defaultSubmitButtonHandler,
         );
 
         this.render();
@@ -85,7 +86,7 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
   protected getHtml(): string {
     const text = this.getAttribute(DefaultSubmitButtonAttributes.text) ?? '';
     const isLoading = !!this.getAttribute(
-      DefaultSubmitButtonAttributes.isLoading
+      DefaultSubmitButtonAttributes.isLoading,
     );
 
     return getSubmitButtonTemplate(text, isLoading);
@@ -101,7 +102,7 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
   }
 
   private readonly loadingHandler: Handler<void> = (
-    message: Message
+    message: Message,
   ): { isHandled: boolean } | null => {
     if (!isSubmitButtonLoadingMessage(message)) return null;
 

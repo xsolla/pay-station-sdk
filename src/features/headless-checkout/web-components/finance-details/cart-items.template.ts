@@ -57,20 +57,24 @@ function getCartItemText(item: CartItem): string {
       : item.title;
   const description = item.description?.replace(/\\n/g, '<br/>');
   return `
-    <div class="details">
-      <div class="title">${title ?? ''}</div>
-      <div class="description">${description ?? ''}</div>
-      ${item.tax ? getPriceTextTemplate(item.tax, null, 'tax') : ''}
-      ${getPriceTextTemplate(null, item.price, 'price')}
-      ${
-        item.priceBeforeDiscount?.amount
-          ? getPriceTextTemplate(
-              null,
-              item.priceBeforeDiscount,
-              'price-before-discount',
-            )
-          : ''
-      }
+    <div class="details-wrapper">
+      <div class="details">
+        <div class="title">${title ?? ''}</div>
+        <div class="description">${description ?? ''}</div>
+        ${item.tax ? getPriceTextTemplate(item.tax, null, 'tax') : ''}
+      </div>
+      <div class="price-wrapper">
+        ${getPriceTextTemplate(null, item.price, 'price')}
+        ${
+          item.priceBeforeDiscount?.amount
+            ? getPriceTextTemplate(
+                null,
+                item.priceBeforeDiscount,
+                'price-before-discount',
+              )
+            : ''
+        }
+      </div>
     </div>
   `;
 }
@@ -91,7 +95,9 @@ export const getCartItemsTemplate = (cartItems: CartItem[] = []): string => {
   });
 
   return `
-    <div class="cart-items">
+    <div class="cart-items ${
+      itemLines.length === 1 ? 'one-item' : 'many-items'
+    }">
       ${itemLines.join('')}
     </div>
   `;

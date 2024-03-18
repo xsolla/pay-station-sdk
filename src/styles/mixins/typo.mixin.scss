@@ -1,0 +1,15 @@
+@mixin psdk-typo() {
+  color: var(--psdk-font-color);
+  font-weight: 400;
+  font-size: var(--psdk-font-size);
+  font-family: var(--psdk-font-family);
+  line-height: var(--psdk-line-height);
+}
+
+@mixin psdk-title2 {
+  color: var(--psdk-title2-color);
+  font-weight: var(--psdk-title2-font-weight);
+  font-size: var(--psdk-title2-font-size);
+  font-family: var(--psdk-font-family);
+  line-height: var(--psdk-title2-line-height);
+}

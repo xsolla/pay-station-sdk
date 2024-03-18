@@ -1,0 +1,32 @@
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: GraphikLCWebUikit;
+  src:
+    url('./assets/fonts/Graphik-Regular-Web.woff2') format('woff2'),
+    url('./assets/fonts/Graphik-Regular-Web.woff') format('woff'),
+    url('./assets/fonts/Graphik-Regular-Web.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 500;
+  font-style: normal;
+  font-family: GraphikLCWebUikit;
+  src:
+    url('./assets/fonts/Graphik-Medium-Web.woff2') format('woff2'),
+    url('./assets/fonts/Graphik-Medium-Web.woff') format('woff'),
+    url('./assets/fonts/Graphik-Medium-Web.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: bold;
+  font-style: normal;
+  font-family: GraphikLCWebUikit;
+  src:
+    url('./assets/fonts/Graphik-Bold-Web.woff2') format('woff2'),
+    url('./assets/fonts/Graphik-Bold-Web.woff') format('woff'),
+    url('./assets/fonts/Graphik-Bold-Web.ttf') format('truetype');
+  font-display: swap;
+}

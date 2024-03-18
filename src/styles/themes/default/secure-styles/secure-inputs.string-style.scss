@@ -1,0 +1,5 @@
+@use 'src/styles/mixins/controls.mixin' as controls;
+
+input {
+  @include controls.psdk-input;
+}
