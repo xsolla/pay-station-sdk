@@ -1,0 +1,129 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/payment-methods.mixin' as payment-methods;
+@use 'src/styles/mixins/cart.mixin' as cart;
+
+psdk-finance-details {
+  @include typo.psdk-typo;
+
+  & > * {
+    margin-bottom: 12px;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .subtotal-row,
+  .total-row,
+  .details,
+  .total-details-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .details {
+    flex-wrap: wrap;
+  }
+
+  .title {
+    margin-right: 8px;
+    font-weight: 500;
+  }
+
+  .price-container {
+    display: flex;
+    gap: 4px;
+  }
+
+  .one-item {
+    .cart-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-container {
+      overflow: hidden;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 12px;
+      border-radius: 16px;
+
+      & img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .details-wrapper {
+      display: flex;
+      width: 100%;
+    }
+
+    .details {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+    }
+  }
+
+  .many-items {
+    .cart-item {
+      display: flex;
+      min-height: 54px;
+      margin-bottom: 12px;
+    }
+
+    .image-container {
+      flex-shrink: 0;
+      overflow: hidden;
+      width: 48px;
+      height: 48px;
+      margin-right: 12px;
+      border-radius: 12px;
+
+      & img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .details-wrapper {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    .details {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+    }
+  }
+
+  .price-wrapper {
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .price-before-discount {
+    @include cart.line-through;
+
+    color: var(--psdk-secondary-color);
+  }
+
+  .tax {
+    display: flex;
+    gap: 4px;
+    color: var(--psdk-secondary-color);
+  }
+
+  .description {
+    flex-grow: 1;
+    word-break: break-all;
+  }
+
+  .divider {
+    border: none;
+    border-bottom: 1px solid var(--psdk-divider-color);
+  }
+}

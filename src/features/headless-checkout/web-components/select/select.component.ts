@@ -5,6 +5,7 @@ import {
 } from './select.template';
 import { SelectAttributes } from './select-attributes.enum';
 import { SelectComponentConfig } from './select-component.config.interface';
+import './select.component.scss';
 
 export class SelectComponent extends BaseControl<SelectComponentConfig> {
   protected config: SelectComponentConfig | null = null;

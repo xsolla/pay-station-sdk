@@ -3,6 +3,7 @@ import { CheckboxAttributes } from './checkbox-attributes.enum';
 import { getCheckboxComponentTemplate } from './checkbox.template';
 import { XpsBoolean } from '../../../../core/xps-boolean.enum';
 import { CheckboxComponentConfig } from './checkbox-component-config.interface';
+import './checkbox.component.scss';
 
 export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
   protected config: CheckboxComponentConfig | null = null;
@@ -33,7 +34,7 @@ export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
 
       this.render();
       this.addEventListenerToElement(this.inputRef, 'change', (event: Event) =>
-        this.notifyOnValueChanges(event)
+        this.notifyOnValueChanges(event),
       );
     });
   }

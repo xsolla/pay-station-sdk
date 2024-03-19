@@ -12,17 +12,32 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.string-style.s[ac]ss$/i,
+        use: ['raw-loader', 'sass-loader'],
+      },
+      {
+        test: /(?<!\.string-style)\.s[ac]ss/i,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'resolve-url-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+            },
+          },
           'sass-loader',
         ],
       },
       {
         test: /\.(svg|png)$/,
         type: 'asset/inline',
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]',
+        },
       },
     ],
   },

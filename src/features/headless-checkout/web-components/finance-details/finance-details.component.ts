@@ -6,6 +6,7 @@ import { WebComponentAbstract } from '../../../../core/web-components/web-compon
 import { HeadlessCheckout } from '../../headless-checkout';
 import { getFinanceDetailsHandler } from '../../post-messages-handlers/get-finance-details.handler';
 import { getFinanceDetailsTemplate } from './finance-details.template';
+import './finance-details.component.scss';
 
 export class FinanceDetailsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;

@@ -1,6 +1,7 @@
 import { PaymentMethod } from '../../../../core/payment-method.interface';
 import { cdnUrl } from '../../environment';
 import { cardPid } from './variables';
+import arrow from '../../../../assets/icons/arrow-right.svg';
 
 const iconsPath = `${cdnUrl}/paystation4/brand-logos`;
 export const getPaymentMethodTemplate = (method: PaymentMethod): string => {
@@ -16,7 +17,10 @@ export const getPaymentMethodTemplate = (method: PaymentMethod): string => {
       <span class="icon">
         <img src="${iconsPath}/${iconName}" alt="${method.name}">
       </span>
-        <span class="name">${method.name}</span>
+      <span class="name">${method.name}</span>
+      <span class="arrow">
+        <img src="${arrow as string}">
+      </span>
     </a>
 </li>`;
 };

@@ -8,6 +8,7 @@ import { PaymentMethodsEvents } from './payment-methods-events.enum';
 import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { PaymentMethodAttributes } from './payment-method-attributes.enum';
+import './payment-methods.component.scss';
 
 export class PaymentMethodsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -56,7 +57,11 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   protected getHtml(): string {
     const paymentMethodsHtml = this.getMethodsHtml();
     return `
-      <input type='text' class='search' placeholder='${this.searchPlaceHolder}'>
+      <div class='search-wrapper'>
+        <input type='text' class='search' placeholder='${
+          this.searchPlaceHolder
+        }'>
+      </div>
       <ul class='payment-methods'>
         ${paymentMethodsHtml ? paymentMethodsHtml.join('') : this.notFoundValue}
       </ul>
@@ -79,11 +84,11 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   }
 
   private readonly paymentMethodsLoadedHandler = (
-    paymentMethods: PaymentMethod[]
+    paymentMethods: PaymentMethod[],
   ): void => {
     this.paymentMethods = paymentMethods;
     this.visibleMethods = this.paymentMethods.filter(
-      (method) => method.isVisible
+      (method) => method.isVisible,
     );
     this.filteredMethods = this.visibleMethods.slice();
 
@@ -96,7 +101,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   private getMethodsHtml(): string[] | null {
     if (this.filteredMethods?.length) {
       return this.filteredMethods.map((method) =>
-        getPaymentMethodTemplate(method)
+        getPaymentMethodTemplate(method),
       );
     }
 
@@ -122,7 +127,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
     };
 
     this.listRef.dispatchEvent(
-      new CustomEvent(PaymentMethodsEvents.selectionChange, eventOptions)
+      new CustomEvent(PaymentMethodsEvents.selectionChange, eventOptions),
     );
   }
 
@@ -141,10 +146,10 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
           const searchValue = (event.target as HTMLInputElement).value;
           this.filteredMethods = filterPaymentMethods(
             this.visibleMethods,
-            searchValue
+            searchValue,
           );
           this.updateMethodsView();
-        }
+        },
       );
     }
   }

@@ -1,0 +1,4 @@
+@mixin line-through {
+  text-decoration: line-through;
+  text-decoration-color: var(--psdk-secondary-color);
+}

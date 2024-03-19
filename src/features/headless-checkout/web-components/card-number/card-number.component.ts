@@ -6,6 +6,7 @@ import { cardIconsMap } from './card-icons.map';
 import { CardType } from './card-type.enum';
 import { CardNumberComponentAttributes } from './card-number-component-attributes.enum';
 import { TextComponent } from '../text-component/text.component';
+import './card-number.component.scss';
 
 export class CardNumberComponent extends TextComponent {
   private cardType = 'default';
@@ -30,7 +31,7 @@ export class CardNumberComponent extends TextComponent {
           this.cardType = res?.cardType ? res.cardType : 'default';
           this.updateCardIcon(this.cardType);
         }
-      }
+      },
     );
   }
 
@@ -55,7 +56,7 @@ export class CardNumberComponent extends TextComponent {
     const iconWrapperElement = rootElement.querySelector('.card-icon');
 
     const iconElement = iconWrapperElement!.querySelector(
-      '.icon'
+      '.icon',
     ) as HTMLImageElement | null;
 
     const cardIcon =
@@ -74,7 +75,7 @@ export class CardNumberComponent extends TextComponent {
 
   private toggleCardIconVisibility(): void {
     const isCardIconShownAttr = this.getAttribute(
-      CardNumberComponentAttributes.icon
+      CardNumberComponentAttributes.icon,
     );
 
     if (!isCardIconShownAttr) {

@@ -11,8 +11,7 @@
       }
     ],
     "color-function-notation": "legacy",
-    "alpha-value-notation": "number",
-    "property-disallowed-list": ["gap"]
+    "alpha-value-notation": "number"
   },
   "overrides": [
     {

@@ -10,6 +10,7 @@ import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/
 import { getPaymentStatusConfig } from './template-config/get-payment-status-config.function';
 import { getSavingMethodStatusConfig } from './template-config/get-saving-method-status-config.function';
 import { getStatusState } from './template-config/get-status-state.function';
+import './status.component.scss';
 
 export class StatusComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -55,7 +56,7 @@ export class StatusComponent extends WebComponentAbstract {
   }
 
   private statusLoadedHandler(
-    statusConfig: StatusComponentConfig | null
+    statusConfig: StatusComponentConfig | null,
   ): void {
     this.statusConfig = statusConfig;
 
@@ -81,7 +82,7 @@ export class StatusComponent extends WebComponentAbstract {
     }
 
     if (status.isSavePaymentAccount) {
-      return getSavingMethodStatusConfig(statusState);
+      return getSavingMethodStatusConfig(statusState, status);
     }
     return getPaymentStatusConfig(statusState, status);
   }

@@ -1,0 +1,40 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/payment-methods.mixin' as payment-methods;
+@use 'src/styles/mixins/controls.mixin' as controls;
+
+psdk-payment-methods {
+  @include typo.psdk-typo;
+
+  .payment-methods {
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-wrapper {
+    display: flex;
+    margin-bottom: 10px;
+
+    & .search {
+      @include controls.psdk-input;
+
+      flex-grow: 1;
+    }
+  }
+
+  .payment-method {
+    @include payment-methods.payment-methods;
+
+    position: relative;
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .arrow {
+      position: absolute;
+      right: 12px;
+      display: flex;
+    }
+  }
+}
