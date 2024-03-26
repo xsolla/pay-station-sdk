@@ -2,7 +2,6 @@
 @import './themes/default/variables';
 @import 'src/styles/mixins/typo.mixin';
 
-psdk-text,
 psdk-submit-button,
 psdk-default-submit-button,
 psdk-payment-methods,
@@ -12,16 +11,11 @@ psdk-finance-details,
 psdk-legal,
 psdk-payment-form,
 psdk-status,
-psdk-phone,
-psdk-card-number,
 psdk-3ds,
 psdk-select,
 psdk-checkbox,
 psdk-user-balance,
-psdk-payment-form-messages,
-psdk-google-pay-button,
-psdk-apple-pay,
-psdk-qr-code {
+psdk-payment-form-messages {
   @include psdk-typo;
 
   .field-error {
@@ -33,8 +27,7 @@ psdk-text,
 psdk-phone,
 psdk-card-number,
 psdk-google-pay-button,
-psdk-apple-pay,
-psdk-qr-code {
+psdk-apple-pay {
   @include psdk-typo;
 
   .field-error {
@@ -53,6 +46,24 @@ psdk-qr-code {
   }
 }
 
+psdk-google-pay-button {
+  iframe {
+    height: 44px;
+  }
+}
+
+psdk-qr-code {
+  @include psdk-typo;
+
+  display: flex;
+  min-height: 170px;
+
+  iframe {
+    width: 100%;
+    border: none;
+  }
+}
+
 .psdk-is-loading {
   .wrapper {
     border-radius: 5px;
@@ -67,4 +78,8 @@ psdk-qr-code {
   to {
     background-position-x: -200%;
   }
+}
+
+.label {
+  margin-bottom: 2px;
 }

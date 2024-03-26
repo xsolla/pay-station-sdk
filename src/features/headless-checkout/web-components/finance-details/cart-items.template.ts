@@ -80,7 +80,7 @@ function getCartItemText(item: CartItem): string {
 }
 
 export const getCartItemsTemplate = (cartItems: CartItem[] = []): string => {
-  if (!cartItems.length) {
+  if (!cartItems?.length) {
     return '';
   }
 
@@ -96,7 +96,7 @@ export const getCartItemsTemplate = (cartItems: CartItem[] = []): string => {
 
   return `
     <div class="cart-items ${
-      itemLines.length === 1 ? 'one-item' : 'many-items'
+      itemLines?.length === 1 ? 'one-item' : 'many-items'
     }">
       ${itemLines.join('')}
     </div>

@@ -60,7 +60,7 @@ function getSubtotalTitle(cartSummary: CartSummary): string {
     `);
   }
 
-  return lines.length
+  return lines?.length
     ? `
     <div class="subtotal-row">
       ${lines.join('')}
