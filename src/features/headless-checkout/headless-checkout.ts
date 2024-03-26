@@ -33,7 +33,6 @@ import { formFieldsStatusChangedHandler } from './post-messages-handlers/form-fi
 import { FormFieldsStatus } from '../../core/form/form-fields-status.interface';
 import { getCombinedPaymentMethodsHandler } from './post-messages-handlers/get-combined-payment-methods.handler';
 import { CombinedPaymentMethods } from '../../core/combined-payment-methods.interface';
-import { themes } from '../../core/customization/themes.map';
 import { ThemesLoader } from '../../core/customization/themes-loader';
 
 @singleton()
@@ -141,7 +140,7 @@ export class HeadlessCheckout {
   private formStatus: FormStatus = FormStatus.undefined;
   private isWebView?: boolean;
   private isSandbox?: boolean;
-  private theme?: [keyof typeof themes];
+  private theme?: string;
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
@@ -159,7 +158,7 @@ export class HeadlessCheckout {
   public async init(environment: {
     isWebview?: boolean;
     sandbox?: boolean;
-    theme?: [keyof typeof themes];
+    theme?: string;
   }): Promise<void> {
     this.isWebView = environment.isWebview;
     this.isSandbox = environment.sandbox;
@@ -364,9 +363,7 @@ export class HeadlessCheckout {
     });
   }
 
-  private async setupSecureStyles(
-    themeName?: [keyof typeof themes],
-  ): Promise<void> {
+  private async setupSecureStyles(themeName?: string): Promise<void> {
     if (!themeName) {
       return;
     }
