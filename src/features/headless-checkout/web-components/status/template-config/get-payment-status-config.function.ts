@@ -14,8 +14,8 @@ export function getPaymentStatusConfig(
     return {
       image: failedImage,
       title: i18next.t('status.error.title'),
-      description: '',
-      showDescription: false,
+      description: i18next.t('error.title.default'),
+      showDescription: true,
       status: status.statusState,
     };
   }
@@ -34,8 +34,8 @@ export function getPaymentStatusConfig(
     return {
       image: failedImage,
       title: i18next.t('status.error.title'),
-      description: '',
-      showDescription: false,
+      description: i18next.t('error.title.default'),
+      showDescription: true,
       status: status.statusState,
     };
   }

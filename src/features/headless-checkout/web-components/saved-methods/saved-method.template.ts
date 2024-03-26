@@ -2,6 +2,7 @@ import { cdnUrl } from '../../environment';
 import { SavedMethod } from '../../../../core/saved-method.interface';
 import { getExpireDate } from './pipes/get-expire-date.pipe';
 import { getCutterName } from './pipes/name-cutter.pipe';
+import deleteIcon from '../../../../assets/icons/delete.svg';
 
 const iconsPath = `${cdnUrl}/paystation4/brand-logos`;
 
@@ -32,7 +33,9 @@ export const getSavedMethodTemplate = (
         ${expireDate ? `<span class='expire-date'>${expireDate}</span>` : ''}
         ${
           isDeleteMode
-            ? `<button class='psdk-delete-saved-method-button'>delete</button>`
+            ? `<button class='psdk-delete-saved-method-button'>
+                  <img src="${deleteIcon as string}">
+                </button>`
             : ''
         }
     </a>
