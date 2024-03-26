@@ -5,4 +5,5 @@ export interface SelectComponentConfig extends ControlComponentConfig {
   readonly?: boolean;
   options?: Array<{ label: string; value: string }>;
   tooltip?: TextConfigTooltip;
+  initValue?: string;
 }

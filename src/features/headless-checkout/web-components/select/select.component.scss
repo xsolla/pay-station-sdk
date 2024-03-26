@@ -73,9 +73,13 @@ psdk-select {
   .option {
     display: flex;
 
-    :hover {
+    :hover, &.active {
       background: var(--psdk-select-hover-bg);
-      color: var(--psdk-select-hover-color);
+    }
+
+    &.focused {
+      background: var(--psdk-select-focus-bg);
+      color: var(--psdk-select-focus-color);
     }
 
     .option-content {
