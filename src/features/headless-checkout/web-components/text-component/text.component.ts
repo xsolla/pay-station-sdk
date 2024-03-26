@@ -38,7 +38,7 @@ export class TextComponent extends SecureComponentAbstract {
         if (res?.fieldName && res?.fieldName === this.inputName) {
           this.finishLoadingComponentHandler(this.inputName);
         }
-      }
+      },
     );
   }
 
@@ -58,7 +58,7 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected async getControlComponentConfig(
-    inputName: string
+    inputName: string,
   ): Promise<TextComponentConfig> {
     const msg: Message<{ inputName: string }> = {
       name: EventName.getControlComponentConfig,
@@ -73,13 +73,13 @@ export class TextComponent extends SecureComponentAbstract {
         return getControlComponentConfigHandler(message, (controlName) => {
           return msg.data?.inputName === controlName;
         });
-      }
+      },
     ) as Promise<TextComponentConfig>;
   }
 
   protected readonly configLoadedHandler = (
     config: TextComponentConfig,
-    componentName: string
+    componentName: string,
   ): void => {
     this.config = config;
     this.componentName = componentName;

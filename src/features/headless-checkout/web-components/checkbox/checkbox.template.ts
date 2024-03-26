@@ -1,22 +1,29 @@
 import { XpsBoolean } from '../../../../core/xps-boolean.enum';
 import { CheckboxComponentConfig } from './checkbox-component-config.interface';
+import check from '../../../../assets/icons/check.svg';
 
 export const getCheckboxComponentTemplate = (
-  config: CheckboxComponentConfig
+  config: CheckboxComponentConfig,
 ): string => {
   const isChecked = config.initValue === XpsBoolean.true;
   const placeholder = config.placeholder;
+  const error = config.error;
 
   return `
-    <label for='${config.name}' class='wrapper'>
+    <div class='checkbox'>
        <input
-        class='checkbox'
         type='checkbox'
         id='${config.name}'
         name='${config.name}'
         ${isChecked ? 'checked' : ''}
         />
-        ${placeholder ? `<span class='label'>${placeholder}</span>` : ''}
-  </label>
+        <div class='checkbox-dummy'>
+          ${isChecked ? `<img src='${check}' alt='checkbox'>` : ''}
+        </div>
+        <div class='wrapper'>
+          ${placeholder ? `<span class='label'>${placeholder}</span>` : ''}
+          ${error ? `<span class='field-error'>${error}</span>` : ''}
+        </div>
+  </div>
  `;
 };

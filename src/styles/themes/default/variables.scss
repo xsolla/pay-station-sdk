@@ -47,6 +47,11 @@
   --psdk-input-placeholder-color: rgba(0, 0, 0, 0.55);
   --psdk-input-placeholder-focus-color: rgb(0, 0, 0);
 
+  // checkbox
+
+  --psdk-checkbox-checked-bg: rgba(61, 70, 245, 1);
+  --psdk-checkbox-unchecked-bg: rgba(65, 57, 96, 0.15);
+
   // divider
   --psdk-divider-color: rgba(0, 0, 0, 0.15);
 
@@ -57,8 +62,9 @@
   --psdk-title2-line-height: 18px;
 
   // select-list
-  --psdk-select-hover-bg: rgb(61, 70, 245);
-  --psdk-select-hover-color: rgb(255, 255, 255);
+  --psdk-select-hover-bg: rgba(65, 57, 96, 0.1);
+  --psdk-select-focus-bg: rgb(61, 70, 245);
+  --psdk-select-focus-color: rgb(255, 255, 255);
 
   // shadows
   --psdk-shadow: 0px 6px 10px 4px rgba(7, 7, 8, 0.1),

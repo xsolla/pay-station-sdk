@@ -40,6 +40,10 @@
     border-color: var(--psdk-input-disabled-border-color);
     background: var(--psdk-input-disabled-bg);
   }
+
+  &.invalid {
+    border-color: var(--psdk-input-error-border-color);
+  }
 }
 
 @mixin psdk-select {
