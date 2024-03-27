@@ -1,5 +1,68 @@
 @use 'src/styles/mixins/typo.mixin' as typo;
 
 psdk-checkbox {
+  $checkbox-size: 18px;
+  $checkbox-img-size: 14px;
+  $checkbox-offset: 1px;
   @include typo.psdk-typo;
+
+  .checkbox {
+    position: relative;
+    display: flex;
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-left: 8px;
+    }
+
+    &-dummy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: $checkbox-size;
+      height: $checkbox-size;
+      border-color: var(--psdk-checkbox-unchecked-bg);
+      border-radius: 2px;
+      background: var(--psdk-checkbox-unchecked-bg);
+
+      img {
+        position: absolute;
+        display: none;
+        width: $checkbox-img-size;
+        height: $checkbox-img-size;
+        inset: $checkbox-offset + 1 $checkbox-offset $checkbox-offset - 1
+          $checkbox-offset + 1;
+      }
+    }
+  }
+
+  input {
+    z-index: 1;
+    display: inline-block;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    margin: 0;
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  input,
+  input:checked {
+    border: 1px solid transparent;
+    background: transparent;
+    appearance: none;
+  }
+
+  input:checked + .checkbox-dummy {
+    border-color: var(--psdk-checkbox-checked-bg);
+    background: var(--psdk-checkbox-checked-bg);
+
+    img {
+      display: block;
+    }
+  }
 }

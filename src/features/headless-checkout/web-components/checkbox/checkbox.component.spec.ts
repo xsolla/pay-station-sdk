@@ -31,7 +31,7 @@ describe('CheckboxComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.CheckboxComponent,
-    CheckboxComponent
+    CheckboxComponent,
   );
 
   beforeEach(() => {
@@ -68,7 +68,7 @@ describe('CheckboxComponent', () => {
 
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.CheckboxComponent)
+      document.querySelector(WebComponentTagName.CheckboxComponent),
     ).toBeDefined();
   });
 
@@ -90,7 +90,7 @@ describe('CheckboxComponent', () => {
 
     const spy = spyOn(
       element as unknown as { notifyOnValueChanges(): void },
-      'notifyOnValueChanges'
+      'notifyOnValueChanges',
     );
 
     setTimeout(() => {
