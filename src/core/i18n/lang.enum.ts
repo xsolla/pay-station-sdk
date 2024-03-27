@@ -17,7 +17,6 @@ export enum Lang {
   RU = 'ru',
   TH = 'th',
   TR = 'tr',
+  TW = 'tw',
   VI = 'vi',
-  ZH_HANS = 'zh_HANS',
-  ZH_HANT = 'zh_HANT',
 }
