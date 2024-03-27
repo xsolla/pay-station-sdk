@@ -27,6 +27,7 @@ psdk-select {
 
   .dropdown {
     position: absolute;
+    z-index: 1;
     display: none;
     flex-direction: column;
     align-items: center;

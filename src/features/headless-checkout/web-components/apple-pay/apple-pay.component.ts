@@ -20,6 +20,7 @@ import { getWaitingProcessingTemplate } from './waiting-processing.template';
 import { waitingProcessingClassname } from './waiting-processing-classname.const';
 import { applePayButtonClassName } from './apple-pay-button-classname.const';
 import { actionsToStopWaiting } from './actions-to-stop-waiting.set';
+import './apple-pay.component.scss';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
@@ -46,7 +47,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
         if (res?.error) {
           this.drawError(res.error);
         }
-      }
+      },
     );
 
     this.headlessCheckout.events.onCoreEvent(
@@ -56,7 +57,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
         if (res?.redirectUrl) {
           this.openRedirectPage(res.redirectUrl);
         }
-      }
+      },
     );
 
     this.headlessCheckout.events.onCoreEvent(
@@ -66,7 +67,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
         if (res?.fieldName && res?.fieldName === this.componentName) {
           this.finishLoadingComponentHandler(this.componentName);
         }
-      }
+      },
     );
   }
 
@@ -97,7 +98,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
       return;
     }
     const errorsContainer = this.querySelector(
-      '.' + errorsHtmlWrapperClassName
+      '.' + errorsHtmlWrapperClassName,
     );
     if (!errorsContainer) {
       return;
@@ -122,7 +123,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
   private hidePayButton(): void {
     const applePayButton: HTMLElement | null = this.querySelector(
-      `.${applePayButtonClassName}`
+      `.${applePayButtonClassName}`,
     );
     if (applePayButton) {
       applePayButton.style.visibility = 'hidden';
@@ -132,7 +133,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
   private showPayButton(): void {
     const applePayButton: HTMLElement | null = this.querySelector(
-      `.${applePayButtonClassName}`
+      `.${applePayButtonClassName}`,
     );
     if (applePayButton) {
       applePayButton.style.visibility = 'visible';
@@ -145,14 +146,14 @@ export class ApplePayComponent extends SecureComponentAbstract {
     waitingProcessingWrapper.classList.add(waitingProcessingClassname);
     waitingProcessingWrapper.innerHTML = getWaitingProcessingTemplate(
       i18next.t('status.processing.title'),
-      i18next.t('status.processing.description')
+      i18next.t('status.processing.description'),
     );
     this.append(waitingProcessingWrapper);
   }
 
   private removeWaitingElement(): void {
     const waitingProcessingWrapper = this.querySelector(
-      `.${waitingProcessingClassname}`
+      `.${waitingProcessingClassname}`,
     );
     if (waitingProcessingWrapper) {
       waitingProcessingWrapper.remove();
@@ -181,7 +182,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
   }
 
   private readonly handleApplePayWindowMessages = (
-    event: MessageEvent
+    event: MessageEvent,
   ): void => {
     const message = JSON.parse(event.data) as {
       command: string;
@@ -195,7 +196,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
     if (message.command === ApplePayCommands.applePaySendToken) {
       this.destroyApplePayWindow();
       void this.submitForm(
-        (message.data as { applePayToken: string }).applePayToken
+        (message.data as { applePayToken: string }).applePayToken,
       );
       return;
     }
@@ -211,7 +212,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
     }
     this.window.removeEventListener(
       'message',
-      this.handleApplePayWindowMessages
+      this.handleApplePayWindowMessages,
     );
 
     if (stopLoading) {
