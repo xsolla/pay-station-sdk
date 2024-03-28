@@ -31,4 +31,13 @@ psdk-status {
 
     margin-top: 20px;
   }
+
+  .message {
+    @include typo.psdk-typo;
+
+    padding: 12px;
+    border-radius: var(--psdk-common-border-radius);
+    background-color: var(--psdk-neutral-bg);
+    color: var(--psdk-neutral-color);
+  }
 }

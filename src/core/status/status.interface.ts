@@ -59,4 +59,5 @@ export interface Status {
     };
   };
   isSavePaymentAccount?: boolean;
+  autoCancellation: boolean;
 }

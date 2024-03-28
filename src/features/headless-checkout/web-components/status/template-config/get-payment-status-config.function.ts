@@ -17,6 +17,7 @@ export function getPaymentStatusConfig(
       description: '',
       showDescription: false,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 
@@ -27,6 +28,7 @@ export function getPaymentStatusConfig(
       description: i18next.t('status.processing.description'),
       showDescription: true,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 
@@ -37,6 +39,7 @@ export function getPaymentStatusConfig(
       description: '',
       showDescription: false,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 
@@ -49,6 +52,7 @@ export function getPaymentStatusConfig(
       }),
       showDescription: !!status.email,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 

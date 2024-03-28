@@ -14,6 +14,7 @@
       "status.error.title": "Payment failed",
       "status.success.title": "Payment successful",
       "status.success.description": "We sent your receipt to {{email}}",
+      "status.message.auto-cancellation": "Complete the transaction with the selected payment method. If you choose not to complete it on the payment method's page, close this window. Your account won't be charged.",
       "finance-details-total-title": "Total",
       "finance-details-subtotal-title": "Subtotal",
       "finance-details-hrk-equal": "Equals {{value}} HRK",

@@ -7,4 +7,5 @@ export interface StatusComponentConfig {
   showDescription: boolean;
   isSavePaymentAccount?: boolean;
   status: StatusEnum;
+  autoCancellation: boolean;
 }

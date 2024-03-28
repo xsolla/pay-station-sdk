@@ -8,6 +8,7 @@ const mockStatusConfig: StatusComponentConfig = {
   description: '',
   showDescription: false,
   status: StatusEnum.done,
+  autoCancellation: true,
 };
 const mockStatusConfigWithDescription: StatusComponentConfig = {
   title: 'title',
@@ -15,6 +16,7 @@ const mockStatusConfigWithDescription: StatusComponentConfig = {
   description: 'description',
   showDescription: true,
   status: StatusEnum.done,
+  autoCancellation: true,
 };
 
 describe('getStatusComponentTemplate', () => {
