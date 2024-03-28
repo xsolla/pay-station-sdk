@@ -17,6 +17,7 @@ export function getSavingMethodStatusConfig(
       showDescription: false,
       isSavePaymentAccount: true,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 
@@ -28,6 +29,7 @@ export function getSavingMethodStatusConfig(
       showDescription: true,
       isSavePaymentAccount: true,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 
@@ -39,6 +41,7 @@ export function getSavingMethodStatusConfig(
       showDescription: false,
       isSavePaymentAccount: true,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 
@@ -50,6 +53,7 @@ export function getSavingMethodStatusConfig(
       showDescription: false,
       isSavePaymentAccount: true,
       status: status.statusState,
+      autoCancellation: status.autoCancellation,
     };
   }
 

@@ -40,6 +40,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Güvenli bağlantı",
          "status.error.title" : "Ödeme alınamadı",
+         "status.message.auto-cancellation" : "Ödemeyi seçili ödeme yöntemiyle tamamlayın. Ödeme yönteminin sayfasında işlemi tamamlamamayı seçerseniz bu pencereyi kapatın. Bu durumda hesabınızdan ücret tahsil edilmez.",
          "status.processing.description" : "Ödeme işleminin tamamlanması bekleniyor...",
          "status.processing.title" : "Ödeme işlemi gerçekleştiriliyor",
          "status.success.description" : "Makbuzunuzu {{email}} adresine gönderdik",

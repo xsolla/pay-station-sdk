@@ -40,6 +40,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Безопасное соединение",
          "status.error.title" : "Платеж не прошел",
+         "status.message.auto-cancellation" : "Завершите транзакцию с выбранным способом оплаты. Если вы решите не завершать платеж на странице способа оплаты, закройте это окно. Деньги не спишутся.",
          "status.processing.description" : "Ожидаем завершения оплаты...",
          "status.processing.title" : "Обработка платежа",
          "status.success.description" : "Мы отправили чек на {{email}}",
