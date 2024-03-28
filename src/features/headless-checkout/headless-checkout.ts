@@ -35,6 +35,7 @@ import { getCombinedPaymentMethodsHandler } from './post-messages-handlers/get-c
 import { CombinedPaymentMethods } from '../../core/combined-payment-methods.interface';
 import { themes } from '../../core/customization/themes.map';
 import { ThemesLoader } from '../../core/customization/themes-loader';
+import { Lang } from '../../core/i18n/lang.enum';
 
 @singleton()
 export class HeadlessCheckout {
@@ -160,12 +161,13 @@ export class HeadlessCheckout {
     isWebview?: boolean;
     sandbox?: boolean;
     theme?: [keyof typeof themes];
+    language?: Lang;
   }): Promise<void> {
     this.isWebView = environment.isWebview;
     this.isSandbox = environment.sandbox;
     this.theme = environment.theme;
 
-    await this.localizeService.initDictionaries();
+    await this.localizeService.initDictionaries(environment.language);
 
     this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
     await this.setupCoreIframe();
@@ -323,6 +325,10 @@ export class HeadlessCheckout {
     return this.postMessagesClient.send<Status>(msg, (message) =>
       getPaymentStatusHandler(message),
     ) as Promise<Status>;
+  }
+
+  public getAvailableLanguages(): Lang[] {
+    return this.localizeService.getAvailableLanguages();
   }
 
   private async setupCoreIframe(): Promise<void> {
