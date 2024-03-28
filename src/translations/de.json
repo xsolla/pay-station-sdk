@@ -40,6 +40,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Sichere Verbindung",
          "status.error.title" : "Zahlung fehlgeschlagen",
+         "status.message.auto-cancellation" : "Schließe die Transaktion mit der ausgewählten Zahlungsmethode ab. Wenn du die Transaktion auf der Seite der Zahlungsmethoden nicht abschließen möchtest, schließe dieses Fenster. Es wird dann kein Geld abgebucht.",
          "status.processing.description" : "Zahlung wird durchgeführt …",
          "status.processing.title" : "Zahlung wird verarbeitet",
          "status.success.description" : "Wir haben den Beleg an {{email}} gesendet",

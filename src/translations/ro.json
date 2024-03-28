@@ -40,6 +40,7 @@
          "sctl-indications" : "Indicații SCTL",
          "secure-connection" : "Conexiune securizată",
          "status.error.title" : "Plată eșuată",
+         "status.message.auto-cancellation" : "Finalizați tranzacția cu metoda de plată selectată. Dacă alegeți să nu o finalizați pe pagina metodei de plată, închideți această fereastră. Contul dvs. nu va fi debitat.",
          "status.processing.description" : "Se aşteaptă încheierea plății...",
          "status.processing.title" : "Procesare plată",
          "status.success.description" : "Am trimis chitanța dumneavoastră la {{email}}",
