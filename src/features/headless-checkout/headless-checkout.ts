@@ -36,6 +36,8 @@ import { CombinedPaymentMethods } from '../../core/combined-payment-methods.inte
 import { themes } from '../../core/customization/themes.map';
 import { ThemesLoader } from '../../core/customization/themes-loader';
 import { Lang } from '../../core/i18n/lang.enum';
+import { getCountryListHandler } from './post-messages-handlers/get-country-list.handler';
+import { CountryResponse } from '../../core/country-response.interface';
 
 @singleton()
 export class HeadlessCheckout {
@@ -329,6 +331,23 @@ export class HeadlessCheckout {
 
   public getAvailableLanguages(): Lang[] {
     return this.localizeService.getAvailableLanguages();
+  }
+
+  public async getCountryList(): Promise<{
+    countryList: CountryResponse['countryList'];
+    currentCountry: string;
+  }> {
+    const msg: Message = {
+      name: EventName.getCountryList,
+    };
+
+    return this.postMessagesClient.send<{
+      countryList: CountryResponse['countryList'];
+      currentCountry: string;
+    }>(msg, getCountryListHandler) as Promise<{
+      countryList: CountryResponse['countryList'];
+      currentCountry: string;
+    }>;
   }
 
   private async setupCoreIframe(): Promise<void> {
