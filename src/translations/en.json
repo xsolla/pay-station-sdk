@@ -3,7 +3,7 @@
     "translation": {
       "hello": "Hello world!",
       "legal": "Legal",
-      "disclaimer": "Xsolla is the official distributor of this content. By purchasing, you confirm that you’re an adult and that you've read, understood, and accepted the <a href={{link}} target='_blank'>EULA</a>. You also accept that the agreement takes effect immediately and acknowledge that you'll lose any right of withdrawal once the digital content starts downloading.",
+      "disclaimer-with-cookies": "By proceeding, you confirm you’re an adult according to your state laws and agree to be bound by <a href={{xsolla_terms_link}} target=\"_blank\">Xsolla’s EULA</a>.<br>Xsolla independently collects essential cookies on this page and further while processing the purchase which is covered by <a href={{xsolla_privacy_link}} target=\"_blank\">Xsolla’s Cookie Policy</a>.<br>Please note that for this purchase, Xsolla is the authorized merchant of record and controller of the data you submit on this page.<br>If you have any questions, please reach out to <a href={{xsolla_help_link}} target=\"_blank\">Xsolla Gamer Support</a>.",
       "cookie-policy": "Cookie policy",
       "privacy-policy": "Privacy policy",
       "refund-policy": "Refund policy",
