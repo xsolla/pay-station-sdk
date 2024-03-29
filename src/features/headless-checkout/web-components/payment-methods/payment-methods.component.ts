@@ -87,9 +87,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
     paymentMethods: PaymentMethod[],
   ): void => {
     this.paymentMethods = paymentMethods;
-    this.visibleMethods = this.paymentMethods.filter(
-      (method) => method.isVisible,
-    );
+    this.visibleMethods = this.paymentMethods;
     this.filteredMethods = this.visibleMethods.slice();
 
     super.render();

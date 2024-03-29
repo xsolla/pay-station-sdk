@@ -25,6 +25,7 @@ psdk-saved-methods {
     }
 
     & .name {
+      flex-grow: 1;
       margin-right: 8px;
     }
 
@@ -33,5 +34,12 @@ psdk-saved-methods {
       right: 12px;
       display: flex;
     }
+  }
+
+  .psdk-delete-saved-method-button {
+    display: flex;
+    border: none;
+    background: transparent;
+    cursor: pointer;
   }
 }

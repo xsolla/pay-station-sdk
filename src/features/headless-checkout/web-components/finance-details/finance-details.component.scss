@@ -16,7 +16,8 @@ psdk-finance-details {
   .subtotal-row,
   .total-row,
   .details,
-  .total-details-row {
+  .total-details-row,
+  .transaction-invoice {
     display: flex;
     justify-content: space-between;
   }
