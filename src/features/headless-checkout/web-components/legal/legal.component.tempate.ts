@@ -17,8 +17,10 @@ export const getLegalComponentTemplate = (
       disclaimer
         ? `
   <div class='disclaimer'>
-    ${i18next.t('disclaimer', {
-      link: 'https://xsolla.com/eula',
+    ${i18next.t('disclaimer-with-cookies', {
+      xsolla_terms_link: 'https://xsolla.com/eula',
+      xsolla_privacy_link: 'https://xsolla.com/cookie',
+      xsolla_help_link: 'https://help.xsolla.com/',
     })}
   </div>`
         : ''
@@ -32,16 +34,6 @@ export const getLegalComponentTemplate = (
         target='_blank'
       >
         ${i18next.t('legal')}
-      </a>
-
-      <div class='divider'></div>
-
-      <a
-        class='link link-legal'
-        href='https://xsolla.com/cookie'
-        target='_blank'
-      >
-        ${i18next.t('cookie-policy')}
       </a>
 
       <div class='divider'></div>
