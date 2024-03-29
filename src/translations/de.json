@@ -5,6 +5,7 @@
          "apple-pay.errors.payment" : "Zahlung konnte nicht verarbeitet werden. Vergewissere dich, ob du auf deinem Gerät bei Apple angemeldet bist und Apple Pay eingerichtet hast, bevor du es erneut versuchst. Es dauert einige Minuten, bis Änderungen in den Apple-Einstellungen synchronisiert sind.",
          "cookie-policy" : "Cookie-Richtlinie",
          "disclaimer" : "Xsolla ist der offizielle Vertreiber dieses Inhalts. Mit dem Kauf bestätigst du, dass du volljährig bist und die <a href={{link}} target='_blank'>EULA<\/a> gelesen und verstanden hast und damit einverstanden bist. Du akzeptierst außerdem, dass die Vereinbarung sofort in Kraft tritt und dass du dein Widerrufsrecht verlierst, sobald der Download des digitalen Inhalts beginnt.",
+         "error.title.default" : "Zahlung konnte nicht verarbeitet werden",
          "finance-details-cart-items-checkout-title" : "Ingame-Kauf",
          "finance-details-hrk-equal" : "Entspricht {{value}} HRK",
          "finance-details-hrk-exchange-rate" : "Wechselkurs: 1 EUR = 7,5345 HRK",

@@ -5,6 +5,7 @@
          "apple-pay.errors.payment" : "Ödemeniz işleme konulamadı. Tekrar denemeden önce cihazınızda Apple'a giriş yapmış olduğunuzdan emin olun ve Apple Pay'i kurun. Apple ayarlarındaki değişikliklerin senkronize olması birkaç dakika sürer.",
          "cookie-policy" : "Çerez Politikası",
          "disclaimer" : "Xsolla, bu içeriğin resmi dağıtıcısıdır. Satın alarak yetişkin olduğunuzu ve <a href={{link}} target='_blank'>EULA<\/a> belgesini okuduğunuzu, anladığınızı, kabul ettiğinizi beyan etmiş olursunuz. Ayrıca dijital içeriğin indirilmeye başladığı anda bu sözleşmenin yürürlüğe girdiğini ve cayma hakkınızdan feragat ettiğinizi kabul etmiş olursunuz.",
+         "error.title.default" : "Ödeme işlenemedi",
          "finance-details-cart-items-checkout-title" : "Oyun içi satın alma",
          "finance-details-hrk-equal" : "{{value}} Hırvat kunasına eşittir",
          "finance-details-hrk-exchange-rate" : "Döviz kuru: 1 euro = 7,5345 Hırvat kunası",

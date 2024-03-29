@@ -5,6 +5,7 @@
          "apple-pay.errors.payment" : "Nie można przetworzyć Twojej płatności. Upewnij się, że jesteś zalogowany w Apple na swoim urządzeniu i skonfiguruj Apple Pay przed ponowną próbą. Synchronizacja zmian w ustawieniach Apple może potrwać kilka minut.",
          "cookie-policy" : "Polityka plików cookie",
          "disclaimer" : "Xsolla jest oficjalnym dystrybutorem tych treści. Dokonując zakupu potwierdzasz, że jesteś osobą pełnoletnią i przeczytałeś, zrozumiałeś i zaakceptowałeś <a href={{link}} target='_blank'>Umowę licencyjną użytkownika końcowego (EULA)<\/a>. Wyrażasz również zgodę na natychmiastowe wejście w życie postanowień umownych i przyjmujesz do wiadomości, że po rozpoczęciu pobierania treści cyfrowych utracisz prawo odstąpienia od umowy.",
+         "error.title.default" : "Nie udało się przetworzyć płatności",
          "finance-details-cart-items-checkout-title" : "Zakup w grze",
          "finance-details-hrk-equal" : "Wynosi {{value}} HRK",
          "finance-details-hrk-exchange-rate" : "Kurs wymiany: 1 EUR = 7,5345 HRK",
