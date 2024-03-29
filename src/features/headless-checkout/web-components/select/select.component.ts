@@ -7,6 +7,10 @@ import { SelectAttributes } from './select-attributes.enum';
 import { SelectComponentConfig } from './select-component.config.interface';
 import './select.component.scss';
 import { SelectKeys } from './select-keys.enum';
+import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
+import { container } from 'tsyringe';
+import { EventName } from '../../../../core/event-name.enum';
+import { SelectType } from './select-type.enum';
 
 export class SelectComponent extends BaseControl<SelectComponentConfig> {
   protected config: SelectComponentConfig | null = null;
@@ -15,6 +19,7 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
   private isOpened = false;
   private selectedOptionIndex!: number;
   private currentHoverOptionIndex!: number;
+  private readonly headlessCheckoutSpy!: HeadlessCheckoutSpy;
 
   private get rootElement(): this | ShadowRoot {
     return this.shadowRoot ?? this;
@@ -26,31 +31,34 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
 
   public constructor() {
     super();
+    this.headlessCheckoutSpy = container.resolve(HeadlessCheckoutSpy);
   }
 
   public get nameAttr(): string {
     return this.getAttribute(SelectAttributes.name) ?? '';
   }
 
+  public get typeAttr(): string {
+    return this.getAttribute(SelectAttributes.type) ?? '';
+  }
+
   public static get observedAttributes(): string[] {
-    return [SelectAttributes.name];
+    return [SelectAttributes.name, SelectAttributes.name];
   }
 
   protected connectedCallback(): void {
-    this.controlName = this.nameAttr;
+    this.controlName = this.nameAttr || this.typeAttr;
 
     if (!this.controlName) {
       return;
     }
 
-    this.listenFieldStatusChange();
+    if (!this.headlessCheckoutSpy.appWasInit) {
+      this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
+      return;
+    }
 
-    void this.getComponentConfig(this.controlName).then((config) => {
-      this.config = config;
-      console.log(config);
-
-      this.render();
-    });
+    this.loadConfig();
   }
 
   protected attributeChangedCallback(): void {
@@ -75,6 +83,45 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
     this.addOptions();
 
     this.addHandlers();
+  }
+
+  protected notifyOnFocusEvent(): void {
+    if (this.typeAttr === SelectType.country) {
+      return;
+    }
+
+    super.notifyOnFocusEvent();
+  }
+
+  protected notifyOnBlurEvent(): void {
+    if (this.typeAttr === SelectType.country) {
+      return;
+    }
+
+    super.notifyOnBlurEvent();
+  }
+
+  protected notifyOnValueChanges(value: unknown): void {
+    if (this.typeAttr === SelectType.country) {
+      this.dispatchChangeCountryEvent(value);
+
+      return;
+    }
+    super.notifyOnValueChanges(value);
+  }
+
+  private dispatchChangeCountryEvent(value: unknown): void {
+    const eventOptions = {
+      bubbles: true,
+      composed: true,
+      detail: {
+        country: value,
+      },
+    };
+
+    this.rootElement.dispatchEvent(
+      new CustomEvent(EventName.userCountryChanged, eventOptions),
+    );
   }
 
   private toggleDropdown(): void {
@@ -126,24 +173,18 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
     );
 
     this.addEventListenerToElement(button, 'keydown', (event) => {
-      const { key: keyEvent, code } = event as KeyboardEvent;
-      const key = keyEvent.toLowerCase();
+      const key = (event as KeyboardEvent).key.toLowerCase();
+      const code = (event as KeyboardEvent).code.toLowerCase();
 
       const optionsElements = Array.from(
         this.options!.children,
       ) as HTMLElement[];
 
-      if (key.length === 1 && /[a-z]/i.test(key)) {
+      if (/[a-z]/i.test(key) && key.length === 1) {
         this.handleLetterKey(key, optionsElements);
-        return;
-      }
-
-      if (key === SelectKeys.enter || code === SelectKeys.space) {
+      } else if (key === SelectKeys.enter || code === SelectKeys.space) {
         this.handleEnterOrSpaceKey(event as KeyboardEvent);
-        return;
-      }
-
-      if (
+      } else if (
         (key === SelectKeys.arrowUp || key === SelectKeys.arrowDown) &&
         this.isOpened
       ) {
@@ -283,38 +324,33 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
   private onSelectOption(event: Event): void {
     const eventTarget = event.target as HTMLElement;
 
-    if (!eventTarget) {
-      return;
-    }
+    if (!eventTarget) return;
 
     const optionValue = this.getOptionValue(eventTarget);
     const optionIndex = this.getOptionIndex(eventTarget);
     const previousOption = this.getOptionByIndex(this.selectedOptionIndex);
 
-    if (optionValue && optionIndex && previousOption) {
-      this.removeFocusedClass(previousOption as HTMLElement);
+    if (!optionValue || !optionIndex || !previousOption) return;
 
-      this.selectedOptionValue = optionValue;
-      this.selectedOptionIndex = this.currentHoverOptionIndex =
-        Number(optionIndex);
+    this.removeFocusedClass(previousOption as HTMLElement);
 
-      const selectedOptionElement =
-        this.rootElement.querySelector('#select-content');
+    this.selectedOptionValue = optionValue;
+    this.selectedOptionIndex = this.currentHoverOptionIndex =
+      Number(optionIndex);
 
-      const selectedOption = this.config?.options?.find(
-        (option) => this.selectedOptionValue === option.value,
-      );
+    const selectedOptionElement =
+      this.rootElement.querySelector('#select-content');
+    const selectedOption = this.config?.options?.find(
+      (option) => this.selectedOptionValue === option.value,
+    );
 
-      if (selectedOptionElement && eventTarget.parentElement) {
-        selectedOptionElement.innerHTML = selectedOption?.label ?? '';
+    if (!selectedOptionElement || !eventTarget.parentElement) return;
 
-        this.setFocusedClass(eventTarget.parentElement);
+    selectedOptionElement.innerHTML = selectedOption?.label ?? '';
+    this.setFocusedClass(eventTarget.parentElement);
 
-        this.closeDropdown();
-
-        this.notifyOnValueChanges(this.selectedOptionValue);
-      }
-    }
+    this.closeDropdown();
+    this.notifyOnValueChanges(this.selectedOptionValue);
   }
 
   private getOptionValue(target: HTMLElement): string | null {
@@ -345,5 +381,38 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
 
   private removeFocusedClass(element: HTMLElement): void {
     element.classList.remove('focused');
+  }
+
+  private setupSelectCountryConfig(): void {
+    void this.headlessCheckout.getCountryList().then((data) => {
+      this.config = {
+        options: data.countryList.map((country) => ({
+          label: country.name,
+          value: country.ISO,
+        })),
+      };
+
+      this.config.initValue = data.currentCountry;
+
+      this.render();
+    });
+  }
+
+  private loadConfig(): void {
+    switch (this.typeAttr) {
+      case SelectType.country: {
+        this.setupSelectCountryConfig();
+
+        break;
+      }
+      default:
+        this.listenFieldStatusChange();
+
+        void this.getComponentConfig(this.controlName).then((config) => {
+          this.config = config;
+
+          this.render();
+        });
+    }
   }
 }
