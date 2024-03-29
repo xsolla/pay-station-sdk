@@ -5,6 +5,7 @@
          "apple-pay.errors.payment" : "Não foi possível processar seu pagamento. Certifique-se de estar acessando sua conta Apple em seu dispositivo e configure a Apple Pay antes de tentar novamente. As mudanças nas configurações da Apple pode levar alguns minutos para ser sincronizada.",
          "cookie-policy" : "Política de Cookies",
          "disclaimer" : "A Xsolla é a distribuidora oficial desse conteúdo. Ao comprá-lo, você confirma que é um adulto e que você leu, compreendeu e aceitou o <a href={{link}} target='_blank'>CLUA<\/a>. Você também aceita que o acordo entra em efeito imediatamente e reconhece que você perde qualquer direito de arrependimento assim que o download do conteúdo digital é iniciado.",
+         "error.title.default" : "Não foi possível processar o pagamento",
          "finance-details-cart-items-checkout-title" : "Compra no jogo",
          "finance-details-hrk-equal" : "Equivale {{value}}HRK",
          "finance-details-hrk-exchange-rate" : "Taxa de câmbio: 1 EUR = 7,5345 HRK",
