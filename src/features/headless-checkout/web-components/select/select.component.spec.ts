@@ -5,6 +5,7 @@ import { WebComponentTagName } from '../../../../core/web-components/web-compone
 import { HeadlessCheckout } from '../../headless-checkout';
 import { SelectAttributes } from './select-attributes.enum';
 import { SelectComponent } from './select.component';
+import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 
 function createComponent(name: string): HTMLElement {
   const element = document.createElement(WebComponentTagName.SelectComponent);
@@ -34,6 +35,7 @@ const configMock = {
 describe('SelectComponent', () => {
   let postMessagesClient: PostMessagesClient;
   let headlessCheckout: HeadlessCheckout;
+  let headlessCheckoutSpy: HeadlessCheckoutSpy;
 
   window.customElements.define(
     WebComponentTagName.SelectComponent,
@@ -53,6 +55,13 @@ describe('SelectComponent', () => {
       },
     } as unknown as HeadlessCheckout;
 
+    headlessCheckoutSpy = {
+      listenAppInit: noopStub,
+      get appWasInit() {
+        return true;
+      },
+    } as unknown as HeadlessCheckoutSpy;
+
     container.clearInstances();
 
     container
@@ -64,11 +73,24 @@ describe('SelectComponent', () => {
       })
       .register(Window, {
         useValue: window,
+      })
+      .register(HeadlessCheckoutSpy, {
+        useValue: headlessCheckoutSpy,
       });
   });
 
   afterEach(() => {
     document.body.innerHTML = '';
+    const appWasInitSpy = spyOnProperty(
+      headlessCheckoutSpy,
+      'appWasInit',
+      'get',
+    );
+    const listenAppInitSpy = spyOn(headlessCheckoutSpy, 'listenAppInit');
+    listenAppInitSpy.and.callFake((callback: () => void) => {
+      appWasInitSpy.and.returnValue(true);
+      callback();
+    });
   });
 
   it('Should create component', () => {

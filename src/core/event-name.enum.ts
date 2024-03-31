@@ -4,6 +4,7 @@ export const enum EventName {
   initPayment = 'initPayment',
   initForm = 'initForm',
   submitForm = 'submitForm',
+  getCountryList = 'getCountryList',
   getPaymentMethodsList = 'getPaymentMethodsList',
   getPaymentQuickMethods = 'getPaymentQuickMethods',
   getCombinedPaymentMethods = 'getCombinedPaymentMethods',
@@ -32,4 +33,5 @@ export const enum EventName {
   applePayError = 'applePayError',
   openApplePayPage = 'openApplePayPage',
   submitApplePayForm = 'submitApplePayForm',
+  userCountryChanged = 'userCountryChanged',
 }
