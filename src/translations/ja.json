@@ -1,6 +1,8 @@
 {
    "ja" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Payは、OS 10.12 SierraまたはIOS 10をインストールしたSafariブラウザでのみご利用いただけます。ブラウザを変更するか、他の決済方法を選択してください。",
+         "apple-pay.errors.payment" : "",
          "cookie-policy" : "クッキーポリシー",
          "disclaimer" : "エクソーラはこのコンテンツの正規代理です。購入することにより、あなたは成人であり、<a href={{link}} target='_blank'>EULA<\/a>を読み、理解し、同意したことを確認します。また、本契約が直ちに発効することを承諾し、デジタルコンテンツのダウンロードが開始された時点で、撤回する権利を失うことを了承するものとします。",
          "finance-details-cart-items-checkout-title" : "ゲーム内購入",
@@ -37,6 +39,7 @@
          "sctl-indications" : "特商法取引に基づく表示",
          "secure-connection" : "安全な接続",
          "status.error.title" : "決済失敗",
+         "status.message.auto-cancellation" : "選択された決済方法で取引を完了してください。決済方法のページで完了しないことを選択した場合は、このウィンドウを閉じてください。アカウントには請求されません。",
          "status.processing.description" : "決済の完了待ち...",
          "status.processing.title" : "決済処理中",
          "status.success.description" : "領収書を{{email}}に送信しました",

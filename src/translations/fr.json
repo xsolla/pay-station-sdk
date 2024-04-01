@@ -39,6 +39,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Connexion sécurisée",
          "status.error.title" : "Échec de paiement",
+         "status.message.auto-cancellation" : "Complétez la transaction avec le mode de paiement sélectionné. Si vous choisissez de ne pas terminer la transaction une fois sur la page du mode de paiement, fermez la fenêtre. Votre compte ne sera pas débité.",
          "status.processing.description" : "En attente de l'achèvement du paiement…",
          "status.processing.title" : "Traitement du paiement",
          "status.success.description" : "Nous avons envoyé votre reçu à {{email}}",

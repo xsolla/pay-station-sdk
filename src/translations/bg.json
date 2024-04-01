@@ -39,6 +39,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Сигурна връзка",
          "status.error.title" : "Неуспешно плащане",
+         "status.message.auto-cancellation" : "Завършете транзакцията с избрания начин на плащане. Ако изберете да не я завършвате на страницата на начина на плащане, затворете прозореца. Няма да бъдете таксувани.",
          "status.processing.description" : "Изчаква завършване на плащане...",
          "status.processing.title" : "Плащането се обработва",
          "status.success.description" : "Изпратихме касовата Ви бележка на {{email}}",

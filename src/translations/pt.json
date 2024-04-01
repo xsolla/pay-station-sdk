@@ -39,6 +39,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Conexão segura",
          "status.error.title" : "Falha no pagamento",
+         "status.message.auto-cancellation" : "Conclua a transação com o método de pagamento selecionado. Se você escolher não concluí-la na página de métodos de pagamento, feche esta janela. Sua conta não será cobrada.",
          "status.processing.description" : "Aguardando a conclusão do pagamento",
          "status.processing.title" : "Pagamento em processamento",
          "status.success.description" : "Enviamos seu recibo para {{email}}",

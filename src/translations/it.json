@@ -1,13 +1,15 @@
 {
    "it" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "",
+         "apple-pay.errors.payment" : "Impossibile processare il pagamento. Verifica di avere eseguito l'accesso a Apple sul dispositivo e configura Apple Pay prima di provare di nuovo. Sono necessari un paio di minuti per la sincronizzazione delle modifiche alle impostazioni di Apple.",
          "cookie-policy" : "Informativa sui Cookie",
          "disclaimer" : "Xsolla è il distributore ufficiale di questo contenuto. Procedendo con l'acquisto, l'utente conferma di essere maggiorenne e di aver letto, compreso e accettato l' <a href={{link}} target='_blank'>EULA<\/a>. L'utente accetta inoltre che il contratto abbia effetto immediato e riconosce che perderà qualsiasi diritto di recesso una volta che il contenuto digitale inizierà a essere scaricato.",
          "finance-details-cart-items-checkout-title" : "Acquisto in-game",
          "finance-details-hrk-equal" : "Pari a {{value}} HKR",
          "finance-details-hrk-exchange-rate" : "Tasso di cambio: 1 EUR = 7,5345 HRK",
          "finance-details-sales-tax" : "Imposta sulle vendite",
-         "finance-details-sales-tax-including" : "Imposta sulle vendite",
+         "finance-details-sales-tax-including" : "",
          "finance-details-sales-tax-percent" : "Imposta sulle vendite {{percent}}%",
          "finance-details-subtotal-details-discount" : "Sconto",
          "finance-details-subtotal-details-fee" : "Commissione sistema di pagamento",
@@ -37,6 +39,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Connessione sicura",
          "status.error.title" : "Pagamento non riuscito",
+         "status.message.auto-cancellation" : "Completa la transazione con il metodo di pagamento selezionato. Se decidi di non completarlo sulla pagina del metodo di pagamento, chiudi questa finestra. Non verrà addebitato niente sul tuo conto.",
          "status.processing.description" : "In attesa che il pagamento venga completato…",
          "status.processing.title" : "Elaborazione pagamento",
          "status.success.description" : "Abbiamo inviato una ricevuta a {{email}}",

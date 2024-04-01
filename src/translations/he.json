@@ -1,6 +1,8 @@
 {
    "he" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "",
+         "apple-pay.errors.payment" : "עיבוד התשלום נכשל. לפני שמנסים שוב, חשוב לוודא שנכנסת ל-Apple במכשיר שלך והגדרת את Apple Pay. סנכרון השינויים שמבוצעים ב-Apple יימשך כמה דקות.",
          "cookie-policy" : "מדיניות בנושא קובצי Cookie",
          "disclaimer" : "‏Xsolla היא המפיצה הרשמית של התוכן הזה. קנייה מבטאת אישור שלך שאינך קטין\/ה ושקראת את <a href={{link}} target='_blank'>הסכם משתמש הקצה<\/a>, הבנת אותו והסכמת לתנאיו. כמו כן, ניתנת ההסכמה שלך שהסכם זה נכנס לתוקף מיידי וידוע לך שאחרי תחילת ההורדה של התוכן הדיגיטלי לא תהיה לך זכות לבטל את הקנייה.",
          "finance-details-cart-items-checkout-title" : "רכישה מתוך המשחק",
@@ -37,6 +39,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "חיבור מאובטח",
          "status.error.title" : "התשלום נכשל",
+         "status.message.auto-cancellation" : "צריך להשלים את העסקה באמצעות אמצעי התשלום שבחרת. אם אינך רוצה להשלים את העסקה בדף של אמצעי התשלום, אפשר לסגור את החלון והחשבון שלך לא יחויב.",
          "status.processing.description" : "בהמתנה לסיום התשלום...",
          "status.processing.title" : "התשלום בעיבוד",
          "status.success.description" : "שלחנו את הקבלה אל {{email}}",

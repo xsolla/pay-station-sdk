@@ -39,6 +39,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "اتصال آمن",
          "status.error.title" : "فشلت عملية السداد",
+         "status.message.auto-cancellation" : "أكمل المعاملة باستخدام طريقة السداد المحددة. إذا اخترت عدم إكمالها في صفحة طريقة الدفع، فأغلق هذه النافذة. لن تُخصم أي مبالغ من حسابك.",
          "status.processing.description" : "في انتظار أن يتم السداد...",
          "status.processing.title" : "جارٍ تنفيذ السداد",
          "status.success.description" : "أرسلنا إيصالك إلى {{email}}",
