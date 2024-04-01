@@ -1,7 +1,7 @@
 {
    "ko" : {
       "translation" : {
-         "apple-pay.errors.device-is-not-capable" : "",
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay는 Sierra 10.12 또는 IOS 10 OS가 설치된 Safari 브라우저에서만 이용 가능합니다. 브라우저를 변경하거나 다른 결제 옵션을 선택해 주세요.",
          "apple-pay.errors.payment" : "결제를 처리할 수 없습니다. 귀하의 장치에서 Apple에 로그인했는지 확인하고 Apple Pay를 설정한 후 다시 시도하세요. Apple 설정의 변경 사항을 동기화하는 데에는 몇 분 정도 걸립니다.",
          "cookie-policy" : "쿠키 정책",
          "disclaimer" : "이 콘텐츠의 공식 배포자는 엑솔라입니다. 이를 구매함으로써 귀하는 본인이 성인이며 <a href={{link}} target='_blank'>EULA<\/a>를 읽고 이해했으며 이에 동의했음을 확인합니다. 또한 귀하는 계약이 즉시 효력을 발생한다는 사실에 동의하며 디지털 콘텐츠의 다운로드가 시작되면 철회할 수 있는 권리를 상실하게 된다는 사실을 인정합니다.",

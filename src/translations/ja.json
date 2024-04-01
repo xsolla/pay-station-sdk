@@ -2,7 +2,7 @@
    "ja" : {
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Payは、OS 10.12 SierraまたはIOS 10をインストールしたSafariブラウザでのみご利用いただけます。ブラウザを変更するか、他の決済方法を選択してください。",
-         "apple-pay.errors.payment" : "",
+         "apple-pay.errors.payment" : "トラザックションを処理できません。お使いのデバイスでAppleにサインインし、Apple Payを設定していることを確認してから再試行してください。Appleの設定の変更は、同期に2〜3分かかります。",
          "cookie-policy" : "クッキーポリシー",
          "disclaimer" : "エクソーラはこのコンテンツの正規代理です。購入することにより、あなたは成人であり、<a href={{link}} target='_blank'>EULA<\/a>を読み、理解し、同意したことを確認します。また、本契約が直ちに発効することを承諾し、デジタルコンテンツのダウンロードが開始された時点で、撤回する権利を失うことを了承するものとします。",
          "finance-details-cart-items-checkout-title" : "ゲーム内購入",
@@ -29,7 +29,7 @@
          "finance-details-vat-percent" : "消費税 {{percent}}%",
          "finance-details-vat-percent-including" : "{{percent}}% 消費税込み",
          "hello" : "こんにちは、世界！",
-         "legal" : "",
+         "legal" : "法的文書",
          "privacy-policy" : "プライバシーポリシー",
          "refund-policy" : "返金ポリシー",
          "saving-status.error.title" : "決済方法を保存できません",
