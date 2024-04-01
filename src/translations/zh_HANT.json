@@ -1,8 +1,11 @@
 {
    "zh_HANT" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay 僅適用於已安裝 OS 10.12 Sierra 或 IOS 10 的 Safari 瀏覽器。請變更您的瀏覽器或選取其他付款選項。",
+         "apple-pay.errors.payment" : "無法為您處理付款。請確認有透過裝置，登入 Apple，並在重試之前，設定好 Apple Pay。凡 Apple 設定變更，大概都要花幾分鐘時間，才能完成同步處理。",
          "cookie-policy" : "Cookie 政策",
          "disclaimer" : "愛索拉是此內容的官方發布商。進行購買即代表您確認您是成年人並已閱讀、理解並接受<a href={{link}} target='_blank'>使用者許可協議<\/a>。您還同意協議將立即生效，並認識到一旦數字內容開始下載，您將失去任何撤銷權利。",
+         "error.title.default" : "無法處理付款",
          "finance-details-cart-items-checkout-title" : "遊戲內選購",
          "finance-details-hrk-equal" : "相當於 {{value}} 克羅埃西亞庫納(HRK)",
          "finance-details-hrk-exchange-rate" : "匯率換算：1 歐元 (EUR) = 7.5345 克羅埃西亞庫納 (HRK)",
