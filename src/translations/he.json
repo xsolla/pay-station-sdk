@@ -1,8 +1,11 @@
 {
    "he" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay זמין רק בדפדפן Safari עם מערכת הפעלה OS 10.12 Sierra או IOS 10. צריך להשתמש בדפדפן אחר או לבחור אפשרות תשלום אחרת.",
+         "apple-pay.errors.payment" : "עיבוד התשלום נכשל. לפני שמנסים שוב, חשוב לוודא שנכנסת ל-Apple במכשיר שלך והגדרת את Apple Pay. סנכרון השינויים שמבוצעים ב-Apple יימשך כמה דקות.",
          "cookie-policy" : "מדיניות בנושא קובצי Cookie",
          "disclaimer" : "‏Xsolla היא המפיצה הרשמית של התוכן הזה. קנייה מבטאת אישור שלך שאינך קטין\/ה ושקראת את <a href={{link}} target='_blank'>הסכם משתמש הקצה<\/a>, הבנת אותו והסכמת לתנאיו. כמו כן, ניתנת ההסכמה שלך שהסכם זה נכנס לתוקף מיידי וידוע לך שאחרי תחילת ההורדה של התוכן הדיגיטלי לא תהיה לך זכות לבטל את הקנייה.",
+         "error.title.default" : "העיבוד של התשלום נכשל",
          "finance-details-cart-items-checkout-title" : "רכישה מתוך המשחק",
          "finance-details-hrk-equal" : "שווה-ערך ל-{{value}} קונה קרואטי",
          "finance-details-hrk-exchange-rate" : "שער המרה: 1 אירו = 7.5345 קונה קרואטי",
