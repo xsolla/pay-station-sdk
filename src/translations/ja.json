@@ -40,6 +40,7 @@
          "sctl-indications" : "特商法取引に基づく表示",
          "secure-connection" : "安全な接続",
          "status.error.title" : "決済失敗",
+         "status.message.auto-cancellation" : "選択された決済方法で取引を完了してください。決済方法のページで完了しないことを選択した場合は、このウィンドウを閉じてください。アカウントには請求されません。",
          "status.processing.description" : "決済の完了待ち...",
          "status.processing.title" : "決済処理中",
          "status.success.description" : "領収書を{{email}}に送信しました",

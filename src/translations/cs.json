@@ -40,6 +40,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Zabezpečené připojení",
          "status.error.title" : "Platba se nezdařila",
+         "status.message.auto-cancellation" : "Dokončete transakci pomocí vybraného způsobu platby. Pokud se na stránce způsobu platby rozhodnete transakci nedokončit, zavřete toto okno. Z Vašeho účtu nebude stržena žádná částka.",
          "status.processing.description" : "Čekání na dokončení platby...",
          "status.processing.title" : "Zpracovávání platby",
          "status.success.description" : "Vaši stvrzenku jsme zaslali na {{email}}",

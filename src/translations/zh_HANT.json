@@ -40,6 +40,7 @@
          "sctl-indications" : "特定商業交易法聲明",
          "secure-connection" : "安全連線",
          "status.error.title" : "付款失敗",
+         "status.message.auto-cancellation" : "請使用所選的付款方式完成交易。如果您選擇不在付款方式的頁面上完成交易，請關閉此視窗，您的帳戶將不會被扣費。",
          "status.processing.description" : "等待完成付款......",
          "status.processing.title" : "正在處理付款",
          "status.success.description" : "我們已將您的收據發送至 {{email}}",

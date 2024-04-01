@@ -40,6 +40,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Bezpieczne połączenie",
          "status.error.title" : "Płatność nieudana",
+         "status.message.auto-cancellation" : "Dokończ transakcję przy użyciu wybranej metody płatności. Jeśli nie chcesz zrealizować transakcji na stronie metody płatności, zamknij to okno. Twoje konto nie zostanie obciążone.",
          "status.processing.description" : "Oczekiwanie na sfinalizowanie płatności...",
          "status.processing.title" : "Trwa przetwarzanie płatności",
          "status.success.description" : "Wysłaliśmy rachunek na adres {{email}}",

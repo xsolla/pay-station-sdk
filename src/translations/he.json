@@ -40,6 +40,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "חיבור מאובטח",
          "status.error.title" : "התשלום נכשל",
+         "status.message.auto-cancellation" : "צריך להשלים את העסקה באמצעות אמצעי התשלום שבחרת. אם אינך רוצה להשלים את העסקה בדף של אמצעי התשלום, אפשר לסגור את החלון והחשבון שלך לא יחויב.",
          "status.processing.description" : "בהמתנה לסיום התשלום...",
          "status.processing.title" : "התשלום בעיבוד",
          "status.success.description" : "שלחנו את הקבלה אל {{email}}",

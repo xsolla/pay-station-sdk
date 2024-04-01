@@ -40,6 +40,7 @@
          "sctl-indications" : "SCTL Indications",
          "secure-connection" : "Kết nối bảo mật",
          "status.error.title" : "Thanh toán thất bại",
+         "status.message.auto-cancellation" : "Hoàn tất giao dịch với phương thức thanh toán đã chọn. Nếu bạn không muốn hoàn tất giao dịch trên trang của phương thức thanh toán, hãy đóng cửa sổ này lại. Tài khoản của bạn sẽ không bị tính phí.",
          "status.processing.description" : "Đợi thanh toán hoàn tất...",
          "status.processing.title" : "Đang xử lý thanh toán",
          "status.success.description" : "Biên nhận đã được gửi đến {{email}}",
