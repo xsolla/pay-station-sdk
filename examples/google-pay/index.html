@@ -12,26 +12,27 @@
 Link the SDK bundle.
 NOTE: In this example, we use a local build just for convenience purposes.
 -->
-    <script src="../../dist/main.js"></script>
+  <script src='../../dist/main.js'></script>
     <script src="../variables.js"></script>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+  <link rel='stylesheet' href='style.css' />
+  <link rel='stylesheet' href='../../dist/style.css' />
+</head>
 
   <body>
     <h1>Pay Station SDK</h1>
 
-    <h1>GooglePay payment integration (only https)</h1>
+<h1>Google Pay payment integration</h1>
 
     <div id="form-container"></div>
     <div id="status-container"></div>
 
-    <!--
-  Add finance details component to show purchase details
+<!--
+  Add the finance details component to show purchase details.
 -->
     <psdk-finance-details></psdk-finance-details>
 
-    <!--
-  Add legal component to provide links to legal documents
+<!--
+  Add the legal component to provide links to legal documents.
 -->
     <psdk-legal></psdk-legal>
     <!-- Initialization script -->
@@ -68,6 +69,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
         await headlessCheckout.init({
           isWebView: false,
           sandbox: false,
+          theme: 'default'
         });
 
         /**
@@ -78,24 +80,28 @@ NOTE: In this example, we use a local build just for convenience purposes.
         await headlessCheckout.setToken(accessToken);
 
         /**
-         * Define payment method id.
+         * Define payment method ID.
          * To get lists of payment methods use psdk-payment-methods.
          * Refer to `examples/select-method` for more details
          */
         const googlePayPaymentMethodId = 3431;
 
-        const form = await headlessCheckout.form.init({
-          paymentMethodId: googlePayPaymentMethodId,
-          returnUrl:
-            'http://localhost:3000/pay-station-sdk/examples/return.html',
-        });
+    const form = await headlessCheckout.form.init({
+      paymentMethodId: googlePayPaymentMethodId,
+      /**
+       * Initialize payment.
+       * returnUrl will be opened after payment is completed on external payment method side.
+       * Please see `examples/return.html` for more details.
+       */
+      returnUrl: 'http://return',
+    });
 
-        /**
-         * Subscribe to payment actions
-         */
-        headlessCheckout.form.onNextAction((nextAction) => {
-          console.log('Next action', nextAction);
-          const statusContainer = document.querySelector('#status-container');
+    /**
+     * Subscribe to payment actions.
+     */
+    headlessCheckout.form.onNextAction((nextAction) => {
+      console.log('Next action', nextAction);
+      const statusContainer = document.querySelector('#status-container');
 
           if (nextAction.type === 'check_status') {
             /**
@@ -107,8 +113,15 @@ NOTE: In this example, we use a local build just for convenience purposes.
             statusContainer.append(statusComponent);
           }
 
-          if (nextAction.type === 'special_button') {
-            formElement.innerHTML = '';
+
+      /**
+       * To render the GooglePay button, it is necessary to handle the "special_button" NextAction.
+       */
+      if (nextAction.type === 'special_button') {
+        /**
+         * Remove unnecessary form fields to render GooglePayButtonComponent in the same place.
+         */
+        formElement.innerHTML = '';
 
             if (nextAction.data.buttonName === 'google-pay') {
               const googleButton = new PayStationSdk.GooglePayButtonComponent();
@@ -117,45 +130,45 @@ NOTE: In this example, we use a local build just for convenience purposes.
           }
         });
 
-        /**
-         * Create payment form
-         */
-        const formElement = document.querySelector('#form-container');
+    /**
+     * Create a payment form.
+     */
+    const formElement = document.querySelector('#form-container');
 
-        /**
-         * form.fields provide available fields for selected payment method.
-         * You can filter it by `isMandatory` flag to get required fields only
-         */
-        const requiredFields = form.fields.filter(
-          (field) => field.isMandatory === '1',
-        );
-        console.log('Required form fields', requiredFields);
+    /**
+     * form.fields provide available fields for selected payment method.
+     * You can filter it by the `isMandatory` flag to get required fields only.
+     */
+    const requiredFields = form.fields.filter(
+      (field) => field.isMandatory === '1'
+    );
+    console.log('Required form fields', requiredFields);
 
+    /**
+     * Render requried fields.
+     */
+    requiredFields.forEach((field) => {
+      if (field.type === 'text') {
         /**
-         * Render requried fields
+         * You can use <psdk-text name="field.name"></psdk-text> as well.
          */
-        requiredFields.forEach((field) => {
-          if (field.type === 'text') {
-            /**
-             * You can use <psdk-text name="field.name"></psdk-text> as well
-             */
-            const input = new PayStationSdk.TextComponent();
-            input.setAttribute('name', field.name);
-            formElement.append(input);
-          }
-        });
-
-        /**
-         * Render submit form button.
-         * You can use <psdk-submit-button></psdk-submit-button> as well
-         */
-        const submitButton = new PayStationSdk.SubmitButtonComponent();
-        submitButton.setAttribute('text', 'Pay Now');
-        formElement.append(submitButton);
+        const input = new PayStationSdk.TextComponent();
+        input.setAttribute('name', field.name);
+        formElement.append(input);
       }
+    });
 
-      // Initialize sdk
-      initPayStationSdk();
-    </script>
-  </body>
+    /**
+     * Render the submit form button.
+     * You can use <psdk-submit-button></psdk-submit-button> as well.
+     */
+    const submitButton = new PayStationSdk.SubmitButtonComponent();
+    submitButton.setAttribute('text', 'Pay Now');
+    formElement.append(submitButton);
+  }
+
+  // Initialize SDK.
+  initPayStationSdk();
+</script>
+</body>
 </html>
