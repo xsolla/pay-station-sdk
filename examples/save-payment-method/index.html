@@ -15,6 +15,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
     <script src="../../dist/main.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="../../dist/style.css" />
+    <script src="../variables.js"></script>
   </head>
 
   <body>
@@ -26,10 +27,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
     <!-- Initialization script -->
     <script>
       if (typeof PayStationSdk === 'undefined') {
-        alert(`
-It seems SDK library is undefined.
-Please, link CDN source or create local build (recommended to test purposes only).
-        `);
+        alert(payStationSdkUndefinedError);
         throw new Error('PayStationSdk not found');
       }
       /**
@@ -121,7 +119,7 @@ Please, link CDN source or create local build (recommended to test purposes only
           /**
            * Initialize payment.
            * returnUrl will be opened after payment is completed on external payment method side.
-           * Refer to `examples/save-payment-method/return.html` for more details.
+           * Refer to `examples/return.html` for more details.
            */
           returnUrl: 'http://return',
         });
