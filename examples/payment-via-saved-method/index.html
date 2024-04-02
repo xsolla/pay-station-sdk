@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!--
+Link the SDK bundle.
+NOTE: In this example, we use a local build just for convenience purposes.
+-->
+    <script src="../../dist/main.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../dist/style.css" />
+  </head>
+
+  <body>
+    <h1>Save payment method</h1>
+    <div class="errors"></div>
+    <div class="content"></div>
+    <psdk-legal></psdk-legal>
+
+    <!-- Initialization script -->
+    <script>
+      if (typeof PayStationSdk === 'undefined') {
+        alert(`
+It seems SDK library is undefined.
+Please, link CDN source or create local build (recommended to test purposes only).
+        `);
+        throw new Error('PayStationSdk not found');
+      }
+      /**
+       * To learn more about creating tokens,
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+       */
+      const accessToken = '';
+
+      if (!accessToken) {
+        alert(`No token provided. Please, check the documentation`);
+        throw new Error('No token provided');
+      }
+      /**
+       * The SDK is available under the PayStationSdk namespace.
+       * To begin initialization, obtain a reference to the headlessCheckout object.
+       */
+      const { headlessCheckout } = PayStationSdk;
+      const contentElement = document.querySelector('.content');
+
+      async function initPayStationSdk() {
+        /**
+         * Call the `init()` method with the provided environment object.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a WebView or not.
+         * Please note that this command executes asynchronously.
+         */
+        await headlessCheckout.init({
+          isWebView: false,
+          sandbox: true,
+          theme: 'default',
+        });
+
+        /**
+         * After the Payments SDK has been initialized, the next step is setting the token.
+         * To learn more about creating tokens,
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+         */
+        await headlessCheckout.setToken(accessToken);
+      }
+
+      function clearPaymentForm() {
+        contentElement.innerHTML = '';
+      }
+
+      async function addSavedPaymentMethods() {
+        const savedPaymentMethods = new PayStationSdk.SavedMethodsComponent();
+        contentElement.appendChild(savedPaymentMethods);
+        window.addEventListener(
+          'savedMethodSelected',
+          handlePaymentMethodChoice,
+        );
+      }
+
+      function addSubmitButtonElement() {
+        const submitButtonElement = new PayStationSdk.SubmitButtonComponent();
+        submitButtonElement.setAttribute('text', 'Pay now');
+        contentElement.appendChild(submitButtonElement);
+      }
+
+      function addPaymentFormMessagesElement() {
+        const paymentFormMessagesElement =
+          new PayStationSdk.PaymentFormMessagesComponent();
+        contentElement.appendChild(paymentFormMessagesElement);
+      }
+
+      function addPaymentFormElement() {
+        const paymentFormElement = new PayStationSdk.PaymentFormComponent();
+        contentElement.appendChild(paymentFormElement);
+      }
+
+      function handlePaymentMethodChoice(event) {
+        const payload = event.detail;
+        window.removeEventListener(
+          'savedMethodSelected',
+          handlePaymentMethodChoice,
+        );
+
+        clearPaymentForm();
+        addPaymentFormMessagesElement();
+        addPaymentFormElement();
+        addSubmitButtonElement();
+
+        initPaymentForm(payload.paymentMethodId, payload.savedMethodId);
+      }
+
+      function initPaymentForm(paymentMethodId, savedMethodId) {
+        headlessCheckout.form.init({
+          paymentMethodId: paymentMethodId,
+          paymentWithSavedMethod: true,
+          savedMethodId,
+
+          /**
+           * Initialize payment.
+           * returnUrl will be opened after payment is completed on external payment method side.
+           * Refer to `examples/save-payment-method/return.html` for more details.
+           */
+          returnUrl: 'http://return',
+        });
+      }
+
+      function handleNextActions() {
+        headlessCheckout.form.onNextAction((action) => {
+          if (action.type === 'redirect') {
+            redirectToExternalPageAction(action);
+          }
+          if (action.type === 'check_status') {
+            checkStatusAction();
+          }
+          if (action.type === 'show_errors') {
+            showErrorsAction();
+          }
+        });
+      }
+
+      function checkStatusAction() {
+        clearPaymentForm();
+        const statusElement = new PayStationSdk.StatusComponent();
+        contentElement.appendChild(statusElement);
+      }
+
+      function showErrorsAction(action) {
+        const errors = action.data.errors ?? [];
+        const formError = errors[0]?.message ?? null;
+
+        const errorsElement = document.querySelector('.errors');
+
+        if (errorsElement) {
+          errorsElement.innerHTML = formError;
+        }
+      }
+
+      function redirectToExternalPageAction(redirectAction) {
+        /**
+         * Generate the externalPaymentMethod redirect URL.
+         */
+        const url = new URL(redirectAction.data.redirect.redirectUrl);
+        const params = Object.entries(redirectAction.data.redirect.data);
+        params.forEach((entry) => {
+          const [key, value] = entry;
+          url.searchParams.append(key, value);
+        });
+
+        /**
+         * Open an external payment system.
+         */
+        this.window.location.href = url.toString();
+      }
+
+      async function main() {
+        await initPayStationSdk();
+        await addSavedPaymentMethods();
+        handleNextActions();
+      }
+
+      main();
+    </script>
+  </body>
+</html>

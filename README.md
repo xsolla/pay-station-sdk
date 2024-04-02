@@ -69,7 +69,12 @@ declare const headlessCheckout: {
   getQuickMethods(country?: string): Promise<PaymentMethod[]>;
 
   /**
-   * Returns a user’s saved methods.
+   * Returns available payment methods, including quick payment options and saved payment methods.
+   */
+  getCombinedPaymentMethods(country?: string): Promise<CombinedPaymentMethods>;
+
+  /**
+   * Returns user’s saved methods.
    */
   getSavedMethods(): Promise<SavedMethod[]>;
 
@@ -161,14 +166,14 @@ declare const headlessCheckout: {
 ### Regular components
 
 | **Component**         | **Selector**               | **Status** |
-| --------------------- |----------------------------| ---------- |
+| --------------------- | -------------------------- | ---------- |
 | Payment Methods       | psdk-payment-methods       | ✅         |
 | Saved Methods         | psdk-saved-methods         | ✅         |
 | Payment Form Messages | psdk-payment-form-messages | ✅         |
 | Checkbox              | psdk-checkbox              | ✅         |
 | Select                | psdk-select                | ✅         |
-| Apple Pay Button      | ❔                          | 🕑         |
-| Google Pay Button     | ❔                          | 🕑         |
+| Apple Pay Button      | psdk-apple-pay             | ✅         |
+| Google Pay Button     | psdk-google-pay-button     | ✅         |
 | Submit Button         | psdk-submit-button         | ✅         |
 | User Balance          | psdk-user-balance          | ✅         |
 | Finance Details       | psdk-finance-details       | ✅         |
@@ -251,7 +256,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 6. (Optional) Select the Pay Station components as regular HTML tags and subscribe on their events to implement additional logic using callbacks.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -398,3 +403,55 @@ Integration flow:
 1. Create a `return` page.
 1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
+
+## Save method integration guide
+
+> A working example can be found [here](./examples/save-payment-method).
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Display methods that can be saved `<psdk-payment-methods save-method-mode='true'></psdk-payment-methods>`.
+1. Handle the selection of the payment method with `selectionChange` event.
+1. Add a form message component to the form - `<psdk-payment-form-messages>`.
+1. Add a payment form component to the form - `<psdk-payment-form>`.
+1. Initialize the payment form with the `{ paymentMethodId: ${id}, savePaymentMethod: true, returnUrl: ${returnUrl}}` parameters, where `event.detail.paymentMethodId` is from the `selectionChange` event.
+1. Handle the next action event.
+
+## Delete saved method integration guide
+
+> A working example can be found [here](./examples/saved-methods).
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Display saved methods using the `<psdk-saved-methods>` component.
+1. To make the delete saved method button appear, you need to add the `delete-mode='true'` attribute to the `<psdk-saved-methods>` component.
+1. Handle the deleted saved method event - `deletedSavedMethodStatus`. This is optional. It can be used to display an informational message.
+
+## Payment via saved method integration guide
+
+> A working example can be found [here](./examples/payment-via-saved-method).
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Display saved methods using the `<psdk-saved-methods>` component.
+1. Handle the selection of the payment method with the `savedMethodSelected` event.
+1. Add a form message component to the form - `<psdk-payment-form-messages>`.
+1. Add a payment form component to the form - `<psdk-payment-form>`.
+1. Initialize the payment form with the `{ paymentMethodId: ${id}, paymentWithSavedMethod: true, savedMethodId, returnUrl: ${returnUrl}}` parameters, where `paymentMethodId` and `savedMethodId` are from the `savedMethodSelected` of the `event.details` parameter.
+1. Handle the next action event.
+
+## Payment via user balance
+
+1. If the user has sufficient virtual balance for full payment, a form for payment by balance will always be returned, regardless of the method passed when initiating the payment form using `headlessCheckout.form.init({...})`.
+2. Payment by balance will be reflected in the `<psdk-finance-details>` component.
+3. The user balance can also be displayed using the `<psdk-user-balance>` component.
+4. The user balance can be obtained using the `headlessCheckout.getUserBalance()` method.
