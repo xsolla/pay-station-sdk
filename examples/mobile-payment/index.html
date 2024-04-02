@@ -18,23 +18,29 @@ NOTE: In this example, we use a local build just for convenience purposes.
 </head>
 
 <body>
-<h1>Pay Station SDK</h1>
+<div class='application'>
+  <h1>Pay Station SDK</h1>
 
-<h1>Google Pay payment integration</h1>
+  <h1>Mobile payment methods integration</h1>
 
-<div id='form-container'></div>
-<div id='status-container'></div>
+  <!--
+    Add payment form messages component to show form messages
+  -->
+  <psdk-payment-form-messages></psdk-payment-form-messages>
+  <div id='form-container'></div>
+  <div id='status-container'></div>
 
-<!--
-  Add finance details component to show purchase details
--->
-<psdk-finance-details></psdk-finance-details>
+  <!--
+    Add finance details component to show purchase details
+  -->
+  <psdk-finance-details></psdk-finance-details>
 
-<!--
-  Add legal component to provide links to legal documents
--->
-<psdk-legal></psdk-legal>
-<!-- Initialization script -->
+  <!--
+    Add legal component to provide links to legal documents
+  -->
+  <psdk-legal></psdk-legal>
+  <!-- Initialization script -->
+</div>
 <script>
   if (typeof PayStationSdk === 'undefined') {
     alert(`
@@ -59,6 +65,16 @@ Please, link CDN source or create local build (recommended to test purposes only
    * To begin initialization, obtain a reference to the headlessCheckout object.
    */
   const { headlessCheckout } = PayStationSdk;
+
+  /**
+   * Render submit form button.
+   * You can use <psdk-submit-button></psdk-submit-button> as well
+   */
+  function renderSubmitButton(formElement, text = 'Pay Now') {
+    const submitButton = new PayStationSdk.SubmitButtonComponent();
+    submitButton.setAttribute('text', text);
+    formElement.append(submitButton);
+  }
 
   async function initPayStationSdk() {
     /**
@@ -86,10 +102,10 @@ Please, link CDN source or create local build (recommended to test purposes only
      * To get lists of payment methods use psdk-payment-methods.
      * Please see `examples/select-method` for more details
      */
-    const googlePayPaymentMethodId = 3431;
+    const mobilePaymentMethodId = 1738;
 
     const form = await headlessCheckout.form.init({
-      paymentMethodId: googlePayPaymentMethodId,
+      paymentMethodId: mobilePaymentMethodId,
       /**
        * Initialize payment.
        * returnUrl will be opened after payment completed on external payment method side.
@@ -104,11 +120,40 @@ Please, link CDN source or create local build (recommended to test purposes only
     headlessCheckout.form.onNextAction((nextAction) => {
       console.log('Next action', nextAction);
       const statusContainer = document.querySelector('#status-container');
+      const formMessages = document.querySelector('psdk-payment-form-messages');
+
+      /**
+       * Handle redirect action
+       */
+      if (nextAction.type === 'redirect') {
+        /**
+         * Generate redirect url
+         */
+        const url = new URL(nextAction.data.redirect.redirectUrl);
+        const params = Object.entries(nextAction.data.redirect.data);
+        params.forEach((entry) => {
+          const [key, value] = entry;
+          url.searchParams.append(key, value);
+        });
+
+        /**
+         * Open payment system page.
+         */
+        window.location.href = url;
+
+        /**
+         * Create status component. It will be updated once payment status changed.
+         * You can use <psdk-status></psdk-status> component as well
+         */
+        const statusComponent = new PayStationSdk.StatusComponent();
+        statusContainer.append(statusComponent);
+      }
 
       if (nextAction.type === 'check_status') {
         /**
          * Remove unnecessary form fields to render StatusComponent in the same place.
          */
+        formMessages.remove();
         formElement.innerHTML = '';
 
         const statusComponent = new PayStationSdk.StatusComponent();
@@ -117,18 +162,22 @@ Please, link CDN source or create local build (recommended to test purposes only
 
 
       /**
-       * To render the GooglePay button, it's necessary to handle the "special_button" NextAction.
+       * To render submit button with new texts for mobile payment, it's necessary to handle the "show_mobile_payment_screen" NextAction.
        */
-      if (nextAction.type === 'special_button') {
+      if (nextAction.type === 'show_mobile_payment_screen') {
         /**
-         * Remove unnecessary form fields to render GooglePayButtonComponent in the same place.
+         * Remove unnecessary form fields
          */
         formElement.innerHTML = '';
 
-        if (nextAction.data.buttonName === 'google-pay') {
-          const googleButton = new PayStationSdk.GooglePayButtonComponent();
-          formElement.append(googleButton);
-        }
+
+        /**
+         *  Along with the Mobile payment, a button is provided which can be used to check the status of the payment.
+         *  You need to extract the text from nextAction and render a new button.
+         */
+        const submitButtonText = nextAction.data.submitButtonText;
+
+        renderSubmitButton(formElement, submitButtonText);
       }
     });
 
@@ -160,13 +209,7 @@ Please, link CDN source or create local build (recommended to test purposes only
       }
     });
 
-    /**
-     * Render submit form button.
-     * You can use <psdk-submit-button></psdk-submit-button> as well
-     */
-    const submitButton = new PayStationSdk.SubmitButtonComponent();
-    submitButton.setAttribute('text', 'Pay Now');
-    formElement.append(submitButton);
+    renderSubmitButton(formElement);
   }
 
   // initialize sdk
