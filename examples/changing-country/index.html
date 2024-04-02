@@ -9,22 +9,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <!--
-    Link the SDK bundle.
-    NOTE: In this example, we use a local build just for convenience purposes.
-    -->
+Link the SDK bundle.
+NOTE: In this example, we use a local build just for convenience purposes.
+-->
     <script src="../../dist/main.js"></script>
-    <script src="../../dist/main.js"></script>
+    <script src="../variables.js"></script>
+    <link rel="stylesheet" href="../../dist/style.css" />
   </head>
 
   <body>
     <h1>Pay Station SDK</h1>
-
-    <!--
-    Define a specific Payments component in the HTML markup, e.g., `psdk-payment-methods`.
-    The `country` attribute indicates the country for which the payment methods are being loaded.
-    -->
-    <psdk-payment-methods country="US"></psdk-payment-methods>
-
+    <psdk-select type="country"></psdk-select>
+    <psdk-legal></psdk-legal>
     <!-- Initialization script -->
     <script>
       if (typeof PayStationSdk === 'undefined') {
@@ -41,6 +37,7 @@
         alert(`No token provided. Please, check the documentation`);
         throw new Error('No token provided');
       }
+
       async function initPayStationSdk() {
         /**
          * The SDK is available under the PayStationSdk namespace.
@@ -57,6 +54,7 @@
         await headlessCheckout.init({
           isWebView: false,
           sandbox: true,
+          theme: 'default',
         });
 
         /**
@@ -66,22 +64,15 @@
          */
         await headlessCheckout.setToken(accessToken);
 
-        /**
-         * To gain more control over Pay Station components,
-         * you can access them as regular HTML elements.
-         */
-        const paymentMethods = document.querySelector('psdk-payment-methods');
-
-        /**
-         * To add extra logic to a component, you can subscribe to
-         * its events and place your code in a callback function.
-         */
-        paymentMethods.addEventListener('selectionChange', (event) => {
-          console.log(event.detail);
-        });
+        const countrySelectorElement = document.querySelector('psdk-select');
+        countrySelectorElement.addEventListener(
+          'userCountryChanged',
+          (event) => {
+            console.log(event.detail);
+          },
+        );
       }
 
-      // run initialization script
       initPayStationSdk();
     </script>
   </body>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,6 +13,7 @@
     NOTE: In this example, we use a local build just for convenience purposes.
     -->
     <script src="../../dist/main.js"></script>
+    <script src="../variables.js"></script>
   </head>
 
   <body>
@@ -34,10 +35,7 @@
     <!-- Initialization script -->
     <script>
       if (typeof PayStationSdk === 'undefined') {
-        alert(`
-It seems SDK library is undefined.
-Please, link CDN source or create local build (recommended to test purposes only).
-        `);
+        alert(payStationSdkUndefinedError);
         throw new Error('PayStationSdk not found');
       }
       /**
@@ -87,7 +85,7 @@ Please, link CDN source or create local build (recommended to test purposes only
         /**
          * Initialize payment.
          * returnUrl will be opened after payment completed on PayPal side.
-         * Please see `examples/paypal/return.html` for more details
+         * Please see `examples/return.html` for more details
          */
         const form = await headlessCheckout.form.init({
           paymentMethodId: paypalPaymentMethodId,
@@ -139,7 +137,7 @@ Please, link CDN source or create local build (recommended to test purposes only
          * You can filter it by `isMandatory` flag to get required fields only
          */
         const requiredFields = form.fields.filter(
-          (field) => field.isMandatory === '1'
+          (field) => field.isMandatory === '1',
         );
         console.log('Required form fields', requiredFields);
 

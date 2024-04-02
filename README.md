@@ -84,6 +84,19 @@ declare const headlessCheckout: {
   getFinanceDetails(): Promise<FinanceDetails | null>;
 
   /**
+   * Returns available countries.
+   */
+  getCountryList(): Promise<{
+    countryList: CountryResponse['countryList'];
+    currentCountry: string;
+  }>;
+
+  /**
+   * Returns available locales.
+   */
+  getAvailableLanguages(): Lang[];
+
+  /**
    * Payment form.
    * Only one form can exist on a page at a time.
    */
@@ -161,14 +174,14 @@ declare const headlessCheckout: {
 ### Regular components
 
 | **Component**         | **Selector**               | **Status** |
-| --------------------- |----------------------------| ---------- |
+| --------------------- | -------------------------- | ---------- |
 | Payment Methods       | psdk-payment-methods       | ✅         |
 | Saved Methods         | psdk-saved-methods         | ✅         |
 | Payment Form Messages | psdk-payment-form-messages | ✅         |
 | Checkbox              | psdk-checkbox              | ✅         |
 | Select                | psdk-select                | ✅         |
-| Apple Pay Button      | ❔                          | 🕑         |
-| Google Pay Button     | ❔                          | 🕑         |
+| Apple Pay Button      | ❔                         | 🕑         |
+| Google Pay Button     | ❔                         | 🕑         |
 | Submit Button         | psdk-submit-button         | ✅         |
 | User Balance          | psdk-user-balance          | ✅         |
 | Finance Details       | psdk-finance-details       | ✅         |
@@ -237,13 +250,13 @@ The `ThreeDs` component contains the logic required to perform the necessary cre
 
 ## Integration guide
 
-To start using the Pay Station SDK, include the SDK bundle in your project. You can do this in any convenient way, such as adding the SDK bundle as npm-package or simply adding a CDN link in the `<script>` HTML tag.
+To start using the Pay Station SDK, include the SDK bundle in your project. You can do this in any convenient way, such as adding the SDK bundle as npm-package.
 
 > A working example can be found [here](./examples/select-method)
 
 Regardless of the SDK adding method chosen, all integration steps are the same:
 
-1. Include the SDK library in your project. It doesn't matter whether you are using an npm-package or a CDN link.
+1. Include the SDK library in your project. It doesn't matter whether you are using an npm-package.
 2. Access the `headlessCheckout` object, which contains the Pay Station initialization logic.
 3. Initialize the SDK with your environment parameters.
 4. Set the access token for the initialized SDK.
@@ -251,7 +264,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 6. (Optional) Select the Pay Station components as regular HTML tags and subscribe on their events to implement additional logic using callbacks.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -282,7 +295,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
       if (typeof PayStationSdk === 'undefined') {
         alert(`
     It seems SDK library is undefined.
-    Please, link CDN source or create local build (recommended to test purposes only).
+    Please, link PayStationSdk source or create local build (recommended to test purposes only).
             `);
       }
       /**
@@ -346,7 +359,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 
 Integration flow:
 
-1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Add the SDK library to your project. You can use an npm-package.
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
@@ -375,7 +388,7 @@ Integration flow:
 
 Integration flow:
 
-1. Add the SDK library to your project. You can use an npm package or CDN link.
+1. Add the SDK library to your project. You can use an npm package.
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
@@ -398,3 +411,34 @@ Integration flow:
 1. Create a `return` page.
 1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
+
+## Using default styles
+
+> A working example can be found [here](./examples/default-styles).
+
+1. To use the default styles of the sdk components, you need to connect the style.css file to your html document.
+2. To use the default styles of secure components, you need to pass the parameter `theme: 'default'` when initializing `headlessCheckout`.
+
+## Changing country
+
+> A working example can be found [here](./examples/changing-country).
+
+Where can the country value be used?
+
+1. When initializing the form - `headlessCheckout.form.init({ ..., country: ${countryISO} })`.
+2. Pass it as an attribute for the component `<psdk-payment-methods country="${countryISO}></psdk-payment-methods>`.
+
+How to get the country value?
+
+1. You can get the list of available countries using the method `headlessCheckout.getCountryList()`.
+1. You can use the ready-made component - `<psdk-select type='country'></psdk-select>`. When using this component, you need to listen for the `userCountryChanged` event.
+
+## Changing locales
+
+Where can the language value be used?
+
+1. The language value can be used when initializing `headlessCheckout` - `init({ language?: Lang; })`. Lang - `src/core/i18n/lang.enum.ts`.
+
+How can I get the value of the available locale?
+
+1. You can get the list of locales using the `headlessCheckout.getAvailableLanguages()` method.
