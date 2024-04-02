@@ -41,7 +41,10 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   }
 
   public static get observedAttributes(): string[] {
-    return [PaymentMethodsAttributes.country];
+    return [
+      PaymentMethodsAttributes.country,
+      PaymentMethodsAttributes.skipPaymentMethodsCount,
+    ];
   }
 
   protected connectedCallback(): void {
@@ -78,6 +81,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   private loadRegularMethods(): void {
     const country =
       this.getAttribute(PaymentMethodsAttributes.country) ?? undefined;
+
     void this.headlessCheckout
       .getRegularMethods({ country, isSaveMethodMode: this.isSaveMethodMode })
       .then(this.paymentMethodsLoadedHandler);
@@ -86,7 +90,11 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   private readonly paymentMethodsLoadedHandler = (
     paymentMethods: PaymentMethod[],
   ): void => {
-    this.paymentMethods = paymentMethods;
+    const skipPaymentMethodsCount = Number(
+      this.getAttribute(PaymentMethodsAttributes.skipPaymentMethodsCount),
+    );
+
+    this.paymentMethods = paymentMethods.slice(skipPaymentMethodsCount);
     this.visibleMethods = this.paymentMethods;
     this.filteredMethods = this.visibleMethods.slice();
 
