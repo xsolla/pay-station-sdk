@@ -85,6 +85,8 @@ export class HeadlessCheckout {
         },
       };
 
+      this.formSpy.formWasInit = false;
+
       return this.postMessagesClient.send<Form>(msg, (message) =>
         initFormHandler(message, (args?: unknown) => {
           if (args) {
