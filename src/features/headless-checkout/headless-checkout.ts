@@ -283,9 +283,14 @@ export class HeadlessCheckout {
     ) as Promise<PaymentMethod[]>;
   }
 
-  public async getCombinedPaymentMethods(): Promise<CombinedPaymentMethods> {
+  public async getCombinedPaymentMethods(
+    country?: string,
+  ): Promise<CombinedPaymentMethods> {
     const msg: Message = {
       name: EventName.getCombinedPaymentMethods,
+      data: {
+        country,
+      },
     };
 
     return this.postMessagesClient.send<CombinedPaymentMethods>(

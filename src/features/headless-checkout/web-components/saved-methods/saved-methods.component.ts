@@ -10,6 +10,7 @@ import { PostMessagesClient } from '../../../../core/post-messages-client/post-m
 import { deleteSavedMethodHandler } from '../../post-messages-handlers/delete-saved-method.handler';
 import { EventName } from '../../../../core/event-name.enum';
 import './saved-methods.component.scss';
+import deleteIcon from '../../../../assets/icons/delete.svg';
 
 export class SavedMethodsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
@@ -209,7 +210,10 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   private createDeleteButton(): HTMLButtonElement {
     const button = this.window.document.createElement('button');
     button.className = 'psdk-delete-saved-method-button';
-    button.textContent = 'delete';
+
+    const deleteIconElement = this.window.document.createElement('img');
+    deleteIconElement.src = deleteIcon;
+    button.appendChild(deleteIconElement);
     button.style.cursor = 'pointer';
 
     return button;

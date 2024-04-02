@@ -16,6 +16,7 @@ import { GooglePayButtonComponent } from './features/headless-checkout/web-compo
 import { QrCodeComponent } from './features/headless-checkout/web-components/qr-code/qr-code.component';
 import { ApplePayComponent } from './features/headless-checkout/web-components/apple-pay/apple-pay.component';
 import { PaymentFormComponent } from './features/headless-checkout/web-components/payment-form/payment-form.component';
+import { SavedMethodsComponent } from './features/headless-checkout/web-components/saved-methods/saved-methods.component';
 
 export {
   SubmitButtonComponent,
@@ -36,4 +37,5 @@ export {
   QrCodeComponent,
   ApplePayComponent,
   PaymentFormComponent,
+  SavedMethodsComponent,
 };
