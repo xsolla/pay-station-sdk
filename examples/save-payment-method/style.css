@@ -1,0 +1,12 @@
+psdk-payment-methods,
+psdk-submit-button,
+psdk-payment-form,
+psdk-payment-form-messages {
+  display: block;
+  margin-bottom: 20px;
+  max-width: auto;
+}
+
+psdk-submit-button button {
+  max-width: 100% !important;
+}
