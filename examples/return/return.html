@@ -36,7 +36,7 @@
       }
       /**
        * To learn more about creating tokens,
-       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
       const accessToken = new URL(window.location.href).searchParams.get(
         'token',
@@ -57,7 +57,7 @@
         /**
          * Call the `init()` method with the provided environment object.
          * The isWebView parameter is required and indicates whether your
-         * integration type is a webview or not.
+         * integration type is a WebView or not.
          * You can set sandbox payment mode with `sandbox` parameter
          * Please note that this command executes asynchronously.
          */
@@ -69,12 +69,12 @@
         /**
          * After the Payments SDK has been initialized, the next step is setting the token.
          * To learn more about creating tokens,
-         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
          */
         await headlessCheckout.setToken(accessToken);
       }
 
-      // initialize sdk
+      // Initialize sdk
       initPayStationSdk();
     </script>
   </body>

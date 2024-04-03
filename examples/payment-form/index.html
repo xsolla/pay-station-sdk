@@ -42,7 +42,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
       }
       /**
        * To learn more about creating tokens,
-       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
       const accessToken = '8sogGIVUx5xz1vWhRbYR7E0gUEjgN0er_lc_en';
 
@@ -61,7 +61,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
         /**
          * Call the `init()` method with the provided environment object.
          * The isWebView parameter is required and indicates whether your
-         * integration type is a webview or not.
+         * integration type is a WebView or not.
          * You can set sandbox payment mode with `sandbox` parameter
          * Please note that this command executes asynchronously.
          */
@@ -73,14 +73,14 @@ NOTE: In this example, we use a local build just for convenience purposes.
         /**
          * After the Payments SDK has been initialized, the next step is setting the token.
          * To learn more about creating tokens,
-         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
          */
         await headlessCheckout.setToken(accessToken);
 
         /**
          * Define payment method id.
          * To get lists of payment methods use psdk-payment-methods.
-         * Please see `examples/select-method` for more details
+         * Refer to `examples/select-method` for more details
          */
         const paymentMethodId = 1380;
 
@@ -125,7 +125,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
         formElement.append(submitButton);
       }
 
-      // initialize sdk
+      // Initialize sdk
       initPayStationSdk();
     </script>
   </body>
