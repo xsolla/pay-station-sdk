@@ -18,7 +18,7 @@ export class TextComponent extends SecureComponentAbstract {
   protected config?: TextComponentConfig;
   protected readonly postMessagesClient: PostMessagesClient;
   protected readonly window: Window;
-  private readonly formSpy: FormSpy;
+  protected readonly formSpy: FormSpy;
 
   private readonly headlessCheckout: HeadlessCheckout;
   private isListeningFieldStatusChange = false;

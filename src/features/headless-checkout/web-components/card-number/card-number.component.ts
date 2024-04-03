@@ -36,8 +36,13 @@ export class CardNumberComponent extends TextComponent {
   }
 
   protected attributeChangedCallback(): void {
-    super.attributeChangedCallback();
-    this.toggleCardIconVisibility();
+    if (!this.formSpy.formWasInit) {
+      this.formSpy.listenFormInit(() => {
+        super.attributeChangedCallback();
+        this.toggleCardIconVisibility();
+      });
+      return;
+    }
   }
 
   protected getHtml(): string {

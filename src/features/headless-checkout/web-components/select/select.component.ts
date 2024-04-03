@@ -11,6 +11,7 @@ import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/
 import { container } from 'tsyringe';
 import { EventName } from '../../../../core/event-name.enum';
 import { SelectType } from './select-type.enum';
+import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 
 export class SelectComponent extends BaseControl<SelectComponentConfig> {
   protected config: SelectComponentConfig | null = null;
@@ -20,6 +21,7 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
   private selectedOptionIndex!: number;
   private currentHoverOptionIndex!: number;
   private readonly headlessCheckoutSpy!: HeadlessCheckoutSpy;
+  private readonly formSpy!: FormSpy;
 
   private get rootElement(): this | ShadowRoot {
     return this.shadowRoot ?? this;
@@ -32,6 +34,7 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
   public constructor() {
     super();
     this.headlessCheckoutSpy = container.resolve(HeadlessCheckoutSpy);
+    this.formSpy = container.resolve(FormSpy);
   }
 
   public get nameAttr(): string {
@@ -53,7 +56,15 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
       return;
     }
 
-    if (!this.headlessCheckoutSpy.appWasInit) {
+    if (!this.formSpy.formWasInit && this.typeAttr !== SelectType.country) {
+      this.formSpy.listenFormInit(() => this.connectedCallback());
+      return;
+    }
+
+    if (
+      !this.headlessCheckoutSpy.appWasInit &&
+      this.typeAttr === SelectType.country
+    ) {
       this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
       return;
     }
