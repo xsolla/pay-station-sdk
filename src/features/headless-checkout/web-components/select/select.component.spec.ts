@@ -6,6 +6,7 @@ import { HeadlessCheckout } from '../../headless-checkout';
 import { SelectAttributes } from './select-attributes.enum';
 import { SelectComponent } from './select.component';
 import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
+import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 
 function createComponent(name: string): HTMLElement {
   const element = document.createElement(WebComponentTagName.SelectComponent);
@@ -70,6 +71,13 @@ describe('SelectComponent', () => {
       })
       .register(HeadlessCheckout, {
         useValue: headlessCheckout,
+      })
+      .register<FormSpy>(FormSpy, {
+        useValue: {
+          get formWasInit() {
+            return true;
+          },
+        } as FormSpy,
       })
       .register(Window, {
         useValue: window,

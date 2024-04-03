@@ -4,12 +4,16 @@ import { getCheckboxComponentTemplate } from './checkbox.template';
 import { XpsBoolean } from '../../../../core/xps-boolean.enum';
 import { CheckboxComponentConfig } from './checkbox-component-config.interface';
 import './checkbox.component.scss';
+import { container } from 'tsyringe';
+import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 
 export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
   protected config: CheckboxComponentConfig | null = null;
+  protected readonly formSpy: FormSpy;
 
   public constructor() {
     super();
+    this.formSpy = container.resolve(FormSpy);
   }
 
   public get nameAttr(): string {
@@ -24,6 +28,11 @@ export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
     this.controlName = this.nameAttr;
 
     if (!this.controlName) {
+      return;
+    }
+
+    if (!this.formSpy.formWasInit) {
+      this.formSpy.listenFormInit(() => this.connectedCallback());
       return;
     }
 
@@ -44,7 +53,9 @@ export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
       return this.connectedCallback();
     }
 
-    super.attributeChangedCallback();
+    if (!this.formSpy.formWasInit) {
+      this.formSpy.listenFormInit(() => super.attributeChangedCallback());
+    }
   }
 
   protected getHtml(): string {

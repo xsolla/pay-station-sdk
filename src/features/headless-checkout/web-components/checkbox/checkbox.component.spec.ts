@@ -6,6 +6,7 @@ import { PostMessagesClient } from '../../../../core/post-messages-client/post-m
 import { CheckboxComponent } from './checkbox.component';
 import { CheckboxComponentConfig } from './checkbox-component-config.interface';
 import { XpsBoolean } from '../../../../core/xps-boolean.enum';
+import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 
 const config: CheckboxComponentConfig = {
   name: 'test',
@@ -55,6 +56,13 @@ describe('CheckboxComponent', () => {
       })
       .register<PostMessagesClient>(PostMessagesClient, {
         useValue: postMessagesClient,
+      })
+      .register<FormSpy>(FormSpy, {
+        useValue: {
+          get formWasInit() {
+            return true;
+          },
+        } as FormSpy,
       })
       .register<Window>(Window, { useValue: windowService });
   });
