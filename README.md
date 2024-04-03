@@ -416,8 +416,8 @@ Integration flow:
 
 > A working example can be found [here](./examples/default-styles).
 
-1. To use the default styles of the sdk components, you need to connect the style.css file to your html document.
-2. To use the default styles of secure components, you need to pass the parameter `theme: 'default'` when initializing `headlessCheckout`.
+1. To use the default styles of the SDK components, you need to connect the style.css file to your HTML document.
+2. To use the default styles of the secure components, you need to pass the `theme: 'default'` parameter when initializing `headlessCheckout`.
 
 ## Changing country
 
@@ -425,12 +425,12 @@ Integration flow:
 
 Where can the country value be used?
 
-1. When initializing the form - `headlessCheckout.form.init({ ..., country: ${countryISO} })`.
-2. Pass it as an attribute for the component `<psdk-payment-methods country="${countryISO}></psdk-payment-methods>`.
+1. When initializing the form using `headlessCheckout.form.init({ ..., country: ${countryISO} })`.
+2. When passing it as an attribute for the `<psdk-payment-methods country="${countryISO}></psdk-payment-methods>` component.
 
 How to get the country value?
 
-1. You can get the list of available countries using the method `headlessCheckout.getCountryList()`.
+1. To get the list of available countries, use the `headlessCheckout.getCountryList()` method.
 1. You can use the ready-made component - `<psdk-select type='country'></psdk-select>`. When using this component, you need to listen for the `userCountryChanged` event.
 
 ## Changing locales
@@ -441,4 +441,4 @@ Where can the language value be used?
 
 How can I get the value of the available locale?
 
-1. You can get the list of locales using the `headlessCheckout.getAvailableLanguages()` method.
+1. You can get the list of locales by using the `headlessCheckout.getAvailableLanguages()` method.
