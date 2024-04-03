@@ -24,19 +24,19 @@ NOTE: In this example, we use a local build just for convenience purposes.
   <h1>Qr code payment methods integration</h1>
 
   <!--
-    Add payment form messages component to show form messages
+    Add the payment form messages component to show form messages.
   -->
   <psdk-payment-form-messages></psdk-payment-form-messages>
   <div id='form-container'></div>
   <div id='status-container'></div>
 
   <!--
-    Add finance details component to show purchase details
+    Add the finance details component to show purchase details.
   -->
   <psdk-finance-details></psdk-finance-details>
 
   <!--
-    Add legal component to provide links to legal documents
+    Add the legal component to provide links to legal documents.
   -->
   <psdk-legal></psdk-legal>
   <!-- Initialization script -->
@@ -51,7 +51,7 @@ Please, link CDN source or create local build (recommended to test purposes only
   }
   /**
    * To learn more about creating tokens,
-   * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+   * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
   const accessToken = '';
 
@@ -68,7 +68,7 @@ Please, link CDN source or create local build (recommended to test purposes only
 
   /**
    * Render submit form button.
-   * You can use <psdk-submit-button></psdk-submit-button> as well
+   * You can use <psdk-submit-button></psdk-submit-button> as well.
    */
   function renderSubmitButton(formElement, text = 'Pay Now') {
     const submitButton = new PayStationSdk.SubmitButtonComponent();
@@ -80,8 +80,8 @@ Please, link CDN source or create local build (recommended to test purposes only
     /**
      * Call the `init()` method with the provided environment object.
      * The isWebView parameter is required and indicates whether your
-     * integration type is a webview or not.
-     * You can set sandbox payment mode with `sandbox` parameter
+     * integration type is a WebView or not.
+     * You can set sandbox payment mode with the `sandbox` parameter.
      * Please note that this command executes asynchronously.
      */
     await headlessCheckout.init({
@@ -93,14 +93,14 @@ Please, link CDN source or create local build (recommended to test purposes only
     /**
      * After the Payments SDK has been initialized, the next step is setting the token.
      * To learn more about creating tokens,
-     * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+     * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
      */
     await headlessCheckout.setToken(accessToken);
 
     /**
-     * Define payment method id.
-     * To get lists of payment methods use psdk-payment-methods.
-     * Please see `examples/select-method` for more details
+     * Define payment method ID.
+     * To get lists of payment methods, use psdk-payment-methods.
+     * Please see `examples/select-method` for more details.
      */
     const alipayPaymentMethodId = 3623;
 
@@ -108,25 +108,25 @@ Please, link CDN source or create local build (recommended to test purposes only
       paymentMethodId: alipayPaymentMethodId,
       /**
        * Initialize payment.
-       * returnUrl will be opened after payment completed on external payment method side.
-       * Please see `examples/return.html` for more details
+       * returnUrl will be opened after payment is completed on external payment method side.
+       * Please see `examples/return.html` for more details.
        */
       returnUrl: 'http://return',
     });
 
     /**
-     * Subscribe to payment actions
+     * Subscribe to payment actions.
      */
     headlessCheckout.form.onNextAction((nextAction) => {
       console.log('Next action', nextAction);
       const statusContainer = document.querySelector('#status-container');
 
       /**
-       * Handle redirect action
+       * Handle the redirect action.
        */
       if (nextAction.type === 'redirect') {
         /**
-         * Generate redirect url
+         * Generate the redirect URL.
          */
         const url = new URL(nextAction.data.redirect.redirectUrl);
         const params = Object.entries(nextAction.data.redirect.data);
@@ -136,13 +136,13 @@ Please, link CDN source or create local build (recommended to test purposes only
         });
 
         /**
-         * Open QR code on payment system page.
+         * Open the QR code on the payment system page.
          */
         window.location.href = url;
 
         /**
-         * Create status component. It will be updated once payment status changed.
-         * You can use <psdk-status></psdk-status> component as well
+         * Create the status component. It will be updated once the payment status changed.
+         * You can use <psdk-status></psdk-status> component as well.
          */
         const statusComponent = new PayStationSdk.StatusComponent();
         statusContainer.append(statusComponent);
@@ -173,7 +173,7 @@ Please, link CDN source or create local build (recommended to test purposes only
 
 
         /**
-         *  Along with the QR code, a button is provided which can be used to check the status of the payment.
+         *  Along with the QR code, a button is provided and can be used to check the payment status.
          *  You need to extract the text from nextAction and render a new button.
          */
         const submitButtonText = nextAction.data.submitButtonText;
@@ -183,13 +183,13 @@ Please, link CDN source or create local build (recommended to test purposes only
     });
 
     /**
-     * Create payment form
+     * Create the payment form.
      */
     const formElement = document.querySelector('#form-container');
 
     /**
      * form.fields provide available fields for selected payment method.
-     * You can filter it by `isMandatory` flag to get required fields only
+     * You can filter it by the `isMandatory` flag to get required fields only.
      */
     const requiredFields = form.fields.filter(
       (field) => field.isMandatory === '1'
@@ -197,12 +197,12 @@ Please, link CDN source or create local build (recommended to test purposes only
     console.log('Required form fields', requiredFields);
 
     /**
-     * Render requried fields
+     * Render requried fields.
      */
     requiredFields.forEach((field) => {
       if (field.type === 'text') {
         /**
-         * You can use <psdk-text name="field.name"></psdk-text> as well
+         * You can use <psdk-text name="field.name"></psdk-text> as well.
          */
         const input = new PayStationSdk.TextComponent();
         input.setAttribute('name', field.name);
@@ -213,7 +213,7 @@ Please, link CDN source or create local build (recommended to test purposes only
     renderSubmitButton(formElement);
   }
 
-  // initialize sdk
+  // Initialize SDK.
   initPayStationSdk();
 </script>
 </body>

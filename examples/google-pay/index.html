@@ -26,12 +26,12 @@ NOTE: In this example, we use a local build just for convenience purposes.
 <div id='status-container'></div>
 
 <!--
-  Add finance details component to show purchase details
+  Add the finance details component to show purchase details.
 -->
 <psdk-finance-details></psdk-finance-details>
 
 <!--
-  Add legal component to provide links to legal documents
+  Add the legal component to provide links to legal documents.
 -->
 <psdk-legal></psdk-legal>
 <!-- Initialization script -->
@@ -45,7 +45,7 @@ Please, link CDN source or create local build (recommended to test purposes only
   }
   /**
    * To learn more about creating tokens,
-   * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+   * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
   const accessToken = '';
 
@@ -64,8 +64,8 @@ Please, link CDN source or create local build (recommended to test purposes only
     /**
      * Call the `init()` method with the provided environment object.
      * The isWebView parameter is required and indicates whether your
-     * integration type is a webview or not.
-     * You can set sandbox payment mode with `sandbox` parameter
+     * integration type is a WebView or not.
+     * You can set sandbox payment mode with the `sandbox` parameter.
      * Please note that this command executes asynchronously.
      */
     await headlessCheckout.init({
@@ -77,14 +77,14 @@ Please, link CDN source or create local build (recommended to test purposes only
     /**
      * After the Payments SDK has been initialized, the next step is setting the token.
      * To learn more about creating tokens,
-     * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+     * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
      */
     await headlessCheckout.setToken(accessToken);
 
     /**
-     * Define payment method id.
-     * To get lists of payment methods use psdk-payment-methods.
-     * Please see `examples/select-method` for more details
+     * Define payment method ID.
+     * To get lists of payment methods, use psdk-payment-methods.
+     * Refer to `examples/select-method` for more details.
      */
     const googlePayPaymentMethodId = 3431;
 
@@ -92,14 +92,14 @@ Please, link CDN source or create local build (recommended to test purposes only
       paymentMethodId: googlePayPaymentMethodId,
       /**
        * Initialize payment.
-       * returnUrl will be opened after payment completed on external payment method side.
-       * Please see `examples/return.html` for more details
+       * returnUrl will be opened after payment is completed on external payment method side.
+       * Please see `examples/return.html` for more details.
        */
       returnUrl: 'http://return',
     });
 
     /**
-     * Subscribe to payment actions
+     * Subscribe to payment actions.
      */
     headlessCheckout.form.onNextAction((nextAction) => {
       console.log('Next action', nextAction);
@@ -117,7 +117,7 @@ Please, link CDN source or create local build (recommended to test purposes only
 
 
       /**
-       * To render the GooglePay button, it's necessary to handle the "special_button" NextAction.
+       * To render the GooglePay button, it is necessary to handle the "special_button" NextAction.
        */
       if (nextAction.type === 'special_button') {
         /**
@@ -133,13 +133,13 @@ Please, link CDN source or create local build (recommended to test purposes only
     });
 
     /**
-     * Create payment form
+     * Create a payment form.
      */
     const formElement = document.querySelector('#form-container');
 
     /**
      * form.fields provide available fields for selected payment method.
-     * You can filter it by `isMandatory` flag to get required fields only
+     * You can filter it by the `isMandatory` flag to get required fields only.
      */
     const requiredFields = form.fields.filter(
       (field) => field.isMandatory === '1'
@@ -147,12 +147,12 @@ Please, link CDN source or create local build (recommended to test purposes only
     console.log('Required form fields', requiredFields);
 
     /**
-     * Render requried fields
+     * Render requried fields.
      */
     requiredFields.forEach((field) => {
       if (field.type === 'text') {
         /**
-         * You can use <psdk-text name="field.name"></psdk-text> as well
+         * You can use <psdk-text name="field.name"></psdk-text> as well.
          */
         const input = new PayStationSdk.TextComponent();
         input.setAttribute('name', field.name);
@@ -161,15 +161,15 @@ Please, link CDN source or create local build (recommended to test purposes only
     });
 
     /**
-     * Render submit form button.
-     * You can use <psdk-submit-button></psdk-submit-button> as well
+     * Render the submit form button.
+     * You can use <psdk-submit-button></psdk-submit-button> as well.
      */
     const submitButton = new PayStationSdk.SubmitButtonComponent();
     submitButton.setAttribute('text', 'Pay Now');
     formElement.append(submitButton);
   }
 
-  // initialize sdk
+  // Initialize SDK.
   initPayStationSdk();
 </script>
 </body>

@@ -415,16 +415,16 @@ Integration flow:
 1. Initialize the payment form with the Google Pay payment method ID and return URL.
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-   - The Next action with the `check_status` type means that need to render status component.
-   - The Next action with the `special_button` type means that need to render special button component (in our case it's Google Pay button).
+   - The Next action with the `check_status` type means that you need to render the status component.
+   - The Next action with the `special_button` type means that you need to render the special button component (in our case it is the Google Pay button).
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Create a `return` page.
-1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
+1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
 
-## SDK payment methods integration guide (Barzahlen, Naver, Venmo etc)
+## SDK payment methods integration guide (Barzahlen, Naver, Venmo, etc.)
 
 > A working example can be found [here](./examples/sdk-payment-methods).
 
@@ -440,12 +440,12 @@ Integration flow:
 1. Initialize the payment form with the SDK payment method ID and return URL.
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-   - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the URL to redirect from the action payload.
+   - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Create a `return` page.
-1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
+1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
 
 ## QR code pay integration guide
@@ -464,14 +464,14 @@ Integration flow:
 1. Initialize the payment form with the QR code payment method ID and return URL.
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the URL to redirect from the action payload.
-   - The Next action with the `show_qr_code` type means that need render QR code component.
-   - The Next action with the `check_status` type means that need to render status component.
+   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
+   - The Next action with the `show_qr_code` type means that you need to render the QR code component.
+   - The Next action with the `check_status` type means that you need to render the status component.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Create a `return` page.
-1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
+1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
 
 ## Mobile payment integration guide
@@ -490,12 +490,12 @@ Integration flow:
 1. Initialize the payment form with the QR code payment method ID and return URL.
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the URL to redirect from the action payload.
-   - The Next action with the `show_mobile_payment_screen` type means that need render new submit button.
-   - The Next action with the `check_status` type means that need to render status component.
+   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
+   - The Next action with the `show_mobile_payment_screen` type means that you need to render new submit button.
+   - The Next action with the `check_status` type means that you need to render the status component.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Create a `return` page.
-1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
+1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
