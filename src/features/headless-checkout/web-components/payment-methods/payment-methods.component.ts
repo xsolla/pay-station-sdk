@@ -169,9 +169,24 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   }
 
   private updateMethodsView(): void {
-    const paymentMethods = this.getMethodsHtml();
-    this.listRef.innerHTML = paymentMethods
-      ? paymentMethods.join('')
-      : this.notFoundValue;
+    if (!this.filteredMethods?.length) {
+      this.listRef.innerHTML = this.notFoundValue;
+      return;
+    }
+
+    Array.from(this.listRef.children).forEach((method) => {
+      const pid = Number(method.getAttribute('data-method-id'));
+
+      const isFilteredMethod = this.filteredMethods?.find(
+        (filteredMethod) => filteredMethod.id === pid,
+      );
+
+      if (isFilteredMethod) {
+        (method as HTMLElement).style.display = '';
+        return;
+      }
+
+      (method as HTMLElement).style.display = 'none';
+    });
   }
 }

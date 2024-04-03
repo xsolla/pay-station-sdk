@@ -12,14 +12,16 @@ export const getPaymentMethodTemplate = (method: PaymentMethod): string => {
   } else {
     iconName = method.iconName;
   }
-  return `<li class="payment-method" data-method-id="${method.id}">
-    <a tabindex="0" href="${method.id}">
-      <span class="icon">
-        <img src="${iconsPath}/${iconName}" alt="${method.name}">
+  return `<li class='payment-method' data-method-id='${method.id}'>
+    <a tabindex='0' href='${method.id}'>
+      <span class='icon'>
+        <img src='${iconsPath}/${iconName}' alt='${
+          method.name
+        }' onerror="this.onerror=null; this.src='${iconsPath}/default.svg'">
       </span>
-      <span class="name">${method.name}</span>
-      <span class="arrow">
-        <img src="${arrow as string}">
+      <span class='name'>${method.name}</span>
+      <span class='arrow'>
+        <img src='${arrow as string}'>
       </span>
     </a>
 </li>`;
