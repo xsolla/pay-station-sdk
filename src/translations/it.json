@@ -1,8 +1,11 @@
 {
    "it" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay è disponibile solo sul browser Safari con OS 10.12 Sierra o IOS 10. Cambia il browser o seleziona un altro metodo di pagamento.",
+         "apple-pay.errors.payment" : "Impossibile processare il pagamento. Verifica di avere eseguito l'accesso a Apple sul dispositivo e configura Apple Pay prima di provare di nuovo. Sono necessari un paio di minuti per la sincronizzazione delle modifiche alle impostazioni di Apple.",
          "cookie-policy" : "Informativa sui Cookie",
-         "disclaimer" : "Xsolla è il distributore ufficiale di questo contenuto. Procedendo con l'acquisto, l'utente conferma di essere maggiorenne e di aver letto, compreso e accettato l' <a href={{link}} target='_blank'>EULA<\/a>. L'utente accetta inoltre che il contratto abbia effetto immediato e riconosce che perderà qualsiasi diritto di recesso una volta che il contenuto digitale inizierà a essere scaricato.",
+         "disclaimer-with-cookies" : "Proseguendo, confermi di essere un adulto secondo le leggi del tuo stato e acconsenti di essere vincolato dall'<a href={{xsolla_terms_link}} target=\"_blank\">EULA di Xsolla<\/a>.<br>Xsolla raccoglie autonomamente i cookie essenziali su questa pagina e in seguito durante l'elaborazione dell'acquisto, che è coperto dalla <a href={{xsolla_privacy_link}} target=\"_blank\">Politica sui cookie di Xsolla<\/a>. <br>Si prega di notare che per questo acquisto, Xsolla è il rivenditore autorizzato e il responsabile del trattamento dei dati inviati in questa pagina.<br>Per eventuali domande, si prega di contattare l'<a href={{xsolla_help_link}} target=\"_blank\">Assistenza Gamer Xsolla<\/a>.",
+         "error.title.default" : "Non è stato possibile elaborare il pagamento",
          "finance-details-cart-items-checkout-title" : "Acquisto in-game",
          "finance-details-hrk-equal" : "Pari a {{value}} HKR",
          "finance-details-hrk-exchange-rate" : "Tasso di cambio: 1 EUR = 7,5345 HRK",

@@ -1,8 +1,11 @@
 {
    "ja" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Payは、OS 10.12 SierraまたはIOS 10をインストールしたSafariブラウザでのみご利用いただけます。ブラウザを変更するか、他の決済方法を選択してください。",
+         "apple-pay.errors.payment" : "トラザックションを処理できません。お使いのデバイスでAppleにサインインし、Apple Payを設定していることを確認してから再試行してください。Appleの設定の変更は、同期に2〜3分かかります。",
          "cookie-policy" : "クッキーポリシー",
-         "disclaimer" : "エクソーラはこのコンテンツの正規代理です。購入することにより、あなたは成人であり、<a href={{link}} target='_blank'>EULA<\/a>を読み、理解し、同意したことを確認します。また、本契約が直ちに発効することを承諾し、デジタルコンテンツのダウンロードが開始された時点で、撤回する権利を失うことを了承するものとします。",
+         "disclaimer-with-cookies" : "以下の手続きにより、利用者はお住まいの州法に基づいて成人であることを確認し、<a href={{xsolla_terms_link}} target=\"_blank\">エクソーラEULA<\/a>に拘束されることに同意します。<br>エクソーラは、このページ上およびさらに購入処理中に、<a href={{xsolla_privacy_link}} target=\"_blank\">エクソーラクッキーポリシー<\/a>の対象となる必須のクッキを独自に収集します。<br>この購入に関して、Xsollaは認証されたマーチャントであり、このページで送信されたデータの管理者であることにご注意ください。<br>ご質問がある場合は、<a href={{xsolla_help_link}} target=\"_blank\">エクソーラゲーマーサポート<\/a>までお問い合わせください。",
+         "error.title.default" : "決済を処理できません",
          "finance-details-cart-items-checkout-title" : "ゲーム内購入",
          "finance-details-hrk-equal" : "{{value}} HRKに相当する",
          "finance-details-hrk-exchange-rate" : "為替レート：1ユーロ＝7.5345HRK",
@@ -27,7 +30,7 @@
          "finance-details-vat-percent" : "消費税 {{percent}}%",
          "finance-details-vat-percent-including" : "{{percent}}% 消費税込み",
          "hello" : "こんにちは、世界！",
-         "legal" : "",
+         "legal" : "法的文書",
          "privacy-policy" : "プライバシーポリシー",
          "refund-policy" : "返金ポリシー",
          "saving-status.error.title" : "決済方法を保存できません",

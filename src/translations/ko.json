@@ -1,8 +1,11 @@
 {
    "ko" : {
       "translation" : {
+         "apple-pay.errors.device-is-not-capable" : "Apple Pay는 Sierra 10.12 또는 IOS 10 OS가 설치된 Safari 브라우저에서만 이용 가능합니다. 브라우저를 변경하거나 다른 결제 옵션을 선택해 주세요.",
+         "apple-pay.errors.payment" : "결제를 처리할 수 없습니다. 귀하의 장치에서 Apple에 로그인했는지 확인하고 Apple Pay를 설정한 후 다시 시도하세요. Apple 설정의 변경 사항을 동기화하는 데에는 몇 분 정도 걸립니다.",
          "cookie-policy" : "쿠키 정책",
-         "disclaimer" : "이 콘텐츠의 공식 배포자는 엑솔라입니다. 이를 구매함으로써 귀하는 본인이 성인이며 <a href={{link}} target='_blank'>EULA<\/a>를 읽고 이해했으며 이에 동의했음을 확인합니다. 또한 귀하는 계약이 즉시 효력을 발생한다는 사실에 동의하며 디지털 콘텐츠의 다운로드가 시작되면 철회할 수 있는 권리를 상실하게 된다는 사실을 인정합니다.",
+         "disclaimer-with-cookies" : "계속 진행하면 해당 주의 법에 따라 성인임을 확인하고 <a href={{xsolla_terms_link}} target=\"_blank\">엑솔라 EULA<\/a>에 동의하게 됩니다.<br>엑솔라는 구매를 처리하는 동안 <a href={{xsolla_privacy_link}} target=\"_blank\">엑솔라 쿠키 정책<\/a>의 적용을 받는 필수 쿠키를 이 페이지에서 독립적으로 수집합니다.<br>이 구매의 경우 엑솔라는 이 페이지에서 제출된 데이터의 공인 기록 및 관리자임을 유의해 주십시오.<br>문의 사항이 있으시면 <a href={{xsolla_help_link}} target=\"_blank\">엑솔라 게이머 지원<\/a>으로 문의해주시기 바랍니다.",
+         "error.title.default" : "결제를 처리할 수 없음",
          "finance-details-cart-items-checkout-title" : "인게임 구매",
          "finance-details-hrk-equal" : "= {{value}} HRK",
          "finance-details-hrk-exchange-rate" : "환율: 1 EUR = 7.5345 HRK",
