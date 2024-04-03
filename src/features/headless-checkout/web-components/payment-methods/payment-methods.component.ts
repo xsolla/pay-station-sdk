@@ -96,7 +96,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
 
     this.paymentMethods = paymentMethods.slice(skipPaymentMethodsCount);
     this.visibleMethods = this.paymentMethods;
-    this.paymentMethods = paymentMethods;
+
     if (this.getAttribute(PaymentMethodsAttributes.saveMethodMode)) {
       this.visibleMethods = this.paymentMethods.filter(
         (method) => method.isVisible,
