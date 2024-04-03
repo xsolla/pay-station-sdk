@@ -34,7 +34,7 @@ Please, link CDN source or create local build (recommended to test purposes only
       }
       /**
        * To learn more about creating tokens,
-       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
       const accessToken = '';
 
@@ -53,7 +53,7 @@ Please, link CDN source or create local build (recommended to test purposes only
         /**
          * Call the `init()` method with the provided environment object.
          * The isWebView parameter is required and indicates whether your
-         * integration type is a webview or not.
+         * integration type is a WebView or not.
          * Please note that this command executes asynchronously.
          */
         await headlessCheckout.init({
@@ -65,7 +65,7 @@ Please, link CDN source or create local build (recommended to test purposes only
         /**
          * After the Payments SDK has been initialized, the next step is setting the token.
          * To learn more about creating tokens,
-         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
          */
         await headlessCheckout.setToken(accessToken);
       }
@@ -120,8 +120,8 @@ Please, link CDN source or create local build (recommended to test purposes only
 
           /**
            * Initialize payment.
-           * returnUrl will be opened after payment completed on external payment method side.
-           * Please see `examples/save-payment-method/return.html` for more details
+           * returnUrl will be opened after payment is completed on external payment method side.
+           * Refer to `examples/save-payment-method/return.html` for more details.
            */
           returnUrl: 'http://return',
         });
@@ -160,7 +160,7 @@ Please, link CDN source or create local build (recommended to test purposes only
 
       function redirectToExternalPageAction(redirectAction) {
         /**
-         * Generate externalPaymentMethod redirect url
+         * Generate the externalPaymentMethod redirect URL.
          */
         const url = new URL(redirectAction.data.redirect.redirectUrl);
         const params = Object.entries(redirectAction.data.redirect.data);

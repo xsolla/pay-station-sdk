@@ -74,7 +74,7 @@ declare const headlessCheckout: {
   getCombinedPaymentMethods(country?: string): Promise<CombinedPaymentMethods>;
 
   /**
-   * Returns a user’s saved methods.
+   * Returns user’s saved methods.
    */
   getSavedMethods(): Promise<SavedMethod[]>;
 
@@ -417,7 +417,7 @@ Integration flow:
 1. Handle the selection of the payment method with `selectionChange` event.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
-1. Initialize the payment form with parameters `{ paymentMethodId: ${id}, savePaymentMethod: true, returnUrl: ${returnUrl}}`. Where `event.detail.paymentMethodId` from `selectionChange` event.
+1. Initialize the payment form with the `{ paymentMethodId: ${id}, savePaymentMethod: true, returnUrl: ${returnUrl}}` parameters, where `event.detail.paymentMethodId` is from the `selectionChange` event.
 1. Handle the next action event.
 
 ## Delete saved method integration guide
@@ -443,15 +443,15 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Display saved methods using the `<psdk-saved-methods>` component.
-1. Handle the selection of the payment method with `savedMethodSelected` event.
+1. Handle the selection of the payment method with the `savedMethodSelected` event.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
-1. Initialize the payment form with parameters `{ paymentMethodId: ${id}, paymentWithSavedMethod: true, savedMethodId, returnUrl: ${returnUrl}}`. Where `paymentMethodId` and `savedMethodId` are from `savedMethodSelected` event.details.
+1. Initialize the payment form with the `{ paymentMethodId: ${id}, paymentWithSavedMethod: true, savedMethodId, returnUrl: ${returnUrl}}` parameters, where `paymentMethodId` and `savedMethodId` are from the `savedMethodSelected` of the `event.details` parameter.
 1. Handle the next action event.
 
 ## Payment via user balance
 
-1. If the user has a virtual balance, then no matter which method you pass when `headlessCheckout.form.init({...})`, if the balance is enough for full payment, a form for payment by balance will always be returned.
+1. If the user has sufficient virtual balance for full payment, a form for payment by balance will always be returned, regardless of the method passed when initiating the payment form using `headlessCheckout.form.init({...})`.
 2. Payment by balance will be reflected in the `<psdk-finance-details>` component.
-3. Also, the user's balance can be displayed using the `<psdk-user-balance>` component.
-4. The user's balance can be obtained using the `headlessCheckout.getUserBalance()` method.
+3. The user balance can also be displayed using the `<psdk-user-balance>` component.
+4. The user balance can be obtained using the `headlessCheckout.getUserBalance()` method.
