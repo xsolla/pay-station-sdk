@@ -7,6 +7,7 @@ import { ThreeDsAction } from './three-ds/three-ds.action.type';
 import { SpecialButtonAction } from './special-button.action.type';
 import { ShowQrCodeAction } from './show-qr-code.action.type';
 import { ShowMobilePaymentScreenAction } from './show-mobile-payment-screen.action.type';
+import { HideFormAction } from './hide-form.action.type';
 
 export type NextAction =
   | CheckStatusAction
@@ -17,4 +18,5 @@ export type NextAction =
   | ThreeDsAction
   | SpecialButtonAction
   | ShowQrCodeAction
-  | ShowMobilePaymentScreenAction;
+  | ShowMobilePaymentScreenAction
+  | HideFormAction;
