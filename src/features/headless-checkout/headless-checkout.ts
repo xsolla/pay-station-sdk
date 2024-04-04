@@ -193,6 +193,10 @@ export class HeadlessCheckout {
     this.errorsSubscription?.();
   }
 
+  /**
+   * Initialize the payment with a token.
+   * Reset the form on initialization.
+   */
   public async setToken(token: string): Promise<void> {
     if (!token) {
       throw new Error('Need correct token');
@@ -285,6 +289,9 @@ export class HeadlessCheckout {
     ) as Promise<PaymentMethod[]>;
   }
 
+  /**
+   * Returns available payment methods, including quick payment options and saved payment methods.
+   */
   public async getCombinedPaymentMethods(
     country?: string,
   ): Promise<CombinedPaymentMethods> {
@@ -301,6 +308,9 @@ export class HeadlessCheckout {
     ) as Promise<CombinedPaymentMethods>;
   }
 
+  /**
+   * Returns user’s saved methods.
+   */
   public async getSavedMethods(): Promise<SavedMethod[]> {
     const msg: Message = {
       name: EventName.getSavedMethods,
@@ -312,6 +322,9 @@ export class HeadlessCheckout {
     ) as Promise<SavedMethod[]>;
   }
 
+  /**
+   * Returns a user’s balance.
+   */
   public async getUserBalance(): Promise<UserBalance> {
     const msg: Message = {
       name: EventName.getUserBalance,
@@ -323,6 +336,13 @@ export class HeadlessCheckout {
     ) as Promise<UserBalance>;
   }
 
+  /**
+   * Get the final payment status: Success or Error.
+   * Calling this method breaks the previous connection.
+   * Use the invoiceId argument after a return from the payment system.
+   * @throws UndefinedFormError if you did not pass invoiceId and the initialized form does not exist.
+   * @throws BreakConnectionError if the method is called again.
+   */
   public async getStatus(): Promise<Status> {
     const msg: Message = {
       name: EventName.getPaymentStatus,
@@ -336,10 +356,16 @@ export class HeadlessCheckout {
     ) as Promise<Status>;
   }
 
+  /**
+   * Returns available locales.
+   */
   public getAvailableLanguages(): Lang[] {
     return this.localizeService.getAvailableLanguages();
   }
 
+  /**
+   * Returns available countries.
+   */
   public async getCountryList(): Promise<{
     countryList: CountryResponse['countryList'];
     currentCountry: string;

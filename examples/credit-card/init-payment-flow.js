@@ -5,10 +5,7 @@ document.addEventListener('DOMContentLoaded', buildPaymentFlow);
 
 function buildPaymentFlow() {
   if (typeof PayStationSdk === 'undefined') {
-    alert(`
-      It seems SDK library is undefined.
-      Please, link CDN source or create local build (recommended to test purposes only).
-              `);
+    alert(payStationSdkUndefinedError);
     throw new Error('PayStationSdk not found');
   }
   /**
@@ -206,8 +203,7 @@ function buildPaymentFlow() {
       /*
        * This return URL means you start the current example on localhost with the 3000 port.
        * */
-      returnUrl:
-        'http://localhost:3000/pay-station-sdk/examples/credit-card/return.html',
+      returnUrl: 'http://localhost:3000/pay-station-sdk/examples/return.html',
     });
 
     /**
