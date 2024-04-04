@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,74 +7,72 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Return page</title>
+    <title>Document</title>
     <!--
-    Link the SDK bundle.
-    NOTE: In this example, we use a local build just for convenience purposes.
-    -->
+Link the SDK bundle.
+NOTE: In this example, we use a local build just for convenience purposes.
+-->
     <script src="../../dist/main.js"></script>
+    <script src="../variables.js"></script>
+    <link rel="stylesheet" href="../../dist/style.css" />
   </head>
 
   <body>
-    <h1>PayPal payment return page</h1>
-
-    <!--
-      Add status component. It will take the necessary parameters from return url
-    -->
-    <psdk-status></psdk-status>
-
-    <!--
-      Add legal component to provide links to legal documents
-    -->
+    <h1>Pay Station SDK</h1>
+    <psdk-select type="country"></psdk-select>
     <psdk-legal></psdk-legal>
-
+    <!-- Initialization script -->
     <script>
       if (typeof PayStationSdk === 'undefined') {
-        alert(`
-It seems SDK library is undefined.
-Please, link CDN source or create local build (recommended to test purposes only).
-        `);
+        alert(payStationSdkUndefinedError);
         throw new Error('PayStationSdk not found');
       }
       /**
        * To learn more about creating tokens,
-       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
-      const accessToken = new URL(window.location.href).searchParams.get('token');
+      const accessToken = '';
 
       if (!accessToken) {
-        alert('No token provided. Please, check the documentation');
+        alert(`No token provided. Please, check the documentation`);
         throw new Error('No token provided');
       }
 
-      /**
-       * The SDK is available under the PayStationSdk namespace.
-       * To begin initialization, obtain a reference to the headlessCheckout object.
-       */
-      const { headlessCheckout } = PayStationSdk;
-
       async function initPayStationSdk() {
+        /**
+         * The SDK is available under the PayStationSdk namespace.
+         * To begin initialization, obtain a reference to the headlessCheckout object.
+         */
+        const { headlessCheckout } = PayStationSdk;
+
         /**
          * Call the `init()` method with the provided environment object.
          * The isWebView parameter is required and indicates whether your
-         * integration type is a webview or not.
-         * You can set sandbox payment mode with `sandbox` parameter
+         * integration type is a WebView or not.
          * Please note that this command executes asynchronously.
          */
         await headlessCheckout.init({
           isWebView: false,
           sandbox: true,
+          theme: 'default',
         });
 
         /**
          * After the Payments SDK has been initialized, the next step is setting the token.
          * To learn more about creating tokens,
-         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
          */
         await headlessCheckout.setToken(accessToken);
+
+        const countrySelectorElement = document.querySelector('psdk-select');
+        countrySelectorElement.addEventListener(
+          'userCountryChanged',
+          (event) => {
+            console.log(event.detail);
+          },
+        );
       }
 
-      // initialize sdk
       initPayStationSdk();
     </script>
   </body>

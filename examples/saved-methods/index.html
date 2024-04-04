@@ -13,8 +13,8 @@ Link the SDK bundle.
 NOTE: In this example, we use a local build just for convenience purposes.
 -->
     <script src="../../dist/main.js"></script>
+    <script src="../variables.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="../../dist/style.css" />
   </head>
 
   <body>
@@ -30,10 +30,7 @@ The `country` attribute indicates the country for which the saved methods are be
     <!-- Initialization script -->
     <script>
       if (typeof PayStationSdk === 'undefined') {
-        alert(`
-It seems SDK library is undefined.
-Please, link CDN source or create local build (recommended to test purposes only).
-        `);
+        alert(payStationSdkUndefinedError);
         throw new Error('PayStationSdk not found');
       }
       /**
@@ -86,9 +83,9 @@ Please, link CDN source or create local build (recommended to test purposes only
           console.log(event.detail);
         });
 
-        savedMethods.addEventListener('deletedSavedMethodStatus', (event) => {
-          console.log(event.detail);
-        });
+    savedMethods.addEventListener('deletedSavedMethodStatus', (event) => {
+      console.log(event.detail);
+    });
 
         const button = document.querySelector('#edit-saved-methods');
         button.addEventListener('click', () => {

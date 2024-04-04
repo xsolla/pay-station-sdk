@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,6 +12,7 @@
     Link the SDK bundle.
     NOTE: In this example, we use a local build just for convenience purposes.
     -->
+    <script src="../../dist/main.js"></script>
     <script src="../../dist/main.js"></script>
   </head>
 
@@ -27,15 +28,12 @@
     <!-- Initialization script -->
     <script>
       if (typeof PayStationSdk === 'undefined') {
-        alert(`
-It seems SDK library is undefined.
-Please, link CDN source or create local build (recommended to test purposes only).
-        `);
+        alert(payStationSdkUndefinedError);
         throw new Error('PayStationSdk not found');
       }
       /**
        * To learn more about creating tokens,
-       * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
       const accessToken = '';
 
@@ -53,7 +51,7 @@ Please, link CDN source or create local build (recommended to test purposes only
         /**
          * Call the `init()` method with the provided environment object.
          * The isWebView parameter is required and indicates whether your
-         * integration type is a webview or not.
+         * integration type is a WebView or not.
          * Please note that this command executes asynchronously.
          */
         await headlessCheckout.init({
@@ -64,7 +62,7 @@ Please, link CDN source or create local build (recommended to test purposes only
         /**
          * After the Payments SDK has been initialized, the next step is setting the token.
          * To learn more about creating tokens,
-         * please read https://developers.xsolla.com/api/pay-station/operation/create-token/
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
          */
         await headlessCheckout.setToken(accessToken);
 
