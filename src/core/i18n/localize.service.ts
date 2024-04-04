@@ -19,7 +19,11 @@ export class LocalizeService {
     await i18next.init({
       lng: locale,
       fallbackLng: Lang.EN,
-      supportedLngs: Object.values(Lang),
+      supportedLngs: [
+        ...Object.values(Lang),
+        LegacyLang.ZH_HANT,
+        LegacyLang.ZH_HANS,
+      ],
       debug: false,
       resources: loadDictionaries(),
     });
