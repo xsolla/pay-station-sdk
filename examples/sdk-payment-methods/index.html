@@ -1,195 +1,195 @@
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-  <meta charset='UTF-8' />
-  <meta
-    name='viewport'
-    content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'
-  />
-  <meta http-equiv='X-UA-Compatible' content='ie=edge' />
-  <title>Document</title>
-  <!--
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!--
 Link the SDK bundle.
 NOTE: In this example, we use a local build just for convenience purposes.
 -->
-  <script src='../../dist/main.js'></script>
-  <link rel='stylesheet' href='style.css' />
-  <link rel='stylesheet' href='../../dist/style.css' />
-</head>
+    <script src="../../dist/main.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../dist/style.css" />
+    <script src="../variables.js"></script>
+  </head>
 
-<body>
-<div class='application'>
-  <h1>Pay Station SDK</h1>
+  <body>
+    <div class="application">
+      <h1>Pay Station SDK</h1>
 
-  <h1>SDK payment methods integration</h1>
+      <h1>SDK payment methods integration</h1>
 
-  <ul>
-    <li>Barzahlen</li>
-    <li>Naver</li>
-    <li>Venmo</li>
-    <li>etc</li>
-  </ul>
+      <ul>
+        <li>Barzahlen</li>
+        <li>Naver</li>
+        <li>Venmo</li>
+        <li>etc</li>
+      </ul>
 
-  <!--
+      <!--
     Add the payment form messages component to show form messages.
   -->
-  <psdk-payment-form-messages></psdk-payment-form-messages>
-  <div id='form-container'></div>
-  <div id='status-container'></div>
+      <psdk-payment-form-messages></psdk-payment-form-messages>
+      <div id="form-container"></div>
+      <div id="status-container"></div>
 
-  <!--
+      <!--
     Add the finance details component to show purchase details.
   -->
-  <psdk-finance-details></psdk-finance-details>
+      <psdk-finance-details></psdk-finance-details>
 
-  <!--
+      <!--
     Add the legal component to provide links to legal documents.
   -->
-  <psdk-legal></psdk-legal>
-  <!-- Initialization script -->
-</div>
-<script>
-  if (typeof PayStationSdk === 'undefined') {
-    alert(`
-It seems SDK library is undefined.
-Please, link CDN source or create local build (recommended to test purposes only).
-        `);
-    throw new Error('PayStationSdk not found');
-  }
-  /**
-   * To learn more about creating tokens,
-   * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
-   */
-  const accessToken = '';
-
-  if (!accessToken) {
-    alert('No token provided. Please, check the documentation');
-    throw new Error('No token provided');
-  }
-
-  /**
-   * The SDK is available under the PayStationSdk namespace.
-   * To begin initialization, obtain a reference to the headlessCheckout object.
-   */
-  const { headlessCheckout } = PayStationSdk;
-
-  /**
-   * Render the submit form button.
-   * You can use <psdk-submit-button></psdk-submit-button> as well.
-   */
-  function renderSubmitButton(formElement, text = 'Pay Now') {
-    const submitButton = new PayStationSdk.SubmitButtonComponent();
-    submitButton.setAttribute('text', text);
-    formElement.append(submitButton);
-  }
-
-  async function initPayStationSdk() {
-    /**
-     * Call the `init()` method with the provided environment object.
-     * The isWebView parameter is required and indicates whether your
-     * integration type is a WebView or not.
-     * You can set sandbox payment mode with the `sandbox` parameter.
-     * Please note that this command executes asynchronously.
-     */
-    await headlessCheckout.init({
-      isWebView: false,
-      sandbox: false,
-      theme: 'default'
-    });
-
-    /**
-     * After the Payments SDK has been initialized, the next step is setting the token.
-     * To learn more about creating tokens,
-     * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
-     */
-    await headlessCheckout.setToken(accessToken);
-
-    /**
-     * Define payment method ID.
-     * To get lists of payment methods, use psdk-payment-methods.
-     * Please see `examples/select-method` for more details.
-     */
-    const sdkPaymentMethodId = 3636;
-
-    const form = await headlessCheckout.form.init({
-      paymentMethodId: sdkPaymentMethodId,
+      <psdk-legal></psdk-legal>
+      <!-- Initialization script -->
+    </div>
+    <script>
+      if (typeof PayStationSdk === 'undefined') {
+        alert(payStationSdkUndefinedError);
+        throw new Error('PayStationSdk not found');
+      }
       /**
-       * Initialize payment.
-       * returnUrl will be opened after payment is completed on external payment method side.
-       * Please see `examples/return.html` for more details.
+       * To learn more about creating tokens,
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
        */
-      returnUrl: 'http://return',
-    });
+      const accessToken = '';
 
-    /**
-     * Subscribe to payment actions.
-     */
-    headlessCheckout.form.onNextAction((nextAction) => {
-      console.log('Next action', nextAction);
-      const statusContainer = document.querySelector('#status-container');
-      const formMessages = document.querySelector('psdk-payment-form-messages');
+      if (!accessToken) {
+        alert('No token provided. Please, check the documentation');
+        throw new Error('No token provided');
+      }
 
       /**
-       * Handle redirect action.
+       * The SDK is available under the PayStationSdk namespace.
+       * To begin initialization, obtain a reference to the headlessCheckout object.
        */
-      if (nextAction.type === 'redirect') {
+      const { headlessCheckout } = PayStationSdk;
+
+      /**
+       * Render the submit form button.
+       * You can use <psdk-submit-button></psdk-submit-button> as well.
+       */
+      function renderSubmitButton(formElement, text = 'Pay Now') {
+        const submitButton = new PayStationSdk.SubmitButtonComponent();
+        submitButton.setAttribute('text', text);
+        formElement.append(submitButton);
+      }
+
+      async function initPayStationSdk() {
         /**
-         * Generate the redirect URL.
+         * Call the `init()` method with the provided environment object.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a WebView or not.
+         * You can set sandbox payment mode with the `sandbox` parameter.
+         * Please note that this command executes asynchronously.
          */
-        const url = new URL(nextAction.data.redirect.redirectUrl);
-        const params = Object.entries(nextAction.data.redirect.data);
-        params.forEach((entry) => {
-          const [key, value] = entry;
-          url.searchParams.append(key, value);
+        await headlessCheckout.init({
+          isWebView: false,
+          sandbox: false,
+          theme: 'default',
         });
 
         /**
-         * Open SDK payment system.
+         * After the Payments SDK has been initialized, the next step is setting the token.
+         * To learn more about creating tokens,
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
          */
-        window.location.href = url;
+        await headlessCheckout.setToken(accessToken);
 
         /**
-         * Create status component. It will be updated once the payment status changed.
-         * You can use <psdk-status></psdk-status> component as well.
+         * Define payment method ID.
+         * To get lists of payment methods, use psdk-payment-methods.
+         * Please see `examples/select-method` for more details.
          */
-        const statusComponent = new PayStationSdk.StatusComponent();
-        statusContainer.append(statusComponent);
-      }
-    });
+        const sdkPaymentMethodId = 3636;
 
-    /**
-     * Create the payment form.
-     */
-    const formElement = document.querySelector('#form-container');
+        const form = await headlessCheckout.form.init({
+          paymentMethodId: sdkPaymentMethodId,
+          /**
+           * Initialize payment.
+           * returnUrl will be opened after payment is completed on external payment method side.
+           * Please see `examples/return.html` for more details.
+           */
+          returnUrl: 'http://return',
+        });
 
-    /**
-     * form.fields provide available fields for selected payment method.
-     * You can filter it by the `isMandatory` flag to get required fields only.
-     */
-    const requiredFields = form.fields.filter(
-      (field) => field.isMandatory === '1'
-    );
-    console.log('Required form fields', requiredFields);
-
-    /**
-     * Render requried fields.
-     */
-    requiredFields.forEach((field) => {
-      if (field.type === 'text') {
         /**
-         * You can use <psdk-text name="field.name"></psdk-text> as well.
+         * Subscribe to payment actions.
          */
-        const input = new PayStationSdk.TextComponent();
-        input.setAttribute('name', field.name);
-        formElement.append(input);
+        headlessCheckout.form.onNextAction((nextAction) => {
+          console.log('Next action', nextAction);
+          const statusContainer = document.querySelector('#status-container');
+          const formMessages = document.querySelector(
+            'psdk-payment-form-messages',
+          );
+
+          /**
+           * Handle redirect action.
+           */
+          if (nextAction.type === 'redirect') {
+            /**
+             * Generate the redirect URL.
+             */
+            const url = new URL(nextAction.data.redirect.redirectUrl);
+            const params = Object.entries(nextAction.data.redirect.data);
+            params.forEach((entry) => {
+              const [key, value] = entry;
+              url.searchParams.append(key, value);
+            });
+
+            /**
+             * Open SDK payment system.
+             */
+            window.location.href = url;
+
+            /**
+             * Create status component. It will be updated once the payment status changed.
+             * You can use <psdk-status></psdk-status> component as well.
+             */
+            const statusComponent = new PayStationSdk.StatusComponent();
+            statusContainer.append(statusComponent);
+          }
+        });
+
+        /**
+         * Create the payment form.
+         */
+        const formElement = document.querySelector('#form-container');
+
+        /**
+         * form.fields provide available fields for selected payment method.
+         * You can filter it by the `isMandatory` flag to get required fields only.
+         */
+        const requiredFields = form.fields.filter(
+          (field) => field.isMandatory === '1',
+        );
+        console.log('Required form fields', requiredFields);
+
+        /**
+         * Render requried fields.
+         */
+        requiredFields.forEach((field) => {
+          if (field.type === 'text') {
+            /**
+             * You can use <psdk-text name="field.name"></psdk-text> as well.
+             */
+            const input = new PayStationSdk.TextComponent();
+            input.setAttribute('name', field.name);
+            formElement.append(input);
+          }
+        });
+
+        renderSubmitButton(formElement);
       }
-    });
 
-    renderSubmitButton(formElement);
-  }
-
-  // Initialize SDK.
-  initPayStationSdk();
-</script>
-</body>
+      // Initialize SDK.
+      initPayStationSdk();
+    </script>
+  </body>
 </html>

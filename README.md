@@ -417,89 +417,6 @@ Integration flow:
 1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
 
-## Save method integration guide
-
-> A working example can be found [here](./examples/save-payment-method).
-
-Integration flow:
-
-1. Add the SDK library to your project. You can use an npm-package or CDN link.
-1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
-1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
-1. Display methods that can be saved `<psdk-payment-methods save-method-mode='true'></psdk-payment-methods>`.
-1. Handle the selection of the payment method with `selectionChange` event.
-1. Add a form message component to the form - `<psdk-payment-form-messages>`.
-1. Add a payment form component to the form - `<psdk-payment-form>`.
-1. Initialize the payment form with the `{ paymentMethodId: ${id}, savePaymentMethod: true, returnUrl: ${returnUrl}}` parameters, where `event.detail.paymentMethodId` is from the `selectionChange` event.
-1. Handle the next action event.
-
-## Delete saved method integration guide
-
-> A working example can be found [here](./examples/saved-methods).
-
-Integration flow:
-
-1. Add the SDK library to your project. You can use an npm-package or CDN link.
-1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
-1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
-1. Display saved methods using the `<psdk-saved-methods>` component.
-1. To make the delete saved method button appear, you need to add the `delete-mode='true'` attribute to the `<psdk-saved-methods>` component.
-1. Handle the deleted saved method event - `deletedSavedMethodStatus`. This is optional. It can be used to display an informational message.
-
-## Payment via saved method integration guide
-
-> A working example can be found [here](./examples/payment-via-saved-method).
-
-Integration flow:
-
-1. Add the SDK library to your project. You can use an npm-package or CDN link.
-1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
-1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
-1. Display saved methods using the `<psdk-saved-methods>` component.
-1. Handle the selection of the payment method with the `savedMethodSelected` event.
-1. Add a form message component to the form - `<psdk-payment-form-messages>`.
-1. Add a payment form component to the form - `<psdk-payment-form>`.
-1. Initialize the payment form with the `{ paymentMethodId: ${id}, paymentWithSavedMethod: true, savedMethodId, returnUrl: ${returnUrl}}` parameters, where `paymentMethodId` and `savedMethodId` are from the `savedMethodSelected` of the `event.details` parameter.
-1. Handle the next action event.
-
-## Payment via user balance
-
-1. If the user has sufficient virtual balance for full payment, a form for payment by balance will always be returned, regardless of the method passed when initiating the payment form using `headlessCheckout.form.init({...})`.
-2. Payment by balance will be reflected in the `<psdk-finance-details>` component.
-3. The user balance can also be displayed using the `<psdk-user-balance>` component.
-4. The user balance can be obtained using the `headlessCheckout.getUserBalance()` method.
-
-## Using default styles
-
-> A working example can be found [here](./examples/default-styles).
-
-1. To use the default styles of the SDK components, you need to connect the style.css file to your HTML document.
-2. To use the default styles of the secure components, you need to pass the `theme: 'default'` parameter when initializing `headlessCheckout`.
-
-## Changing country
-
-> A working example can be found [here](./examples/changing-country).
-
-Where can the country value be used?
-
-1. When initializing the form using `headlessCheckout.form.init({ ..., country: ${countryISO} })`.
-2. When passing it as an attribute for the `<psdk-payment-methods country="${countryISO}></psdk-payment-methods>` component.
-
-How to get the country value?
-
-1. To get the list of available countries, use the `headlessCheckout.getCountryList()` method.
-1. You can use the ready-made component - `<psdk-select type='country'></psdk-select>`. When using this component, you need to listen for the `userCountryChanged` event.
-
-## Changing locales
-
-Where can the language value be used?
-
-1. The language value can be used when initializing `headlessCheckout` - `init({ language?: Lang; })`. Lang - `src/core/i18n/lang.enum.ts`.
-
-How can I get the value of the available locale?
-
-1. You can get the list of locales by using the `headlessCheckout.getAvailableLanguages()` method.
-
 ## Google Pay integration guide
 
 > A working example can be found [here](./examples/google-pay).
@@ -510,20 +427,52 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-    - The financial details component are updated with transaction details once the payment is completed.
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the Google Pay payment method ID and return URL.
-    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-    - The Next action with the `check_status` type means that you need to render the status component.
-    - The Next action with the `special_button` type means that you need to render the special button component (in our case it is the Google Pay button).
+   - The Next action with the `check_status` type means that you need to render the status component.
+   - The Next action with the `special_button` type means that you need to render the special button component (in our case it is the Google Pay button).
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Create a `return` page.
 1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
+
+## Apple Pay integration guide
+
+> A working example can be found [here](./examples/apple-pay).
+
+Features of the payment system:
+
+1. An Apple Pay payment can only be made on a supported device.
+1. On the `PayStationSdk` side, only the possibility of payment on this device is checked, all necessary data is checked, and a new tab is opened where the payment itself will be made - https://secure.xsolla.com/paystation4/payment/external-pages/apple-pay.
+1. For the convenience of users, the `PayStationSdk` the `<psdk-apple-pay>` component is integrated into the `<psdk-submit-button>` component.
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm package.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
+
+- The financial details component are updated with transaction details once the payment is completed.
+
+1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
+
+- The Next action with the `check_status` type means that you need to render the status component.
+- The Next action with the `hide_form` type informs you that can hide payment form with css.
+- The Next action with the `show_errors` type means that you need to show errors messages and payment can't be completed.
+
+1. Add a payment form component to the form - `<psdk-payment-form>`.
+1. Initialize the payment form with the Apple-pay payment method ID and return URL.
+
+- The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+
+1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 
 ## SDK payment methods integration guide (Barzahlen, Naver, Venmo, etc.)
 
@@ -535,13 +484,13 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-    - The financial details component are updated with transaction details once the payment is completed.
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the SDK payment method ID and return URL.
-    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-    - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
+   - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
@@ -549,7 +498,7 @@ Integration flow:
 1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
 
-## QR code pay integration guide
+## QR code payment integration guide
 
 > A working example can be found [here](./examples/qr-code).
 
@@ -559,15 +508,15 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-    - The financial details component are updated with transaction details once the payment is completed.
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the QR code payment method ID and return URL.
-    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-    - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
-    - The Next action with the `show_qr_code` type means that you need to render the QR code component.
-    - The Next action with the `check_status` type means that you need to render the status component.
+   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
+   - The Next action with the `show_qr_code` type means that you need to render the QR code component.
+   - The Next action with the `check_status` type means that you need to render the status component.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
@@ -585,18 +534,109 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-    - The financial details component are updated with transaction details once the payment is completed.
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the QR code payment method ID and return URL.
-    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-    - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
-    - The Next action with the `show_mobile_payment_screen` type means that you need to render new submit button.
-    - The Next action with the `check_status` type means that you need to render the status component.
+   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
+   - The Next action with the `show_mobile_payment_screen` type means that you need to render new submit button.
+   - The Next action with the `check_status` type means that you need to render the status component.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Create a `return` page.
 1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
+
+## Payment via user balance
+
+1. If the user has sufficient virtual balance for full payment, a form for payment by balance will always be returned, regardless of the method passed when initiating the payment form using `headlessCheckout.form.init({...})`.
+2. Payment by balance will be reflected in the `<psdk-finance-details>` component.
+3. The user balance can also be displayed using the `<psdk-user-balance>` component.
+4. The user balance can be obtained using the `headlessCheckout.getUserBalance()` method.
+
+## Saved payment methods
+
+### Save method integration guide
+
+> A working example can be found [here](./examples/save-payment-method).
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Display methods that can be saved `<psdk-payment-methods save-method-mode='true'></psdk-payment-methods>`.
+1. Handle the selection of the payment method with `selectionChange` event.
+1. Add a form message component to the form - `<psdk-payment-form-messages>`.
+1. Add a payment form component to the form - `<psdk-payment-form>`.
+1. Initialize the payment form with the `{ paymentMethodId: ${id}, savePaymentMethod: true, returnUrl: ${returnUrl}}` parameters, where `event.detail.paymentMethodId` is from the `selectionChange` event.
+1. Handle the next action event.
+
+### Delete saved method integration guide
+
+> A working example can be found [here](./examples/saved-methods).
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Display saved methods using the `<psdk-saved-methods>` component.
+1. To make the delete saved method button appear, you need to add the `delete-mode='true'` attribute to the `<psdk-saved-methods>` component.
+1. Handle the deleted saved method event - `deletedSavedMethodStatus`. This is optional. It can be used to display an informational message.
+
+### Payment via saved method integration guide
+
+> A working example can be found [here](./examples/payment-via-saved-method).
+
+Integration flow:
+
+1. Add the SDK library to your project. You can use an npm-package or CDN link.
+1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
+1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
+1. Display saved methods using the `<psdk-saved-methods>` component.
+1. Handle the selection of the payment method with the `savedMethodSelected` event.
+1. Add a form message component to the form - `<psdk-payment-form-messages>`.
+1. Add a payment form component to the form - `<psdk-payment-form>`.
+1. Initialize the payment form with the `{ paymentMethodId: ${id}, paymentWithSavedMethod: true, savedMethodId, returnUrl: ${returnUrl}}` parameters, where `paymentMethodId` and `savedMethodId` are from the `savedMethodSelected` of the `event.details` parameter.
+1. Handle the next action event.
+
+## Payment country
+
+### Changing country
+
+> A working example can be found [here](./examples/changing-country).
+
+Where can the country value be used?
+
+1. When initializing the form using `headlessCheckout.form.init({ ..., country: ${countryISO} })`.
+2. When passing it as an attribute for the `<psdk-payment-methods country="${countryISO}></psdk-payment-methods>` component.
+
+How to get the country value?
+
+1. To get the list of available countries, use the `headlessCheckout.getCountryList()` method.
+1. You can use the ready-made component - `<psdk-select type='country'></psdk-select>`. When using this component, you need to listen for the `userCountryChanged` event.
+
+## Localization
+
+### Changing locales
+
+Where can the language value be used?
+
+1. The language value can be used when initializing `headlessCheckout` - `init({ language?: Lang; })`. Lang - `src/core/i18n/lang.enum.ts`.
+
+How can I get the value of the available locale?
+
+1. You can get the list of locales by using the `headlessCheckout.getAvailableLanguages()` method.
+
+## Default styles
+
+## Using default styles
+
+> A working example can be found [here](./examples/default-styles).
+
+1. To use the default styles of the SDK components, you need to connect the style.css file to your HTML document.
+2. To use the default styles of the secure components, you need to pass the `theme: 'default'` parameter when initializing `headlessCheckout`.
