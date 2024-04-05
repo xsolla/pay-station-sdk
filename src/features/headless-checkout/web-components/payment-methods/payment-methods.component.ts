@@ -95,16 +95,12 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
     );
 
     this.paymentMethods = paymentMethods.slice(skipPaymentMethodsCount);
-    this.visibleMethods = this.paymentMethods;
 
-    if (this.getAttribute(PaymentMethodsAttributes.saveMethodMode)) {
-      this.visibleMethods = this.paymentMethods.filter(
-        (method) => method.isVisible,
-      );
-    } else {
-      this.visibleMethods = this.paymentMethods;
-    }
-    this.filteredMethods = this.visibleMethods.slice();
+    this.visibleMethods = this.paymentMethods.filter(
+      (method) => method.isVisible,
+    );
+
+    this.filteredMethods = this.paymentMethods.slice();
 
     super.render();
     this.finishLoadingComponentHandler('payment-methods');
@@ -132,11 +128,16 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   }
 
   private dispatchSelectionEvent(target: HTMLElement): void {
+    const paymentMethodId = this.getPaymentMethodId(target);
+    if (!paymentMethodId) {
+      return;
+    }
+
     const eventOptions = {
       bubbles: true,
       composed: true,
       detail: {
-        paymentMethodId: this.getPaymentMethodId(target),
+        paymentMethodId: paymentMethodId,
       },
     };
 
@@ -169,24 +170,9 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   }
 
   private updateMethodsView(): void {
-    if (!this.filteredMethods?.length) {
-      this.listRef.innerHTML = this.notFoundValue;
-      return;
-    }
-
-    Array.from(this.listRef.children).forEach((method) => {
-      const pid = Number(method.getAttribute('data-method-id'));
-
-      const isFilteredMethod = this.filteredMethods?.find(
-        (filteredMethod) => filteredMethod.id === pid,
-      );
-
-      if (isFilteredMethod) {
-        (method as HTMLElement).style.display = '';
-        return;
-      }
-
-      (method as HTMLElement).style.display = 'none';
-    });
+    const paymentMethods = this.getMethodsHtml();
+    this.listRef.innerHTML = paymentMethods
+      ? paymentMethods.join('')
+      : this.notFoundValue;
   }
 }
