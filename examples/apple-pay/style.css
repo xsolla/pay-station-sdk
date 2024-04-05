@@ -1,0 +1,21 @@
+.hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.error {
+  padding: 12px;
+  margin-bottom: 1rem;
+  border-radius: var(--psdk-common-border-radius);
+  color: var(--psdk-alert-color);
+  background: var(--psdk-alert-bg);
+  font-family: var(--psdk-font-family);
+  font-size: var(--psdk-font-size);
+  line-height: var(--psdk-line-height);
+}
+
+.error a,
+.error a:hover,
+.error a:visited {
+  color: var(--psdk-alert-color);
+}
