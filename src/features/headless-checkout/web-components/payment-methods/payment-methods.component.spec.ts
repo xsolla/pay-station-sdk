@@ -213,9 +213,7 @@ describe('PaymentMethodsComponent', () => {
     const event = new Event('input', { bubbles: true });
     searchInputElement!.dispatchEvent(event);
     await Promise.resolve();
-    expect(
-      document.querySelectorAll('.payment-method:not([style])')?.length,
-    ).toBe(1);
+    expect(document.querySelectorAll('.payment-method')?.length).toBe(1);
   });
 
   it('Should draw no methods', async () => {

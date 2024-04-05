@@ -131,6 +131,10 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   }
 
   private dispatchSelectionEvent(target: HTMLElement): void {
+    if (!this.getSavedMethodData(target).savedMethodId) {
+      return;
+    }
+
     const eventOptions = {
       bubbles: true,
       composed: true,
