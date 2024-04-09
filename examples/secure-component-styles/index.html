@@ -1,96 +1,99 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Secure component styles</title>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta
+    name='viewport'
+    content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'
+  />
+  <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+  <title>Secure component styles</title>
 
-    <style>
+  <style>
       /* Global styles */
       #form-container {
-        padding: 12px 0;
+          padding: 12px 0;
       }
 
       psdk-text {
-        display: block;
-        width: 400px;
-        height: 40px;
-        margin-bottom: 12px;
+          display: block;
+          width: 400px;
+          height: 40px;
+          margin-bottom: 12px;
       }
 
       psdk-text iframe {
-        border: none;
-        width: inherit;
-        height: inherit;
+          border: none;
+          width: inherit;
+          height: inherit;
       }
-    </style>
+  </style>
 
-    <!--
-    Link the SDK bundle.
-    NOTE: In this example, we use a local build just for convenience purposes.
-    -->
-    <script src="../../dist/main.js"></script>
-    <script src="../variables.js"></script>
-    <!-- <script src="../../dist/main.js"></script> -->
-  </head>
+  <!--
+  Link the SDK bundle.
+  NOTE: In this example, we use a local build just for convenience purposes.
+  -->
+  <script src='../../dist/main.js'></script>
+  <script src='../variables.js'></script>
+  <link rel='stylesheet' href='../../dist/style.css'></link>
+</head>
 
-  <body>
-    <h1>Secure component styles</h1>
+<body>
+<h1>Secure component styles</h1>
 
-    <div id="form-container">
-      <psdk-text name="email"></psdk-text>
-      <psdk-text name="zip"></psdk-text>
-    </div>
+<div id='form-container'>
+  <psdk-text name='email'></psdk-text>
+  <psdk-text name='zip'></psdk-text>
+</div>
 
-    <!--
-      Add legal component to provide links to legal documents
-    -->
-    <psdk-legal></psdk-legal>
+<psdk-total></psdk-total>
 
-    <!-- Initialization script -->
-    <script>
-      if (typeof PayStationSdk === 'undefined') {
-        alert(payStationSdkUndefinedError);
-        throw new Error('PayStationSdk not found');
-      }
-      /**
-       * To learn more about creating tokens,
-       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
-       */
-      const accessToken = '';
+<!--
+  Add legal component to provide links to legal documents
+-->
+<psdk-legal></psdk-legal>
 
-      if (!accessToken) {
-        alert('No token provided. Please, check the documentation');
-        throw new Error('No token provided');
-      }
+<!-- Initialization script -->
+<script>
+  if (typeof PayStationSdk === 'undefined') {
+    alert(payStationSdkUndefinedError);
+    throw new Error('PayStationSdk not found');
+  }
+  /**
+   * To learn more about creating tokens,
+   * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+   */
+  const accessToken = '';
 
-      /**
-       * The SDK is available under the PayStationSdk namespace.
-       * To begin initialization, obtain a reference to the headlessCheckout object.
-       */
-      const { headlessCheckout } = PayStationSdk;
+  if (!accessToken) {
+    alert('No token provided. Please, check the documentation');
+    throw new Error('No token provided');
+  }
 
-      async function initPayStationSdk() {
-        /**
-         * Call the `init()` method with the provided environment object.
-         * The isWebView parameter is required and indicates whether your
-         * integration type is a WebView or not.
-         * You can set sandbox payment mode with `sandbox` parameter
-         * Please note that this command executes asynchronously.
-         */
-        await headlessCheckout.init({
-          isWebView: false,
-          sandbox: true,
-        });
+  /**
+   * The SDK is available under the PayStationSdk namespace.
+   * To begin initialization, obtain a reference to the headlessCheckout object.
+   */
+  const { headlessCheckout } = PayStationSdk;
 
-        /**
-         * Set styles for secure components
-         */
-        await headlessCheckout.setSecureComponentStyles(`
+  async function initPayStationSdk() {
+    /**
+     * Call the `init()` method with the provided environment object.
+     * The isWebView parameter is required and indicates whether your
+     * integration type is a WebView or not.
+     * You can set sandbox payment mode with `sandbox` parameter
+     * Please note that this command executes asynchronously.
+     */
+    await headlessCheckout.init({
+      isWebView: false,
+      sandbox: true,
+      theme: 'default'
+    });
+
+    /**
+     * Set styles for secure components
+     */
+    await headlessCheckout.setSecureComponentStyles(`
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
           input {
@@ -106,33 +109,33 @@
           }
         `);
 
-        /**
-         * After the Payments SDK has been initialized, the next step is setting the token.
-         * To learn more about creating tokens,
-         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
-         */
-        await headlessCheckout.setToken(accessToken);
+    /**
+     * After the Payments SDK has been initialized, the next step is setting the token.
+     * To learn more about creating tokens,
+     * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+     */
+    await headlessCheckout.setToken(accessToken);
 
-        /**
-         * Define payment method id.
-         * To get lists of payment methods use psdk-payment-methods.
-         * Refer to `examples/select-method` for more details
-         */
-        const paypalPaymentMethodId = 24;
+    /**
+     * Define payment method id.
+     * To get lists of payment methods use psdk-payment-methods.
+     * Refer to `examples/select-method` for more details
+     */
+    const paypalPaymentMethodId = 24;
 
-        /**
-         * Initialize payment.
-         * returnUrl will be opened after payment completed on PayPal side.
-         * Refer to `examples/return.html` for more details
-         */
-        const form = await headlessCheckout.form.init({
-          paymentMethodId: paypalPaymentMethodId,
-          returnUrl: 'http://return',
-        });
-      }
+    /**
+     * Initialize payment.
+     * returnUrl will be opened after payment completed on PayPal side.
+     * Refer to `examples/return.html` for more details
+     */
+    const form = await headlessCheckout.form.init({
+      paymentMethodId: paypalPaymentMethodId,
+      returnUrl: 'http://return'
+    });
+  }
 
-      // Initialize sdk
-      initPayStationSdk();
-    </script>
-  </body>
+  // Initialize sdk
+  initPayStationSdk();
+</script>
+</body>
 </html>

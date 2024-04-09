@@ -151,7 +151,8 @@ describe('LegalComponent', () => {
       (name: string, callback: (event: unknown) => void) => {
         const messageEvent = {
           data: JSON.stringify({
-            name: EventName.legalComponentPing,
+            name: EventName.requiredComponentPing,
+            data: { componentName: 'LegalComponent' },
           }),
           origin: '',
           source: {

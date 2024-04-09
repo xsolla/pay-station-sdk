@@ -12,6 +12,7 @@ import { isEventMessage } from '../../../../core/guards/event-message.guard';
 import './legal.component.scss';
 
 export class LegalComponent extends WebComponentAbstract {
+  private readonly componentName = 'LegalComponent';
   private readonly postMessagesClient: PostMessagesClient;
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly headlessCheckoutSpy: HeadlessCheckoutSpy;
@@ -76,13 +77,16 @@ export class LegalComponent extends WebComponentAbstract {
     if (
       !data ||
       !isEventMessage(data) ||
-      data.name !== EventName.legalComponentPing
+      data.name !== EventName.requiredComponentPing ||
+      (data.data as { componentName: string }).componentName !==
+        this.componentName
     ) {
       return;
     }
     message.source?.postMessage(
       JSON.stringify({
-        name: EventName.legalComponentPong,
+        name: EventName.requiredComponentPong,
+        data: { componentName: this.componentName },
       }),
       message.origin as WindowPostMessageOptions,
     );
