@@ -3,7 +3,7 @@
 .application {
     margin: 0 auto;
     width: 100%;
-    max-width: 700px;
+    max-width: 360px;
 }
 
 .columns-wrapper {
@@ -24,8 +24,7 @@ psdk-card-number {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 400px;
-    height: 60px;
+    width: 360px;
     margin-bottom: 30px;
 }
 
@@ -36,8 +35,7 @@ psdk-card-number .wrapper {
 psdk-text iframe,
 psdk-card-number iframe {
     border: none;
-    width: inherit;
-    height: 30px;
+    width: 360px;
 }
 
 .field-error {
@@ -74,12 +72,6 @@ psdk-select button.select {
     background: #e8e8e8;
 }
 
-psdk-submit-button {
-    width: 100%;
-    max-width: 300px;
-    padding: 3px 6px;
-}
-
 /* *** *** CONTROLS: END *** *** */
 
 /* *** *** FINANCE DETAILS: START *** *** */
@@ -87,7 +79,12 @@ psdk-submit-button {
 psdk-finance-details {
     display: block;
     background: #f5f5f5;
-    margin-right: 10px;
+    padding: 10px;
+}
+
+psdk-total {
+    display: block;
+    background: #f5f5f5;
     padding: 10px;
 }
 
@@ -115,6 +112,7 @@ psdk-status .image {
 psdk-status .title-text {
     text-align: center;
 }
+
 /* *** *** STATUS: END *** *** */
 
 /* *** *** FOOTER LINKS: START *** *** */
@@ -132,4 +130,5 @@ psdk-status .title-text {
     display: flex;
     justify-content: space-between;
 }
+
 /* *** *** FOOTER LINKS: END *** *** */

@@ -6,6 +6,7 @@ export enum WebComponentTagName {
   SavedMethodsComponent = 'psdk-saved-methods',
   PriceTextComponent = 'psdk-price-text',
   FinanceDetailsComponent = 'psdk-finance-details',
+  TotalComponent = 'psdk-total',
   LegalComponent = 'psdk-legal',
   PaymentFormComponent = 'psdk-payment-form',
   StatusComponent = 'psdk-status',
