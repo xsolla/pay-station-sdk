@@ -3,9 +3,8 @@ import { getCartItemsTemplate } from './cart-items.template';
 import { getCroatianExchangeRateTemplate } from './croatian-exchange-rate.template';
 import { getShippingTemplate } from './shipping.template';
 import { getSubtotalDetailsTemplate } from './subtotal-details.template';
-import { getTotalDetailsTemplate } from './total-details.template';
-import { getTotalRowTemplate } from './total-row.template';
 import { getTransactionDetailsTemplate } from './transaction-details.template';
+import { getTotalDetailsTemplate } from './total-details.template';
 
 export const getFinanceDetailsTemplate = (
   financeDetails: FinanceDetails,
@@ -21,7 +20,6 @@ export const getFinanceDetailsTemplate = (
       financeDetails.finance,
       financeDetails.cartSummary,
     ),
-    getTotalRowTemplate(financeDetails.cartSummary),
     getCroatianExchangeRateTemplate(financeDetails),
     getTotalDetailsTemplate(financeDetails.finance, financeDetails.cartSummary),
   ].join('');

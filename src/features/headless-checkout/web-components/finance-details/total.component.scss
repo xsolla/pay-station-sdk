@@ -1,0 +1,25 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/payment-methods.mixin' as payment-methods;
+@use 'src/styles/mixins/cart.mixin' as cart;
+
+psdk-total {
+  @include typo.psdk-typo;
+
+  & > * {
+    margin-bottom: 12px;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .title {
+    margin-right: 8px;
+    font-weight: 500;
+  }
+}

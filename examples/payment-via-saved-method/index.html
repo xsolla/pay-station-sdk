@@ -98,6 +98,11 @@ NOTE: In this example, we use a local build just for convenience purposes.
         contentElement.appendChild(paymentFormElement);
       }
 
+      function addFinanceDetailsElement() {
+        const totalComponent = new PayStationSdk.TotalComponent();
+        contentElement.appendChild(totalComponent);
+      }
+
       function handlePaymentMethodChoice(event) {
         const payload = event.detail;
         window.removeEventListener(
@@ -109,6 +114,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
         addPaymentFormMessagesElement();
         addPaymentFormElement();
         addSubmitButtonElement();
+        addFinanceDetailsElement()
 
         initPaymentForm(payload.paymentMethodId, payload.savedMethodId);
       }

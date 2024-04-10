@@ -157,7 +157,7 @@ function buildPaymentFlow() {
      */
     await headlessCheckout.init({
       isWebView: false,
-      sandbox: true,
+      sandbox: false,
     });
 
     /**
@@ -165,19 +165,6 @@ function buildPaymentFlow() {
      */
     await headlessCheckout.setSecureComponentStyles(`
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
-          input {
-            padding: 0;
-            border: 1px solid grey;
-            border-radius: 8px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 14px;
-            height: 30px !important;
-          }
-
-          input:focus {
-            outline: none;
-          }
         `);
 
     /**
