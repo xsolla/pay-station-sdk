@@ -1,23 +1,24 @@
 import { PaymentMethod } from '../../../../core/payment-method.interface';
-import { cdnUrl } from '../../environment';
-import { cardPid } from './variables';
-import arrow from '../../../../assets/icons/arrow-right.svg';
+import { cdnIconsUrl } from '../../environment';
 
-const iconsPath = `${cdnUrl}/paystation4/brand-logos`;
+const iconsPath = `${cdnIconsUrl}/brand-logos`;
+const defaultIconPath = `${cdnIconsUrl}/default-payment-icons/default.svg`;
+
+const arrow = `${cdnIconsUrl}/common-icons/chevron-right--line.svg`;
 export const getPaymentMethodTemplate = (method: PaymentMethod): string => {
-  let iconName: string;
+  let iconPath: string;
 
   if (!method.iconName) {
-    iconName = method.id === cardPid ? 'card.svg' : 'default.svg';
+    iconPath = defaultIconPath;
   } else {
-    iconName = method.iconName;
+    iconPath = `${iconsPath}/${method.iconName}`;
   }
   return `<li class='payment-method' data-method-id='${method.id}'>
     <a tabindex='0' href='${method.id}'>
       <span class='icon'>
-        <img src='${iconsPath}/${iconName}' alt='${
+        <img src='${iconPath}' alt='${
           method.name
-        }' onerror="this.onerror=null; this.src='${iconsPath}/default.svg'">
+        }' onerror="this.onerror=null; this.src='${defaultIconPath}'">
       </span>
       <span class='name'>${method.name}</span>
       <span class='arrow'>

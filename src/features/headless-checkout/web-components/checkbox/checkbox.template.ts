@@ -1,6 +1,8 @@
 import { XpsBoolean } from '../../../../core/xps-boolean.enum';
 import { CheckboxComponentConfig } from './checkbox-component-config.interface';
-import check from '../../../../assets/icons/check.svg';
+import { cdnIconsUrl } from '../../environment';
+
+const check = `${cdnIconsUrl}/check.svg`;
 
 export const getCheckboxComponentTemplate = (
   config: CheckboxComponentConfig,

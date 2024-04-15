@@ -2,10 +2,9 @@
   font-weight: normal;
   font-style: normal;
   font-family: GraphikLCWebUikit;
-  src:
-    url('./assets/fonts/Graphik-Regular-Web.woff2') format('woff2'),
-    url('./assets/fonts/Graphik-Regular-Web.woff') format('woff'),
-    url('./assets/fonts/Graphik-Regular-Web.ttf') format('truetype');
+  src: url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Regular-Web.woff2') format('woff2'),
+  url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Regular-Web.woff') format('woff'),
+  url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Regular-Web.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -13,10 +12,9 @@
   font-weight: 500;
   font-style: normal;
   font-family: GraphikLCWebUikit;
-  src:
-    url('./assets/fonts/Graphik-Medium-Web.woff2') format('woff2'),
-    url('./assets/fonts/Graphik-Medium-Web.woff') format('woff'),
-    url('./assets/fonts/Graphik-Medium-Web.ttf') format('truetype');
+  src: url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Medium-Web.woff2') format('woff2'),
+  url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Medium-Web.woff') format('woff'),
+  url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Medium-Web.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -24,9 +22,8 @@
   font-weight: bold;
   font-style: normal;
   font-family: GraphikLCWebUikit;
-  src:
-    url('./assets/fonts/Graphik-Bold-Web.woff2') format('woff2'),
-    url('./assets/fonts/Graphik-Bold-Web.woff') format('woff'),
-    url('./assets/fonts/Graphik-Bold-Web.ttf') format('truetype');
+  src: url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Bold-Web.woff2') format('woff2'),
+  url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Bold-Web.woff') format('woff'),
+  url('https://cdn.xsolla.net/headless-checkout-prod/assets/fonts/graphik/Graphik-Bold-Web.ttf') format('truetype');
   font-display: swap;
 }

@@ -1,6 +1,7 @@
 import { SelectComponentConfig } from './select-component.config.interface';
-import arrow from '../../../../assets/icons/arrow-down.svg';
+import { cdnIconsUrl } from '../../environment';
 
+const arrow = `${cdnIconsUrl}/common-icons/chevron-down--line.svg`;
 export const getSelectOptionTemplate = (
   option: {
     label: string;
@@ -31,7 +32,7 @@ export const getSelectComponentTemplate = (
 
           <div class='arrow-wrapper'>
             <div id='dropdown-icon' class='arrow arrow-down'>
-              <img src='${arrow as string}'>
+              <img src='${arrow}'>
             </div>
           </div>
         </button>
