@@ -10,13 +10,14 @@ import { PostMessagesClient } from '../../../../core/post-messages-client/post-m
 import { deleteSavedMethodHandler } from '../../post-messages-handlers/delete-saved-method.handler';
 import { EventName } from '../../../../core/event-name.enum';
 import './saved-methods.component.scss';
-import deleteIcon from '../../../../assets/icons/delete.svg';
+import { cdnIconsUrl } from '../../environment';
 
 export class SavedMethodsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly headlessCheckoutSpy: HeadlessCheckoutSpy;
   private readonly window: Window;
   private readonly postMessagesClient: PostMessagesClient;
+  private readonly deleteIcon = `${cdnIconsUrl}/common-icons/trash-can--line.svg`;
 
   private savedMethods?: SavedMethod[];
 
@@ -216,7 +217,7 @@ export class SavedMethodsComponent extends WebComponentAbstract {
     button.className = 'psdk-delete-saved-method-button';
 
     const deleteIconElement = this.window.document.createElement('img');
-    deleteIconElement.src = deleteIcon;
+    deleteIconElement.src = this.deleteIcon;
     button.appendChild(deleteIconElement);
     button.style.cursor = 'pointer';
 

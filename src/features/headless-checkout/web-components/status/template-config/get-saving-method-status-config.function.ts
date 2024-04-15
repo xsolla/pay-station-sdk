@@ -1,9 +1,11 @@
 import { StatusState } from './status-state.enum';
 import { StatusComponentConfig } from './status.component.config.interface';
-import failedImage from '../../../../../assets/statuses/failed.png';
 import i18next from 'i18next';
-import successImage from '../../../../../assets/statuses/success.png';
 import { Status } from '../../../../../core/status/status.interface';
+import { cdnIconsUrl } from '../../../environment';
+
+const failedImage = `${cdnIconsUrl}/statuses/failed.png`;
+const successImage = `${cdnIconsUrl}/statuses/success.png`;
 
 export function getSavingMethodStatusConfig(
   statusState: StatusState,

@@ -1,10 +1,11 @@
-import { cdnUrl } from '../../environment';
+import { cdnIconsUrl } from '../../environment';
 import { SavedMethod } from '../../../../core/saved-method.interface';
 import { getExpireDate } from './pipes/get-expire-date.pipe';
 import { getCutterName } from './pipes/name-cutter.pipe';
-import deleteIcon from '../../../../assets/icons/delete.svg';
 
-const iconsPath = `${cdnUrl}/paystation4/brand-logos`;
+const iconsPath = `${cdnIconsUrl}/brand-logos`;
+const defaultIconPath = `${cdnIconsUrl}/default-payment-icons/default.svg`;
+const deleteIcon = `${cdnIconsUrl}/common-icons/trash-can--line.svg`;
 
 export const getSavedMethodTemplate = (
   method: SavedMethod,
@@ -12,12 +13,12 @@ export const getSavedMethodTemplate = (
 ): string => {
   const expireDate = getExpireDate(method.cardExpiryDate);
   const name = getCutterName(method);
-  let iconName: string;
+  let iconPath: string;
 
   if (!method.iconName) {
-    iconName = 'default.svg';
+    iconPath = defaultIconPath;
   } else {
-    iconName = method.iconName;
+    iconPath = `${iconsPath}/${method.iconName}`;
   }
 
   return `<li class='saved-method' data-payment-method-id='${
@@ -27,14 +28,16 @@ export const getSavedMethodTemplate = (
   }'>
     <a tabindex='0' href='${method.id}'>
       <span class='icon'>
-        <img src='${iconsPath}/${iconName}' alt='${method.name}'>
+        <img src='${iconPath}' alt='${
+          method.name
+        }' onerror="this.onerror=null; this.src='${defaultIconPath}'">
       </span>
         <span class='name'>${name}</span>
         ${expireDate ? `<span class='expire-date'>${expireDate}</span>` : ''}
         ${
           isDeleteMode
             ? `<button class='psdk-delete-saved-method-button'>
-                  <img src="${deleteIcon as string}">
+                  <img src='${deleteIcon as string}'>
                 </button>`
             : ''
         }
