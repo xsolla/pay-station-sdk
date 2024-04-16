@@ -40,11 +40,11 @@ export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
 
     void this.getComponentConfig(this.controlName).then((config) => {
       this.config = config as CheckboxComponentConfig;
-
       this.render();
       this.addEventListenerToElement(this.inputRef, 'change', (event: Event) =>
         this.notifyOnValueChanges(event),
       );
+      this.finishLoadingFormControlHandler(this.controlName);
     });
   }
 

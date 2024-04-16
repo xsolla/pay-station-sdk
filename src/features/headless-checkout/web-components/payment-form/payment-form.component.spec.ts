@@ -8,6 +8,7 @@ import { PaymentFormComponent } from './payment-form.component';
 import { Field } from '../../../../core/form/field.interface';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { FieldSettings } from './field-settings.interface';
+import { FormLoader } from '../../../../core/form/form-loader';
 
 function createComponent(): void {
   const element = document.createElement(
@@ -47,6 +48,7 @@ describe('PaymentFormComponent', () => {
   let paymentFormFieldsManager: PaymentFormFieldsService;
   let postMessagesClient: PostMessagesClient;
   let windowService: Window;
+  let formLoader: FormLoader;
 
   window.customElements.define(
     WebComponentTagName.PaymentFormComponent,
@@ -77,6 +79,11 @@ describe('PaymentFormComponent', () => {
       },
     } as unknown as FormSpy;
 
+    formLoader = {
+      setupAndAwaitFieldsLoading: noopStub,
+      setFieldLoaded: noopStub,
+    } as unknown as FormLoader;
+
     paymentFormFieldsManager = {
       createMissedFields: noopStub,
       removeExtraFields: noopStub,
@@ -104,7 +111,8 @@ describe('PaymentFormComponent', () => {
       .register<PostMessagesClient>(PostMessagesClient, {
         useValue: postMessagesClient,
       })
-      .register<Window>(Window, { useValue: windowService });
+      .register<Window>(Window, { useValue: windowService })
+      .register<FormLoader>(FormLoader, { useValue: formLoader });
   });
 
   afterEach(() => {
