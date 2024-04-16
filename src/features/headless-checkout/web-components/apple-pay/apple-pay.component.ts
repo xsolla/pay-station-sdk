@@ -31,7 +31,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
   private readonly listenApplePayWindowCloseDelay = 100;
   private applePayWindow?: Window | null;
   private listenApplePayWindowCloseTimeout?: ReturnType<typeof setTimeout>;
-  private isWaitingPayment = false;
 
   public constructor() {
     super();
@@ -111,7 +110,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
   }
 
   private setupWaitingPayment(isWaiting: boolean): void {
-    this.isWaitingPayment = isWaiting;
     if (isWaiting) {
       this.drawWaitingElement();
       this.hidePayButton();

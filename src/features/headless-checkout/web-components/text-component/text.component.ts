@@ -36,7 +36,7 @@ export class TextComponent extends SecureComponentAbstract {
       finishLoadComponentHandler,
       (res) => {
         if (res?.fieldName && res?.fieldName === this.inputName) {
-          this.finishLoadingComponentHandler(this.inputName);
+          this.finishLoadingFormControlHandler(this.inputName);
         }
       },
     );
@@ -47,7 +47,6 @@ export class TextComponent extends SecureComponentAbstract {
   }
 
   protected connectedCallback(): void {
-    this.startLoadingComponentHandler();
     if (!this.formSpy.formWasInit) {
       this.formSpy.listenFormInit(() => this.getConfigFromInputName());
       return;

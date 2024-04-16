@@ -70,7 +70,6 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   }
 
   protected connectedCallback(): void {
-    this.startLoadingComponentHandler();
     if (!this.headlessCheckoutSpy.appWasInit) {
       this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
       return;
@@ -98,7 +97,6 @@ export class SavedMethodsComponent extends WebComponentAbstract {
   ): void => {
     this.savedMethods = savedMethods;
     super.render();
-    this.finishLoadingComponentHandler('saved-methods');
     this.listenClicks();
   };
 
