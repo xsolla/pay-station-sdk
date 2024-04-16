@@ -1,13 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { isLoadingCssClassName } from '../../shared/loading-state/is-loading-css-class-name.const';
+import { FormLoader } from '../form/form-loader';
+import { container } from 'tsyringe';
 import { createFinishLoadingEvent } from '../../shared/loading-state/dispatch-finish-loading-event.function';
+import { isLoadingCssClassName } from '../../shared/loading-state/is-loading-css-class-name.const';
 
 export abstract class WebComponentAbstract extends HTMLElement {
+  protected formLoader!: FormLoader;
+
   protected eventListeners: Array<{
     element: Element;
     eventType: string;
     listener(event: Event): void;
   }> = [];
+
+  public constructor() {
+    super();
+    this.formLoader = container.resolve(FormLoader);
+  }
 
   protected abstract getHtml(): string;
 
@@ -75,6 +84,10 @@ export abstract class WebComponentAbstract extends HTMLElement {
     }
   }
 
+  protected finishLoadingFormControlHandler(componentName: string): void {
+    this.formLoader.setFieldLoaded(componentName);
+  }
+
   protected startLoadingComponentHandler(): void {
     this.classList.add(isLoadingCssClassName);
   }
@@ -86,5 +99,6 @@ export abstract class WebComponentAbstract extends HTMLElement {
 
   protected dispatchFinishLoadingEvent(componentName: string): void {
     this.dispatchEvent(createFinishLoadingEvent(componentName));
+    this.formLoader.setFieldLoaded(componentName);
   }
 }

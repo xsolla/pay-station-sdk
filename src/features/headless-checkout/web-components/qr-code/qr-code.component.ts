@@ -1,12 +1,13 @@
 import { SecureComponentAbstract } from '../../../../core/web-components/secure-component/secure-component.abstract';
-import { EventName } from '../../../../core/event-name.enum';
-import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
 import { container } from 'tsyringe';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
+import { EventName } from '../../../../core/event-name.enum';
+import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
 
 export class QrCodeComponent extends SecureComponentAbstract {
   protected componentName = 'qr-code';
+  protected inputName = 'qr';
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly formSpy: FormSpy;
 
@@ -14,20 +15,23 @@ export class QrCodeComponent extends SecureComponentAbstract {
     super();
     this.headlessCheckout = container.resolve(HeadlessCheckout);
     this.formSpy = container.resolve(FormSpy);
-  }
-
-  protected connectedCallback(): void {
-    this.startLoadingComponentHandler();
-
-    if (!this.formSpy.formWasInit) {
-      this.formSpy.listenFormInit(() => this.connectedCallback());
-    }
 
     this.headlessCheckout.events.onCoreEvent(
       EventName.finishLoadComponent,
       finishLoadComponentHandler,
-      () => this.finishLoadingComponentHandler('qr-code'),
+      (res) => {
+        if (res?.fieldName && res?.fieldName === this.inputName) {
+          this.finishLoadingFormControlHandler(this.inputName);
+        }
+      },
     );
+  }
+
+  protected connectedCallback(): void {
+    if (!this.formSpy.formWasInit) {
+      this.formSpy.listenFormInit(() => this.connectedCallback());
+      return;
+    }
 
     super.connectedCallback();
   }

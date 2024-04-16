@@ -36,12 +36,15 @@ export class PaymentFormComponent extends WebComponentAbstract {
       return;
     }
     const formExpectedFields = this.formSpy.formFields;
-    const formRequriedFields = this.getRequriedFields(this.formSpy.formFields);
+
+    const formRequiredFields = this.getRequriedFields(this.formSpy.formFields);
 
     super.render();
     if (formExpectedFields) {
+      this.setupFormLoader(formRequiredFields);
+
       const expectedFields = this.getFieldsSettings(formExpectedFields);
-      const requiredFields = this.getFieldsSettings(formRequriedFields);
+      const requiredFields = this.getFieldsSettings(formRequiredFields);
       const existsControls = this.getExistsControls();
 
       this.setupFormFields(expectedFields, requiredFields, existsControls);
@@ -149,5 +152,9 @@ export class PaymentFormComponent extends WebComponentAbstract {
       { name: EventName.warning, data: { message } },
       () => null,
     );
+  }
+
+  private setupFormLoader(fields: Field[]): void {
+    void this.formLoader.setupAndAwaitFieldsLoading(fields);
   }
 }
