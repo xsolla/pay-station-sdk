@@ -421,8 +421,8 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
 
         void this.getComponentConfig(this.controlName).then((config) => {
           this.config = config;
-
           this.render();
+          this.finishLoadingFormControlHandler(this.controlName);
         });
     }
   }
