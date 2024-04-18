@@ -7,6 +7,7 @@ import { CheckboxComponent } from './checkbox.component';
 import { CheckboxComponentConfig } from './checkbox-component-config.interface';
 import { XpsBoolean } from '../../../../core/xps-boolean.enum';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
+import { FormLoader } from '../../../../core/form/form-loader';
 
 const config: CheckboxComponentConfig = {
   name: 'test',
@@ -29,6 +30,7 @@ describe('CheckboxComponent', () => {
   let headlessCheckout: HeadlessCheckout;
   let postMessagesClient: PostMessagesClient;
   let windowService: Window;
+  let formLoader: FormLoader;
 
   window.customElements.define(
     WebComponentTagName.CheckboxComponent,
@@ -48,6 +50,11 @@ describe('CheckboxComponent', () => {
 
     windowService = window;
 
+    formLoader = {
+      setupAndAwaitFieldsLoading: noopStub,
+      setFieldLoaded: noopStub,
+    } as unknown as FormLoader;
+
     container.clearInstances();
 
     container
@@ -64,7 +71,8 @@ describe('CheckboxComponent', () => {
           },
         } as FormSpy,
       })
-      .register<Window>(Window, { useValue: windowService });
+      .register<Window>(Window, { useValue: windowService })
+      .register<FormLoader>(FormLoader, { useValue: formLoader });
   });
 
   afterEach(() => {

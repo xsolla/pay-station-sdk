@@ -38,6 +38,7 @@ import { Themes } from '../../core/customization/themes.type';
 import { Lang } from '../../core/i18n/lang.enum';
 import { getCountryListHandler } from './post-messages-handlers/get-country-list.handler';
 import { CountryResponse } from '../../core/country-response.interface';
+import { FormLoader } from '../../core/form/form-loader';
 
 @singleton()
 export class HeadlessCheckout {
@@ -137,6 +138,8 @@ export class HeadlessCheckout {
     activate: (): void => {
       this.formStatus = FormStatus.active;
     },
+    setupAndAwaitFieldsLoading: async (fields: Field[]): Promise<void> =>
+      this.formLoader.setupAndAwaitFieldsLoading(fields),
   };
 
   public get formConfiguration(): FormConfiguration | undefined {
@@ -159,6 +162,7 @@ export class HeadlessCheckout {
     private readonly headlessCheckoutSpy: HeadlessCheckoutSpy,
     private readonly formSpy: FormSpy,
     private readonly themesLoader: ThemesLoader,
+    private readonly formLoader: FormLoader,
   ) {}
 
   public async init(environment: {

@@ -7,6 +7,7 @@ import { SelectAttributes } from './select-attributes.enum';
 import { SelectComponent } from './select.component';
 import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
+import { FormLoader } from '../../../../core/form/form-loader';
 
 function createComponent(name: string): HTMLElement {
   const element = document.createElement(WebComponentTagName.SelectComponent);
@@ -37,6 +38,7 @@ describe('SelectComponent', () => {
   let postMessagesClient: PostMessagesClient;
   let headlessCheckout: HeadlessCheckout;
   let headlessCheckoutSpy: HeadlessCheckoutSpy;
+  let formLoader: FormLoader;
 
   window.customElements.define(
     WebComponentTagName.SelectComponent,
@@ -49,6 +51,11 @@ describe('SelectComponent', () => {
     postMessagesClient = {
       send: noopStub,
     } as unknown as PostMessagesClient;
+
+    formLoader = {
+      setupAndAwaitFieldsLoading: noopStub,
+      setFieldLoaded: noopStub,
+    } as unknown as FormLoader;
 
     headlessCheckout = {
       form: {
@@ -84,6 +91,9 @@ describe('SelectComponent', () => {
       })
       .register(HeadlessCheckoutSpy, {
         useValue: headlessCheckoutSpy,
+      })
+      .register(FormLoader, {
+        useValue: formLoader,
       });
   });
 
