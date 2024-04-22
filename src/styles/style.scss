@@ -24,8 +24,10 @@ psdk-payment-form-messages {
 }
 
 psdk-text,
+psdk-lit-text,
 psdk-phone,
 psdk-card-number,
+psdk-lit-card-number,
 psdk-google-pay-button,
 psdk-apple-pay {
   @include psdk-typo;

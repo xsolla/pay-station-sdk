@@ -1,26 +1,22 @@
 import { EventName } from '../../../../core/event-name.enum';
-
-import { getCardNumberComponentTemplate } from './card-number.template';
 import { updateCreditCardTypeHandler } from '../../post-messages-handlers/update-credit-card-type.handler';
 import { cardIconsMap } from './card-icons.map';
 import { CardType } from './card-type.enum';
 import { CardNumberComponentAttributes } from './card-number-component-attributes.enum';
-import { TextComponent } from '../text-component/text.component';
 import './card-number.component.scss';
+import { property, customElement } from 'lit/decorators.js';
+import { TextComponent } from '../text-component/text.component';
+import { html, TemplateResult } from 'lit';
 
+@customElement('psdk-card-number')
 export class CardNumberComponent extends TextComponent {
+  @property({ attribute: false })
   private cardType = 'default';
 
-  private isCardIconShown = true;
+  @property({ type: Boolean, attribute: CardNumberComponentAttributes.icon })
+  private readonly isCardIconShown = false;
 
-  public static get observedAttributes(): string[] {
-    return [
-      CardNumberComponentAttributes.name,
-      CardNumberComponentAttributes.icon,
-    ];
-  }
-
-  protected connectedCallback(): void {
+  public connectedCallback(): void {
     super.connectedCallback();
 
     this.postMessagesClient.listen<{ cardType: string }>(
@@ -29,65 +25,32 @@ export class CardNumberComponent extends TextComponent {
       (res) => {
         if (this.isCardIconShown && this.cardType !== res?.cardType) {
           this.cardType = res?.cardType ? res.cardType : 'default';
-          this.updateCardIcon(this.cardType);
         }
       },
     );
   }
 
-  protected attributeChangedCallback(): void {
-    if (!this.formSpy.formWasInit) {
-      this.formSpy.listenFormInit(() => {
-        super.attributeChangedCallback();
-        this.toggleCardIconVisibility();
-      });
-      return;
+  protected render(): TemplateResult<1> {
+    if (!this.formSpy.formWasInit || !this.componentName) {
+      return html``;
     }
-  }
 
-  protected getHtml(): string {
-    const secureHtml = this.getSecureHtml();
-    return getCardNumberComponentTemplate({
-      title: this.config?.title,
-      error: this.config?.error,
-      isCardIconShown: this.isCardIconShown,
-      secureHtml,
-    });
-  }
-
-  private updateCardIcon(iconName: string): void {
-    const rootElement = this.shadowRoot ?? this;
-
-    const iconWrapperElement = rootElement.querySelector('.card-icon');
-
-    const iconElement = iconWrapperElement!.querySelector(
-      '.icon',
-    ) as HTMLImageElement | null;
-
-    const cardIcon =
-      cardIconsMap[iconName as CardType] ?? cardIconsMap[CardType.DEFAULT_CARD];
-    if (!iconElement) {
-      const newIconElement = this.window.document.createElement('img');
-      newIconElement.width = 24;
-      newIconElement.height = 18;
-      newIconElement.classList.add('icon');
-      newIconElement.src = cardIcon;
-      iconWrapperElement!.appendChild(newIconElement);
-    } else {
-      iconElement.src = cardIcon;
-    }
-  }
-
-  private toggleCardIconVisibility(): void {
-    const isCardIconShownAttr = this.getAttribute(
-      CardNumberComponentAttributes.icon,
+    const textComponentTemplate = this.getTextComponentTemplate(
+      this.getCardIconTemplate(),
     );
 
-    if (!isCardIconShownAttr) {
-      this.isCardIconShown = true;
-      return;
-    }
+    return html`${textComponentTemplate}`;
+  }
 
-    this.isCardIconShown = isCardIconShownAttr === 'true';
+  private getCardIconTemplate(): TemplateResult<1> | null {
+    const cardIcon =
+      cardIconsMap[this.cardType as CardType] ??
+      cardIconsMap[CardType.DEFAULT_CARD];
+
+    return this.isCardIconShown
+      ? html`<span class="card-icon">
+          <img width="24" height="18" class="icon" src="${cardIcon}" />
+        </span>`
+      : null;
   }
 }

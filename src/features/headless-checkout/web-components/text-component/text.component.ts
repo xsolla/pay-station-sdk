@@ -1,8 +1,6 @@
-import { SecureComponentAbstract } from '../../../../core/web-components/secure-component/secure-component.abstract';
 import { TextComponentAttributes } from './text-component-attributes.enum';
 import { container } from 'tsyringe';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
-import { getTextComponentTemplate } from './text.compontent.template';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { EventName } from '../../../../core/event-name.enum';
 import { Message } from '../../../../core/message.interface';
@@ -11,25 +9,34 @@ import { getControlComponentConfigHandler } from '../get-control-component-confi
 import { HeadlessCheckout } from '../../headless-checkout';
 import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
 import { TextComponentConfig } from './text-component.config.interface';
-import { FieldStatus } from '../../../../core/form/field-status.interface';
 import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
+import { LitSecureComponentAbstract } from '../../../../core/web-components/secure-component/lit-secure-component.abstract';
+import { html, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-export class TextComponent extends SecureComponentAbstract {
+@customElement('psdk-text')
+export class TextComponent extends LitSecureComponentAbstract {
+  @property({ attribute: TextComponentAttributes.name })
+  protected inputName = '';
+
+  @property({ attribute: false })
   protected config?: TextComponentConfig;
-  protected readonly postMessagesClient: PostMessagesClient;
-  protected readonly window: Window;
-  protected readonly formSpy: FormSpy;
 
-  private readonly headlessCheckout: HeadlessCheckout;
+  @property({ attribute: false })
+  protected showError: boolean = false;
+
+  protected readonly postMessagesClient: PostMessagesClient =
+    container.resolve(PostMessagesClient);
+  protected readonly window: Window = container.resolve(Window);
+  protected readonly formSpy: FormSpy = container.resolve(FormSpy);
+
+  private readonly headlessCheckout: HeadlessCheckout =
+    container.resolve(HeadlessCheckout);
   private isListeningFieldStatusChange = false;
-  private inputName?: string | null;
 
   public constructor() {
     super();
-    this.formSpy = container.resolve(FormSpy);
-    this.postMessagesClient = container.resolve(PostMessagesClient);
-    this.window = container.resolve(Window);
-    this.headlessCheckout = container.resolve(HeadlessCheckout);
 
     this.headlessCheckout.events.onCoreEvent(
       EventName.finishLoadComponent,
@@ -42,17 +49,45 @@ export class TextComponent extends SecureComponentAbstract {
     );
   }
 
-  public static get observedAttributes(): string[] {
-    return [TextComponentAttributes.name];
-  }
+  public connectedCallback(): void {
+    super.connectedCallback();
 
-  protected connectedCallback(): void {
     if (!this.formSpy.formWasInit) {
       this.formSpy.listenFormInit(() => this.getConfigFromInputName());
       return;
     }
 
     this.getConfigFromInputName();
+  }
+
+  protected render(): TemplateResult<1> {
+    if (!this.formSpy.formWasInit || !this.componentName) {
+      return html``;
+    }
+
+    return this.getTextComponentTemplate();
+  }
+
+  protected getTextComponentTemplate(
+    additionalControls?: TemplateResult<1> | null,
+  ): TemplateResult<1> {
+    const { title, tooltip, error } = this.config ?? {};
+
+    return html`
+      ${this.renderByCondition(
+        !!title,
+        html` <div class="label">${title}</div>`,
+      )}
+      ${this.renderByCondition(
+        !!tooltip?.text,
+        html` <div class="description">${tooltip?.text}</div>`,
+      )}
+      ${this.renderSecureComponentWithWrapper(additionalControls)}
+      ${this.renderByCondition(
+        this.showError,
+        html` <div class="field-error">${error}</div>`,
+      )}
+    `;
   }
 
   protected async getControlComponentConfig(
@@ -81,29 +116,9 @@ export class TextComponent extends SecureComponentAbstract {
   ): void => {
     this.config = config;
     this.componentName = componentName;
-    super.render();
   };
 
-  protected attributeChangedCallback(): void {
-    if (!this.inputName) {
-      return;
-    }
-
-    super.attributeChangedCallback();
-  }
-
-  protected getHtml(): string {
-    const secureHtml = this.getSecureHtml();
-    return getTextComponentTemplate({
-      title: this.config?.title,
-      tooltip: this.config?.tooltip,
-      error: this.config?.error,
-      secureHtml,
-    });
-  }
-
   private getConfigFromInputName(): void {
-    this.inputName = this.getAttribute(TextComponentAttributes.name);
     if (!this.inputName) {
       return;
     }
@@ -128,29 +143,13 @@ export class TextComponent extends SecureComponentAbstract {
         return;
       }
 
-      this.config.error = this.getFirstError(fieldStatus.errors);
-      this.updateError(fieldStatus);
+      this.showError = !!(fieldStatus.isTouched && !fieldStatus.isFocused);
+
+      this.config = {
+        ...this.config,
+        error: this.getFirstError(fieldStatus.errors),
+      };
     });
-  }
-
-  private updateError(fieldStatus: FieldStatus): void {
-    const rootElement = this.shadowRoot ?? this;
-    const errorElement = rootElement.querySelector('.field-error');
-
-    if (this.config?.error && fieldStatus.isTouched && !fieldStatus.isFocused) {
-      if (!errorElement) {
-        const newErrorElement = this.window.document.createElement('div');
-        newErrorElement.classList.add('field-error');
-        newErrorElement.innerHTML = this.config.error;
-        rootElement.appendChild(newErrorElement);
-      } else {
-        errorElement.innerHTML = this.config.error;
-      }
-    } else {
-      if (errorElement) {
-        errorElement.remove();
-      }
-    }
   }
 
   private getFirstError(errors: ValidationErrors | null): string | null {
@@ -160,5 +159,22 @@ export class TextComponent extends SecureComponentAbstract {
 
     const firstErrorKey: string = Object.keys(errors)[0];
     return errors[firstErrorKey]?.message ?? null;
+  }
+
+  private renderSecureComponentWithWrapper(
+    additionalControls?: TemplateResult<1> | null,
+  ): TemplateResult<1> {
+    const additionalClass = additionalControls
+      ? 'wrapper--additional-controls'
+      : '';
+    return html`
+      <div class="wrapper ${additionalClass}">
+        ${unsafeHTML(this.getSecureHtml())}
+        ${this.renderByCondition(
+          !!additionalControls,
+          html`${additionalControls}`,
+        )}
+      </div>
+    `;
   }
 }

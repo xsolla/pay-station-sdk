@@ -1,18 +1,15 @@
 import { PhoneComponentAttributes } from './phone-component-attributes.enum';
 import { headlessCheckoutAppUrl } from '../../environment';
 import { TextComponent } from '../text-component/text.component';
+import { property, customElement } from 'lit/decorators.js';
 
+@customElement('psdk-phone')
 export class PhoneComponent extends TextComponent {
-  public static get observedAttributes(): string[] {
-    return [PhoneComponentAttributes.showFlags];
-  }
+  @property({ attribute: PhoneComponentAttributes.name })
+  protected inputName = 'phone';
 
-  protected connectedCallback(): void {
-    super.connectedCallback();
-    if (!this.getAttribute(PhoneComponentAttributes.name)) {
-      this.setAttribute(PhoneComponentAttributes.name, 'phone');
-    }
-  }
+  @property({ type: Boolean, attribute: PhoneComponentAttributes.showFlags })
+  private readonly showFlags = false;
 
   protected getSecureHtml(): string {
     if (!this.componentName) {
@@ -20,9 +17,7 @@ export class PhoneComponent extends TextComponent {
     }
 
     let src = `${headlessCheckoutAppUrl}/secure-components/${this.componentName}`;
-    const showFlags = this.getAttribute(PhoneComponentAttributes.showFlags);
-
-    if (showFlags) {
+    if (this.showFlags) {
       src += '?showFlags=true';
     }
     return `<iframe src='${src}'></iframe>`;
