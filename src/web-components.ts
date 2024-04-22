@@ -22,12 +22,12 @@ import { TotalComponent } from './features/headless-checkout/web-components/fina
 export {
   SubmitButtonComponent,
   TextComponent,
+  CardNumberComponent,
   PaymentMethodsComponent,
   PriceTextComponent,
   FinanceDetailsComponent,
   LegalComponent,
   StatusComponent,
-  CardNumberComponent,
   ThreeDsComponent,
   PhoneComponent,
   SelectComponent,
