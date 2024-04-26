@@ -34,11 +34,11 @@ import { FormFieldsStatus } from '../../core/form/form-fields-status.interface';
 import { getCombinedPaymentMethodsHandler } from './post-messages-handlers/get-combined-payment-methods.handler';
 import { CombinedPaymentMethods } from '../../core/combined-payment-methods.interface';
 import { ThemesLoader } from '../../core/customization/themes-loader';
-import { Themes } from '../../core/customization/themes.type';
 import { Lang } from '../../core/i18n/lang.enum';
 import { getCountryListHandler } from './post-messages-handlers/get-country-list.handler';
 import { CountryResponse } from '../../core/country-response.interface';
 import { FormLoader } from '../../core/form/form-loader';
+import { InitialOptions } from './initial-options.interface';
 
 @singleton()
 export class HeadlessCheckout {
@@ -165,12 +165,7 @@ export class HeadlessCheckout {
     private readonly formLoader: FormLoader,
   ) {}
 
-  public async init(environment: {
-    isWebview?: boolean;
-    sandbox?: boolean;
-    theme?: Themes;
-    language?: Lang;
-  }): Promise<void> {
+  public async init(environment: InitialOptions): Promise<void> {
     this.isWebView = environment.isWebview;
     this.isSandbox = environment.sandbox;
     this.theme = environment.theme;
@@ -247,6 +242,20 @@ export class HeadlessCheckout {
       msg,
       getFinanceDetailsHandler,
     ) as Promise<FinanceDetails | null>;
+  }
+
+  public onUpdateFinanceDetails(
+    callbackFn: (financeDetails: FinanceDetails) => void,
+  ): void {
+    this.postMessagesClient.listen<FinanceDetails | null>(
+      EventName.financeDetails,
+      getFinanceDetailsHandler,
+      (financeDetails) => {
+        if (financeDetails) {
+          callbackFn(financeDetails);
+        }
+      },
+    );
   }
 
   /**

@@ -6,3 +6,5 @@ export * from './web-components';
 export { Lang } from './core/i18n/lang.enum';
 export { EventName } from './core/event-name.enum';
 export { NextActionType } from './core/actions/next-action-type.enum';
+export { FinanceDetails } from './core/finance-details/finance-details.interface';
+export { InitialOptions } from './features/headless-checkout/initial-options.interface';
