@@ -37,6 +37,10 @@ export class FormLoader {
   }
 
   public setFieldLoaded(name: string): void {
+    if (!this._fields) {
+      return;
+    }
+
     if (name in this._fields) {
       this._fields[name] = true;
     }
