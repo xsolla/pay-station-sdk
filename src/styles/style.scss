@@ -27,7 +27,8 @@ psdk-text,
 psdk-phone,
 psdk-card-number,
 psdk-google-pay-button,
-psdk-apple-pay {
+psdk-apple-pay,
+psdk-xsolla-number {
   @include psdk-typo;
 
   .field-error {

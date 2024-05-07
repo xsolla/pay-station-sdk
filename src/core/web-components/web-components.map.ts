@@ -20,6 +20,8 @@ import { QrCodeComponent } from '../../features/headless-checkout/web-components
 import { ApplePayComponent } from '../../features/headless-checkout/web-components/apple-pay/apple-pay.component';
 import { DefaultSubmitButtonComponent } from '../../features/headless-checkout/web-components/submit-button/default-submit-button/default-submit-button.component';
 import { TotalComponent } from '../../features/headless-checkout/web-components/finance-details/total.component';
+import { CashPaymentInstructionComponent } from '../../features/headless-checkout/web-components/cash-payment-instruction/cash-payment-instruction.component';
+import { XsollaNumberComponent } from '../../features/headless-checkout/web-components/xsolla-number/xsolla-number.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -46,4 +48,7 @@ export const webComponents: {
   [WebComponentTagName.ApplePayComponent]: ApplePayComponent,
   [WebComponentTagName.DefaultSubmitButtonComponent]:
     DefaultSubmitButtonComponent,
+  [WebComponentTagName.CashPaymentInstructionComponent]:
+    CashPaymentInstructionComponent,
+  [WebComponentTagName.XsollaNumberComponent]: XsollaNumberComponent,
 };

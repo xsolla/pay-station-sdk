@@ -1,0 +1,25 @@
+@mixin default-button {
+  width: 100%;
+  max-width: 360px;
+  height: 40px;
+  border: none;
+  border-radius: var(--psdk-button-border-radius);
+  background: var(--psdk-button-default-bg);
+  color: var(--psdk-button-color);
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--psdk-button-hover-bg);
+  }
+
+  &:active {
+    background: var(--psdk-button-press-bg);
+  }
+
+  &:disabled {
+    background: var(--psdk-button-disabled-bg);
+    color: var(--psdk-button-disabled-color);
+    cursor: default;
+  }
+}

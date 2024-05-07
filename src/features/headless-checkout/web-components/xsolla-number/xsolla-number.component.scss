@@ -1,0 +1,206 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/animation.mixin' as animation;
+@use 'src/styles/mixins/buttons.mixin' as buttons;
+
+psdk-xsolla-number {
+  @include typo.psdk-typo;
+
+  .payment-title {
+    @include typo.psdk-title2;
+
+    margin: 0 0 4px;
+    padding: 0;
+  }
+
+  .payment-description {
+    margin: 0 0 20px;
+    padding: 0;
+  }
+
+  .payment-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 0 20px;
+
+    .item {
+      $gap: 24px;
+
+      flex-shrink: 0;
+      width: calc(50% - calc($gap / 2));
+
+      .content {
+        @include typo.psdk-title2;
+      }
+    }
+  }
+
+  .instruction-wrapper {
+    margin-bottom: 20px;
+
+    .title {
+      @include typo.psdk-title2;
+
+      margin: 0 0 4px;
+      padding: 0;
+    }
+
+    .instruction {
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 4px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .notifier {
+      margin: 0;
+      padding: 12px;
+      border-radius: var(--psdk-common-border-radius);
+      background: var(--psdk-warning-bg);
+      color: var(--psdk-warning-color);
+    }
+  }
+
+  .send-xsolla-number-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 16px;
+
+    .choose-method-button {
+      @include typo.psdk-title2;
+
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: var(--psdk-button-default-bg);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .wrapper {
+      margin-right: 10px;
+      margin-bottom: 0;
+    }
+
+    .recipient {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 0;
+      height: 0;
+      visibility: hidden;
+
+      button {
+        display: none;
+      }
+    }
+
+    .active-control {
+      .recipient {
+        position: static;
+        width: auto;
+        height: auto;
+        visibility: visible;
+
+        button {
+          display: block;
+        }
+      }
+
+      .choose-method-button {
+        margin-bottom: 3px;
+        color: #000;
+        font-weight: 400;
+      }
+    }
+
+    .send-button {
+      @include typo.psdk-typo;
+      @include buttons.default-button;
+
+      position: relative;
+      width: auto;
+      padding: 11px 14px;
+
+      .text {
+        visibility: visible;
+        pointer-events: none;
+      }
+
+      .loader {
+        @include animation.loader(var(--psdk-button-color));
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: none;
+      }
+
+      &.is-loading {
+        cursor: default;
+
+        .loader {
+          display: flex;
+        }
+
+        .text {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  .send-notification {
+    position: relative;
+    margin: 0;
+    padding: 12px 48px 12px 12px;
+    border-radius: var(--psdk-common-border-radius);
+  }
+
+  .send-notification-failed {
+    background: var(--psdk-alert-bg);
+    color: var(--psdk-alert-color);
+
+    & svg {
+      fill: var(--psdk-alert-color);
+    }
+  }
+
+  .send-notification-succeed {
+    background: var(--psdk-success-bg);
+    color: var(--psdk-success-color);
+
+    & svg {
+      fill: var(--psdk-success-color);
+    }
+  }
+
+  .psdk-close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    & svg {
+      pointer-events: none;
+    }
+  }
+
+  .notification-description {
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -44,7 +44,24 @@
       "saving-status.success.title": "Payment method saved",
       "apple-pay.errors.payment": "Unable to process your payment. Make sure you’re signed in to Apple on your device and set up Apple Pay before you try again. Changes in Apple settings take a couple of minutes to sync.",
       "apple-pay.errors.device-is-not-capable": "Apple Pay is available only in Safari browser with installed OS 10.12 Sierra or IOS 10. Please change your browser or select another payment option.",
-      "error.title.default": "Couldn't process payment"
+      "error.title.default": "Couldn't process payment",
+      "xsolla-number.payment.description": "To process your payment, we need to verify your account",
+      "xsolla-number.payment.title": "Payment via {{paymentMethodName}}",
+      "xsolla-number.info.user-account": "User account",
+      "xsolla-number.info.xsolla-number": "Xsolla number",
+      "xsolla-number.instruction.how-to": "How to pay",
+      "xsolla-number.instruction.paragraph-one": "1. Go to a {{paymentMethodName}} payment location.",
+      "xsolla-number.instruction.paragraph-two": "2. Press the {{projectName}} or Xsolla button on the payment kiosk.",
+      "xsolla-number.instruction.paragraph-three": "3. Enter your user account name or Xsolla number.",
+      "xsolla-number.instruction.paragraph-four": "4. Insert cash to complete the transaction.",
+      "xsolla-number.instruction.notification": "Terminal owner may charge additional commission",
+      "xsolla-number.send-panel.get-xsolla-number": "Get Xsolla number",
+      "xsolla-number.send-panel.send": "Send",
+      "xsolla-number.send-panel.print": "Print info",
+      "xsolla-number.send-panel.email": "Email",
+      "xsolla-number.notification.success.email": "We sent payment instruction to your email. If you haven’t received them, try again",
+      "xsolla-number.notification.success.sms": "We sent your Xsolla number to your phone number. If you haven't received it, try again",
+      "xsolla-number.notification.failed": "Can’t send payment instructions. Try again later"
     }
   }
 }
