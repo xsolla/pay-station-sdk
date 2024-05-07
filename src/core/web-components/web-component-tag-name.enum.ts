@@ -20,4 +20,6 @@ export enum WebComponentTagName {
   GooglePayButtonComponent = 'psdk-google-pay-button',
   ApplePayComponent = 'psdk-apple-pay',
   QrCodeComponent = 'psdk-qr-code',
+  CashPaymentInstructionComponent = 'psdk-cash-payment-instruction',
+  XsollaNumberComponent = 'psdk-xsolla-number',
 }

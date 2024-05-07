@@ -8,6 +8,7 @@ import { SpecialButtonAction } from './special-button.action.type';
 import { ShowQrCodeAction } from './show-qr-code.action.type';
 import { ShowMobilePaymentScreenAction } from './show-mobile-payment-screen.action.type';
 import { HideFormAction } from './hide-form.action.type';
+import { ShowCashPaymentAction } from './show-cash-payment.action.type';
 
 export type NextAction =
   | CheckStatusAction
@@ -19,4 +20,5 @@ export type NextAction =
   | SpecialButtonAction
   | ShowQrCodeAction
   | ShowMobilePaymentScreenAction
-  | HideFormAction;
+  | HideFormAction
+  | ShowCashPaymentAction;
