@@ -138,7 +138,9 @@ export class XsollaNumberComponent extends SecureComponentAbstract {
     isLoading: boolean,
   ): void {
     this.isLoading = isLoading;
-    const button = this.querySelector(`#send-${channelType}`);
+    const button = this.querySelector(
+      `#send-${channelType === 'phone' ? 'sms' : channelType}`,
+    );
     if (!button) {
       return;
     }

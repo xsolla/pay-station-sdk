@@ -6,4 +6,5 @@ export interface CashPaymentData {
   title: string;
   projectName: string;
   printUrl: string;
+  instruction?: string;
 }

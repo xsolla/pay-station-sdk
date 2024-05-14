@@ -1,0 +1,29 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/animation.mixin' as animation;
+@use 'src/styles/mixins/buttons.mixin' as buttons;
+
+.cash-payment-instruction {
+  @include typo.psdk-typo;
+
+  .payment-title {
+    @include typo.psdk-title2;
+
+    margin: 0 0 4px;
+    padding: 0;
+  }
+
+  .payment-description {
+    margin: 0 0 20px;
+    padding: 0;
+  }
+
+  .payment-instruction {
+    margin: 0;
+    padding: 0;
+
+    a {
+      color: var(--psdk-checkbox-checked-bg);
+      text-decoration: none;
+    }
+  }
+}
