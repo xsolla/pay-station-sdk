@@ -216,7 +216,8 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
       let optionsTemplate = '';
 
       this.selectedOptionIndex = this.config.options.findIndex(
-        (option) => option.value === this.config?.initValue,
+        (option) =>
+          option.value.toString() === this.config?.initValue?.toString(),
       );
       this.currentHoverOptionIndex = 0;
 
@@ -341,9 +342,11 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
     const optionIndex = this.getOptionIndex(eventTarget);
     const previousOption = this.getOptionByIndex(this.selectedOptionIndex);
 
-    if (!optionValue || !optionIndex || !previousOption) return;
+    if (!optionValue || !optionIndex) return;
 
-    this.removeFocusedClass(previousOption as HTMLElement);
+    if (previousOption) {
+      this.removeFocusedClass(previousOption as HTMLElement);
+    }
 
     this.selectedOptionValue = optionValue;
     this.selectedOptionIndex = this.currentHoverOptionIndex =
@@ -352,7 +355,8 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
     const selectedOptionElement =
       this.rootElement.querySelector('#select-content');
     const selectedOption = this.config?.options?.find(
-      (option) => this.selectedOptionValue === option.value,
+      (option) =>
+        this.selectedOptionValue.toString() === option.value.toString(),
     );
 
     if (!selectedOptionElement || !eventTarget.parentElement) return;
