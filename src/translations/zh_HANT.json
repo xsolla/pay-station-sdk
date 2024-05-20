@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay 僅適用於已安裝 OS 10.12 Sierra 或 IOS 10 的 Safari 瀏覽器。請變更您的瀏覽器或選取其他付款選項。",
          "apple-pay.errors.payment" : "無法為您處理付款。請確認有透過裝置，登入 Apple，並在重試之前，設定好 Apple Pay。凡 Apple 設定變更，大概都要花幾分鐘時間，才能完成同步處理。",
+         "cash-payment-instruction.description" : "我們已寄出購買帳單。一旦完成支付，我方就會把收據寄到您的電子信箱。",
+         "cash-payment-instruction.how-to" : "付款方式",
+         "cash-payment-instruction.title" : "透過 {{paymentMethodName}} 支付",
          "cookie-policy" : "Cookie 政策",
          "disclaimer-with-cookies" : "依各州法律規定，繼續使用，即表示您確認自己已成年，並同意接受<a href={{xsolla_terms_link}} target=\"_blank\">愛索拉之使用者授權合約<\/a>約束。<br>愛索拉會個別收集網頁上的基本 Cookie，進一步處理購買項目，這些在<a href={{xsolla_privacy_link}} target=\"_blank\">愛索拉官方 Cookie 政策<\/a>裡都有涵蓋。<br>請注意關於這個購買項目，愛索拉商家已取得授權，也是資料控制者，您可在網頁送出資料。<br>如有任何問題，請直接找 <a href={{xsolla_help_link}} target=\"_blank\">愛索拉玩家支援<\/a>洽詢。",
          "error.title.default" : "無法處理付款",
@@ -44,7 +47,24 @@
          "status.processing.description" : "等待完成付款......",
          "status.processing.title" : "正在處理付款",
          "status.success.description" : "我們已將您的收據發送至 {{email}}",
-         "status.success.title" : "付款成功"
+         "status.success.title" : "付款成功",
+         "xsolla-number.info.user-account" : "使用者帳戶",
+         "xsolla-number.info.xsolla-number" : "愛索拉編號",
+         "xsolla-number.instruction.how-to" : "付款方式",
+         "xsolla-number.instruction.notification" : "終端機擁有者可能會另外酌收手續費",
+         "xsolla-number.instruction.paragraph-four" : "4. 插入現金，即可完成交易。",
+         "xsolla-number.instruction.paragraph-one" : "1. 移至 {{paymentMethodName}} 付款位置。",
+         "xsolla-number.instruction.paragraph-three" : "3. 輸入使用者帳戶名稱，或愛索拉編號。",
+         "xsolla-number.instruction.paragraph-two" : "2. 請到付款資訊站那邊，按下{{projectName}} 或愛索拉按鈕。",
+         "xsolla-number.notification.failed" : "無法寄出付款說明。請稍後再試一次",
+         "xsolla-number.notification.success.email" : "我們會把付款說明寄到您的電子信箱。如果您還未收到，請再試一次",
+         "xsolla-number.notification.success.sms" : "我們會把愛索拉編號寄到您的手機號碼。如果您還未收到，請再試一次",
+         "xsolla-number.payment.description" : "若要處理付款，必須先驗證帳戶",
+         "xsolla-number.payment.title" : "透過 {{paymentMethodName}} 支付",
+         "xsolla-number.send-panel.email" : "電子郵件",
+         "xsolla-number.send-panel.get-xsolla-number" : "取得愛索拉編號",
+         "xsolla-number.send-panel.print" : "列印資訊",
+         "xsolla-number.send-panel.send" : "傳送"
       }
    }
 }

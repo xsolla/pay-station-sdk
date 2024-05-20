@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay只能在OS 10.12 Sierra或IOS 10上的Safari浏览器中使用。请更换浏览器或选择其他支付方式。",
          "apple-pay.errors.payment" : "无法处理您的支付。请确保已在您的设备上登录Apple并已设置Apple Pay，然后重试。Apple设置的更改可能需要几分钟才能同步。",
+         "cash-payment-instruction.description" : "我们已向您发送了一份购买账单。支付后，您将通过邮件收到购买凭证。",
+         "cash-payment-instruction.how-to" : "如何付款",
+         "cash-payment-instruction.title" : "通过{{paymentMethodName}}支付",
          "cookie-policy" : "Cookie政策",
          "disclaimer-with-cookies" : "继续即表示您确认根据您所在地的法律，您是成年人，并同意受<a href={{xsolla_terms_link}} target=\"_blank\">艾克索拉的EULA<\/a>所约束。<br>艾克索拉按照<a href={{xsolla_privacy_link}} target=\"_blank\">艾克索拉的Cookie政策<\/a>在处理购买时在本页面及后续页面独立收集必要的Cookie。<br>请注意，对于此次购买，艾克索拉是您在本页面提交的数据的授权记录商户和控制方。<br>如有任何问题，请联系<a href={{xsolla_help_link}} target=\"_blank\">艾克索拉玩家支持<\/a>。",
          "error.title.default" : "无法处理支付",
@@ -44,7 +47,24 @@
          "status.processing.description" : "正在等待支付完成...",
          "status.processing.title" : "正在处理付款",
          "status.success.description" : "您的收据已发送至{{email}}",
-         "status.success.title" : "支付成功"
+         "status.success.title" : "支付成功",
+         "xsolla-number.info.user-account" : "用户帐户",
+         "xsolla-number.info.xsolla-number" : "艾克索拉编号",
+         "xsolla-number.instruction.how-to" : "如何付款",
+         "xsolla-number.instruction.notification" : "终端机所有者可能收取额外佣金",
+         "xsolla-number.instruction.paragraph-four" : "4. 放入现金以完成交易。",
+         "xsolla-number.instruction.paragraph-one" : "1. 前往{{paymentMethodName}}支付点。",
+         "xsolla-number.instruction.paragraph-three" : "3. 输入您的用户帐户名称或艾克索拉编号。",
+         "xsolla-number.instruction.paragraph-two" : "2. 在支付自助终端机上点击{{projectName}}或Xsolla按钮。",
+         "xsolla-number.notification.failed" : "无法发送支付说明。请稍后重试",
+         "xsolla-number.notification.success.email" : "我们已将支付说明发送至您的邮箱。如未收到，请重试",
+         "xsolla-number.notification.success.sms" : "我们已将艾克索拉编号发送至您的手机。如未收到，请重试",
+         "xsolla-number.payment.description" : "为处理您的支付，我们需要验证您的帐户",
+         "xsolla-number.payment.title" : "通过{{paymentMethodName}}支付",
+         "xsolla-number.send-panel.email" : "电子邮箱",
+         "xsolla-number.send-panel.get-xsolla-number" : "获取艾克索拉编号",
+         "xsolla-number.send-panel.print" : "打印信息",
+         "xsolla-number.send-panel.send" : "发送"
       }
    }
 }

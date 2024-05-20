@@ -84,4 +84,19 @@ describe('CashPaymentInstructionComponent', () => {
       )!.innerHTML,
     ).toContain(WebComponentTagName.XsollaNumberComponent);
   });
+
+  it('Should draw cash-payment-instruction', async () => {
+    spyOnProperty(formSpy, 'formWasInit').and.returnValue(true);
+    spyOn(postMessagesClient, 'send').and.returnValue(
+      Promise.resolve({ isCashPaymentMethod: true } as CashPaymentData),
+    );
+    createComponent();
+    const delay = 100;
+    await timeout(delay);
+    expect(
+      document.querySelector(
+        WebComponentTagName.CashPaymentInstructionComponent,
+      )!.innerHTML,
+    ).toContain('cash-payment-instruction');
+  });
 });

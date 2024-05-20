@@ -8,6 +8,8 @@ import { CashPaymentData } from '../../../../core/cash-payment-data.interface';
 import { CashPaymentType } from './cash-payment.type';
 import { WebComponentAbstract } from '../../../../core/web-components/web-component.abstract';
 import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
+import { getCashPaymentInstructionTemplate } from './cash-payment-instruction.template';
+import './cash-payment-instruction.component.scss';
 
 export class CashPaymentInstructionComponent extends WebComponentAbstract {
   private readonly formSpy: FormSpy;
@@ -30,7 +32,10 @@ export class CashPaymentInstructionComponent extends WebComponentAbstract {
 
   protected getHtml(): string {
     if (this.cashPaymentData?.isCashPaymentMethod) {
-      return '';
+      return getCashPaymentInstructionTemplate(
+        this.cashPaymentData.title,
+        this.cashPaymentData.instruction,
+      );
     }
 
     return `<${WebComponentTagName.XsollaNumberComponent}></${WebComponentTagName.XsollaNumberComponent}>`;

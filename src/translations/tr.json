@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay sadece 10.12 Sierra veya iOS 10 yüklü cihazlarda Safari tarayıcısında kullanılabilir. Lütfen tarayıcınızı değiştirin veya başka bir ödeme yöntemi seçin.",
          "apple-pay.errors.payment" : "Ödemeniz işleme konulamadı. Tekrar denemeden önce cihazınızda Apple'a giriş yapmış olduğunuzdan emin olun ve Apple Pay'i kurun. Apple ayarlarındaki değişikliklerin senkronize olması birkaç dakika sürer.",
+         "cash-payment-instruction.description" : "Siparişiniz için bir fatura düzenledik. Ödemenizi yaptıktan sonra makbuzu size e-postayla göndereceğiz.",
+         "cash-payment-instruction.how-to" : "Nasıl ödeme yapılır",
+         "cash-payment-instruction.title" : "{{paymentMethodName}} ile ödeme",
          "cookie-policy" : "Çerez Politikası",
          "disclaimer-with-cookies" : "Devam ederek ilgili eyalet yasalarına göre yetişkin olduiğunuzu ve <a href={{xsolla_terms_link}} target=\"_blank\">Xsolla’nın EULA<\/a> belgesine tabi olduğunuzu kabul etmiş olursunuz.<br>Xsolla, bağımsız olarak bu sayfadaki başlıca çerezleri toplar. Bunlar, <a href={{xsolla_privacy_link}} target=\"_blank\">Xsolla’nın Çerez Politikasında<\/a> açıklanmıştır.<br>Lütfen bu satın alım için Xsolla'nın yetkili hem yetkili satıcı hem de bu sayfaya girdiğiniz verilerin kontrolcüsü olduğunu unutmayın.<br>Sorularınız varsa lütfen <a href={{xsolla_help_link}} target=\"_blank\">Xsolla Oyuncu Destek Ekibi<\/a> ile iletişime geçin.",
          "error.title.default" : "Ödeme işlenemedi",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Ödeme işleminin tamamlanması bekleniyor...",
          "status.processing.title" : "Ödeme işlemi gerçekleştiriliyor",
          "status.success.description" : "Makbuzunuzu {{email}} adresine gönderdik",
-         "status.success.title" : "Ödeme alındı"
+         "status.success.title" : "Ödeme alındı",
+         "xsolla-number.info.user-account" : "Kullanıcı hesabı",
+         "xsolla-number.info.xsolla-number" : "Xsolla numarası",
+         "xsolla-number.instruction.how-to" : "Nasıl ödeme yapılır",
+         "xsolla-number.instruction.notification" : "Terminal sahibi ilave komisyon tahsil edebilir",
+         "xsolla-number.instruction.paragraph-four" : "4. İşlemi tamamlamak için nakit girişi yapın.",
+         "xsolla-number.instruction.paragraph-one" : "1. Bir {{paymentMethodName}} ödeme konumuna gidin.",
+         "xsolla-number.instruction.paragraph-three" : "3. Kullanıcı hesap adınızı veya Xsolla numaranızı girin.",
+         "xsolla-number.instruction.paragraph-two" : "2. Ödeme kioskunda {{projectName}} veya Xsolla düğmesine basın.",
+         "xsolla-number.notification.failed" : "Ödeme talimatları gönderilemiyor. Daha sonra tekrar deneyin.",
+         "xsolla-number.notification.success.email" : "Ödeme talimatlarını e-posta adresinize gönderdik. E-postayı almadıysanız tekrar deneyin.",
+         "xsolla-number.notification.success.sms" : "Xsolla numaranızı telefonunuza gönderdik. Almadıysanız tekrar deneyin.",
+         "xsolla-number.payment.description" : "Ödemenizin işlenebilmesi için hesabınızı doğrulamamız gerekiyor.",
+         "xsolla-number.payment.title" : "{{paymentMethodName}} ile ödeme",
+         "xsolla-number.send-panel.email" : "E-posta",
+         "xsolla-number.send-panel.get-xsolla-number" : "Xsolla numarası al",
+         "xsolla-number.send-panel.print" : "Bilgileri yazdır",
+         "xsolla-number.send-panel.send" : "Gönder"
       }
    }
 }
