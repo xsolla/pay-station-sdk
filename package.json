@@ -1,6 +1,6 @@
 {
   "name": "@xsolla/pay-station-sdk",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Pay Station SDK",
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
     "test:dev": "karma start --auto-watch",
     "lint": "npm run eslint:lint && npm run stylelint:lint",
     "eslint:lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "stylelint:lint": "stylelint \"src/**/*.scss\"",
+    "stylelint:glint": "stylelint \"src/**/*.scss\"",
     "prepare": "husky install",
     "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public",
     "prettier": "prettier --write ./src"
