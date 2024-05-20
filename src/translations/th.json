@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "สามารถใช้ Apple Pay บนเบราว์เซอร์ Safari ที่มีการติดตั้ง OS 10.12 Sierra หรือ IOS 10 ไว้เท่านั้น โปรดเปลี่ยนเบราว์เซอร์ของคุณหรือเลือกช่องทางการชำระเงินอื่น",
          "apple-pay.errors.payment" : "ไม่สามารถประมวลผลการชำระเงินของคุณ โปรดตรวจสอบให้แน่ใจว่าคุณลงชื่อเข้าใช้ Apple บนอุปกรณ์และตั้งค่า Apple Pay หลังจากนั้นให้ลองอีกครั้ง การเปลี่ยนแปลงการตั้งค่า Apple จะใช้เวลาในการซิงค์ประมาณสองถึงสามนาที",
+         "cash-payment-instruction.description" : "เราได้ออกใบเรียกเก็บเงินสำหรับการซื้อของคุณแล้ว เมื่อคุณชำระเงินแล้ว เราจะส่งใบเสร็จรับเงินให้คุณทางอีเมล",
+         "cash-payment-instruction.how-to" : "วิธีการชำระเงิน",
+         "cash-payment-instruction.title" : "ชำระเงินผ่าน {{paymentMethodName}}",
          "cookie-policy" : "นโยบายคุกกี้",
          "disclaimer-with-cookies" : "การดำเนินการต่อหมายถึงคุณยืนยันว่าคุณเป็นผู้ใหญ่ตามกฎหมายของรัฐและตกลงที่จะผูกพันตาม <a href={{xsolla_terms_link}} target=\"_blank\">ข้อตกลงการอนุญาตสำหรับผู้ใช้ปลายทางของเอ็กซ์โซลล่า <\/a><br> เอ็กซ์โซลล่ารวบรวมคุกกี้ที่จำเป็นอย่างอิสระในหน้านี้ และเพิ่มเติมในขณะที่ทำการประมวลผลการซื้อซึ่งครอบคลุมอยู่ใน<a href={{xsolla_privacy_link}} target=\"_blank\">นโยบายคุกกี้ของเอ็กซ์โซลล่า<\/a> <br>โปรดทราบว่าสำหรับการซื้อนี้ทางเอ็กซ์โซลล่าเป็นผู้ค้าที่ได้รับอนุญาตในการบันทึก และผู้ควบคุมข้อมูลที่คุณส่งเข้ามาในหน้านี้ <br>หากคุณมีคำถามใด ๆ โปรดติดต่อไปยัง<a href={{xsolla_help_link}} target=\"_blank\"> ฝ่ายสนับสนุนเกมเมอร์ของเอ็กซ์โซล่า<\/a>",
          "error.title.default" : "ไม่สามารถดำเนินการชำระเงินได้",
@@ -44,7 +47,24 @@
          "status.processing.description" : "กำลังรอการชำระเงินให้เสร็จสิ้น...",
          "status.processing.title" : "กำลังดำเนินการชำระเงิน",
          "status.success.description" : "เราส่งใบเสร็จรับเงินไปยัง {{email}} แล้ว",
-         "status.success.title" : "ชำระเงินสำเร็จแล้ว"
+         "status.success.title" : "ชำระเงินสำเร็จแล้ว",
+         "xsolla-number.info.user-account" : "บัญชีผู้ใช้งาน",
+         "xsolla-number.info.xsolla-number" : "หมายเลขเอ็กซ์โซลล่า",
+         "xsolla-number.instruction.how-to" : "วิธีการชำระเงิน",
+         "xsolla-number.instruction.notification" : "เจ้าของเทอร์มินัลอาจเรียกเก็บค่าคอมมิชชันเพิ่มเติม",
+         "xsolla-number.instruction.paragraph-four" : "4. ป้อนเงินสดเพื่อทำรายการให้เสร็จสิ้น",
+         "xsolla-number.instruction.paragraph-one" : "1. ไปที่สถานที่ชำระเงิน {{paymentMethodName}}",
+         "xsolla-number.instruction.paragraph-three" : "3. ป้อนชื่อบัญชีผู้ใช้ของคุณหรือหมายเลขเอ็กซ์โซลล่า",
+         "xsolla-number.instruction.paragraph-two" : "2. กดปุ่ม {{projectName}}หรือปุ่ม Xsolla บนตู้ชำระเงิน",
+         "xsolla-number.notification.failed" : "ไม่สามารถส่งคำแนะนำในการชำระเงินได้ โปรดลองอีกครั้งในภายหลัง",
+         "xsolla-number.notification.success.email" : "เราได้ส่งคำแนะนำในการชำระเงินไปยังอีเมลของคุณ หากคุณยังไม่ได้รับ โปรดลองใหม่อีกครั้ง",
+         "xsolla-number.notification.success.sms" : "เราได้ส่งหมายเลขเอ็กซ์โซลล่าของคุณไปยังหมายเลขโทรศัพท์ของคุณ หากคุณยังไม่ได้รับ โปรดลองใหม่อีกครั้ง",
+         "xsolla-number.payment.description" : "เพื่อประมวลผลการชำระเงินของคุณ เราจำเป็นต้องยืนยันบัญชีของคุณ",
+         "xsolla-number.payment.title" : "ชำระเงินผ่าน {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "อีเมล",
+         "xsolla-number.send-panel.get-xsolla-number" : "รับหมายเลขเอ็กซ์โซลล่า",
+         "xsolla-number.send-panel.print" : "พิมพ์ข้อมูล",
+         "xsolla-number.send-panel.send" : "ส่ง"
       }
    }
 }
