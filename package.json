@@ -14,7 +14,7 @@
     "test:dev": "karma start --auto-watch",
     "lint": "npm run eslint:lint && npm run stylelint:lint",
     "eslint:lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "stylelint:glint": "stylelint \"src/**/*.scss\"",
+    "stylelint:lint": "stylelint \"src/**/*.scss\"",
     "prepare": "husky install",
     "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public",
     "prettier": "prettier --write ./src"
