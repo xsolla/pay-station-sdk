@@ -34,4 +34,8 @@ export const enum EventName {
   openApplePayPage = 'openApplePayPage',
   submitApplePayForm = 'submitApplePayForm',
   userCountryChanged = 'userCountryChanged',
+  getCashPaymentData = 'getCashPaymentData',
+  sendCashPaymentData = 'sendCashPaymentData',
+  sendCashPaymentButtonStatus = 'sendCashPaymentButtonStatus',
+  sendCashPaymentDataStatus = 'sendCashPaymentDataStatus',
 }

@@ -18,6 +18,7 @@ import { ApplePayComponent } from './features/headless-checkout/web-components/a
 import { PaymentFormComponent } from './features/headless-checkout/web-components/payment-form/payment-form.component';
 import { SavedMethodsComponent } from './features/headless-checkout/web-components/saved-methods/saved-methods.component';
 import { TotalComponent } from './features/headless-checkout/web-components/finance-details/total.component';
+import { CashPaymentInstructionComponent } from './features/headless-checkout/web-components/cash-payment-instruction/cash-payment-instruction.component';
 
 export {
   SubmitButtonComponent,
@@ -40,4 +41,5 @@ export {
   PaymentFormComponent,
   SavedMethodsComponent,
   TotalComponent,
+  CashPaymentInstructionComponent,
 };
