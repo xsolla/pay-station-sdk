@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Usługa Apple Pay dostępna jest wyłącznie w przeglądarce Safari z zainstalowanym systemem OS 10.12 Sierra lub iOS 10. Zmień przeglądarkę lub wybierz inną metodę płatności.",
          "apple-pay.errors.payment" : "Nie można przetworzyć Twojej płatności. Upewnij się, że jesteś zalogowany w Apple na swoim urządzeniu i skonfiguruj Apple Pay przed ponowną próbą. Synchronizacja zmian w ustawieniach Apple może potrwać kilka minut.",
+         "cash-payment-instruction.description" : "Wystawiliśmy rachunek za Twój zakup. Po opłaceniu transakcji, wyślemy pokwitowanie na Twój adres e-mail.",
+         "cash-payment-instruction.how-to" : "Jak zapłacić",
+         "cash-payment-instruction.title" : "Płatność przez {{paymentMethodName}}",
          "cookie-policy" : "Polityka plików cookie",
          "disclaimer-with-cookies" : "Kontynuując, potwierdzasz, że jesteś osobą pełnoletnią w rozumieniu przepisów krajowych i zgadzasz się przestrzegać postanowień <a href={{xsolla_terms_link}} target=\"_blank\">Umowy licencyjnej użytkownika końcowego Xsolla<\/a>.<br>Xsolla stosuje niezależnie niezbędne pliki cookie na tej stronie, a także podczas obsługi płatności, zgodnie z postanowieniami <a href={{xsolla_privacy_link}} target=\"_blank\">Polityki plików cookie Xsolla<\/a>.<br>Przypominamy, że w zakresie niniejszego zakupu Xsolla pełni rolę upoważnionego, ostatecznego sprzedawcy i administratora danych przekazywanych przez Ciebie za pośrednictwem strony.<br>W razie pytań prosimy o kontakt z <a href={{xsolla_help_link}} target=\"_blank\">Działem wsparcia graczy Xsolla<\/a>.",
          "error.title.default" : "Nie udało się przetworzyć płatności",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Oczekiwanie na sfinalizowanie płatności...",
          "status.processing.title" : "Trwa przetwarzanie płatności",
          "status.success.description" : "Wysłaliśmy rachunek na adres {{email}}",
-         "status.success.title" : "Płatność zrealizowana"
+         "status.success.title" : "Płatność zrealizowana",
+         "xsolla-number.info.user-account" : "Konto użytkownika",
+         "xsolla-number.info.xsolla-number" : "Numer Xsolla",
+         "xsolla-number.instruction.how-to" : "Jak zapłacić",
+         "xsolla-number.instruction.notification" : "Właściciel terminala może pobrać dodatkową prowizję",
+         "xsolla-number.instruction.paragraph-four" : "4. Włóż gotówkę, aby sfinalizować transakcję.",
+         "xsolla-number.instruction.paragraph-one" : "1. Przejdź do lokalizacji płatności {{paymentMethodName}}.",
+         "xsolla-number.instruction.paragraph-three" : "3. Wprowadź nazwę swojego konta użytkownika lub numer Xsolla.",
+         "xsolla-number.instruction.paragraph-two" : "2. Naciśnij przycisk {{projectName}} lub Xsolla w kiosku płatności.",
+         "xsolla-number.notification.failed" : "Nie można wysłać instrukcji dotyczących płatności. Spróbuj ponownie później",
+         "xsolla-number.notification.success.email" : "Wysłaliśmy instrukcję płatności na Twój adres e-mail. Jeśli ich nie otrzymałeś, spróbuj ponownie",
+         "xsolla-number.notification.success.sms" : "Wysłaliśmy Twój numer Xsolla na Twój numer telefonu. Jeśli go nie otrzymałeś\/łaś, spróbuj ponownie",
+         "xsolla-number.payment.description" : "Aby przetworzyć Twoją płatność, musimy zweryfikować Twoje konto",
+         "xsolla-number.payment.title" : "Płatność przez {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "E-mail",
+         "xsolla-number.send-panel.get-xsolla-number" : "Uzyskaj numer Xsolla",
+         "xsolla-number.send-panel.print" : "Informacja dotycząca drukowania",
+         "xsolla-number.send-panel.send" : "Wyślij"
       }
    }
 }

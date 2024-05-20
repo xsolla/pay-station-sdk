@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Услугата Apple Pay е достъпна само в браузър Safari с инсталирана OS 10.12 Sierra или IOS 10. Моля, сменете браузъра си или изберете друг метод на плащане.",
          "apple-pay.errors.payment" : "Плащането Ви не може да бъде обработено. Уверете се, че сте вписани в Apple на Вашето устройство и настройте Apple Pay, преди да опитате отново. Синхронизирането на промените в настройките на Apple отнема няколко минути.",
+         "cash-payment-instruction.description" : "Издадохме фактура за вашата покупка. След като платите, ще ви изпратим разписката по имейл.",
+         "cash-payment-instruction.how-to" : "Как да платя",
+         "cash-payment-instruction.title" : "Плащане с {{paymentMethodName}}",
          "cookie-policy" : "Политика за бисквитките",
          "disclaimer-with-cookies" : "С продължаването Вие потвърждавате, че сте на пълнолетна възраст съгласно законите във Вашата държава и се съгласявате да бъдете обвързан(а) от <a href={{xsolla_terms_link}} target=\"_blank\">ЛСКП на Xsolla<\/a>.<br>Xsolla самостоятелно събира основни бисквитки на тази страница и по-нататък, докато обработва покупката, която е обхваната от <a href={{xsolla_privacy_link}} target=\"_blank\">Правилата за бисквитки на Xsolla<\/a>.<br>Имайте предвид, че за тази покупка Xsolla е упълномощеният регистриран търговец и администратор на данните, които подавате на тази страница.<br>Ако имате въпроси, свържете се с <a href={{xsolla_help_link}} target=\"_blank\">отдел „Геймърска поддръжка“ на Xsolla<\/a>.",
          "error.title.default" : "Неуспешно обработване на плащането",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Изчаква завършване на плащане...",
          "status.processing.title" : "Плащането се обработва",
          "status.success.description" : "Изпратихме касовата Ви бележка на {{email}}",
-         "status.success.title" : "Успешно плащане"
+         "status.success.title" : "Успешно плащане",
+         "xsolla-number.info.user-account" : "Потребителски профил",
+         "xsolla-number.info.xsolla-number" : "Номер на Ексола",
+         "xsolla-number.instruction.how-to" : "Как да платя",
+         "xsolla-number.instruction.notification" : "Терминалният собственик може да таксува допълнителна комисиона",
+         "xsolla-number.instruction.paragraph-four" : "4. Внесете средства, за да завършите трансакцията.",
+         "xsolla-number.instruction.paragraph-one" : "1. Отидете в център за плащане на {{paymentMethodName}}.",
+         "xsolla-number.instruction.paragraph-three" : "3. Въведете потребителското име на профила си или номер на Ексола.",
+         "xsolla-number.instruction.paragraph-two" : "2. Натиснете бутона {{projectName}} или „Ексола“ на терминала за плащане.",
+         "xsolla-number.notification.failed" : "Неуспешно изпращане на платежни инструкции. Опитайте отново по-късно.",
+         "xsolla-number.notification.success.email" : "Изпратихме платежни инструкции на Вашия имейл. Ако не сте ги получили, опитайте отново.",
+         "xsolla-number.notification.success.sms" : "Изпратихме вашия Ексола номер на телефона Ви. Ако не сте го получили, опитайте отново.",
+         "xsolla-number.payment.description" : "За да обработим плащането Ви, трябва да потвърдим профила Ви.",
+         "xsolla-number.payment.title" : "Плащане с {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "Имейл",
+         "xsolla-number.send-panel.get-xsolla-number" : "Получаване на номер на Ексола",
+         "xsolla-number.send-panel.print" : "Печат на информацията",
+         "xsolla-number.send-panel.send" : "Изпращане"
       }
    }
 }

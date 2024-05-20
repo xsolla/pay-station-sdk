@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay chỉ có thể được sử dụng trên trình duyệt Safari cài đặt với OS 10.12 Sierra hoặc iOS 10. Vui lòng đổi trình duyệt hoặc chọn phương thức thanh toán khác.",
          "apple-pay.errors.payment" : "Không thể xử lý thanh toán. Hãy đảm bảo bạn đã đăng nhập tài khoản Apple trên thiết bị và thiết lập thanh toán Apple Pay trước khi thử lại. Thay đổi trong thiết lập Apple sẽ mất vài phút để đồng bộ.",
+         "cash-payment-instruction.description" : "Chúng tôi đã xuất hóa đơn cho giao dịch mua của bạn. Sau khi bạn thanh toán, chúng tôi sẽ gửi biên lai cho bạn qua email.",
+         "cash-payment-instruction.how-to" : "Cách thức thanh toán",
+         "cash-payment-instruction.title" : "Thanh toán qua {{paymentMethodName}}",
          "cookie-policy" : "Chính sách cookie",
          "disclaimer-with-cookies" : "Bằng việc tiếp tục, bạn xác nhận mình là người trưởng thành theo luật pháp của tiểu bang và đồng ý chịu sự ràng buộc theo <a href={{xsolla_terms_link}} target=\"_blank\">Thỏa thuận người dùng cuối (EULA)<\/a> của Xsolla.<br>Xsolla thu thập riêng cookie thiết yếu tại trang này và những vị trí khác trong quá trình xử lý giao dịch theo <a href={{xsolla_privacy_link}} target=\"_blank\">Chính sách cookie<\/a> của Xsolla.<br>Xin lưu ý, đối với giao dịch này, Xsolla là thương nhập có thẩm quyền trên giấy tờ và là đơn vị kiểm soát đối với dữ liệu bạn gửi trên trang này.<br>Nếu có thắc mắc, vui lòng liên hệ bộ phận <a href={{xsolla_help_link}} target=\"_blank\">Hỗ trợ người chơi của Xsolla<\/a>.",
          "error.title.default" : "Không thể xử lý khoản thanh toán",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Đợi thanh toán hoàn tất...",
          "status.processing.title" : "Đang xử lý thanh toán",
          "status.success.description" : "Biên nhận đã được gửi đến {{email}}",
-         "status.success.title" : "Thanh toán thành công"
+         "status.success.title" : "Thanh toán thành công",
+         "xsolla-number.info.user-account" : "Tài khoản người dùng",
+         "xsolla-number.info.xsolla-number" : "Mã số Xsolla",
+         "xsolla-number.instruction.how-to" : "Cách thức thanh toán",
+         "xsolla-number.instruction.notification" : "Chủ trạm có thể tính thêm phí hoa hồng",
+         "xsolla-number.instruction.paragraph-four" : "4. Đưa tiền vào để hoàn tất giao dịch.",
+         "xsolla-number.instruction.paragraph-one" : "1. Đến vị trí thanh toán của {{paymentMethodName}}.",
+         "xsolla-number.instruction.paragraph-three" : "3. Nhập tên tài khoản người dùng hoặc mã số Xsolla của bạn.",
+         "xsolla-number.instruction.paragraph-two" : "2. Nhấn {{projectName}} hoặc nút Xsolla tại ki-ốt thanh toán.",
+         "xsolla-number.notification.failed" : "Không thể gửi hướng dẫn thanh toán. Hãy thử lại sau",
+         "xsolla-number.notification.success.email" : "Chúng tôi đã gửi hướng dẫn thanh toán đến địa chỉ email của bạn. Nếu bạn chưa nhận được, hãy thử lại",
+         "xsolla-number.notification.success.sms" : "Chúng tôi đã gửi mã số Xsolla đến số điện thoại của bạn. Nếu bạn chưa nhận được, hãy thử lại",
+         "xsolla-number.payment.description" : "Để xử lý yêu cầu thanh toán, chúng tôi cần xác thực tài khoản của bạn",
+         "xsolla-number.payment.title" : "Thanh toán qua {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "Email",
+         "xsolla-number.send-panel.get-xsolla-number" : "Lấy mã số Xsolla",
+         "xsolla-number.send-panel.print" : "In thông tin",
+         "xsolla-number.send-panel.send" : "Gửi đi"
       }
    }
 }

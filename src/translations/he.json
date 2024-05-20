@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay זמין רק בדפדפן Safari עם מערכת הפעלה OS 10.12 Sierra או IOS 10. צריך להשתמש בדפדפן אחר או לבחור אפשרות תשלום אחרת.",
          "apple-pay.errors.payment" : "עיבוד התשלום נכשל. לפני שמנסים שוב, חשוב לוודא שנכנסת ל-Apple במכשיר שלך והגדרת את Apple Pay. סנכרון השינויים שמבוצעים ב-Apple יימשך כמה דקות.",
+         "cash-payment-instruction.description" : "הפקנו חיוב לרכישה שלך. אחרי התשלום נשלח לך את הקבלה באימייל.",
+         "cash-payment-instruction.how-to" : "איך משלמים",
+         "cash-payment-instruction.title" : "תשלום באמצעות {{paymentMethodName}}",
          "cookie-policy" : "מדיניות בנושא קובצי Cookie",
          "disclaimer-with-cookies" : "המשך מבטא אישור שלך שגילך נחשב מבוגר לפי החוקים במדינה שלך, והסכמה ל<a href={{xsolla_terms_link}} target=\"_blank\">הסכם הרישיון של Xsolla למשתמש קצה<\/a>.<br>‏בדף זה, Xsolla אוספת באופן עצמאי קובצי Cookie מהותיים בזמן עיבוד הרכישה, כפי שמוצהר ב<a href={{xsolla_privacy_link}} target=\"_blank\">מדיניות Xsolla לקובצי Cookie<\/a>.<br>לידיעתך, למטרות הרכישה הנוכחית, Xsolla היא המוכרת הרשומה המורשית ומבקרת הנתונים שנשלחים על ידך בדף הזה.<br>בכל שאלה אפשר לפנות אל <a href={{xsolla_help_link}} target=\"_blank\">התמיכה של Xsolla Gamer<\/a>.",
          "error.title.default" : "העיבוד של התשלום נכשל",
@@ -44,7 +47,24 @@
          "status.processing.description" : "בהמתנה לסיום התשלום...",
          "status.processing.title" : "התשלום בעיבוד",
          "status.success.description" : "שלחנו את הקבלה אל {{email}}",
-         "status.success.title" : "התשלום התקבל"
+         "status.success.title" : "התשלום התקבל",
+         "xsolla-number.info.user-account" : "חשבון משתמש",
+         "xsolla-number.info.xsolla-number" : "מספר ב-Xsolla",
+         "xsolla-number.instruction.how-to" : "איך משלמים",
+         "xsolla-number.instruction.notification" : "יכול להיות שבעלי המסוף יגבה עמלה נוספת",
+         "xsolla-number.instruction.paragraph-four" : "4. מכניסים מזומן כדי להשלים את העסקה.",
+         "xsolla-number.instruction.paragraph-one" : "1. ניגשים למקום תשלום של {{paymentMethodName}}.",
+         "xsolla-number.instruction.paragraph-three" : "3. מקלידים את שם חשבון המשתמש או את המספר ב-Xsolla.",
+         "xsolla-number.instruction.paragraph-two" : " 2. בקיוסק התשלום, מקישים על {{projectName}} או על הלחצן של Xsolla.",
+         "xsolla-number.notification.failed" : "השליחה של הוראת התשלום נכשלה. אפשר לנסות שוב מאוחר יותר.",
+         "xsolla-number.notification.success.email" : "שלחנו לך את הוראות התשלום באימייל. אם לא קיבלת אותן כדאי לנסות שוב.",
+         "xsolla-number.notification.success.sms" : "שלחנו למספר הטלפון שלך הודעה עם המספר שלך ב-Xsolla. אם לא קיבלת את ההודעה כדאי לנסות שוב.",
+         "xsolla-number.payment.description" : "כדי שנוכל לעבד את התשלום אנחנו צריכים לאמת את החשבון שלך",
+         "xsolla-number.payment.title" : "תשלום באמצעות {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "אימייל",
+         "xsolla-number.send-panel.get-xsolla-number" : "קבלת מספר ב-Xsolla",
+         "xsolla-number.send-panel.print" : "הדפסת המידע",
+         "xsolla-number.send-panel.send" : "שליחה"
       }
    }
 }

@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Оплата с помощью Apple Pay доступна только в браузере Safari с OS 10.12 Sierra или IOS 10. Воспользуйтесь другим браузером или измените способ оплаты.",
          "apple-pay.errors.payment" : "Оплата не выполнена. Перед повторной попыткой убедитесь, что вы вошли в свой аккаунт Apple и у вас настроен кошелек Apple Pay. Сихнронизация с измененными настройками Apple может занять пару минут.",
+         "cash-payment-instruction.description" : "Выставили вам счет за покупку. Теперь можно платить — после этого отправим чек на почту.",
+         "cash-payment-instruction.how-to" : "Как оплатить",
+         "cash-payment-instruction.title" : "Оплата через {{paymentMethodName}}",
          "cookie-policy" : "Политика использования cookie",
          "disclaimer-with-cookies" : "Продолжая оплату, вы подтверждаете, что достигли возраста совершеннолетия в вашей стране и согласны с условиями <a href={{xsolla_terms_link}} target=\"_blank\">Пользовательского соглашения Xsolla<\/a>.<br>Xsolla независимо собирает необходимые cookie-файлы на этой и других страницах во время обработки платежа, как и указано в <a href={{xsolla_privacy_link}} target=\"_blank\">Политике Cookie компании Xsolla<\/a>.<br>Необходимо учитывать, что Xsolla является Получателем платежа и контроллером информации, которую вы предоставляете на этой странице.<br>Если у вас есть вопросы, свяжитесь с нашей <a href={{xsolla_help_link}} target=\"_blank\">Службой поддержки<\/a>.",
          "error.title.default" : "Не получилось обработать платеж",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Ожидаем завершения оплаты...",
          "status.processing.title" : "Обработка платежа",
          "status.success.description" : "Мы отправили чек на {{email}}",
-         "status.success.title" : "Платеж прошел"
+         "status.success.title" : "Платеж прошел",
+         "xsolla-number.info.user-account" : "Имя пользователя",
+         "xsolla-number.info.xsolla-number" : "Xsolla-номер",
+         "xsolla-number.instruction.how-to" : "Как оплатить",
+         "xsolla-number.instruction.notification" : "Владелец терминала может дополнительно взимать комиссию",
+         "xsolla-number.instruction.paragraph-four" : "4. Вставьте наличные для завершения оплаты. ",
+         "xsolla-number.instruction.paragraph-one" : " 1. Найдите пункт оплаты {{paymentMethodName}}.",
+         "xsolla-number.instruction.paragraph-three" : "3. Введите имя пользователя или Xsolla-номер. ",
+         "xsolla-number.instruction.paragraph-two" : " 2. Нажмите на терминале кнопку проекта {{projectName}} или кнопку Xsolla. ",
+         "xsolla-number.notification.failed" : "Не удалось отправить платежные инструкции. Повторите попытку позже",
+         "xsolla-number.notification.success.email" : "Отправили инструкции к оплате на ваш email-адрес. Если вы их не получили, повторите попытку",
+         "xsolla-number.notification.success.sms" : "Отправили Xsolla-номер на ваш номер телефона. Если вы не получили Xsolla-номер, повторите попытку",
+         "xsolla-number.payment.description" : "Подтвердите аккаунт, чтобы оплатить покупку",
+         "xsolla-number.payment.title" : "Оплата через {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "Email-адрес",
+         "xsolla-number.send-panel.get-xsolla-number" : "Получить Xsolla-номер",
+         "xsolla-number.send-panel.print" : "Печатать инструкцию",
+         "xsolla-number.send-panel.send" : "Отправить"
       }
    }
 }

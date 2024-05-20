@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay só está disponível no navegador Safari com o OS 10.12 Sierra ou IOS 10. Troque de navegador ou selecione outra opção de pagamento.",
          "apple-pay.errors.payment" : "Não foi possível processar seu pagamento. Certifique-se de estar acessando sua conta Apple em seu dispositivo e configure a Apple Pay antes de tentar novamente. As mudanças nas configurações da Apple pode levar alguns minutos para ser sincronizada.",
+         "cash-payment-instruction.description" : "Enviamos uma cobrança para a sua conta. Após o pagamento, você receberá o recibo por e-mail.",
+         "cash-payment-instruction.how-to" : "Como pagar",
+         "cash-payment-instruction.title" : "Pagamento via {{paymentMethodName}}",
          "cookie-policy" : "Política de Cookies",
          "disclaimer-with-cookies" : "Ao prosseguir, você confirma que é um adulto de acordo com as leis do seu estado e concorda em se vincular ao <a href={{xsolla_terms_link}} target=\"_blank\">CLUA da Xsolla<\/a>.<br>A Xsolla coleta cookies essenciais independentemente nesta página e durante o processamento da compra, como determinado na <a href={{xsolla_privacy_link}} target=\"_blank\">Política de Cookies da Xsolla<\/a>.<br>Observe que, para esta compra, a Xsolla é a comerciante de registros autorizada e controladora dos dados que você enviar a esta página.<br>Se você tiver qualquer dúvida, contate o <a href={{xsolla_help_link}} target=\"_blank\">Suporte Gamer Xsolla<\/a>.",
          "error.title.default" : "Não foi possível processar o pagamento",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Aguardando a conclusão do pagamento",
          "status.processing.title" : "Pagamento em processamento",
          "status.success.description" : "Enviamos seu recibo para {{email}}",
-         "status.success.title" : "Pagamento bem-sucedido"
+         "status.success.title" : "Pagamento bem-sucedido",
+         "xsolla-number.info.user-account" : "Conta do usuário",
+         "xsolla-number.info.xsolla-number" : "Número Xsolla",
+         "xsolla-number.instruction.how-to" : "Como pagar",
+         "xsolla-number.instruction.notification" : "O proprietário do terminal poderá cobrar comissões adicionais",
+         "xsolla-number.instruction.paragraph-four" : "4. Insira o dinheiro para concluir a transação.",
+         "xsolla-number.instruction.paragraph-one" : "1. Vá para um local de pagamento {{paymentMethodName}}.",
+         "xsolla-number.instruction.paragraph-three" : "3. Insira o nome de usuário da sua conta ou número Xsolla.",
+         "xsolla-number.instruction.paragraph-two" : "2. Pressione {{projectName}} ou o botão Xsolla no quiosque de pagamento.",
+         "xsolla-number.notification.failed" : "Não é possível enviar instruções de pagamento. Tente novamente mais tarde",
+         "xsolla-number.notification.success.email" : "Enviamos uma instrução de pagamento ao seu e-mail. Caso não tenha recebido ela, tente novamente",
+         "xsolla-number.notification.success.sms" : "Enviamos seu número Xsolla ao seu número de telefone. Caso não tenha recebido ele, tente novamente",
+         "xsolla-number.payment.description" : "Para processar seu pagamento, precisamos verificar sua conta",
+         "xsolla-number.payment.title" : "Pagamento via {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "E-mail",
+         "xsolla-number.send-panel.get-xsolla-number" : "Obter número Xsolla",
+         "xsolla-number.send-panel.print" : "Imprimir informações",
+         "xsolla-number.send-panel.send" : "Enviar"
       }
    }
 }

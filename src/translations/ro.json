@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay este disponibil numai în browserul Safari cu OS 10.12 Sierra sau iOS 10. instalat. Schimbați browserul sau selectați o altă opțiune de plată.",
          "apple-pay.errors.payment" : "Nu putem procesa plata ta. Asigură-te că eşti logat în Apple pe dispozitivul tău înainte să încerci din nou. Sincronizarea modificărilor în setările Apple durează câteva minute.",
+         "cash-payment-instruction.description" : "Am emis o factură pentru achiziția dvs. După ce ați plătit, vă vom trimite prin e-mail chitanța.",
+         "cash-payment-instruction.how-to" : "Cum se plăteşte",
+         "cash-payment-instruction.title" : "Plată prin {{paymentMethodName}}",
          "cookie-policy" : "Politica privind modulele cookie",
          "disclaimer-with-cookies" : "Continuând, confirmați că sunteți adult în conformitate cu legislația națională și sunteți de acord să respectați <a href={{xsolla_terms_link}} target=\"_blank\">acordul utilizatorului final Xsolla<\/a>.<br>Xsolla colectează în mod independent module cookie esențiale pe această pagină și în continuare în timpul procesării achiziției care este acoperită de <a href={{xsolla_privacy_link}} target=\"_blank\">politica Xsolla privind modulele cookie <\/a>.<br>Vă rugăm să rețineți că, pentru această achiziție, Xsolla este comerciantul autorizat de înregistrare și controlor al datelor pe care le trimiteți pe această pagină.<br>Dacă aveți întrebări, vă rugăm să vă adresați serviciului <a href={{xsolla_help_link}} target=\"_blank\">Xsolla de asistență pentru jucători<\/a>.",
          "error.title.default" : "Nu s-a putut procesa plata",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Se aşteaptă încheierea plății...",
          "status.processing.title" : "Procesare plată",
          "status.success.description" : "Am trimis chitanța dumneavoastră la {{email}}",
-         "status.success.title" : "Plată realizată cu succes"
+         "status.success.title" : "Plată realizată cu succes",
+         "xsolla-number.info.user-account" : "Contul utilizatorului",
+         "xsolla-number.info.xsolla-number" : "Număr Xsolla",
+         "xsolla-number.instruction.how-to" : "Cum se plăteşte",
+         "xsolla-number.instruction.notification" : "Proprietarul terminalului poate percepe un comision suplimentar",
+         "xsolla-number.instruction.paragraph-four" : "4. Inserează cash pentru a finaliza tranzacția.",
+         "xsolla-number.instruction.paragraph-one" : "1. Du-te la o {{paymentMethodName}} locație de plată.",
+         "xsolla-number.instruction.paragraph-three" : "3. Introdu numele contului tău de utilizator sau numărul Xsolla.",
+         "xsolla-number.instruction.paragraph-two" : "2. Apasă butonul {{projectName}} sau Xsolla de pe chioșcul de plată.",
+         "xsolla-number.notification.failed" : "Nu pot trimite instrucțiunile de plată. Încearcă din nou mai târziu",
+         "xsolla-number.notification.success.email" : "Am trimis instrucțiunile de plată la adresa ta de e-mail. Dacă nu le-ai primit, încearcă din nou",
+         "xsolla-number.notification.success.sms" : "Am trimis numărul Xsolla la numărul tău de telefon. Dacă nu l-ai primit, încearcă din nou",
+         "xsolla-number.payment.description" : "Pentru a putea procesa plata ta, trebuie să îți verificăm contul",
+         "xsolla-number.payment.title" : "Plată prin {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "E-mail",
+         "xsolla-number.send-panel.get-xsolla-number" : "Obține număr Xsolla",
+         "xsolla-number.send-panel.print" : "Printează informația",
+         "xsolla-number.send-panel.send" : "Trimitere"
       }
    }
 }
