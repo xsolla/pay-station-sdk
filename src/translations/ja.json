@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Payは、OS 10.12 SierraまたはIOS 10をインストールしたSafariブラウザでのみご利用いただけます。ブラウザを変更するか、他の決済方法を選択してください。",
          "apple-pay.errors.payment" : "トラザックションを処理できません。お使いのデバイスでAppleにサインインし、Apple Payを設定していることを確認してから再試行してください。Appleの設定の変更は、同期に2〜3分かかります。",
+         "cash-payment-instruction.description" : "ご購入金額にて請求書が発行されます。お支払いが完了すると、領収書がメールで送信されます。",
+         "cash-payment-instruction.how-to" : "決済方法",
+         "cash-payment-instruction.title" : "{{paymentMethodName}}によるお支払い。",
          "cookie-policy" : "クッキーポリシー",
          "disclaimer-with-cookies" : "以下の手続きにより、利用者はお住まいの州法に基づいて成人であることを確認し、<a href={{xsolla_terms_link}} target=\"_blank\">エクソーラEULA<\/a>に拘束されることに同意します。<br>エクソーラは、このページ上およびさらに購入処理中に、<a href={{xsolla_privacy_link}} target=\"_blank\">エクソーラクッキーポリシー<\/a>の対象となる必須のクッキを独自に収集します。<br>この購入に関して、Xsollaは認証されたマーチャントであり、このページで送信されたデータの管理者であることにご注意ください。<br>ご質問がある場合は、<a href={{xsolla_help_link}} target=\"_blank\">エクソーラゲーマーサポート<\/a>までお問い合わせください。",
          "error.title.default" : "決済を処理できません",
@@ -44,7 +47,24 @@
          "status.processing.description" : "決済の完了待ち...",
          "status.processing.title" : "決済処理中",
          "status.success.description" : "領収書を{{email}}に送信しました",
-         "status.success.title" : "決済完了"
+         "status.success.title" : "決済完了",
+         "xsolla-number.info.user-account" : "ユーザーアカウント",
+         "xsolla-number.info.xsolla-number" : "エクソーラ番号",
+         "xsolla-number.instruction.how-to" : "決済方法",
+         "xsolla-number.instruction.notification" : "ターミナル所有者は、追加の手数料を請求することができます",
+         "xsolla-number.instruction.paragraph-four" : "4. 現金を投入して取引を完了します。",
+         "xsolla-number.instruction.paragraph-one" : " 1. {{paymentMethodName}}の決済場所に移動します。",
+         "xsolla-number.instruction.paragraph-three" : "3. ユーザーアカウント名またはエクソーラ番号を入力します。",
+         "xsolla-number.instruction.paragraph-two" : "2. 決済キオスクの{{projectName}}またはエクソーラボタンを押します。",
+         "xsolla-number.notification.failed" : "支払いに関する注意事項を送信できません。後でもう一度やり直してください",
+         "xsolla-number.notification.success.email" : "お支払いのご案内をメールでお送りしました。まだ届いていない場合は、もう一度やり直してください",
+         "xsolla-number.notification.success.sms" : "お客様の電話番号にエクソーラ番号を送信しました。まだ届いていない場合は、もう一度やり直してください",
+         "xsolla-number.payment.description" : "お支払いを処理するには、アカウントを検証する必要があります",
+         "xsolla-number.payment.title" : "{{paymentMethodName}}によるお支払い。",
+         "xsolla-number.send-panel.email" : "メールアドレス",
+         "xsolla-number.send-panel.get-xsolla-number" : "エクソーラ番号を取得する",
+         "xsolla-number.send-panel.print" : "プリント情報",
+         "xsolla-number.send-panel.send" : "送信する"
       }
    }
 }

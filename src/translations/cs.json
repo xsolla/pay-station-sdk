@@ -3,6 +3,9 @@
       "translation" : {
          "apple-pay.errors.device-is-not-capable" : "Apple Pay je k dispozici pouze v prohlížeči Safari s nainstalovaným macOS 10.12 Sierra nebo iOS 10. Změňte prosím prohlížeč nebo vyberte jinou možnost platby.",
          "apple-pay.errors.payment" : "Platbu nelze zpracovat. Než to zkusíte znovu, ujistěte se, že jste na svém zařízení přihlášeni k účtu Apple a máte nastaveno Apple Pay. Synchronizace změn v nastavení Apple trvá několik minut.",
+         "cash-payment-instruction.description" : "Vystavili jsme účtenku za Váš nákup. Jakmile zaplatíte, zašleme Vám e-mailem stvrzenku.",
+         "cash-payment-instruction.how-to" : "Jak platit",
+         "cash-payment-instruction.title" : "Platba prostřednictvím {{paymentMethodName}}",
          "cookie-policy" : "Zásady používání cookies",
          "disclaimer-with-cookies" : "Pokračováním potvrzujete, že jste dospělí podle zákonů Vašeho státu a souhlasíte s tím, že budete vázáni <a href={{xsolla_terms_link}} target=\"_blank\">smlouvou EULA společnosti Xsolla<\/a>.<br>Společnost Xsolla na této stránce a dále při zpracování nákupu nezávisle shromažďuje základní soubory cookies, na které se vztahují <a href={{xsolla_privacy_link}} target=\"_blank\">Zásady používání cookies společnosti Xsolla<\/a>.<br>Upozorňujeme, že pro tento nákup je společnost Xsolla autorizovaným obchodníkem a správcem údajů, které na této stránce odešlete.<br>V případě jakýchkoli dotazů se obraťte na <a href={{xsolla_help_link}} target=\"_blank\">Podporu hráčů společnosti Xsolla<\/a>.",
          "error.title.default" : "Platbu nelze zpracovat",
@@ -44,7 +47,24 @@
          "status.processing.description" : "Čekání na dokončení platby...",
          "status.processing.title" : "Zpracovávání platby",
          "status.success.description" : "Vaši stvrzenku jsme zaslali na {{email}}",
-         "status.success.title" : "Platba byla úspěšná"
+         "status.success.title" : "Platba byla úspěšná",
+         "xsolla-number.info.user-account" : "Uživatelský účet",
+         "xsolla-number.info.xsolla-number" : "Číslo Xsolla",
+         "xsolla-number.instruction.how-to" : "Jak platit",
+         "xsolla-number.instruction.notification" : "Majitel terminálu si může účtovat dodatečný poplatek",
+         "xsolla-number.instruction.paragraph-four" : "4. Pro dokončení transakce vložte hotovost.",
+         "xsolla-number.instruction.paragraph-one" : "1. Jděte na platební místo {{paymentMethodName}}.",
+         "xsolla-number.instruction.paragraph-three" : "3. Zadejte název svého uživatelského účtu nebo číslo Xsolla.",
+         "xsolla-number.instruction.paragraph-two" : "2. Stiskněte tlačítko {{projectName}} nebo Xsolla na platebním kiosku.",
+         "xsolla-number.notification.failed" : "Pokyny k platbě nelze odeslat. Zkuste to znovu později",
+         "xsolla-number.notification.success.email" : "Pokyny k platbě jsme Vám zaslali na e-mail. Pokud jste je neobdrželi, zkuste to znovu",
+         "xsolla-number.notification.success.sms" : "Vaše číslo Xsolla jsme Vám zaslali na telefonní číslo. Pokud jste ho neobdrželi, zkuste to znovu",
+         "xsolla-number.payment.description" : "Abychom mohli platbu zpracovat, musíme Váš účet ověřit",
+         "xsolla-number.payment.title" : "Platba prostřednictvím {{paymentMethodName}}",
+         "xsolla-number.send-panel.email" : "E-mail",
+         "xsolla-number.send-panel.get-xsolla-number" : "Obdržet číslo Xsolla",
+         "xsolla-number.send-panel.print" : "Vytisknout informace",
+         "xsolla-number.send-panel.send" : "Odeslat"
       }
    }
 }
