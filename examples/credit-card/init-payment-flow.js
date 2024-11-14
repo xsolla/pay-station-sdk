@@ -42,7 +42,7 @@ function buildPaymentFlow() {
     this.window.location.href = url.toString();
   }
 
-  function renderRequiredFields(requiredFields, formElement) {
+  function renderFields(requiredFields, formElement) {
     /**
      * It is important to render every every required field as a component according to its own type or
      * other specific parameters. In the current case, we could encounter fields of the following types:
@@ -63,6 +63,11 @@ function buildPaymentFlow() {
         renderSelectComponent(formElement, field);
         return;
       }
+
+      if (field.type === 'check') {
+        renderCheckboxComponent(formElement, field);
+        return;
+      }
     });
   }
 
@@ -80,6 +85,15 @@ function buildPaymentFlow() {
      * You can use <psdk-select name="field.name"></psdk-select> as well.
      */
     const input = new PayStationSdk.SelectComponent();
+    input.setAttribute('name', field.name);
+    formElement.append(input);
+  }
+
+  function renderCheckboxComponent(formElement, field) {
+    /**
+     * You can use <psdk-checkbox name="field.name"></psdk-checkbox> as well.
+     */
+    const input = new PayStationSdk.CheckboxComponent();
     input.setAttribute('name', field.name);
     formElement.append(input);
   }
@@ -112,8 +126,8 @@ function buildPaymentFlow() {
     const threeDsComponent = new PayStationSdk.ThreeDsComponent();
 
     threeDsComponent.setAttribute(
-      'data-challenge',
-      JSON.stringify(threeDsAction.data.data),
+        'data-challenge',
+        JSON.stringify(threeDsAction.data.data),
     );
 
     document.getElementById('right-col').append(threeDsComponent);
@@ -137,14 +151,6 @@ function buildPaymentFlow() {
      * render new fields in the same place.
      */
     formElement.innerHTML = '';
-  }
-
-  function getRequiredFields(fields) {
-    /**
-     * form.fields provide available fields for the selected payment method.
-     * You can filter it by the `isMandatory` flag to get required fields only.
-     */
-    return fields.filter((field) => field.isMandatory === '1');
   }
 
   async function initPayStationSdk() {
@@ -204,18 +210,18 @@ function buildPaymentFlow() {
      */
     headlessCheckout.form.onNextAction((nextAction) => {
       switch (nextAction.type) {
-        /**
-         * Handle the 'show_fields' action.
-         */
+          /**
+           * Handle the 'show_fields' action.
+           */
         case 'show_fields':
           clearFormFields(formElement);
-          renderRequiredFields(nextAction.data.fields, formElement);
+          renderFields(nextAction.data.fields, formElement);
           renderSubmitButton(formElement);
           break;
 
-        /**
-         * Handle the 'check_status' action.
-         */
+          /**
+           * Handle the 'check_status' action.
+           */
         case 'check_status':
           /**
            * Remove unnecessary form fields to render StatusComponent in the same place.
@@ -224,28 +230,26 @@ function buildPaymentFlow() {
           renderStatusComponent(statusElement);
           break;
 
-        /**
-         * Handle the '3DS' action.
-         */
+          /**
+           * Handle the '3DS' action.
+           */
         case '3DS':
           handle3dsAction(nextAction);
           break;
 
-        /**
-         * Handle the 'redirect' action.
-         */
+          /**
+           * Handle the 'redirect' action.
+           */
         case 'redirect':
           handleRedirectAction(nextAction);
           break;
       }
     });
 
-    const requiredFields = getRequiredFields(form.fields);
-
     /**
-     * Render the required fields.
+     * Render the fields.
      */
-    renderRequiredFields(requiredFields, formElement);
+    renderFields(form.fields, formElement);
 
     renderSubmitButton(formElement);
   }
