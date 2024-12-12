@@ -10,6 +10,7 @@ import { FormStatus } from '../../core/status/form-status.enum';
 import { noopStub } from '../../tests/stubs/noop.stub';
 import { headlessCheckoutAppUrl } from './environment';
 import { ThemesLoader } from '../../core/customization/themes-loader';
+import { submitHandler } from './post-messages-handlers/submit/submit.handler';
 
 const mockMessage: Message = {
   name: EventName.initPayment,
@@ -246,5 +247,14 @@ describe('HeadlessCheckout', () => {
     const spy = spyOn(postMessagesClient, 'listen');
     headlessCheckout.form.onFieldsStatusChange(noopStub);
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('Should init', async () => {
+    const spy = spyOn(postMessagesClient, 'send');
+    await headlessCheckout.form.submit();
+    expect(spy).toHaveBeenCalledWith(
+      { name: EventName.submitForm },
+      submitHandler,
+    );
   });
 });

@@ -151,6 +151,12 @@ declare const headlessCheckout: {
      * Allows you to prepare components before a user can interact with them.
      */
     activate(): void;
+
+    /**
+     * Initiate form submit.
+     * To get submit action response listen onNextAction events
+     */
+    submit(): void;
   };
 
   /**
