@@ -5,7 +5,7 @@ import { EventName } from '../../../../../core/event-name.enum';
 import { HeadlessCheckout } from '../../../headless-checkout';
 import { DefaultSubmitButtonAttributes } from './default-submit-button-attributes.enum';
 import { getSubmitButtonTemplate } from './default-submit-button.template';
-import { defaultSubmitButtonHandler } from './default-submit-button.handler';
+import { submitHandler } from '../../../post-messages-handlers/submit/submit.handler';
 import { Message } from '../../../../../core/message.interface';
 import { Handler } from '../../../../../core/post-messages-client/handler.type';
 import { isSubmitButtonLoadingMessage } from '../../../../../core/guards/submit-button-loading-message.guard';
@@ -75,7 +75,7 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
 
         void this.postMessagesClient.send(
           { name: EventName.submitForm },
-          defaultSubmitButtonHandler,
+          submitHandler,
         );
 
         this.render();
