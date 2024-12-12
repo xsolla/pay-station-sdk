@@ -39,6 +39,7 @@ import { getCountryListHandler } from './post-messages-handlers/get-country-list
 import { CountryResponse } from '../../core/country-response.interface';
 import { FormLoader } from '../../core/form/form-loader';
 import { InitialOptions } from './initial-options.interface';
+import { submitHandler } from './post-messages-handlers/submit/submit.handler';
 
 @singleton()
 export class HeadlessCheckout {
@@ -138,8 +139,18 @@ export class HeadlessCheckout {
     activate: (): void => {
       this.formStatus = FormStatus.active;
     },
+
     setupAndAwaitFieldsLoading: async (fields: Field[]): Promise<void> =>
       this.formLoader.setupAndAwaitFieldsLoading(fields),
+
+    submit: async (): Promise<void> => {
+      await this.postMessagesClient.send(
+        {
+          name: EventName.submitForm,
+        },
+        submitHandler,
+      );
+    },
   };
 
   public get formConfiguration(): FormConfiguration | undefined {
@@ -411,8 +422,12 @@ export class HeadlessCheckout {
   private async listenCoreIframeLoading(): Promise<void> {
     return new Promise((resolve) => {
       const handler = (event: MessageEvent): void => {
+        if (typeof event.data !== 'string') {
+          return;
+        }
+
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (JSON.parse(event.data as string).name === EventName.isReady) {
+        if (JSON.parse(event.data).name === EventName.isReady) {
           resolve();
           this.window.removeEventListener('message', handler);
         }
