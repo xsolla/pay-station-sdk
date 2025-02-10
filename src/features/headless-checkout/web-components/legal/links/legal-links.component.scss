@@ -1,0 +1,18 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/links.mixin' as links;
+
+psdk-legal-links {
+  @include typo.psdk-typo;
+  @include links.link-container;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

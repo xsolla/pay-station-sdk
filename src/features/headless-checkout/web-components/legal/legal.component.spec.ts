@@ -7,6 +7,7 @@ import { LegalComponent } from './legal.component';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { EventName } from '../../../../core/event-name.enum';
 import { LegalComponentConfig } from './legal-component.config.interface';
+import { tick } from '../../../../tests/stubs/tick';
 
 function createComponent(): void {
   const element = document.createElement(WebComponentTagName.LegalComponent);
@@ -17,17 +18,7 @@ function createComponent(): void {
 const mockConfig: LegalComponentConfig = {
   isJapanUser: false,
   refundPolicyUrl: 'refundPolicyUrl',
-  secureConnection: {
-    secureConnectionUrl: 'secureConnectionUrl',
-  },
 };
-
-const delay = async (): Promise<boolean> =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    });
-  });
 
 describe('LegalComponent', () => {
   let headlessCheckout: HeadlessCheckout;
@@ -125,7 +116,7 @@ describe('LegalComponent', () => {
     );
     const spy = spyOn(windowService, 'addEventListener');
     createComponent();
-    await delay();
+    await tick();
     expect(spy).toHaveBeenCalled();
   });
 
@@ -136,7 +127,7 @@ describe('LegalComponent', () => {
     );
     const spy = spyOn(windowService, 'addEventListener');
     createComponent();
-    await delay();
+    await tick();
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -165,6 +156,6 @@ describe('LegalComponent', () => {
       },
     );
     createComponent();
-    await delay();
+    await tick();
   });
 });
