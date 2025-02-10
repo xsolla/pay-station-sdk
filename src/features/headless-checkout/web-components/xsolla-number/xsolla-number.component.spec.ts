@@ -4,7 +4,7 @@ import { noopStub } from '../../../../tests/stubs/noop.stub';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { CashPaymentData } from '../../../../core/cash-payment-data.interface';
-import { timeout } from '../../../../tests/stubs/timeout';
+import { tick } from '../../../../tests/stubs/tick';
 import { XsollaNumberComponent } from './xsolla-number.component';
 import { HeadlessCheckoutMock } from '../../../../tests/stubs/headless-checkout.mock';
 import { HeadlessCheckout } from '../../headless-checkout';
@@ -81,7 +81,7 @@ describe('XsollaNumberComponent', () => {
     );
     createComponent();
     const delay = 100;
-    await timeout(delay);
+    await tick(delay);
     const innerHtml = document.querySelector(
       WebComponentTagName.XsollaNumberComponent,
     )!.innerHTML;

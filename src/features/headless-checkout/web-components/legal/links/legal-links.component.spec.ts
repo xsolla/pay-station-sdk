@@ -1,16 +1,17 @@
 import { container } from 'tsyringe';
-import { WebComponentTagName } from '../../../../core/web-components/web-component-tag-name.enum';
-import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
-import { noopStub } from '../../../../tests/stubs/noop.stub';
-import { HeadlessCheckout } from '../../headless-checkout';
-import { LegalComponent } from './legal.component';
-import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
-import { EventName } from '../../../../core/event-name.enum';
-import { LegalComponentConfig } from './legal-component.config.interface';
-import { tick } from '../../../../tests/stubs/tick';
+import { WebComponentTagName } from '../../../../../core/web-components/web-component-tag-name.enum';
+import { HeadlessCheckoutSpy } from '../../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
+import { noopStub } from '../../../../../tests/stubs/noop.stub';
+import { PostMessagesClient } from '../../../../../core/post-messages-client/post-messages-client';
+import { EventName } from '../../../../../core/event-name.enum';
+import { LegalComponentConfig } from '../legal-component.config.interface';
+import { LegalLinksComponent } from './legal-links.component';
+import { tick } from '../../../../../tests/stubs/tick';
 
 function createComponent(): void {
-  const element = document.createElement(WebComponentTagName.LegalComponent);
+  const element = document.createElement(
+    WebComponentTagName.LegalLinksComponent,
+  );
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
 }
@@ -20,23 +21,18 @@ const mockConfig: LegalComponentConfig = {
   refundPolicyUrl: 'refundPolicyUrl',
 };
 
-describe('LegalComponent', () => {
-  let headlessCheckout: HeadlessCheckout;
+describe('LegalLinksComponent', () => {
   let headlessCheckoutSpy: HeadlessCheckoutSpy;
   let postMessagesClient: PostMessagesClient;
   let windowService: Window;
 
   window.customElements.define(
-    WebComponentTagName.LegalComponent,
-    LegalComponent,
+    WebComponentTagName.LegalLinksComponent,
+    LegalLinksComponent,
   );
 
   beforeEach(() => {
     document.body.innerHTML = '<div id="container"></div>';
-
-    headlessCheckout = {
-      getRegularMethods: noopStub,
-    } as unknown as HeadlessCheckout;
 
     headlessCheckoutSpy = {
       listenAppInit: noopStub,
@@ -57,9 +53,6 @@ describe('LegalComponent', () => {
       .register<HeadlessCheckoutSpy>(HeadlessCheckoutSpy, {
         useValue: headlessCheckoutSpy,
       })
-      .register<HeadlessCheckout>(HeadlessCheckout, {
-        useValue: headlessCheckout,
-      })
       .register<PostMessagesClient>(PostMessagesClient, {
         useValue: postMessagesClient,
       })
@@ -73,7 +66,7 @@ describe('LegalComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.LegalComponent),
+      document.querySelector(WebComponentTagName.LegalLinksComponent),
     ).toBeDefined();
   });
 
@@ -143,7 +136,7 @@ describe('LegalComponent', () => {
         const messageEvent = {
           data: JSON.stringify({
             name: EventName.requiredComponentPing,
-            data: { componentName: 'LegalComponent' },
+            data: { componentName: 'LegalLinksComponent' },
           }),
           origin: '',
           source: {

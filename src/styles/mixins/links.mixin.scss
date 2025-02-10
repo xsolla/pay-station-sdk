@@ -1,0 +1,10 @@
+@mixin link-container {
+  a {
+    color: var(--psdk-font-color);
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
