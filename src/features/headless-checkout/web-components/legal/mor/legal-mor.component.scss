@@ -1,0 +1,7 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+
+psdk-legal-mor {
+  @include typo.psdk-typo;
+
+  display: block;
+}

@@ -5,7 +5,7 @@ import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { CashPaymentData } from '../../../../core/cash-payment-data.interface';
 import { CashPaymentInstructionComponent } from './cash-payment-instruction.component';
-import { timeout } from '../../../../tests/stubs/timeout';
+import { tick } from '../../../../tests/stubs/tick';
 
 function createComponent(): void {
   const element = document.createElement(
@@ -77,7 +77,7 @@ describe('CashPaymentInstructionComponent', () => {
     );
     createComponent();
     const delay = 100;
-    await timeout(delay);
+    await tick(delay);
     expect(
       document.querySelector(
         WebComponentTagName.CashPaymentInstructionComponent,
@@ -92,7 +92,7 @@ describe('CashPaymentInstructionComponent', () => {
     );
     createComponent();
     const delay = 100;
-    await timeout(delay);
+    await tick(delay);
     expect(
       document.querySelector(
         WebComponentTagName.CashPaymentInstructionComponent,

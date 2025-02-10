@@ -22,6 +22,12 @@ import { DefaultSubmitButtonComponent } from '../../features/headless-checkout/w
 import { TotalComponent } from '../../features/headless-checkout/web-components/finance-details/total.component';
 import { CashPaymentInstructionComponent } from '../../features/headless-checkout/web-components/cash-payment-instruction/cash-payment-instruction.component';
 import { XsollaNumberComponent } from '../../features/headless-checkout/web-components/xsolla-number/xsolla-number.component';
+import { LegalTermsComponent } from '../../features/headless-checkout/web-components/legal/terms/legal-terms.component';
+import { LegalCookiesComponent } from '../../features/headless-checkout/web-components/legal/cookies/legal-cookies.component';
+import { LegalMorComponent } from '../../features/headless-checkout/web-components/legal/mor/legal-mor.component';
+import { LegalSupportComponent } from '../../features/headless-checkout/web-components/legal/support/legal-support.component';
+import { LegalLinksComponent } from '../../features/headless-checkout/web-components/legal/links/legal-links.component';
+import { SecureConnectionComponent } from '../../features/headless-checkout/web-components/secure-connection/secure-connection.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -34,6 +40,12 @@ export const webComponents: {
   [WebComponentTagName.FinanceDetailsComponent]: FinanceDetailsComponent,
   [WebComponentTagName.TotalComponent]: TotalComponent,
   [WebComponentTagName.LegalComponent]: LegalComponent,
+  [WebComponentTagName.LegalTermsComponent]: LegalTermsComponent,
+  [WebComponentTagName.LegalCookiesComponent]: LegalCookiesComponent,
+  [WebComponentTagName.LegalMorComponent]: LegalMorComponent,
+  [WebComponentTagName.LegalSupportComponent]: LegalSupportComponent,
+  [WebComponentTagName.LegalLinksComponent]: LegalLinksComponent,
+  [WebComponentTagName.SecureConnectionComponent]: SecureConnectionComponent,
   [WebComponentTagName.StatusComponent]: StatusComponent,
   [WebComponentTagName.PaymentFormComponent]: PaymentFormComponent,
   [WebComponentTagName.CardNumberComponent]: CardNumberComponent,
