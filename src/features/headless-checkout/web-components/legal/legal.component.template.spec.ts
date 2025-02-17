@@ -5,10 +5,6 @@ const mockConfig: LegalComponentConfig = {
   isJapanUser: false,
   refundPolicyUrl: 'refundPolicyUrl',
   sctlPolicyUrl: 'sctlPolicyUrl',
-  secureConnection: {
-    isWhiteLabel: true,
-    secureConnectionUrl: 'secureConnectionUrl',
-  },
   disclaimer: 'disclaimer',
 };
 
@@ -16,10 +12,6 @@ const mockConfigJapan: LegalComponentConfig = {
   isJapanUser: true,
   refundPolicyUrl: 'refundPolicyUrl',
   sctlPolicyUrl: 'sctlPolicyUrl',
-  secureConnection: {
-    isWhiteLabel: true,
-    secureConnectionUrl: 'secureConnectionUrl',
-  },
   disclaimer: 'disclaimer',
 };
 

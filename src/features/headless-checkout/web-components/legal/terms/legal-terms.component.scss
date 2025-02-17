@@ -1,0 +1,9 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/links.mixin' as links;
+
+psdk-legal-terms {
+  @include typo.psdk-typo;
+  @include links.link-container;
+
+  display: block;
+}

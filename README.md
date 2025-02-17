@@ -224,15 +224,22 @@ Secure components have access to sensitive user data, and are encapsulated in if
 
 ### Special components
 
-| **Component** | **Selector**      | **Status** |
-| ------------- | ----------------- | ---------- |
-| Legal         | psdk-legal        | ✅         |
-| Payment Form  | psdk-payment-form | ✅         |
-| ThreeDs       | psdk-3ds          | ✅         |
+| **Component**         | **Selector**       | **Status** |
+| --------------------- | ------------------ | ---------- |
+| Legal                 | psdk-legal         | ✅         |
+| LegalTermsComponent   | psdk-legal-terms   | ✅         |
+| LegalCookiesComponent | psdk-legal-cookies | ✅         |
+| LegalMorComponent     | psdk-legal-mor     | ✅         |
+| LegalSupportComponent | psdk-legal-support | ✅         |
+| LegalLinksComponent   | psdk-legal-links   | ✅         |
+| Payment Form          | psdk-payment-form  | ✅         |
+| ThreeDs               | psdk-3ds           | ✅         |
 
 The `Payment Form` component creates missed payment form components to ensure the client does not omit required payment form components. The client receives a warning message from the SDK, but still allows users to complete the payment.
 
-The `Legal` component contains information about Xsolla's legal documents. Client has to include this component and display legal documents in their application in accordance with their agreement with Xsolla. Otherwise, the payment flow is blocked.
+The `Legal` component contains information about Xsolla's legal documents. The client must include either this component or all related components (`LegalTermsComponent`, `LegalCookiesComponent`, `LegalMorComponent`, `LegalSupportComponent`, `LegalLinksComponent`) to display legal documents in the application in accordance with the agreement with Xsolla. Otherwise, the payment flow is blocked.
+
+The `LegalTermsComponent`, `LegalCookiesComponent`, `LegalMorComponent`, `LegalSupportComponent`, `LegalLinksComponent` components contain information about Xsolla's legal documents. The client must include either all these components or only the `Legal` component to display legal documents in the application in accordance with the agreement with Xsolla. Otherwise, the payment flow is blocked.
 
 The `ThreeDs` component contains the logic required to perform the necessary credit card checks in accordance with the 3DS procedure.
 

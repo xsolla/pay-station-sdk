@@ -1,0 +1,12 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+
+psdk-secure-connection {
+  @include typo.psdk-typo;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  .logo {
+    margin-right: 4px;
+  }
+}

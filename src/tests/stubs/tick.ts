@@ -1,2 +1,2 @@
-export const timeout = async (delay: number): Promise<void> =>
+export const tick = async (delay = 0): Promise<void> =>
   new Promise((resolve) => setTimeout(() => resolve(), delay));

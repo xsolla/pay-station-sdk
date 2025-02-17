@@ -1,7 +1,9 @@
 @use 'src/styles/mixins/typo.mixin' as typo;
+@use 'src/styles/mixins/links.mixin' as links;
 
 psdk-legal {
   @include typo.psdk-typo;
+  @include links.link-container;
 
   display: flex;
   flex-direction: column;
@@ -14,24 +16,6 @@ psdk-legal {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
-
-  a {
-    color: var(--psdk-font-color);
-
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
-  }
-
-  .company {
-    display: flex;
-    flex-wrap: wrap;
-
-    a {
-      margin-right: 4px;
-    }
   }
 
   .legal-links {
