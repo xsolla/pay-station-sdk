@@ -4,9 +4,13 @@ import { isNextActionEventMessage } from '../../../core/guards/next-action-event
 import { Message } from '../../../core/message.interface';
 
 export const nextActionHandler: Handler<NextAction> = (
-  message: Message
+  message: Message,
+  callback?: (args?: unknown) => void,
 ): { isHandled: boolean; value?: NextAction } | null => {
   if (isNextActionEventMessage(message)) {
+    if (typeof callback === 'function') {
+      callback(message.data);
+    }
     return {
       isHandled: true,
       value: message.data,
