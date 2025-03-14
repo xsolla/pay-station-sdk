@@ -8,6 +8,7 @@
   - [Regular components](#regular-components)
   - [Secure components](#secure-components)
   - [Special components](#special-components)
+- [Pay Station SDK supported events](#pay-station-sdk-supported-events)
 - [Pay Station SDK supported languages](#pay-station-sdk-supported-languages)
 - [Integration guide](#integration-guide)
 
@@ -225,7 +226,7 @@ Secure components have access to sensitive user data, and are encapsulated in if
 ### Special components
 
 | **Component**         | **Selector**       | **Status** |
-| --------------------- | ------------------ | ---------- |
+| --------------------- |--------------------| ---------- |
 | Legal                 | psdk-legal         | ✅         |
 | LegalTermsComponent   | psdk-legal-terms   | ✅         |
 | LegalCookiesComponent | psdk-legal-cookies | ✅         |
@@ -234,6 +235,7 @@ Secure components have access to sensitive user data, and are encapsulated in if
 | LegalLinksComponent   | psdk-legal-links   | ✅         |
 | Payment Form          | psdk-payment-form  | ✅         |
 | ThreeDs               | psdk-3ds           | ✅         |
+| TotalComponent        | psdk-total         | ✅         |
 
 The `Payment Form` component creates missed payment form components to ensure the client does not omit required payment form components. The client receives a warning message from the SDK, but still allows users to complete the payment.
 
@@ -242,6 +244,524 @@ The `Legal` component contains information about Xsolla's legal documents. The c
 The `LegalTermsComponent`, `LegalCookiesComponent`, `LegalMorComponent`, `LegalSupportComponent`, `LegalLinksComponent` components contain information about Xsolla's legal documents. The client must include either all these components or only the `Legal` component to display legal documents in the application in accordance with the agreement with Xsolla. Otherwise, the payment flow is blocked.
 
 The `ThreeDs` component contains the logic required to perform the necessary credit card checks in accordance with the 3DS procedure.
+
+The `TotalComponent` component contains the total amount of the payment. The client must include current component to display total amount in the application. Otherwise, the payment flow is blocked.
+
+## Pay Station SDK supported events
+
+To provide greater flexibility of payment forms, you can send specific `postMessage` events from the payment UI independently. Based on a defined data structure and existing handlers, you can request and process responses about payment method lists, deleted saved methods, etc. You can also create your own handlers to process data as needed. The list of available events and handlers included in the SDK is shown in the table below.
+
+> Refer to the [working example](./examples/events) for detailed information.
+
+<table border="1">
+<thead>
+<tr>
+<th>Handler</th>
+<th>Event name (Enum)</th>
+<th>Event name (string)</th>
+<th>Payload</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getUserBalanceValueHandler</td>
+<td>EventName.getUserBalanceValue</td>
+<td>getUserBalanceValue</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getUserBalanceValue;
+}
+</code>
+</pre>
+</td>
+<td>
+Gets the user balance’s value, including amount and currency.
+</td>
+</tr>
+<tr>
+<td>initFormHandler</td>
+<td>EventName.initForm</td>
+<td>initForm</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.initForm;
+  data: {
+    configuration: {
+      paymentMethodId: number;
+      returnUrl: string;
+      country?: string;
+      paymentWithSavedMethod?: boolean;
+      savedMethodId?: number;
+      savePaymentMethod?: boolean;
+    }
+  }
+}
+</code></pre>
+</td>
+<td>Initializes the payment form with the provided data.</td>
+</tr>
+<tr>
+<td>submitHandler</td>
+<td>EventName.submitForm</td>
+<td>submitForm</td>
+<td>
+<pre>
+<code>
+{ name: EventName.submitForm; }
+</code>
+</pre></td>
+<td>Submits the payment form.</td>
+</tr>
+<tr>
+<td>setTokenHandler</td>
+<td>EventName.initPayment</td>
+<td>initPayment</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.initPayment;
+  data: {
+    configuration: {
+      token: string;
+      isWebView: boolean;
+      sandbox: boolean;
+    }
+  }
+}
+</code>
+</pre>
+</td>
+<td>Initializes the payment form.</td>
+</tr>
+<tr>
+<td>setSecureComponentStylesHandler</td>
+<td>EventName.setSecureComponentStyles</td>
+<td>setSecureComponentStyles</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.setSecureComponentStyles;
+  data: string;
+}
+</code>
+</pre>
+</td>
+<td>Sets CSS styles for secure components.</td>
+</tr>
+<tr>
+<td>getFinanceDetailsHandler</td>
+<td>EventName.financeDetails</td>
+<td>financeDetails</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.financeDetails;
+}
+</code>
+</pre>
+</td>
+<td>
+Gets generated financial data of the purchase:
+purchase composition, country, taxes, etc.
+</td>
+</tr>
+<tr>
+<td>getRegularMethodsHandler</td>
+<td>EventName.getPaymentMethodsList</td>
+<td>getPaymentMethodsList</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getPaymentMethodsList;
+  data: {
+    country: string | undefined;
+    isSaveMethodMode: boolean | undefined;
+  }
+}
+</code>
+</pre>
+</td>
+<td>Returns a list of regular payment methods.</td>
+</tr>
+<tr>
+<td>getQuickMethodsHandler</td>
+<td>EventName.getPaymentQuickMethods</td>
+<td>getPaymentQuickMethods</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getPaymentQuickMethods;
+  data: {
+    country?: string | undefined;
+  },
+}
+</code>
+</pre>
+</td>
+<td>Returns a list of quick payment methods.</td>
+</tr>
+<tr>
+<td>getCombinedPaymentMethodsHandler</td>
+<td>EventName.getCombinedPaymentMethods</td>
+<td>getCombinedPaymentMethods</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getCombinedPaymentMethods;
+  data: {
+    country?: string | undefined;
+  }
+}
+</code>
+</pre>
+</td>
+<td>
+Returns lists of payment methods, including quick payment methods, saved
+methods, and others.
+</td>
+</tr>
+<tr>
+<td>getSavedMethodsHandler</td>
+<td>EventName.getSavedMethods</td>
+<td>getSavedMethods</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getSavedMethods;
+}
+</code>
+</pre>
+</td>
+<td>Returns a list of saved payment methods.</td>
+</tr>
+<tr>
+<td>getUserBalanceHandler</td>
+<td>EventName.getUserBalance</td>
+<td>getUserBalance</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getUserBalance;
+}
+</code>
+</pre>
+</td>
+<td>
+Returns user balance data to determine whether there are sufficient funds to
+complete the payment.
+</td>
+</tr>
+<tr>
+<td>getPaymentStatusHandler</td>
+<td>EventName.getPaymentStatus</td>
+<td>getPaymentStatus</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getPaymentStatus;
+  data: {
+    url: string;
+  }
+}
+</code>
+</pre>
+</td>
+<td>Returns data on the payment status.</td>
+</tr>
+<tr>
+<td>getCountryListHandler</td>
+<td>EventName.getCountryList</td>
+<td>getCountryList</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getCountryList;
+}
+</code>
+</pre>
+</td>
+<td>Returns a list of countries.</td>
+</tr>
+<tr>
+<td>getControlComponentConfigHandler</td>
+<td>EventName.getControlComponentConfig</td>
+<td>getControlComponentConfig</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getControlComponentConfig;
+  data: {
+    inputName: string;
+  }
+}
+</code>
+</pre>
+</td>
+<td>Returns the configuration of the payment UI elements’ controls.</td>
+</tr>
+<tr>
+<td>getCashPaymentDataHandler</td>
+<td>EventName.getCashPaymentData</td>
+<td>getCashPaymentData</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getCashPaymentData;
+}
+</code>
+</pre>
+</td>
+<td>Returns data on cash payment methods.</td>
+</tr>
+<tr>
+<td>getLegalComponentConfigHandler</td>
+<td>EventName.getLegalComponentConfig</td>
+<td>getLegalComponentConfig</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.getLegalComponentConfig;
+}
+</code>
+</pre>
+</td>
+<td>Returns the configuration for the legal components.</td>
+</tr>
+<tr>
+<td>deleteSavedMethodHandler</td>
+<td>EventName.deleteSavedMethod</td>
+<td>deleteSavedMethod</td>
+<td>
+<pre>
+<code>
+{
+name: EventName.deleteSavedMethod,
+  data: {
+    paymentMethodId: string | null | undefined;
+    savedMethodId: string | null | undefined;
+    type: string | null | undefined;
+  };
+}
+</code>
+</pre>
+</td>
+<td>Allows to remove saved payment methods.</td>
+</tr>
+</tbody>
+</table>
+
+In addition to sending `postMessage` events, you can also subscribe to listen to them. The list of events and handlers that can be used for listening and data processing is shown in the table below. The **Response** column shows the raw data received from the `postMessage`.
+
+> Refer to the [working example](./examples/events) for detailed information.
+
+<table border="1">
+<thead>
+<tr>
+<th>Event name (Enum)</th>
+<th>Event name (string)</th>
+<th>Handler</th>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EventName.formFieldsStatusChanged</td>
+<td>formFieldsStatusChanged</td>
+<td>formFieldsStatusChangedHandler</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.formFieldsStatusChanged;
+  data: {
+    [key: string]: {
+      name: string;
+      validationStatus: 'VALID' | 'INVALID' | 'PENDING' | 'DISABLED';
+      errors: null | {
+          [key: string]: {
+          [key: string]: unknown;
+          message?: string;
+        };
+      };
+      isFocused?: boolean;
+      isTouched?: boolean;
+    }
+  }
+}
+</code></pre>
+</td>
+<td>Notifies about changes in the statuses of payment UI fields.</td>
+</tr>
+<tr>
+<td>EventName.error</td>
+<td>error</td>
+<td>getErrorHandler</td>
+<td>
+<pre>
+<code>
+{
+    data: {
+        error: string
+    }
+}
+</code></pre>
+</td>
+<td>Notifies about errors occurred during the payment process.</td>
+</tr>
+<tr>
+<td>EventName.financeDetails</td>
+<td>financeDetails</td>
+<td>getFinanceDetailsHandler</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.financeDetails;
+  data: {
+    purchase: object;
+    finance: object;
+    cartItems: array;
+    cartSummary: object;
+    paymentCountry: string;
+  }
+}
+</code>
+</pre>
+</td>
+<td>
+Returns data on the purchase, including items, payment country,
+and financial details.
+</td>
+</tr>
+<tr>
+<td>EventName.updateCreditCardType</td>
+<td>updateCreditCardType</td>
+<td>updateCreditCardTypeHandler</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.updateCreditCardType;
+  data: {
+    cardType: string;
+  }
+}
+</code>
+</pre>
+</td>
+<td>Updates information about the bank card type.</td>
+</tr>
+<tr>
+<td>EventName.applePayError</td>
+<td>applePayError</td>
+<td>applePayErrorHandler</td>
+<td>
+<pre>
+<code>
+{
+    data: null | undefined | {
+        error: string
+    }
+}
+</code>
+</pre>
+</td>
+<td>
+Notifies about the error occurred during the payment with Apple Pay.
+</td>
+</tr>
+<tr>
+<td>EventName.openApplePayPage</td>
+<td>openApplePayPage</td>
+<td>openApplePayPageHandler</td>
+<td>
+<pre>
+<code>
+{
+    data: null | undefined | {
+        redirectUrl: string
+    }
+}
+</code>
+</pre>
+</td>
+<td>Notifies about opening of the Apple Pay payment page.</td>
+</tr>
+<tr>
+<td>EventName.finishLoadComponent</td>
+<td>finishLoadComponent</td>
+<td>finishLoadComponentHandler</td>
+<td>
+<pre>
+<code>
+{
+    data: null | undefined | {
+        fieldName: string
+    }
+}
+</code>
+</pre>
+</td>
+<td>
+Notifies about completion of the payment form component loading.
+</td>
+</tr>
+<tr>
+<td>EventName.formMessagesChanged</td>
+<td>formMessagesChanged</td>
+<td>getFormMessagesHandler</td>
+<td>
+<pre>
+<code>
+{
+  data: string[];
+}
+</code>
+</pre>
+</td>
+<td>Returns payment form events.</td>
+</tr>
+<tr>
+<td>EventName.sendCashPaymentDataStatus</td>
+<td>sendCashPaymentDataStatus</td>
+<td>sendCashPaymentDataStatusHandler</td>
+<td>
+<pre>
+<code>
+{
+  data: null | undefined | {
+    status: 'succeed' | 'failed';
+    type: 'sms' | 'email';
+    errors: string[];
+  }
+}
+</code>
+</pre>
+</td>
+<td>Provides data on the payment status when cash methods are used.</td>
+</tr>
+</tbody>
+</table>
+
 
 ## Pay Station SDK supported languages
 
@@ -269,6 +789,7 @@ The `ThreeDs` component contains the logic required to perform the necessary cre
 ## Integration guide
 
 To start using the Pay Station SDK, include the SDK bundle in your project. You can do this in any convenient way, such as adding the SDK bundle as npm-package.
+
 
 > A working example can be found [here](./examples/select-method)
 
