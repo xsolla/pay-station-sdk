@@ -225,7 +225,7 @@ Secure components have access to sensitive user data, and are encapsulated in if
 ### Special components
 
 | **Component**         | **Selector**       | **Status** |
-| --------------------- | ------------------ | ---------- |
+| --------------------- |--------------------| ---------- |
 | Legal                 | psdk-legal         | ✅         |
 | LegalTermsComponent   | psdk-legal-terms   | ✅         |
 | LegalCookiesComponent | psdk-legal-cookies | ✅         |
@@ -234,6 +234,7 @@ Secure components have access to sensitive user data, and are encapsulated in if
 | LegalLinksComponent   | psdk-legal-links   | ✅         |
 | Payment Form          | psdk-payment-form  | ✅         |
 | ThreeDs               | psdk-3ds           | ✅         |
+| TotalComponent        | psdk-total         | ✅         |
 
 The `Payment Form` component creates missed payment form components to ensure the client does not omit required payment form components. The client receives a warning message from the SDK, but still allows users to complete the payment.
 
@@ -242,6 +243,251 @@ The `Legal` component contains information about Xsolla's legal documents. The c
 The `LegalTermsComponent`, `LegalCookiesComponent`, `LegalMorComponent`, `LegalSupportComponent`, `LegalLinksComponent` components contain information about Xsolla's legal documents. The client must include either all these components or only the `Legal` component to display legal documents in the application in accordance with the agreement with Xsolla. Otherwise, the payment flow is blocked.
 
 The `ThreeDs` component contains the logic required to perform the necessary credit card checks in accordance with the 3DS procedure.
+
+The `TotalComponent` component contains the total amount of the payment. The client must include current component to display total amount in the application. Otherwise, the payment flow is blocked.
+
+## Pay Station SDK supported events
+
+Below is a complete list of public postMessages used in the SDK. You can subscribe to them or send them from the SDK to build a more flexible and responsive payment interface.
+
+<table border="1">
+	<thead>
+		<tr>
+			<th style="text-align: left">name</th>
+			<th style="text-align: left">data</th>
+			<th style="text-align: left">details</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>deleteSavedMethod</td>
+			<td>
+				<ul>
+					<li>savedMethodId: number;</li>
+					<li>type: string;</li>
+				</ul>
+			</td>
+			<td>Deletes a saved payment method.</td>
+		</tr>
+		<tr>
+			<td>financeDetails</td>
+			<td>
+				<ul>
+					<li>financeDetails: object;</li>
+				</ul>
+			</td>
+			<td>
+				Retrieves financial information about the payment. 'financeDetails'
+				object contains huge information about:
+				<ul>
+					<li>purchase</li>
+					<li>finance</li>
+					<li>cartItems</li>
+					<li>cartSummary</li>
+					<li>paymentCountry</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>getCashPaymentData</td>
+			<td>
+				<ul>
+					<li>isCashPaymentMethod: boolean;</li>
+					<li>xsollaNumber: string;</li>
+					<li>pid: number;</li>
+					<li>publicId: string;</li>
+					<li>title: string;</li>
+					<li>printUrl: string;</li>
+					<li>projectName: string;</li>
+					<li>instruction?: string;</li>
+				</ul>
+			</td>
+			<td>Gets data required for cash-based payment methods.</td>
+		</tr>
+		<tr>
+			<td>getCombinedPaymentMethods</td>
+			<td>
+				<ul>
+					<li>methods: object;</li>
+				</ul>
+			</td>
+			<td>
+				Retrieves available payment methods, including quick payments and saved
+				methods:
+				<ul>
+					<li>
+						paymentMethods: object
+						<ul>
+							<li>quick: PaymentMethod[];</li>
+							<li>remained: PaymentMethod[];</li>
+						</ul>
+					</li>
+					<li>savedMethods: SavedMethod[];</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>getControlComponentConfig</td>
+			<td>
+				<ul>
+					<li>config: object;</li>
+				</ul>
+			</td>
+			<td>Retrieves configuration for a control component.</td>
+		</tr>
+		<tr>
+			<td>getCountryList</td>
+			<td>
+				<ul>
+					<li>countryList: array;</li>
+					<li>currentCountry: string;</li>
+				</ul>
+			</td>
+			<td>Returns the list of available countries.</td>
+		</tr>
+		<tr>
+			<td>getFormStatus</td>
+			<td>
+				<ul>
+					<li>formStatus?: 'VALID' | 'INVALID' | 'PENDING' | 'DISABLED'</li>
+				</ul>
+			</td>
+			<td>Gets form status.</td>
+		</tr>
+		<tr>
+			<td>getLegalComponentConfig</td>
+			<td>
+				<ul>
+					<li>
+						config: object;
+						<ul>
+							<li>isJapanUser: boolean;</li>
+							<li>refundPolicyUrl: string;</li>
+							<li>sctlPolicyUrl?: string;</li>
+							<li>
+								secureConnection: object;
+								<ul>
+									<li>secureConnectionUrl?: string;</li>
+									<li>isWhiteLabel?: boolean;</li>
+								</ul>
+							</li>
+							<li>disclaimer?: string;</li>
+						</ul>
+					</li>
+				</ul>
+			</td>
+			<td>Retrieves the configuration of legal components.</td>
+		</tr>
+		<tr>
+			<td>getPaymentMethodsList</td>
+			<td>
+				<ul>
+					<li>methods: array;</li>
+				</ul>
+			</td>
+			<td>Gets the list of available payment methods.</td>
+		</tr>
+		<tr>
+			<td>getPaymentQuickMethods</td>
+			<td>
+				<ul>
+					<li>methods: array;</li>
+				</ul>
+			</td>
+			<td>Retrieves quick payment options.</td>
+		</tr>
+		<tr>
+			<td>getPaymentStatus</td>
+			<td>
+				<ul>
+					<li>string;</li>
+				</ul>
+			</td>
+			<td>Checks the status of the payment.</td>
+		</tr>
+		<tr>
+			<td>getSavedMethods</td>
+			<td>
+				<ul>
+					<li>methods: array;</li>
+				</ul>
+			</td>
+			<td>Returns the list of saved user payment methods.</td>
+		</tr>
+		<tr>
+			<td>getUserBalance</td>
+			<td>
+				<ul>
+					<li>
+						userBalance: object;
+						<ul>
+							<li>isEnoughUserBalance: boolean;</li>
+							<li>isEnoughUserRecurrentBalance: boolean;</li>
+						</ul>
+					</li>
+				</ul>
+			</td>
+			<td>Retrieves the user's balance.</td>
+		</tr>
+		<tr>
+			<td>getUserBalanceValue</td>
+			<td>
+				<ul>
+					<li>amount: number;</li>
+					<li>currency: string;</li>
+				</ul>
+				* or returns <b>null;</b>
+			</td>
+			<td>Gets the numerical value of the user's balance.</td>
+		</tr>
+		<tr>
+			<td>initForm</td>
+			<td>
+				<ul>
+					<li>pid: number | null;</li>
+					<li>submitButtonText: string | null;</li>
+					<li>fields: array;</li>
+					<li>isFormAutoSubmitted: boolean;</li>
+				</ul>
+			</td>
+			<td>Initializes the payment form with the given configuration.</td>
+		</tr>
+		<tr>
+			<td>initPayment</td>
+			<td>-</td>
+			<td>Starts the payment process using the provided token.</td>
+		</tr>
+		<tr>
+			<td>publicControlChangeState</td>
+			<td>-</td>
+			<td>Updates the state of a public control component.</td>
+		</tr>
+		<tr>
+			<td>publicControlOnValueChanges</td>
+			<td>-</td>
+			<td>Handles value changes in public control components.</td>
+		</tr>
+		<tr>
+			<td>setSecureComponentStyles</td>
+			<td>
+				<ul>
+					<li>string;</li>
+				</ul>
+			</td>
+			<td>Applies custom styles to secure components.</td>
+		</tr>
+		<tr>
+			<td>nextAction</td>
+			<td>
+				<ul>
+					<li>type: string;</li>
+					<li>data: object;</li>
+				</ul>
+			</td>
+			<td>Represents the next action in a payment flow.</td>
+		</tr>
+	</tbody>
+</table>
 
 ## Pay Station SDK supported languages
 
