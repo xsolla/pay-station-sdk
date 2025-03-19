@@ -1,12 +1,10 @@
 import i18next from 'i18next';
 import { LegalComponentConfig } from './legal-component.config.interface';
-import {
-  cookieUrl,
-  helpUrl,
-  legalAgreementsUrl,
-  privacyPolicyUrl,
-  termsUrl,
-} from './links.const';
+import { legalAgreementsUrl, privacyPolicyUrl } from './links.const';
+import { getLegalTermsComponentTemplate } from './terms/legal-terms.component.tempate';
+import { getLegalCookiesComponentTemplate } from './cookies/legal-cookies.component.tempate';
+import { getLegalMorComponentTemplate } from './mor/legal-mor.component.tempate';
+import { getLegalSupportComponentTemplate } from './support/legal-support.component.tempate';
 
 export const getLegalComponentTemplate = (
   config: LegalComponentConfig,
@@ -16,13 +14,20 @@ export const getLegalComponentTemplate = (
     ${
       disclaimer
         ? `
-  <div class='disclaimer'>
-    ${i18next.t('disclaimer-with-cookies', {
-      xsolla_terms_link: termsUrl,
-      xsolla_privacy_link: cookieUrl,
-      xsolla_help_link: helpUrl,
-    })}
-  </div>`
+        <div class='disclaimer'>
+          <div class="terms">
+            ${getLegalTermsComponentTemplate(config)}
+          </div>
+          <div class="cookies">
+            ${getLegalCookiesComponentTemplate()}
+          </div>
+          <div class="mor">
+            ${getLegalMorComponentTemplate(config)}
+          </div>
+          <div class="support">
+            ${getLegalSupportComponentTemplate()}
+          </div>
+        </div>`
         : ''
     }
    <div class='additional-info'>
