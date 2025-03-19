@@ -1,12 +1,15 @@
-import { LegalPartComponentAbstract } from '../legal-part-component.abstract';
 import { getLegalTermsComponentTemplate } from './legal-terms.component.tempate';
+import { LegalConfigPartComponentAbstract } from '../legal-config-part-component.abstract';
 
 import './legal-terms.component.scss';
 
-export class LegalTermsComponent extends LegalPartComponentAbstract {
+export class LegalTermsComponent extends LegalConfigPartComponentAbstract {
   protected readonly componentName = 'LegalTermsComponent';
 
   protected getHtml(): string {
-    return getLegalTermsComponentTemplate();
+    if (this.config) {
+      return getLegalTermsComponentTemplate(this.config);
+    }
+    return '';
   }
 }
