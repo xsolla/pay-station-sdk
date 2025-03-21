@@ -8,6 +8,7 @@
   - [Regular components](#regular-components)
   - [Secure components](#secure-components)
   - [Special components](#special-components)
+- [Pay Station SDK supported events](#pay-station-sdk-supported-events)
 - [Pay Station SDK supported languages](#pay-station-sdk-supported-languages)
 - [Integration guide](#integration-guide)
 
@@ -248,20 +249,18 @@ The `TotalComponent` component contains the total amount of the payment. The cli
 
 ## Pay Station SDK supported events
 
-For greater flexibility of payment forms, you can send specific post-messages from the payment interface independently. Based on a defined data structure and existing handlers, you can request and process responses about payment method lists, delete saved methods, and much more. You can also create your own handlers to process data as needed.
+To provide greater flexibility of payment forms, you can send specific `postMessage` events from the payment UI independently. Based on a defined data structure and existing handlers, you can request and process responses about payment method lists, deleted saved methods, etc. You can also create your own handlers to process data as needed. The list of available events and handlers included in the SDK is shown in the table below.
 
-Below is a table of available events and existing handlers in the SDK. As mentioned earlier, you can use them or write your own handlers.
-
-> A working example can be found [here](./examples/events)
+> Refer to the [working example](./examples/events) for detailed information.
 
 <table border="1">
 <thead>
 <tr>
-<th>handler</th>
-<th>event name as Enum</th>
-<th>event name as string</th>
-<th>payload</th>
-<th>comment</th>
+<th>Handler</th>
+<th>Event name (Enum)</th>
+<th>Event name (string)</th>
+<th>Payload</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -279,7 +278,7 @@ Below is a table of available events and existing handlers in the SDK. As mentio
 </pre>
 </td>
 <td>
-Gets the value of the user's balance, such as amount and currency.
+Gets the user balance’s value, including amount and currency.
 </td>
 </tr>
 <tr>
@@ -316,7 +315,7 @@ Gets the value of the user's balance, such as amount and currency.
 { name: EventName.submitForm; }
 </code>
 </pre></td>
-<td>Payment form submission.</td>
+<td>Submits the payment form.</td>
 </tr>
 <tr>
 <td>setTokenHandler</td>
@@ -338,7 +337,7 @@ Gets the value of the user's balance, such as amount and currency.
 </code>
 </pre>
 </td>
-<td>Payment form initialization.</td>
+<td>Initializes the payment form.</td>
 </tr>
 <tr>
 <td>setSecureComponentStylesHandler</td>
@@ -354,7 +353,7 @@ Gets the value of the user's balance, such as amount and currency.
 </code>
 </pre>
 </td>
-<td>Setting CSS styles for secure components.</td>
+<td>Sets CSS styles for secure components.</td>
 </tr>
 <tr>
 <td>getFinanceDetailsHandler</td>
@@ -370,8 +369,8 @@ Gets the value of the user's balance, such as amount and currency.
 </pre>
 </td>
 <td>
-Data on the financial aspect of the purchase being made – purchase
-composition, country, taxes, and similar information.
+Gets generated financial data of the purchase:
+purchase composition, country, taxes, etc.
 </td>
 </tr>
 <tr>
@@ -461,7 +460,7 @@ methods, and others.
 </pre>
 </td>
 <td>
-Returns user balance data – whether there are sufficient funds to
+Returns user balance data to determine whether there are sufficient funds to
 complete the payment.
 </td>
 </tr>
@@ -514,7 +513,7 @@ complete the payment.
 </code>
 </pre>
 </td>
-<td>Returns the form control configuration.</td>
+<td>Returns the configuration of the payment UI elements’ controls.</td>
 </tr>
 <tr>
 <td>getCashPaymentDataHandler</td>
@@ -529,7 +528,7 @@ complete the payment.
 </code>
 </pre>
 </td>
-<td>Returns data on the cash payment method.</td>
+<td>Returns data on cash payment methods.</td>
 </tr>
 <tr>
 <td>getLegalComponentConfigHandler</td>
@@ -544,7 +543,7 @@ complete the payment.
 </code>
 </pre>
 </td>
-<td>Returns the configuration for the legal component.</td>
+<td>Returns the configuration for the legal components.</td>
 </tr>
 <tr>
 <td>deleteSavedMethodHandler</td>
@@ -564,23 +563,23 @@ name: EventName.deleteSavedMethod,
 </code>
 </pre>
 </td>
-<td>Allows the removal of a saved payment method.</td>
+<td>Allows to remove saved payment methods.</td>
 </tr>
 </tbody>
 </table>
 
-In addition to sending post-messages, you can also subscribe to listen for them. The table below lists the events and handlers that can be used for subscription and data processing. The “response” column shows the raw data received from the post-message.
+In addition to sending `postMessage` events, you can also subscribe to listen to them. The list of events and handlers that can be used for listening and data processing is shown in the table below. The **Response** column shows the raw data received from the `postMessage`.
 
-> A working example can be found [here](./examples/events)
+> Refer to the [working example](./examples/events) for detailed information.
 
 <table border="1">
 <thead>
 <tr>
-<th>event name as Enum</th>
-<th>event name as string</th>
-<th>handler</th>
-<th>response</th>
-<th>comment</th>
+<th>Event name (Enum)</th>
+<th>Event name (string)</th>
+<th>Handler</th>
+<th>Response</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -610,7 +609,7 @@ In addition to sending post-messages, you can also subscribe to listen for them.
 }
 </code></pre>
 </td>
-<td>Informs about changes in the statuses of payment form fields.</td>
+<td>Notifies about changes in the statuses of payment UI fields.</td>
 </tr>
 <tr>
 <td>EventName.error</td>
@@ -620,13 +619,13 @@ In addition to sending post-messages, you can also subscribe to listen for them.
 <pre>
 <code>
 {
-    data: { 
-        error: string 
+    data: {
+        error: string
     }
 }
 </code></pre>
 </td>
-<td>Informs about errors that occurred during the payment flow.</td>
+<td>Notifies about errors occurred during the payment process.</td>
 </tr>
 <tr>
 <td>EventName.financeDetails</td>
@@ -649,8 +648,8 @@ In addition to sending post-messages, you can also subscribe to listen for them.
 </pre>
 </td>
 <td>
-Returns data on the purchase, products, payment country, as well as
-financial details.
+Returns data on the purchase, including items, payment country,
+and financial details.
 </td>
 </tr>
 <tr>
@@ -669,7 +668,7 @@ financial details.
 </code>
 </pre>
 </td>
-<td>Contains information about the bank card type.</td>
+<td>Updates information about the bank card type.</td>
 </tr>
 <tr>
 <td>EventName.applePayError</td>
@@ -687,7 +686,7 @@ financial details.
 </pre>
 </td>
 <td>
-The data of the error that occurred in the Apple Pay payment flow.
+Notifies about the error occurred during the payment with Apple Pay.
 </td>
 </tr>
 <tr>
@@ -705,7 +704,7 @@ The data of the error that occurred in the Apple Pay payment flow.
 </code>
 </pre>
 </td>
-<td>Data on the opening of the Apple Pay payment page.</td>
+<td>Notifies about opening of the Apple Pay payment page.</td>
 </tr>
 <tr>
 <td>EventName.finishLoadComponent</td>
@@ -723,7 +722,7 @@ The data of the error that occurred in the Apple Pay payment flow.
 </pre>
 </td>
 <td>
-Informs about the completion of the payment form component loading.
+Notifies about completion of the payment form component loading.
 </td>
 </tr>
 <tr>
@@ -758,7 +757,7 @@ Informs about the completion of the payment form component loading.
 </code>
 </pre>
 </td>
-<td>Provides data on the payment result using cash methods.</td>
+<td>Provides data on the payment status when cash methods are used.</td>
 </tr>
 </tbody>
 </table>
