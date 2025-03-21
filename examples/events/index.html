@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!--
+Link the SDK bundle.
+NOTE: In this example, we use a local build just for convenience purposes.
+-->
+    <script src="./main.js"></script>
+    <script src="./variables.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <h1>Pay Station SDK</h1>
+    <psdk-select type="country"></psdk-select>
+    <!-- Initialization script -->
+    <script>
+      if (typeof PayStationSdk === 'undefined') {
+        alert(payStationSdkUndefinedError);
+        throw new Error('PayStationSdk not found');
+      }
+      /**
+       * To learn more about creating tokens,
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+       */
+      const accessToken = 'uep0yxiYdEuU4B2ySSzC4BFAoqYfpZpz_lc_en';
+
+      if (!accessToken) {
+        alert(`No token provided. Please, check the documentation`);
+        throw new Error('No token provided');
+      }
+
+      async function initPayStationSdk() {
+        /**
+          * The SDK is available under the PayStationSdk namespace.
+          * To begin initialization, obtain a reference to the headlessCheckout object.
+         */
+        const { headlessCheckout, getFinanceDetailsHandler } = PayStationSdk;
+
+        /*
+          * How to listen for and handle events using the “initPayment” event as an example
+          * Also, see how to build your own handlers to process received data
+        * */
+        const customInitPaymentHandler = (event) => {
+            console.log('initPayment event, event name is:', event.name);
+            return event;
+        };
+
+        headlessCheckout.events.onCoreEvent('initPayment', customInitPaymentHandler, (data) => {
+          if (data) {
+            console.log('initPayment event, data:', data);
+          }
+          else {
+            console.log('initPayment event, data is empty');
+          }
+        });
+
+        /**
+         * Call the `init()` method with the provided environment object.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a WebView or not.
+         * Please note that this command executes asynchronously.
+         */
+        await headlessCheckout.init({
+          isWebView: false,
+          sandbox: true,
+          theme: 'default',
+        });
+
+        /**
+         * After the Payments SDK has been initialized, the next step is setting the token.
+         * To learn more about creating tokens,
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+         */
+        await headlessCheckout.setToken(accessToken);
+
+        /*
+         * How to send an event and handle its response
+         * using the "Getting Finance Details" event as an example
+         */
+        const financeDetailsPayload = {
+          name: 'financeDetails'
+        }
+
+        const financeDetails = await headlessCheckout.events.send(financeDetailsPayload, getFinanceDetailsHandler);
+        console.log('financeDetails response', financeDetails);
+
+      }
+
+      initPayStationSdk();
+    </script>
+  </body>
+</html>
