@@ -14,6 +14,12 @@ export interface SavedMethod {
     month: string;
     year: string;
   };
+  dateCreate: {
+    date: string;
+    timezone: string;
+    timezone_type: number;
+  };
+  dateLastCharge: number;
   iconName: string | null;
   partner?: string | null;
 }
