@@ -30,6 +30,12 @@ const mockSavedMethod: SavedMethod = {
     month: '05',
     year: '2030',
   },
+  dateCreate: {
+    date: '2025-01-01 00:00:00.000000',
+    timezone: 'Europe/Moscow',
+    timezone_type: 3,
+  },
+  dateLastCharge: 1743576779,
   recurrentType: 'charge',
   form: {
     paymentSid: 'id',

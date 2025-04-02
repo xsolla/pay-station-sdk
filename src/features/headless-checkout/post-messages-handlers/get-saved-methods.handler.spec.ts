@@ -20,6 +20,12 @@ const mockSavedMethod: SavedMethod = {
     month: '12',
     year: '2040',
   },
+  dateCreate: {
+    date: '2025-01-01 00:00:00.000000',
+    timezone: 'Europe/Moscow',
+    timezone_type: 3,
+  },
+  dateLastCharge: 1743576779,
   iconName: 'mastercard.svg',
   isBabkaPay: false,
 };
@@ -39,7 +45,7 @@ describe('getSavedMethodsHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      getSavedMethodsHandler({ name: EventName.getUserBalance })
+      getSavedMethodsHandler({ name: EventName.getUserBalance }),
     ).toBeNull();
   });
 });
