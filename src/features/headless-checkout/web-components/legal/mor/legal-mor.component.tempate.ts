@@ -5,10 +5,7 @@ import {
 } from '../legal-component.config.interface';
 import { termsUrl } from '../links.const';
 
-const legalAreaLabelMap = new Map<LegalArea, string>([
-  ['US', 'legal-mor-us'],
-  ['EU', 'legal-mor-eu'],
-]);
+const legalAreaLabelMap = new Map<LegalArea, string>([['EU', 'legal-mor-eu']]);
 
 const getLabel = (legalArea: LegalArea = 'other'): string => {
   return legalAreaLabelMap.get(legalArea) ?? 'legal-mor';

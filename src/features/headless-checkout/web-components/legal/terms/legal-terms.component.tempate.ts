@@ -6,6 +6,7 @@ import {
 } from '../legal-component.config.interface';
 
 const legalAreaLabelMap = new Map<LegalArea, string>([
+  ['US', 'legal-terms-us'],
   ['EU', 'legal-terms-eu'],
 ]);
 
