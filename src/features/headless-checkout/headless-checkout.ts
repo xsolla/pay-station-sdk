@@ -177,6 +177,7 @@ export class HeadlessCheckout {
   ) {}
 
   public async init(environment: InitialOptions): Promise<void> {
+    console.log('[SDK] init');
     this.isWebView = environment.isWebview;
     this.isSandbox = environment.sandbox;
     this.theme = environment.theme;
