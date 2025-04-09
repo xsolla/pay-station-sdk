@@ -1,6 +1,6 @@
 {
   "name": "@xsolla/pay-station-sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pay Station SDK",
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
