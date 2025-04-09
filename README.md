@@ -226,7 +226,7 @@ Secure components have access to sensitive user data, and are encapsulated in if
 ### Special components
 
 | **Component**         | **Selector**       | **Status** |
-| --------------------- |--------------------| ---------- |
+| --------------------- | ------------------ | ---------- |
 | Legal                 | psdk-legal         | ✅         |
 | LegalTermsComponent   | psdk-legal-terms   | ✅         |
 | LegalCookiesComponent | psdk-legal-cookies | ✅         |
@@ -762,7 +762,6 @@ Notifies about completion of the payment form component loading.
 </tbody>
 </table>
 
-
 ## Pay Station SDK supported languages
 
 - Arabic
@@ -789,7 +788,6 @@ Notifies about completion of the payment form component loading.
 ## Integration guide
 
 To start using the Pay Station SDK, include the SDK bundle in your project. You can do this in any convenient way, such as adding the SDK bundle as npm-package.
-
 
 > A working example can be found [here](./examples/select-method)
 
@@ -1174,3 +1172,10 @@ How can I get the value of the available locale?
 
 1. To use the default styles of the SDK components, you need to connect the style.css file to your HTML document.
 2. To use the default styles of the secure components, you need to pass the `theme: 'default'` parameter when initializing `headlessCheckout`.
+
+## Edge cases
+
+### Payment flow with unsupported country
+
+When attempting to make a payment with a selected country that is not supported in the Pay Station SDK, the payment API will return an error message.
+You can find an example [here](./examples/unsupported-country).
