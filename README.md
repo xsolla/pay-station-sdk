@@ -1175,7 +1175,7 @@ How can I get the value of the available locale?
 
 ## Edge cases
 
-### Payment flow with unsupported country
+### Unsupported countries for payment
 
-When attempting to make a payment with a selected country that is not supported in the Pay Station SDK, the payment API will return an error message.
-You can find an example [here](./examples/unsupported-country).
+If you pass a country that is not supported by the current SDK in the token when making a payment, you will receive an error message.
+Refer to the [example](./examples/unsupported-country).
