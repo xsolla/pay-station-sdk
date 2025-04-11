@@ -1177,5 +1177,8 @@ How can I get the value of the available locale?
 
 ### Unsupported countries for payment
 
-If you pass a country that is not supported by the current SDK in the token when making a payment, you will receive an error message.
+If you select a country that is not supported by the current SDK when making a payment, you will receive an error message. It can occur in the following cases:
+* You passed an unsupported country in the token.
+* Token configuration allowed you to choose an unsupported country directly in the payment UI.
+
 Refer to the [example](./examples/unsupported-country).
