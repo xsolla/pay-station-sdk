@@ -27,6 +27,7 @@ const mockSavedMethod: SavedMethod = {
   },
   dateLastCharge: 1743576779,
   iconName: 'mastercard.svg',
+  userEmail: 'amazing@user.com',
   isBabkaPay: false,
 };
 
