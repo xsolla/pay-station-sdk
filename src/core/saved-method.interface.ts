@@ -21,5 +21,6 @@ export interface SavedMethod {
   };
   dateLastCharge: number;
   iconName: string | null;
+  userEmail: string | null;
   partner?: string | null;
 }

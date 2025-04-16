@@ -44,6 +44,7 @@ const mockSavedMethod: SavedMethod = {
   psName: 'Mastercard',
   isSelected: true,
   iconName: 'mastercard.svg',
+  userEmail: 'amazing@user.com',
 };
 
 describe('SavedMethodsComponent', () => {
