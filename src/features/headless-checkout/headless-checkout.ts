@@ -198,6 +198,9 @@ export class HeadlessCheckout {
     );
   }
 
+  /**
+   * Destroys current instance and creates a new one.
+   */
   public destroy(): void {
     this.destroyCoreIframe();
     this.errorsSubscription?.();
@@ -333,7 +336,7 @@ export class HeadlessCheckout {
   }
 
   /**
-   * Returns user’s saved methods.
+   * Returns user's saved methods.
    */
   public async getSavedMethods(): Promise<SavedMethod[]> {
     const msg: Message = {
@@ -347,7 +350,7 @@ export class HeadlessCheckout {
   }
 
   /**
-   * Returns a user’s balance.
+   * Returns a user's balance.
    */
   public async getUserBalance(): Promise<UserBalance> {
     const msg: Message = {
