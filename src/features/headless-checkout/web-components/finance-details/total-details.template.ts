@@ -19,7 +19,7 @@ function translateTotalDetails(
     return {
       ...item,
       title: i18next.t(translationMap.get(item.key)!, {
-        percent: finance?.vat?.percent,
+        percent: item.percents ?? finance.vat?.percent,
       }),
     } as CartLine;
   });
