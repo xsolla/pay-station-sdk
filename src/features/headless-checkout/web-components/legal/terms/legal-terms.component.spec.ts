@@ -42,6 +42,7 @@ describe('LegalTermsComponent', () => {
 
     postMessagesClient = {
       send: noopStub,
+      listen: noopStub,
     } as unknown as PostMessagesClient;
 
     windowService = window;
@@ -106,7 +107,7 @@ describe('LegalTermsComponent', () => {
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
       true,
     );
-    const spy = spyOn(windowService, 'addEventListener');
+    const spy = spyOn(postMessagesClient, 'listen');
     createComponent();
     await tick();
     expect(spy).toHaveBeenCalled();
