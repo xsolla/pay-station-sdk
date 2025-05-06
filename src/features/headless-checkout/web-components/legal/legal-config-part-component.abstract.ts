@@ -20,7 +20,17 @@ export abstract class LegalConfigPartComponentAbstract extends LegalPartComponen
       this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
       return;
     }
-    void this.getLegalComponentConfig().then(this.configLoadedHandler);
+    this.postMessagesClient.listen(
+      EventName.getLegalComponentConfig,
+      getLegalComponentConfigHandler,
+      (config) => {
+        if (config) {
+          this.configLoadedHandler(config);
+        }
+      },
+    );
+
+    void this.getLegalComponentConfig();
   }
 
   protected readonly configLoadedHandler = (
