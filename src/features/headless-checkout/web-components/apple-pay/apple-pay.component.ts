@@ -24,6 +24,7 @@ import './apple-pay.component.scss';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
+  private readonly applePayWindowName = 'HeadlessCheckout_PayStation_ApplePay';
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly postMessagesClient: PostMessagesClient;
   private readonly formSpy: FormSpy;
@@ -160,7 +161,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
   private openRedirectPage(redirectUrl: string): void {
     this.setupWaitingPayment(true);
-    this.applePayWindow = this.window.open(redirectUrl);
+    this.applePayWindow = this.window.open(redirectUrl, this.applePayWindowName);
     this.listenApplePayWindowCloseEvent();
     this.window.addEventListener('message', this.handleApplePayWindowMessages);
   }
@@ -172,7 +173,8 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
     this.listenApplePayWindowCloseTimeout = setTimeout(() => {
       if (this.applePayWindow?.closed) {
-        this.destroyApplePayWindow();
+        this.destroyApplePayWindow(true);
+        this.dispatchEvent(new CustomEvent(EventName.applePayWindowClosed));
       } else {
         this.listenApplePayWindowCloseEvent();
       }
