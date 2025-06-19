@@ -32,6 +32,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
   private readonly listenApplePayWindowCloseDelay = 100;
   private applePayWindow?: Window | null;
   private listenApplePayWindowCloseTimeout?: ReturnType<typeof setTimeout>;
+  private readonly subscriptions: Array<() => void> = [];
 
   public constructor() {
     super();
@@ -40,34 +41,40 @@ export class ApplePayComponent extends SecureComponentAbstract {
     this.formSpy = container.resolve(FormSpy);
     this.window = container.resolve(Window);
 
-    this.headlessCheckout.events.onCoreEvent(
-      EventName.applePayError,
-      applePayErrorHandler,
-      (res) => {
-        if (res?.error) {
-          this.drawError(res.error);
-        }
-      },
+    this.subscriptions.push(
+        this.headlessCheckout.events.onCoreEvent(
+            EventName.applePayError,
+            applePayErrorHandler,
+            (res) => {
+              if (res?.error) {
+                this.drawError(res.error);
+              }
+            },
+        )
     );
 
-    this.headlessCheckout.events.onCoreEvent(
-      EventName.openApplePayPage,
-      openApplePayPageHandler,
-      (res) => {
-        if (res?.redirectUrl) {
-          this.openRedirectPage(res.redirectUrl);
-        }
-      },
+    this.subscriptions.push(
+        this.headlessCheckout.events.onCoreEvent(
+            EventName.openApplePayPage,
+            openApplePayPageHandler,
+            (res) => {
+              if (res?.redirectUrl) {
+                this.openRedirectPage(res.redirectUrl);
+              }
+            },
+        )
     );
 
-    this.headlessCheckout.events.onCoreEvent(
-      EventName.finishLoadComponent,
-      finishLoadComponentHandler,
-      (res) => {
-        if (res?.fieldName && res?.fieldName === this.componentName) {
-          this.finishLoadingComponentHandler(this.componentName);
-        }
-      },
+    this.subscriptions.push(
+        this.headlessCheckout.events.onCoreEvent(
+            EventName.finishLoadComponent,
+            finishLoadComponentHandler,
+            (res) => {
+              if (res?.fieldName && res?.fieldName === this.componentName) {
+                this.finishLoadingComponentHandler(this.componentName);
+              }
+            },
+        )
     );
   }
 
@@ -80,6 +87,10 @@ export class ApplePayComponent extends SecureComponentAbstract {
     }
 
     this.render();
+  }
+
+  protected disconnectedCallback(): void {
+    this.subscriptions.forEach(unsubscribe => unsubscribe());
   }
 
   protected getHtml(): string {
