@@ -31,7 +31,7 @@ describe('ApplePayComponent', () => {
         onFieldsStatusChange: noopStub,
       },
       events: {
-        onCoreEvent: noopStub,
+        onCoreEvent: () => noopStub,
       },
     } as unknown as HeadlessCheckout;
 
@@ -91,7 +91,7 @@ describe('ApplePayComponent', () => {
           done();
         }
       });
-      return noopStub;
+      return () => {};
     });
 
     element = createComponent();
