@@ -24,6 +24,7 @@ import './apple-pay.component.scss';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
+  private readonly applePayWindowName = 'HeadlessCheckout_PayStation_ApplePay';
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly postMessagesClient: PostMessagesClient;
   private readonly formSpy: FormSpy;
@@ -31,6 +32,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
   private readonly listenApplePayWindowCloseDelay = 100;
   private applePayWindow?: Window | null;
   private listenApplePayWindowCloseTimeout?: ReturnType<typeof setTimeout>;
+  private readonly subscriptions: Array<() => void> = [];
 
   public constructor() {
     super();
@@ -39,34 +41,40 @@ export class ApplePayComponent extends SecureComponentAbstract {
     this.formSpy = container.resolve(FormSpy);
     this.window = container.resolve(Window);
 
-    this.headlessCheckout.events.onCoreEvent(
-      EventName.applePayError,
-      applePayErrorHandler,
-      (res) => {
-        if (res?.error) {
-          this.drawError(res.error);
-        }
-      },
+    this.subscriptions.push(
+        this.headlessCheckout.events.onCoreEvent(
+            EventName.applePayError,
+            applePayErrorHandler,
+            (res) => {
+              if (res?.error) {
+                this.drawError(res.error);
+              }
+            },
+        )
     );
 
-    this.headlessCheckout.events.onCoreEvent(
-      EventName.openApplePayPage,
-      openApplePayPageHandler,
-      (res) => {
-        if (res?.redirectUrl) {
-          this.openRedirectPage(res.redirectUrl);
-        }
-      },
+    this.subscriptions.push(
+        this.headlessCheckout.events.onCoreEvent(
+            EventName.openApplePayPage,
+            openApplePayPageHandler,
+            (res) => {
+              if (res?.redirectUrl) {
+                this.openRedirectPage(res.redirectUrl);
+              }
+            },
+        )
     );
 
-    this.headlessCheckout.events.onCoreEvent(
-      EventName.finishLoadComponent,
-      finishLoadComponentHandler,
-      (res) => {
-        if (res?.fieldName && res?.fieldName === this.componentName) {
-          this.finishLoadingComponentHandler(this.componentName);
-        }
-      },
+    this.subscriptions.push(
+        this.headlessCheckout.events.onCoreEvent(
+            EventName.finishLoadComponent,
+            finishLoadComponentHandler,
+            (res) => {
+              if (res?.fieldName && res?.fieldName === this.componentName) {
+                this.finishLoadingComponentHandler(this.componentName);
+              }
+            },
+        )
     );
   }
 
@@ -79,6 +87,10 @@ export class ApplePayComponent extends SecureComponentAbstract {
     }
 
     this.render();
+  }
+
+  protected disconnectedCallback(): void {
+    this.subscriptions.forEach(unsubscribe => unsubscribe());
   }
 
   protected getHtml(): string {
@@ -160,7 +172,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
   private openRedirectPage(redirectUrl: string): void {
     this.setupWaitingPayment(true);
-    this.applePayWindow = this.window.open(redirectUrl);
+    this.applePayWindow = this.window.open(redirectUrl, this.applePayWindowName);
     this.listenApplePayWindowCloseEvent();
     this.window.addEventListener('message', this.handleApplePayWindowMessages);
   }
@@ -172,7 +184,8 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
     this.listenApplePayWindowCloseTimeout = setTimeout(() => {
       if (this.applePayWindow?.closed) {
-        this.destroyApplePayWindow();
+        this.destroyApplePayWindow(true);
+        this.dispatchEvent(new CustomEvent(EventName.applePayWindowClosed));
       } else {
         this.listenApplePayWindowCloseEvent();
       }

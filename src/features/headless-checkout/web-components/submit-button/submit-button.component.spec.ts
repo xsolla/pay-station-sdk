@@ -44,7 +44,7 @@ describe('SubmitButtonComponent', () => {
         return null;
       },
       events: {
-        onCoreEvent: noopStub,
+        onCoreEvent: () => noopStub,
       },
     } as unknown as HeadlessCheckout;
 

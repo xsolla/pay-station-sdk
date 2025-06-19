@@ -135,12 +135,21 @@ NOTE: In this example, we use a local build just for convenience purposes.
         }
       }
 
+      function listenNewWindowStatus() {
+        const applePayButton = document.querySelector('psdk-apple-pay');
+
+        applePayButton.addEventListener('message', 'applePayWindowClosed', () => {
+          console.log('Apple pay: window closed');
+        })
+      }
+
       async function main() {
         await initPayStationSdk();
         handleNextActions();
         addPaymentFormElement();
         await initPaymentForm(applePayId);
         addSubmitButtonElement();
+        listenNewWindowStatus();
       }
 
       main();
