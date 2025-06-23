@@ -6,4 +6,6 @@ export interface InitialOptions {
   sandbox?: boolean;
   theme?: Themes;
   language?: Lang;
+  topLevelDomain?: string;
+  isApplePayInstantFlowEnabled?: boolean;
 }
