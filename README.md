@@ -929,20 +929,20 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-  - The financial details component are updated with transaction details once the payment is completed.
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the Credit Card payment method ID and return URL (necessary for 3-D Secure transactions).
-  - The return URL redirects the user once payment is completed on the 3-D Secure’s side.
-  - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
+   - The return URL redirects the user once payment is completed on the 3-D Secure’s side.
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-  - The Next action with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. A partner must remove previously added fields and render new fields for this step.
-  - The Next action with the `redirect` type means the form is redirected to complete payment according to the **3DS 1.0** secure procedure. The correct return URL must be provided to return from the 3-D Secure verification flow when it is completed.
-  - The Next action with the `3DS` type means the user card must be checked according to the **3DS 2.0** procedure. The partner is responsible for opening a 3-D Secure window.
+   - The Next action with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. A partner must remove previously added fields and render new fields for this step.
+   - **3DS 1.0 (a deprecated method of payment authorization)**: The Next action with the `redirect` type means the form is redirected to complete payment according to the **3DS 1.0** secure procedure.
+   - **3DS 2.0**: The Next action with the `3DS` type means the user’s card must be verified according to the **3DS 2.0** procedure. This procedure may be required in either challenge or frictionless mode. The necessity of initiating a challenge flow is determined by the issuing bank based on a set of parameters. If a new page needs to be opened, the `3DS` event is accompanied with the data object. Partner’s app should pass this data to the `ThreeDs` component as `data-challenge` attribute, [see example](./examples/credit-card). It creates a new browser tab where the user can authorize the payment.
 1. Add the form fields component to the HTML markup.
-  - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
-  - Use fields with the `isMandatory` flag to get required fields only.
-  - Use the `<psdk-text>` component to render form fields if required. For a field named `card_number` you must use the `<psdk-card-number>` component.
+   - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
+   - Use fields with the `isMandatory` flag to get required fields only.
+   - Use the `<psdk-text>` component to render form fields if required. For a field named `card_number` you must use the `<psdk-card-number>` component.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
 1. Create a `return` page.
