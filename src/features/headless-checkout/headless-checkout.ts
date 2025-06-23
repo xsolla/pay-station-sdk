@@ -161,6 +161,8 @@ export class HeadlessCheckout {
   private isWebView?: boolean;
   private isSandbox?: boolean;
   private theme?: string;
+  private topLevelDomain?: string;
+  private isApplePayInstantFlowEnabled = false;
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
@@ -180,6 +182,9 @@ export class HeadlessCheckout {
     this.isWebView = environment.isWebview;
     this.isSandbox = environment.sandbox;
     this.theme = environment.theme;
+    this.topLevelDomain = environment.topLevelDomain;
+    this.isApplePayInstantFlowEnabled =
+      !!environment.isApplePayInstantFlowEnabled;
 
     await this.localizeService.initDictionaries(environment.language);
 
@@ -222,6 +227,8 @@ export class HeadlessCheckout {
           token,
           isWebView: this.isWebView,
           sandbox: this.isSandbox,
+          topLevelDomain: this.topLevelDomain,
+          isApplePayInstantFlowEnabled: this.isApplePayInstantFlowEnabled,
         },
       },
     };
