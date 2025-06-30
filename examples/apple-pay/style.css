@@ -19,3 +19,78 @@
 .error a:visited {
   color: var(--psdk-alert-color);
 }
+
+/* *** *** COMMON: START *** *** */
+
+.application {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+}
+
+.columns-wrapper {
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.left-col,
+.right-col {
+  width: 50%;
+}
+
+/* *** *** COMMON: END *** *** */
+
+/* *** *** FINANCE DETAILS: START *** *** */
+
+psdk-finance-details,
+psdk-total {
+  display: block;
+  background: #f5f5f5;
+  margin-right: 10px;
+  padding: 10px;
+}
+
+.subtotal-row,
+.total-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+/* *** *** FINANCE DETAILS: END *** *** */
+
+/* *** *** STATUS: START *** *** */
+psdk-status {
+  display: flex;
+}
+
+psdk-status .image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+psdk-status .title-text {
+  text-align: center;
+}
+
+/* *** *** STATUS: END *** *** */
+
+/* *** *** FOOTER LINKS: START *** *** */
+.company {
+  padding-top: 5px;
+  display: flex;
+}
+
+.company .logo {
+  margin-right: 3px;
+}
+
+.legal-links {
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* *** *** FOOTER LINKS: END *** *** */
