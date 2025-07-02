@@ -19,11 +19,33 @@ NOTE: In this example, we use a local build just for convenience purposes.
   </head>
 
   <body>
-    <h1>Apple pay</h1>
-    <div class="errors-container"></div>
-    <div class="content"></div>
-    <div class="submit-button-container"></div>
-    <psdk-legal></psdk-legal>
+    <div class="application">
+      <h1>Apple pay</h1>
+      <div class="columns-wrapper">
+        <div class="left-col">
+          <!--
+            Add the financial details component to show purchase details.
+          -->
+          <psdk-finance-details></psdk-finance-details>
+          <psdk-total></psdk-total>
+        </div>
+
+        <div class="right-col">
+          <div id="errors-container"></div>
+          <!--
+            FormContainer HTML-node to implement the form with all the controls.
+          -->
+          <div id="form-container"></div>
+          <div id="submit-button-container"></div>
+          <!--
+            StatusContainer HTML-node to implement the StatusComponent component with payment information.
+          -->
+          <div id="status-container"></div>
+        </div>
+      </div>
+
+      <psdk-legal></psdk-legal>
+    </div>
 
     <!-- Initialization script -->
     <script>
@@ -46,9 +68,9 @@ NOTE: In this example, we use a local build just for convenience purposes.
        * To begin initialization, obtain a reference to the headlessCheckout object.
        */
       const { headlessCheckout } = PayStationSdk;
-      const contentElement = document.querySelector('.content');
+      const contentElement = document.querySelector('#form-container');
       const submitButtonContainerElement = document.querySelector(
-        '.submit-button-container',
+        '#submit-button-container',
       );
       const applePayId = 3175;
 
@@ -63,6 +85,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
           isWebView: false,
           sandbox: false,
           theme: 'default',
+          isApplePayInstantFlowEnabled: false,
         });
 
         /**
@@ -126,7 +149,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
         const errors = action.data.errors ?? [];
         const formError = errors[0]?.message ?? null;
 
-        const errorsContainer = document.querySelector('.errors-container');
+        const errorsContainer = document.querySelector('#errors-container');
         const formErrorElement = document.createElement('div');
         formErrorElement.innerHTML = formError;
         formErrorElement.classList.add('error');
@@ -138,9 +161,13 @@ NOTE: In this example, we use a local build just for convenience purposes.
       function listenNewWindowStatus() {
         const applePayButton = document.querySelector('psdk-apple-pay');
 
-        applePayButton.addEventListener('message', 'applePayWindowClosed', () => {
-          console.log('Apple pay: window closed');
-        })
+        applePayButton.addEventListener(
+          'message',
+          'applePayWindowClosed',
+          () => {
+            console.log('Apple pay: window closed');
+          },
+        );
       }
 
       async function main() {
