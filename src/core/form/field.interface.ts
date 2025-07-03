@@ -9,7 +9,6 @@ export interface Field {
   options?: unknown[];
   isMandatory: XpsBoolean;
   isReadonly?: XpsBoolean;
-  isVisible: XpsBoolean;
   tooltip?: string;
   regex?: string;
   validation_error_msg?: string;
