@@ -14,7 +14,6 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly headlessCheckoutSpy: HeadlessCheckoutSpy;
   private paymentMethods?: PaymentMethod[];
-  private visibleMethods?: PaymentMethod[];
   private filteredMethods?: PaymentMethod[];
 
   private get listRef(): HTMLElement {
@@ -94,10 +93,6 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
 
     this.paymentMethods = paymentMethods.slice(skipPaymentMethodsCount);
 
-    this.visibleMethods = this.paymentMethods.filter(
-      (method) => method.isVisible,
-    );
-
     this.filteredMethods = this.paymentMethods.slice();
 
     super.render();
@@ -157,7 +152,7 @@ export class PaymentMethodsComponent extends WebComponentAbstract {
         (event) => {
           const searchValue = (event.target as HTMLInputElement).value;
           this.filteredMethods = filterPaymentMethods(
-            this.visibleMethods,
+            this.paymentMethods,
             searchValue,
           );
           this.updateMethodsView();
