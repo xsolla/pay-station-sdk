@@ -1,11 +1,11 @@
-import { SecureComponentAbstract } from '../../../../core/web-components/secure-component/secure-component.abstract';
-import { EventName } from '../../../../core/event-name.enum';
-import { container } from 'tsyringe';
-import { HeadlessCheckout } from '../../headless-checkout';
-import { applePayErrorHandler } from '../../post-messages-handlers/apple-pay/apple-pay-error.handler';
-import { getApplePayComponentTemplate } from './apple-pay.template';
-import { errorsHtmlWrapperClassName } from './errors-html-wrapper-classname.const';
-import { applePayErrors } from './apple-pay.errors.const';
+import {SecureComponentAbstract} from '../../../../core/web-components/secure-component/secure-component.abstract';
+import {EventName} from '../../../../core/event-name.enum';
+import {container} from 'tsyringe';
+import {HeadlessCheckout} from '../../headless-checkout';
+import {applePayErrorHandler} from '../../post-messages-handlers/apple-pay/apple-pay-error.handler';
+import {getApplePayComponentTemplate} from './apple-pay.template';
+import {errorsHtmlWrapperClassName} from './errors-html-wrapper-classname.const';
+import {applePayErrors} from './apple-pay.errors.const';
 import i18next from 'i18next';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
@@ -21,6 +21,8 @@ import { waitingProcessingClassname } from './waiting-processing-classname.const
 import { applePayButtonClassName } from './apple-pay-button-classname.const';
 import { actionsToStopWaiting } from './actions-to-stop-waiting.set';
 import './apple-pay.component.scss';
+import {applePayQrClosedHandler} from '../../post-messages-handlers/apple-pay/apple-pay-qr-closed.handler';
+import {applePayQrOpenedHandler} from '../../post-messages-handlers/apple-pay/apple-pay-qr-opened.handler';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
@@ -76,6 +78,26 @@ export class ApplePayComponent extends SecureComponentAbstract {
             },
         )
     );
+
+      this.subscriptions.push(
+          this.headlessCheckout.events.onCoreEvent(
+              EventName.applePayQrClosed,
+              applePayQrClosedHandler,
+              () => {
+                  this.removeStylesForQrCode();
+              },
+          )
+      );
+
+      this.subscriptions.push(
+          this.headlessCheckout.events.onCoreEvent(
+              EventName.applePayQrOpened,
+              applePayQrOpenedHandler,
+              () => {
+                  this.addStylesForQrCode();
+              },
+          )
+      );
   }
 
   protected connectedCallback(): void {
@@ -99,7 +121,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
   }
 
   protected getSecureHtml(): string {
-    return `<iframe src='${headlessCheckoutAppUrl}/secure-components/${this
+    return `<iframe id="apple-pay-iframe" src='${headlessCheckoutAppUrl}/secure-components/${this
       .componentName!}' allow='payment'></iframe>`;
   }
 
@@ -249,4 +271,20 @@ export class ApplePayComponent extends SecureComponentAbstract {
       });
     }) as Promise<NextAction>;
   }
+
+    private addStylesForQrCode(): void {
+        const iframe = this.querySelector('#apple-pay-iframe');
+
+        (iframe as HTMLElement).style.position = 'absolute';
+        (iframe as HTMLElement).style.top = '0';
+        (iframe as HTMLElement).style.left = '0';
+    }
+
+    private removeStylesForQrCode(): void {
+        const iframe = this.querySelector('#apple-pay-iframe');
+
+        (iframe as HTMLElement).style.removeProperty('position');
+        (iframe as HTMLElement).style.removeProperty('top');
+        (iframe as HTMLElement).style.removeProperty('left');
+    }
 }

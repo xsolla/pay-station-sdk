@@ -39,4 +39,6 @@ export const enum EventName {
   sendCashPaymentButtonStatus = 'sendCashPaymentButtonStatus',
   sendCashPaymentDataStatus = 'sendCashPaymentDataStatus',
   applePayWindowClosed = 'applePayWindowClosed',
+  applePayQrOpened = 'applePayQrOpened',
+  applePayQrClosed = 'applePayQrClosed',
 }
