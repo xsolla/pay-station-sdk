@@ -1006,6 +1006,37 @@ Integration flow:
 
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 
+To configure one-click payment via Apple Pay:
+
+1. Create a request to enable this option. To do so:
+  a. Open your Publisher Account and go to the [Support Hub](https://publisher.xsolla.com/0/support-hub) section.
+  b. Click **Submit request**.
+  c. In the window that opens, fill in the fields:
+    - **Summary**. For example, _Apple Pay one-click payment setup_.
+    - **Description**. Specify the domain used for opening the payment UI, e.g., `amazing.store.com`.
+    - **Project ID**. Select a project ID from the drop-down list. If you want to configure the one-click payment option for multiple projects, specify their IDs in the Description field.
+    d. Click **Send**.
+2. Wait for your domain association file. This step is performed by Xsolla:
+  - Xsolla registers your domain with Apple.
+  - Xsolla receives the domain association file from Apple.
+  - Xsolla emails you the domain association file and provides instructions on where to upload it.
+3. Update the SDK initialization script as shown below:
+
+```typescript
+const config: InitialOptions = {
+  isWebview: false,
+  theme: 'default',
+  language: parameters.language,
+  topLevelDomain: 'amazing.store.com',
+  isApplePayInstantFlowEnabled: true
+};
+
+await initHeadlessCheckoutLib(config);
+```
+
+4. Reply to Xsolla email and confirm that you have uploaded the domain association file to the specified location and updated the SDK initialization script.
+5. Wait for confirmation from Xsolla that one-click payment has been successfully enabled in your project.
+
 ## SDK payment methods integration guide (Barzahlen, Naver, Venmo, etc.)
 
 > A working example can be found [here](./examples/sdk-payment-methods).
