@@ -69,6 +69,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
        */
       const { headlessCheckout } = PayStationSdk;
       const contentElement = document.querySelector('#form-container');
+      const statusElement = document.querySelector('#status-container');
       const submitButtonContainerElement = document.querySelector(
         '#submit-button-container',
       );
@@ -98,6 +99,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
 
       function clearPaymentForm() {
         contentElement.innerHTML = '';
+        submitButtonContainerElement.innerHTML = '';
       }
 
       function addSubmitButtonElement() {
@@ -141,8 +143,8 @@ NOTE: In this example, we use a local build just for convenience purposes.
 
       function checkStatusAction() {
         clearPaymentForm();
-        const statusElement = new PayStationSdk.StatusComponent();
-        contentElement.appendChild(statusElement);
+        const statusComponent = new PayStationSdk.StatusComponent();
+        statusElement.appendChild(statusComponent);
       }
 
       function showErrorsAction(action) {
