@@ -18,8 +18,7 @@ import { applePayButtonClassName } from './apple-pay-button-classname.const';
 import './apple-pay.component.scss';
 import { applePayQrClosedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-qr-closed.handler';
 import { applePayQrOpenedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-qr-opened.handler';
-import { Message } from '../../../../core/message.interface';
-import { ApplePayCommands } from './apple-pay-commands.enum';
+import { closeExternalWindowHandler } from '../../post-messages-handlers/close-external-window.handler';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
@@ -28,9 +27,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
   private readonly postMessagesClient: PostMessagesClient;
   private readonly formSpy: FormSpy;
   private readonly window: Window;
-  private readonly listenApplePayWindowCloseDelay = 100;
   private applePayWindow?: Window | null;
-  private listenApplePayWindowCloseTimeout?: ReturnType<typeof setTimeout>;
   private readonly subscriptions: Array<() => void> = [];
 
   public constructor() {
@@ -92,6 +89,16 @@ export class ApplePayComponent extends SecureComponentAbstract {
         applePayQrOpenedHandler,
         () => {
           this.addStylesForQrCode();
+        },
+      ),
+    );
+
+    this.subscriptions.push(
+      this.headlessCheckout.events.onCoreEvent(
+        EventName.closeExternalWindow,
+        closeExternalWindowHandler,
+        () => {
+          this.destroyApplePayWindow();
         },
       ),
     );
@@ -195,54 +202,15 @@ export class ApplePayComponent extends SecureComponentAbstract {
       redirectUrl,
       this.applePayWindowName,
     );
-    this.listenApplePayWindowCloseEvent();
-    this.window.addEventListener('message', this.handleApplePayWindowMessages);
   }
-
-  private listenApplePayWindowCloseEvent(): void {
-    if (!this.applePayWindow) {
-      return;
-    }
-
-    this.listenApplePayWindowCloseTimeout = setTimeout(() => {
-      if (this.applePayWindow?.closed) {
-        this.destroyApplePayWindow(true);
-        this.dispatchEvent(new CustomEvent(EventName.applePayWindowClosed));
-      } else {
-        this.listenApplePayWindowCloseEvent();
-      }
-    }, this.listenApplePayWindowCloseDelay);
-  }
-
-  private readonly handleApplePayWindowMessages = (
-    event: MessageEvent,
-  ): void => {
-    const message = JSON.parse(event.data) as {
-      command: string;
-      data: Message['data'];
-    };
-    if (message.command === ApplePayCommands.applePayReturn) {
-      this.destroyApplePayWindow();
-      return;
-    }
-    if (message.command === ApplePayCommands.applePaySendToken) {
-      this.destroyApplePayWindow();
-      return;
-    }
-  };
 
   private destroyApplePayWindow(stopLoading?: boolean): void {
+    this.dispatchEvent(new CustomEvent(EventName.applePayWindowClosed));
+
     this.window.focus();
     if (this.applePayWindow && !this.applePayWindow.closed) {
       this.applePayWindow.close();
     }
-    if (this.listenApplePayWindowCloseTimeout) {
-      clearTimeout(this.listenApplePayWindowCloseTimeout);
-    }
-    this.window.removeEventListener(
-      'message',
-      this.handleApplePayWindowMessages,
-    );
 
     if (stopLoading) {
       this.setupWaitingPayment(false);
