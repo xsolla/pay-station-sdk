@@ -12,7 +12,7 @@ function buildPaymentFlow() {
    * To learn more about creating tokens,
    * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
-  const accessToken = '';
+  const accessToken = 'xoueBdKJ6PmsvdmnoFIst8N3ymrh5qta_lc_en_bg_222D44_tb_00A700';
 
   if (!accessToken) {
     alert('No token provided. Please, check the documentation');
@@ -163,7 +163,7 @@ function buildPaymentFlow() {
      */
     await headlessCheckout.init({
       isWebView: false,
-      sandbox: false,
+      sandbox: true,
     });
 
     /**
@@ -189,7 +189,7 @@ function buildPaymentFlow() {
 
     /**
      * Initialize payment.
-     * `returnUrl` is opened after the payment is completed on 3-D Secure’s side.
+     * `returnUrl` is opened after the payment is completed on 3-D Secure's side.
      */
     const form = await headlessCheckout.form.init({
       paymentMethodId: creditCardMethodId,
@@ -252,6 +252,21 @@ function buildPaymentFlow() {
     renderFields(form.fields, formElement);
 
     renderSubmitButton(formElement);
+
+    /**
+     * Listen for the custom 'cardBinCountryChanged' event from the <psdk-card-number> component.
+     * If the detected card BIN country is India (IN), the <psdk-checkbox name="allowSubscription"> will be hidden.
+     * If the country is not India, the checkbox will be shown again.
+     */
+    const cardNumberComponent = document.querySelector('psdk-card-number');
+    if (cardNumberComponent) {
+        cardNumberComponent.addEventListener('cardBinCountryChanged', function (event) {
+            const country = event.detail && event.detail.cardBinCountry;
+            const checkbox = document.querySelector('psdk-checkbox[name="allowSubscription"]');
+            if (!checkbox) return;
+            checkbox.style.display = country === 'IN' ? 'none' : '';
+        });
+    }
   }
 
   // Initialize SDK.
