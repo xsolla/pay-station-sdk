@@ -12,7 +12,7 @@ function buildPaymentFlow() {
    * To learn more about creating tokens,
    * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
-  const accessToken = 'xoueBdKJ6PmsvdmnoFIst8N3ymrh5qta_lc_en_bg_222D44_tb_00A700';
+  const accessToken = '';
 
   if (!accessToken) {
     alert('No token provided. Please, check the documentation');
@@ -163,7 +163,7 @@ function buildPaymentFlow() {
      */
     await headlessCheckout.init({
       isWebView: false,
-      sandbox: true,
+      sandbox: false,
     });
 
     /**
