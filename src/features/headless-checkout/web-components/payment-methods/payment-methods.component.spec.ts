@@ -16,22 +16,37 @@ function createComponent(): void {
   (document.getElementById('container')! as HTMLElement).appendChild(element);
 }
 
-const mockVisiblePaymentMethod = {
+const mockPaymentMethod1 = {
   id: 1,
+  rank: 1,
   name: '1',
-  isVisible: true,
+  aliases: '',
+  categories: [],
+  recommended: false,
+  enabledSaveAccount: null,
+  iconName: null,
 } as PaymentMethod;
 
 const mockQiwiPaymentMethod = {
   id: 16,
+  rank: 2,
   name: 'qiwi',
-  isVisible: true,
+  aliases: '',
+  categories: [],
+  recommended: false,
+  enabledSaveAccount: null,
+  iconName: null,
 } as PaymentMethod;
 
-const mockNotVisiblePaymentMethod = {
-  id: 1,
-  name: '1',
-  isVisible: false,
+const mockPaymentMethod2 = {
+  id: 2,
+  rank: 3,
+  name: '2',
+  aliases: '',
+  categories: [],
+  recommended: false,
+  enabledSaveAccount: null,
+  iconName: null,
 } as PaymentMethod;
 
 describe('PaymentMethodsComponent', () => {
@@ -134,23 +149,9 @@ describe('PaymentMethodsComponent', () => {
     expect(spy).toHaveBeenCalledTimes(2);
   });
 
-  it('Should draw 2 payment methods', async () => {
+  it('Should draw multiple payment methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod, mockVisiblePaymentMethod]),
-    );
-    spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true,
-    );
-    createComponent();
-
-    // Для того, чтобы успели отрисоваться методы
-    await Promise.resolve();
-    expect(document.querySelectorAll('.payment-method')?.length).toBe(2);
-  });
-
-  it('Should draw 2 payment methods', async () => {
-    spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockNotVisiblePaymentMethod, mockVisiblePaymentMethod]),
+      Promise.resolve([mockPaymentMethod1, mockPaymentMethod2]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
       true,
@@ -161,12 +162,22 @@ describe('PaymentMethodsComponent', () => {
     expect(document.querySelectorAll('.payment-method')?.length).toBe(2);
   });
 
-  it('Should draw no payment methods', async () => {
+  it('Should draw different payment methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([
-        mockNotVisiblePaymentMethod,
-        mockNotVisiblePaymentMethod,
-      ]),
+      Promise.resolve([mockPaymentMethod1, mockQiwiPaymentMethod]),
+    );
+    spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
+      true,
+    );
+    createComponent();
+
+    await Promise.resolve();
+    expect(document.querySelectorAll('.payment-method')?.length).toBe(2);
+  });
+
+  it('Should draw all payment methods from response', async () => {
+    spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
+      Promise.resolve([mockPaymentMethod1, mockPaymentMethod2]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
       true,
@@ -179,7 +190,7 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should dispatch custom event', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod]),
+      Promise.resolve([mockPaymentMethod1]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
       true,
@@ -191,7 +202,7 @@ describe('PaymentMethodsComponent', () => {
       .querySelector(WebComponentTagName.PaymentMethodsComponent)!
       .addEventListener(PaymentMethodsEvents.selectionChange, (event) => {
         expect((event as CustomEvent).detail).toEqual({
-          paymentMethodId: String(mockVisiblePaymentMethod.id),
+          paymentMethodId: String(mockPaymentMethod1.id),
         });
       });
 
@@ -200,7 +211,7 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should search methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod, mockQiwiPaymentMethod]),
+      Promise.resolve([mockPaymentMethod1, mockQiwiPaymentMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
       true,
@@ -218,7 +229,7 @@ describe('PaymentMethodsComponent', () => {
 
   it('Should draw no methods', async () => {
     spyOn(headlessCheckout, 'getRegularMethods').and.returnValue(
-      Promise.resolve([mockVisiblePaymentMethod, mockQiwiPaymentMethod]),
+      Promise.resolve([mockPaymentMethod1, mockQiwiPaymentMethod]),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
       true,

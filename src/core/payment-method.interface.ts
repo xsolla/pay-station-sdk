@@ -4,7 +4,6 @@ export interface PaymentMethod {
   name: string;
   aliases: string;
   categories: number[];
-  isVisible: boolean;
   recommended: boolean;
   enabledSaveAccount: null | unknown[];
   iconName: string | null;
