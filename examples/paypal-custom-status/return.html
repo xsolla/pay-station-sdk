@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Return page</title>
+    <!--
+    Link the SDK bundle.
+    NOTE: In this example, we use a local build just for convenience purposes.
+    -->
+    <script src="../../dist/main.js"></script>
+    <script src="../variables.js"></script>
+  </head>
+
+  <body>
+    <h1>PayPal custom status on return page</h1>
+
+    <!--
+  A node to render custom status component
+-->
+    <div id="custom-status-container"></div>
+
+    <!--
+  Add legal component to provide links to legal documents
+-->
+    <psdk-legal></psdk-legal>
+
+    <script>
+      if (typeof PayStationSdk === 'undefined') {
+        alert(payStationSdkUndefinedError);
+        throw new Error('PayStationSdk not found');
+      }
+      /**
+       * To learn more about creating tokens,
+       * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+       */
+      const accessToken = new URL(window.location.href).searchParams.get(
+        'token',
+      );
+
+      if (!accessToken) {
+        alert('No token provided. Please, check the documentation');
+        throw new Error('No token provided');
+      }
+
+      /**
+       * The SDK is available under the PayStationSdk namespace.
+       * To begin initialization, obtain a reference to the headlessCheckout object.
+       */
+      const { headlessCheckout } = PayStationSdk;
+
+      async function initPayStationSdk() {
+        /**
+         * Call the `init()` method with the provided environment object.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a WebView or not.
+         * You can set sandbox payment mode with `sandbox` parameter
+         * Please note that this command executes asynchronously.
+         */
+        await headlessCheckout.init({
+          isWebView: false,
+          sandbox: false,
+        });
+
+        /**
+         * After the Payments SDK has been initialized, the next step is setting the token.
+         * To learn more about creating tokens,
+         * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
+         */
+        await headlessCheckout.setToken(accessToken);
+
+        /*
+         * Create and render a Custom Status component using the current status data.
+         * You can either use the <psdk-status></psdk-status> component or create it dynamically via headlessCheckout.
+         * */
+        const customStatusContainer = document.querySelector(
+          '#custom-status-container',
+        );
+
+        const status = await headlessCheckout.getStatus();
+
+        console.log('status', status);
+
+        customStatusContainer.innerHTML = `
+          <div style="display: flex; border: 1px solid #c2c2c2; padding: 5px; margin: 5px;">
+            <b>Status message</b>: ${status.statusMessage} <br />
+          ${
+            !status.isCanceled
+              ? '<b>Invoice sent to email:</b> ${status.email} <br />'
+              : ''
+          }
+          </div>
+        `;
+      }
+
+      // Initialize sdk
+      initPayStationSdk();
+    </script>
+  </body>
+</html>
