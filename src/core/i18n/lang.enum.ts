@@ -19,4 +19,12 @@ export enum Lang {
   TR = 'tr',
   TW = 'tw',
   VI = 'vi',
+  PH = 'ph',
+  ID = 'id',
+  KM = 'km',
+  LO = 'lo',
+  MS = 'ms',
+  MY = 'my',
+  NE = 'ne',
+  NL = 'nl',
 }
