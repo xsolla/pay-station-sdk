@@ -6,14 +6,16 @@ import { LegacyLang } from './legacy-lang.enum';
 
 @singleton()
 export class LocalizeService {
+  private readonly legacyLocalesMap = new Map<Lang, LegacyLang>([
+    [Lang.CN, LegacyLang.ZH_HANS],
+    [Lang.TW, LegacyLang.ZH_HANT],
+    [Lang.PH, LegacyLang.FIL],
+  ]);
+
   public async initDictionaries(locale: Lang = Lang.EN): Promise<void> {
     // fallback for legacy locale
-    if (locale === Lang.CN) {
-      locale = LegacyLang.ZH_HANS as unknown as Lang;
-    }
-
-    if (locale === Lang.TW) {
-      locale = LegacyLang.ZH_HANT as unknown as Lang;
+    if (this.legacyLocalesMap.has(locale)) {
+      locale = this.legacyLocalesMap.get(locale) as unknown as Lang;
     }
 
     await i18next.init({
@@ -21,8 +23,7 @@ export class LocalizeService {
       fallbackLng: Lang.EN,
       supportedLngs: [
         ...Object.values(Lang),
-        LegacyLang.ZH_HANT,
-        LegacyLang.ZH_HANS,
+        ...this.legacyLocalesMap.values(),
       ],
       debug: false,
       resources: loadDictionaries(),
