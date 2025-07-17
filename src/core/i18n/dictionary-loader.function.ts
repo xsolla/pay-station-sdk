@@ -17,6 +17,14 @@ import ru from '../../translations/ru.json';
 import th from '../../translations/th.json';
 import tr from '../../translations/tr.json';
 import vi from '../../translations/vi.json';
+import id from '../../translations/id.json';
+import km from '../../translations/km.json';
+import lo from '../../translations/lo.json';
+import ms from '../../translations/ms.json';
+import my from '../../translations/my.json';
+import ne from '../../translations/ne.json';
+import nl from '../../translations/nl.json';
+import fil from '../../translations/fil.json';
 import zhHans from '../../translations/zh_HANS.json';
 import zhHant from '../../translations/zh_HANT.json';
 
@@ -40,6 +48,14 @@ export const loadDictionaries = (): Dictionary => {
     ...th,
     ...tr,
     ...vi,
+    ...id,
+    ...km,
+    ...lo,
+    ...ms,
+    ...my,
+    ...ne,
+    ...nl,
+    ...fil,
     ...zhHans,
     ...zhHant,
   };
