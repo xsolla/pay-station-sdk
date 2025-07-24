@@ -65,9 +65,9 @@
       "xsolla-number.send-panel.send": "Send",
       "xsolla-number.send-panel.print": "Print info",
       "xsolla-number.send-panel.email": "Email",
-      "xsolla-number.notification.success.email": "We sent payment instruction to your email. If you haven’t received them, try again",
-      "xsolla-number.notification.success.sms": "We sent your Xsolla number to your phone number. If you haven't received it, try again",
-      "xsolla-number.notification.failed": "Can’t send payment instructions. Try again later",
+      "xsolla-number.notification.success.email": "We sent payment instruction to your email. If you haven’t received them, try again.",
+      "xsolla-number.notification.success.sms": "We sent your Xsolla number to your phone number. If you haven't received it, try again.",
+      "xsolla-number.notification.failed": "Can’t send payment instructions. Try again later.",
       "cash-payment-instruction.description": "We've issued a bill for your purchase. Once you’ve paid, we'll email you the receipt.",
       "cash-payment-instruction.title": "Payment via {{paymentMethodName}}",
       "cash-payment-instruction.how-to": "How to pay"
