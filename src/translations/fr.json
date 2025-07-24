@@ -62,7 +62,7 @@
          "xsolla-number.instruction.paragraph-one" : "1. Allez dans un lieu de paiement {{paymentMethodName}}.",
          "xsolla-number.instruction.paragraph-three" : " 3. Saisissez votre nom de compte utilisateur ou numéro Xsolla.",
          "xsolla-number.instruction.paragraph-two" : "2. Appuyez sur le bouton {{projectName}} ou Xsolla du kiosque de paiement.",
-         "xsolla-number.notification.failed" : "Impossible d'envoyer des instructions de paiement. Réessayer plus tard",
+         "xsolla-number.notification.failed" : "Impossible d'envoyer des instructions de paiement. Réessayer plus tard.",
          "xsolla-number.notification.success.email" : "Nous avons envoyé les instructions de paiement à votre adresse électronique. Si vous ne les avez pas reçues, réessayez.",
          "xsolla-number.notification.success.sms" : "Nous avons envoyé votre numéro Xsolla à votre numéro de téléphone. Si vous ne l'avez pas reçu, réessayez.",
          "xsolla-number.payment.description" : " Pour traiter votre paiement, nous devons vérifier votre compte",
