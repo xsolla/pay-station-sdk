@@ -766,16 +766,24 @@ Notifies about completion of the payment form component loading.
 
 - Arabic
 - Bulgarian
+- Burmese (Myanmar)
 - Chinese (Simplified)
 - Chinese (Traditional)
 - Czech
+- Dutch
 - English
+- Filipino (Tagalog)
 - French
 - German
 - Hebrew
+- Indonesian
 - Italian
 - Japanese
+- Khmer (Cambodian)
 - Korean
+- Lao
+- Malay
+- Nepali
 - Polish
 - Portuguese
 - Romanian
