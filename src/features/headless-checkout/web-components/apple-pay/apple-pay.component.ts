@@ -79,6 +79,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
         applePayQrClosedHandler,
         () => {
           this.removeStylesForQrCode();
+          this.dispatchEvent(new CustomEvent(EventName.applePayQrOpened));
         },
       ),
     );
@@ -89,6 +90,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
         applePayQrOpenedHandler,
         () => {
           this.addStylesForQrCode();
+          this.dispatchEvent(new CustomEvent(EventName.applePayQrOpened));
         },
       ),
     );
