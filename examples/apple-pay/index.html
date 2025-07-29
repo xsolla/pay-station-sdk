@@ -160,16 +160,52 @@ NOTE: In this example, we use a local build just for convenience purposes.
         }
       }
 
-      function listenNewWindowStatus() {
+      /**
+       * Handle Apple Pay events
+       *
+       * Available events:
+       *  events applePayWindowClosed: Apple Pay window closed
+       * - applePayQrOpened: Apple Pay QR code opened (fullscreen mode)
+       * - applePayQrClosed: Apple Pay QR code closed
+       */
+      function listenApplePayEvents() {
         const applePayButton = document.querySelector('psdk-apple-pay');
 
-        applePayButton.addEventListener(
-          'message',
-          'applePayWindowClosed',
-          () => {
-            console.log('Apple pay: window closed');
-          },
-        );
+        // Handle Apple Pay window closed event
+        applePayButton.addEventListener('applePayWindowClosed', () => {
+          console.log('Apple Pay: window closed');
+          // Add custom logic for handling window closure here
+        });
+
+        // Handle Apple Pay QR code opened event
+        applePayButton.addEventListener('applePayQrOpened', () => {
+          console.log('Apple Pay: QR code opened');
+          // Apply fullscreen styles for QR code display
+          const iframe = applePayButton.querySelector('#apple-pay-iframe');
+
+          if (!iframe) {
+            return;
+          }
+
+          iframe.style.position = 'absolute';
+          iframe.style.top = '0';
+          iframe.style.left = '0';
+        });
+
+        // Handle Apple Pay QR code closed event
+        applePayButton.addEventListener('applePayQrClosed', () => {
+          console.log('Apple Pay: QR code closed');
+          // Remove fullscreen styles
+          const iframe = applePayButton.querySelector('#apple-pay-iframe');
+
+          if (!iframe) {
+            return;
+          }
+
+          iframe.style.removeProperty('position');
+          iframe.style.removeProperty('top');
+          iframe.style.removeProperty('left');
+        });
       }
 
       async function main() {
@@ -178,7 +214,7 @@ NOTE: In this example, we use a local build just for convenience purposes.
         addPaymentFormElement();
         await initPaymentForm(applePayId);
         addSubmitButtonElement();
-        listenNewWindowStatus();
+        listenApplePayEvents();
       }
 
       main();
