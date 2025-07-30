@@ -9,10 +9,10 @@ import { Message } from '../../../../core/message.interface';
 import { ControlComponentConfig } from '../control-component-config.interface';
 import { getControlComponentConfigHandler } from '../get-control-component-config.handler';
 import { HeadlessCheckout } from '../../headless-checkout';
-import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
 import { TextComponentConfig } from './text-component.config.interface';
 import { FieldStatus } from '../../../../core/form/field-status.interface';
 import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
+import { ValidationErrorService } from '../../../../core/form/validation-error/validation-error.service';
 
 export class TextComponent extends SecureComponentAbstract {
   protected config?: TextComponentConfig;
@@ -21,6 +21,7 @@ export class TextComponent extends SecureComponentAbstract {
   protected readonly formSpy: FormSpy;
 
   private readonly headlessCheckout: HeadlessCheckout;
+  private readonly validationErrorService: ValidationErrorService;
   private isListeningFieldStatusChange = false;
   private inputName?: string | null;
 
@@ -30,6 +31,7 @@ export class TextComponent extends SecureComponentAbstract {
     this.postMessagesClient = container.resolve(PostMessagesClient);
     this.window = container.resolve(Window);
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.validationErrorService = container.resolve(ValidationErrorService);
 
     this.headlessCheckout.events.onCoreEvent(
       EventName.finishLoadComponent,
@@ -128,7 +130,10 @@ export class TextComponent extends SecureComponentAbstract {
         return;
       }
 
-      this.config.error = this.getFirstError(fieldStatus.errors);
+      this.config.error = this.validationErrorService.getMessage(
+        fieldStatus.errors,
+      );
+
       this.updateError(fieldStatus);
     });
   }
@@ -151,14 +156,5 @@ export class TextComponent extends SecureComponentAbstract {
         errorElement.remove();
       }
     }
-  }
-
-  private getFirstError(errors: ValidationErrors | null): string | null {
-    if (!errors) {
-      return null;
-    }
-
-    const firstErrorKey: string = Object.keys(errors)[0];
-    return errors[firstErrorKey]?.message ?? null;
   }
 }
