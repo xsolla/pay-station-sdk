@@ -1,4 +1,4 @@
-import { ValidationErrors } from './validation-errors.interface';
+import { ValidationErrors } from './validation-error/validation-errors.interface';
 
 export interface FieldStatus {
   name: string;
