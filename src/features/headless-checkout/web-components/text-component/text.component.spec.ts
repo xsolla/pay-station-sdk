@@ -6,6 +6,7 @@ import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { TextComponent } from './text.component';
 import { FormFieldsStatus } from '../../../../core/form/form-fields-status.interface';
+import { ValidationErrorService } from '../../../../core/form/validation-error/validation-error.service';
 
 const fieldName = 'zip';
 
@@ -56,6 +57,7 @@ function createComponent(): HTMLElement {
 describe('TextComponent', () => {
   let postMessagesClient: PostMessagesClient;
   let headlessCheckout: HeadlessCheckout;
+  let validationErrorService: ValidationErrorService;
   let formSpy: FormSpy;
 
   window.customElements.define(
@@ -79,6 +81,12 @@ describe('TextComponent', () => {
       },
     } as unknown as HeadlessCheckout;
 
+    validationErrorService = {
+      getMessage() {
+        return null;
+      },
+    } as unknown as ValidationErrorService;
+
     formSpy = {
       listenFormInit: noopStub,
       get formWasInit() {
@@ -97,6 +105,9 @@ describe('TextComponent', () => {
       })
       .register<HeadlessCheckout>(HeadlessCheckout, {
         useValue: headlessCheckout,
+      })
+      .register(ValidationErrorService, {
+        useValue: validationErrorService,
       })
       .register<Window>(Window, {
         useValue: window,
@@ -174,6 +185,9 @@ describe('TextComponent', () => {
         setTimeout(() => (callback = callbackFn));
       },
     );
+    spyOn(validationErrorService, 'getMessage').and.returnValue(
+      'error message',
+    );
 
     element = createComponent();
 
@@ -195,6 +209,9 @@ describe('TextComponent', () => {
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
       },
+    );
+    spyOn(validationErrorService, 'getMessage').and.returnValue(
+      'error message',
     );
 
     element = createComponent();
