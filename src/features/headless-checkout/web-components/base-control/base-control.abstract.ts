@@ -3,7 +3,7 @@ import { WebComponentAbstract } from '../../../../core/web-components/web-compon
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { EventName } from '../../../../core/event-name.enum';
 import { Message } from '../../../../core/message.interface';
-import { ValidationErrors } from '../../../../core/form/validation-errors.interface';
+import { ValidationErrors } from '../../../../core/form/validation-error/validation-errors.interface';
 import { HeadlessCheckout } from '../../headless-checkout';
 import { ControlComponentConfig } from '../control-component-config.interface';
 import { getControlComponentConfigHandler } from '../get-control-component-config.handler';
@@ -12,12 +12,14 @@ import {
   publicControlOnValueChanges,
 } from './element.handlers';
 import { ElementEventName } from './element-events.enum';
+import { ValidationErrorService } from '../../../../core/form/validation-error/validation-error.service';
 
 export abstract class BaseControl<
   Config extends ControlComponentConfig,
 > extends WebComponentAbstract {
   protected postMessagesClient: PostMessagesClient;
   protected headlessCheckout: HeadlessCheckout;
+  protected validationErrorService: ValidationErrorService;
   protected window: Window;
 
   protected controlName!: string;
@@ -29,6 +31,7 @@ export abstract class BaseControl<
 
     this.postMessagesClient = container.resolve(PostMessagesClient);
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.validationErrorService = container.resolve(ValidationErrorService);
     this.window = container.resolve(Window);
   }
 
@@ -104,7 +107,10 @@ export abstract class BaseControl<
         return;
       }
 
-      this.config.error = this.getErrorFromFieldStatus(fieldStatus.errors);
+      this.config.error = this.validationErrorService.getMessage(
+        fieldStatus.errors,
+      );
+
       this.updateError(fieldStatus.isFocused);
     });
   }

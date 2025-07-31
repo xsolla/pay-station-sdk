@@ -8,6 +8,7 @@ import { CheckboxComponentConfig } from './checkbox-component-config.interface';
 import { XpsBoolean } from '../../../../core/xps-boolean.enum';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { FormLoader } from '../../../../core/form/form-loader';
+import { ValidationErrorService } from '../../../../core/form/validation-error/validation-error.service';
 
 const config: CheckboxComponentConfig = {
   name: 'test',
@@ -28,6 +29,7 @@ function createComponent(): HTMLElement {
 
 describe('CheckboxComponent', () => {
   let headlessCheckout: HeadlessCheckout;
+  let validationErrorService: ValidationErrorService;
   let postMessagesClient: PostMessagesClient;
   let windowService: Window;
   let formLoader: FormLoader;
@@ -43,6 +45,12 @@ describe('CheckboxComponent', () => {
     headlessCheckout = {
       form: { onFieldsStatusChange: noopStub },
     } as unknown as HeadlessCheckout;
+
+    validationErrorService = {
+      getMessage() {
+        return null;
+      },
+    } as unknown as ValidationErrorService;
 
     postMessagesClient = {
       send: noopStub,
@@ -60,6 +68,9 @@ describe('CheckboxComponent', () => {
     container
       .register<HeadlessCheckout>(HeadlessCheckout, {
         useValue: headlessCheckout,
+      })
+      .register(ValidationErrorService, {
+        useValue: validationErrorService,
       })
       .register<PostMessagesClient>(PostMessagesClient, {
         useValue: postMessagesClient,

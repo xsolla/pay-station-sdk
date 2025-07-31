@@ -8,6 +8,7 @@ import { SelectComponent } from './select.component';
 import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/headless-checkout-spy';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { FormLoader } from '../../../../core/form/form-loader';
+import { ValidationErrorService } from '../../../../core/form/validation-error/validation-error.service';
 
 function createComponent(name: string): HTMLElement {
   const element = document.createElement(WebComponentTagName.SelectComponent);
@@ -38,6 +39,7 @@ describe('SelectComponent', () => {
   let postMessagesClient: PostMessagesClient;
   let headlessCheckout: HeadlessCheckout;
   let headlessCheckoutSpy: HeadlessCheckoutSpy;
+  let validationErrorService: ValidationErrorService;
   let formLoader: FormLoader;
 
   window.customElements.define(
@@ -70,6 +72,12 @@ describe('SelectComponent', () => {
       },
     } as unknown as HeadlessCheckoutSpy;
 
+    validationErrorService = {
+      getMessage() {
+        return null;
+      },
+    } as unknown as ValidationErrorService;
+
     container.clearInstances();
 
     container
@@ -78,6 +86,9 @@ describe('SelectComponent', () => {
       })
       .register(HeadlessCheckout, {
         useValue: headlessCheckout,
+      })
+      .register(ValidationErrorService, {
+        useValue: validationErrorService,
       })
       .register<FormSpy>(FormSpy, {
         useValue: {
