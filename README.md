@@ -1056,6 +1056,8 @@ To configure one-click payment via Apple Pay:
 
     c. Xsolla emails you the domain association file and provides instructions on where to upload it.
 
+> Note: To ensure that automatic verification of the domain association file completes successfully, check that it is accessible via network requests.
+
 3. Update the SDK initialization script as shown below:
 
 ```typescript
