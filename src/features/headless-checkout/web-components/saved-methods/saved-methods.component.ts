@@ -115,16 +115,19 @@ export class SavedMethodsComponent extends WebComponentAbstract {
     this.addEventListenerToElement(this.listRef, 'click', (event) => {
       event.preventDefault();
 
-      if (event.target instanceof HTMLButtonElement) {
-        this.deleteButtonClick(event.target);
+      const target = event.target as HTMLElement;
+      const button = target.closest('button.psdk-delete-saved-method-button');
+
+      if (button) {
+        this.deleteButtonClick(button as HTMLButtonElement);
         return;
       }
 
       if (
-        event.target instanceof HTMLElement &&
+        target instanceof HTMLElement &&
         !this.isDeleteMode(this.deleteMode)
       ) {
-        this.dispatchSelectionEvent(event.target);
+        this.dispatchSelectionEvent(target);
       }
     });
   }
