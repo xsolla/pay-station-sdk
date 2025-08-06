@@ -298,6 +298,9 @@ Gets the user balance’s value, including amount and currency.
       paymentWithSavedMethod?: boolean;
       savedMethodId?: number;
       savePaymentMethod?: boolean;
+      overrideFormFields?: { 
+        [key: string]: OverridedField 
+      };
     }
   }
 }
@@ -1034,27 +1037,27 @@ To configure one-click payment via Apple Pay:
 
 1. Create a request to enable this option. To do so:
 
-    a. Open your Publisher Account and go to the [Support Hub](https://publisher.xsolla.com/0/support-hub) section.
+   a. Open your Publisher Account and go to the [Support Hub](https://publisher.xsolla.com/0/support-hub) section.
 
-    b. Click **Submit request**.
+   b. Click **Submit request**.
 
-    c. In the window that opens, fill in the fields:
+   c. In the window that opens, fill in the fields:
 
-      - **Summary**. For example, _Apple Pay one-click payment setup_.
+   - **Summary**. For example, _Apple Pay one-click payment setup_.
 
-      - **Description**. Specify the domain used for opening the payment UI, e.g., `amazing.store.com`.
+   - **Description**. Specify the domain used for opening the payment UI, e.g., `amazing.store.com`.
 
-      - **Project ID**. Select a project ID from the drop-down list. If you want to configure the one-click payment option for multiple projects, specify their IDs in the Description field.
+   - **Project ID**. Select a project ID from the drop-down list. If you want to configure the one-click payment option for multiple projects, specify their IDs in the Description field.
 
-    d. Click **Send**.
+   d. Click **Send**.
 
 2. Wait for your domain association file. This step is performed by Xsolla:
 
-    a. Xsolla registers your domain with Apple.
+   a. Xsolla registers your domain with Apple.
 
-    b. Xsolla receives the domain association file from Apple.
+   b. Xsolla receives the domain association file from Apple.
 
-    c. Xsolla emails you the domain association file and provides instructions on where to upload it.
+   c. Xsolla emails you the domain association file and provides instructions on where to upload it.
 
 > Note: To ensure that automatic verification of the domain association file completes successfully, check that it is accessible via network requests.
 
