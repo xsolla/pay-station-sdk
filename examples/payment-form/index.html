@@ -90,10 +90,19 @@ Add legal component to provide links to legal documents
      */
     const paymentMethodId = 1380;
 
+    /**
+     * Create a payment form.
+     * Use `overrideFieldValues` property to override default values of form fields.
+     */
     await headlessCheckout.form.init({
       paymentMethodId: paymentMethodId,
       returnUrl:
-        'http://localhost:3000/pay-station-sdk/examples/return.html'
+        'http://localhost:3000/pay-station-sdk/examples/return.html',
+      overrideFieldValues: {
+        allowSubscription: {
+          initialValue: '1', // you can use XpsBoolean.true in typescript code
+        },
+      },
     });
 
     /**
