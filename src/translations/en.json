@@ -70,7 +70,27 @@
       "xsolla-number.notification.failed": "Can’t send payment instructions. Try again later.",
       "cash-payment-instruction.description": "We've issued a bill for your purchase. Once you’ve paid, we'll email you the receipt.",
       "cash-payment-instruction.title": "Payment via {{paymentMethodName}}",
-      "cash-payment-instruction.how-to": "How to pay"
+      "cash-payment-instruction.how-to": "How to pay",
+      "validation-error.birth-date-pattern": "Enter a valid birth date",
+      "validation-error.expiration-length": "Enter {{requiredLength}} characters",
+      "validation-error.expiration-month-pattern": "Enter a valid expiration month",
+      "validation-error.expiration-min-month": "Enter a month that includes or comes after {{minMonth}}",
+      "validation-error.expiration-max-month": "Enter a month that includes or comes before {{maxMonth}}",
+      "validation-error.expiration-year-pattern": "Enter a valid expiration year",
+      "validation-error.expiration-min-year": "Enter a year that includes or comes after {{minYear}}",
+      "validation-error.expiration-max-year": "Enter a year that includes or comes before {{maxYear}}",
+      "validation-error.coupon-pattern": "Enter a valid promo code",
+      "validation-error.email-pattern": "Enter a valid email",
+      "validation-error.card-number-pattern": "Enter a valid card number",
+      "validation-error.required": "Required",
+      "validation-error.min-length": "Enter at least {{minLength}} characters",
+      "validation-error.max-length": "Enter no more than {{maxLength}} characters",
+      "validation-error.cpf-number-pattern": "Enter a valid CPF number",
+      "validation-error.cvv-pattern": "Enter a valid CVV/CVC",
+      "validation-error.phone-pattern": "Enter a valid phone",
+      "validation-error.building-number-pattern": "Enter a valid building number",
+      "validation-error.zip-pattern": "Enter a valid ZIP code",
+      "validation-error.data-pattern": "Enter valid data"
     }
   }
 }
