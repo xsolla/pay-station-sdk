@@ -298,8 +298,8 @@ Gets the user balance’s value, including amount and currency.
       paymentWithSavedMethod?: boolean;
       savedMethodId?: number;
       savePaymentMethod?: boolean;
-      overrideFormFields?: { 
-        [key: string]: OverridedField 
+      overrideFormFields?: {
+        [key: string]: OverridedField
       };
     }
   }
@@ -956,10 +956,10 @@ Integration flow:
 1. Initialize the payment form with the Credit Card payment method ID and return URL (necessary for 3-D Secure transactions).
    - The return URL redirects the user once payment is completed on the 3-D Secure’s side.
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
-1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-   - The Next action with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. A partner must remove previously added fields and render new fields for this step.
+1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps:
+   - The `NextAction` with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. You must remove previously added fields and render new fields for this step.
    - **3DS 1.0 (a deprecated method of payment authorization)**: The Next action with the `redirect` type means the form is redirected to complete payment according to the **3DS 1.0** secure procedure.
-   - **3DS 2.0**: The Next action with the `3DS` type means the user’s card must be verified according to the **3DS 2.0** procedure. This procedure may be required in either challenge or frictionless mode. The necessity of initiating a challenge flow is determined by the issuing bank based on a set of parameters. If a new page needs to be opened, the `3DS` event is accompanied with the data object. Partner’s app should pass this data to the `ThreeDs` component as `data-challenge` attribute, [see example](./examples/credit-card). It creates a new browser tab where the user can authorize the payment.
+   - **3DS 2.0**: The `NextAction` with the `3DS` type means the user’s card must be verified according to the **3DS 2.0** procedure. When an additional user action (the challenge flow) is required, the `3DS` event is triggered along with the `data` object. Pass this object to the `ThreeDs` component as the `data-challenge` attribute (refer to the [example](./examples/credit-card)). The component opens a new browser tab where the user can authorize the payment.
 1. Add the form fields component to the HTML markup.
    - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
    - Use fields with the `isMandatory` flag to get required fields only.
