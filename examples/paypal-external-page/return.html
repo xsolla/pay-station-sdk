@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>PayPal external page integration - Return Page</title>
+    <!--
+    This is the return page that PayPal redirects to after payment completion.
+    It acts as a bridge between PayPal and the main application.
+    -->
+</head>
+
+<body>
+<h1>PayPal payment integration</h1>
+<div>Processing payment result...</div>
+
+<!-- Communication script -->
+<script>
+    /**
+     * Get reference to the parent window that opened this popup.
+     * The parent window is the main application page (index.html)
+     * that initiated the PayPal payment flow.
+     */
+    const opener = window.opener;
+
+    /**
+     * Send payment status information back to the parent window.
+     * This communication allows the parent window to handle the payment result
+     * without needing to poll for status or reload the page.
+     */
+    if (opener) {
+        /**
+         * Send a postMessage with:
+         * - type: 'statusUrl' to identify the message type
+         * - searchParams: URL parameters from PayPal containing payment status,
+         *   transaction ID, and other payment-related information
+         */
+        opener.postMessage({
+            type: 'statusUrl', 
+            searchParams: window.location.search
+        }, '*');
+    } else {
+        /**
+         * If there's no parent window (e.g., user navigated directly to this page),
+         * redirect to the status page directly
+         */
+        console.warn('No parent window found. Redirecting to status page.');
+        window.location.href = 'status.html' + window.location.search;
+    }
+
+</script>
+</body>
+</html>
