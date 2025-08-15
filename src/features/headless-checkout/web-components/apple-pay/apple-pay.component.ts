@@ -11,7 +11,6 @@ import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
 import { headlessCheckoutAppUrl } from '../../environment';
 import { openApplePayPageHandler } from '../../post-messages-handlers/apple-pay/open-apple-pay-page.handler';
-import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 import { getWaitingProcessingTemplate } from './waiting-processing.template';
 import { waitingProcessingClassname } from './waiting-processing-classname.const';
 import { applePayButtonClassName } from './apple-pay-button-classname.const';
@@ -24,7 +23,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
   private readonly applePayWindowName = 'HeadlessCheckout_PayStation_ApplePay';
   private readonly headlessCheckout: HeadlessCheckout;
-  private readonly postMessagesClient: PostMessagesClient;
   private readonly formSpy: FormSpy;
   private readonly window: Window;
   private applePayWindow?: Window | null;
@@ -33,7 +31,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
   public constructor() {
     super();
     this.headlessCheckout = container.resolve(HeadlessCheckout);
-    this.postMessagesClient = container.resolve(PostMessagesClient);
     this.formSpy = container.resolve(FormSpy);
     this.window = container.resolve(Window);
 
@@ -100,7 +97,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
         EventName.closeExternalWindow,
         closeExternalWindowHandler,
         () => {
-          this.destroyApplePayWindow();
+          this.destroyApplePayWindow(true);
         },
       ),
     );
