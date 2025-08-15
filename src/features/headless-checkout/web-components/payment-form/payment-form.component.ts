@@ -37,7 +37,7 @@ export class PaymentFormComponent extends WebComponentAbstract {
     }
     const formExpectedFields = this.formSpy.formFields;
 
-    const formRequiredFields = this.getRequriedFields(this.formSpy.formFields);
+    const formRequiredFields = this.getRequiredFields(this.formSpy.formFields);
 
     super.render();
     if (formExpectedFields) {
@@ -91,7 +91,7 @@ export class PaymentFormComponent extends WebComponentAbstract {
     this.logExtraFields(missedFields);
   }
 
-  private getRequriedFields(fields: Field[] = []): Field[] {
+  private getRequiredFields(fields: Field[] = []): Field[] {
     return fields.filter((field) => field.isMandatory === '1');
   }
 
