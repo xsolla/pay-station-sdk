@@ -10,13 +10,14 @@
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development --watch",
+    "clean": "rm -rf dist coverage .swc",
     "test": "karma start --single-run",
     "test:dev": "karma start --auto-watch",
     "lint": "npm run eslint:lint && npm run stylelint:lint",
     "eslint:lint": "eslint \"src/**/*.{ts,tsx}\"",
     "stylelint:lint": "stylelint \"src/**/*.scss\"",
     "prepare": "husky install",
-    "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public",
+    "lib-publish": "npm run clean && npm run build && npm test && npm run lint && npm publish --access public",
     "prettier": "prettier --write ./src"
   },
   "lint-staged": {
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@swc/core": "^1.13.3",
     "@types/jasmine": "^4.3.5",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
@@ -58,7 +60,8 @@
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^9.0.0",
     "stylelint-order": "^6.0.3",
-    "ts-loader": "^9.4.4",
+    "swc-loader": "^0.2.6",
+
     "typescript": "^5.2.2",
     "webpack": "^5.82.2",
     "webpack-cli": "^5.1.4"
