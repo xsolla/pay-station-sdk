@@ -2,33 +2,32 @@ import { cardPid } from '../../../features/headless-checkout/web-components/paym
 import { BasePaymentConfiguration } from '../form-configuration.interface';
 
 interface SpecialPaymentSettingsBase {
-    useSingleExpirationDateField?: boolean;
+  useSingleExpirationDateField?: boolean;
 }
 
-type SpecialPaymentSettingsWithVault =
-    SpecialPaymentSettingsBase & {
-    useExternalVault: true;
-    isPaymentViaSavedMethod: boolean;
+type SpecialPaymentSettings = SpecialPaymentSettingsBase & {
+  useExternalVault?: false;
+  isPaymentViaSavedMethod?: never;
 };
 
-type SpecialPaymentSettingsNoVault =
-    SpecialPaymentSettingsBase & {
-    useExternalVault?: false | undefined;
-    isPaymentViaSavedMethod?: never;
+type SpecialPaymentSettingsWithVault = SpecialPaymentSettingsBase & {
+  useExternalVault: true;
+  isPaymentViaSavedMethod: boolean;
 };
 
 type PaymentConfigurationCreditCardBase = BasePaymentConfiguration & {
-    paymentMethodId: typeof cardPid;
+  paymentMethodId: typeof cardPid;
 };
 
-type PaymentConfigurationCreditCardWithVault = PaymentConfigurationCreditCardBase & {
+type PaymentConfigurationCreditCard = PaymentConfigurationCreditCardBase & {
+  paymentMethodSettings: SpecialPaymentSettings;
+};
+
+type PaymentConfigurationCreditCardWithVault =
+  PaymentConfigurationCreditCardBase & {
     paymentMethodSettings: SpecialPaymentSettingsWithVault;
-};
-
-type PaymentConfigurationCreditCardWithoutVault = PaymentConfigurationCreditCardBase & {
-    paymentMethodSettings: SpecialPaymentSettingsNoVault;
-};
+  };
 
 export type PaymentConfigurationCreditCardSettings =
-    | PaymentConfigurationCreditCardWithVault
-    | PaymentConfigurationCreditCardWithoutVault;
+  | PaymentConfigurationCreditCard
+  | PaymentConfigurationCreditCardWithVault;
