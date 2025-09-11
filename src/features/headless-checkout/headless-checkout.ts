@@ -163,6 +163,7 @@ export class HeadlessCheckout {
   private theme?: string;
   private topLevelDomain?: string;
   private isApplePayInstantFlowEnabled = false;
+  private locale = Lang.EN;
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
   private readonly headlessAppUrl = headlessCheckoutAppUrl;
@@ -185,6 +186,7 @@ export class HeadlessCheckout {
     this.topLevelDomain = environment.topLevelDomain;
     this.isApplePayInstantFlowEnabled =
       !!environment.isApplePayInstantFlowEnabled;
+    this.locale = environment.language ?? Lang.EN;
 
     await this.localizeService.initDictionaries(environment.language);
 
@@ -229,6 +231,7 @@ export class HeadlessCheckout {
           sandbox: this.isSandbox,
           topLevelDomain: this.topLevelDomain,
           isApplePayInstantFlowEnabled: this.isApplePayInstantFlowEnabled,
+          locale: this.locale
         },
       },
     };
