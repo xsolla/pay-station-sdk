@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <!--
-Link the SDK bundle.
-NOTE: In this example, we use a local build just for convenience purposes.
--->
+    Link the SDK bundle.
+    NOTE: In this example, we use a local build just for convenience purposes.
+    -->
     <script src="../../dist/main.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="../../dist/style.css" />
@@ -112,8 +112,8 @@ NOTE: In this example, we use a local build just for convenience purposes.
         contentElement.appendChild(paymentFormElement);
       }
 
-      function initPaymentForm(paymentMethodId) {
-        headlessCheckout.form.init({
+      async function initPaymentForm(paymentMethodId) {
+        await headlessCheckout.form.init({
           paymentMethodId: paymentMethodId,
 
           /**
@@ -127,6 +127,8 @@ NOTE: In this example, we use a local build just for convenience purposes.
 
       function handleNextActions() {
         headlessCheckout.form.onNextAction((action) => {
+          console.info('Next action: ', action);
+
           if (action.type === 'hide_form') {
             contentElement.classList.add('hidden');
           }
@@ -136,7 +138,6 @@ NOTE: In this example, we use a local build just for convenience purposes.
           if (action.type === 'show_errors') {
             showErrorsAction(action);
             clearPaymentForm();
-            submitButtonContainerElement.innerHTML = '';
           }
         });
       }

@@ -1,15 +1,96 @@
+.hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.error {
+  padding: 12px;
+  margin-bottom: 1rem;
+  border-radius: var(--psdk-common-border-radius);
+  color: var(--psdk-alert-color);
+  background: var(--psdk-alert-bg);
+  font-family: var(--psdk-font-family);
+  font-size: var(--psdk-font-size);
+  line-height: var(--psdk-line-height);
+}
+
+.error a,
+.error a:hover,
+.error a:visited {
+  color: var(--psdk-alert-color);
+}
+
 /* *** *** COMMON: START *** *** */
 
 .application {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
 }
 
-#form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.columns-wrapper {
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.left-col,
+.right-col {
+  width: 50%;
 }
 
 /* *** *** COMMON: END *** *** */
+
+/* *** *** FINANCE DETAILS: START *** *** */
+
+psdk-finance-details,
+psdk-total {
+  display: block;
+  background: #f5f5f5;
+  margin-right: 10px;
+  padding: 10px;
+}
+
+.subtotal-row,
+.total-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+/* *** *** FINANCE DETAILS: END *** *** */
+
+/* *** *** STATUS: START *** *** */
+psdk-status {
+  display: flex;
+}
+
+psdk-status .image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+psdk-status .title-text {
+  text-align: center;
+}
+
+/* *** *** STATUS: END *** *** */
+
+/* *** *** FOOTER LINKS: START *** *** */
+.company {
+  padding-top: 5px;
+  display: flex;
+}
+
+.company .logo {
+  margin-right: 3px;
+}
+
+.legal-links {
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* *** *** FOOTER LINKS: END *** *** */
