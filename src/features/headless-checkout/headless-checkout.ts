@@ -40,6 +40,9 @@ import { CountryResponse } from '../../core/country-response.interface';
 import { FormLoader } from '../../core/form/form-loader';
 import { InitialOptions } from './initial-options.interface';
 import { submitHandler } from './post-messages-handlers/submit/submit.handler';
+import {
+  externalInputChangeValueHandler
+} from './post-messages-handlers/external-input-change-value/external-input-change-value.handler';
 
 @singleton()
 export class HeadlessCheckout {
@@ -142,6 +145,18 @@ export class HeadlessCheckout {
 
     setupAndAwaitFieldsLoading: async (fields: Field[]): Promise<void> =>
       this.formLoader.setupAndAwaitFieldsLoading(fields),
+
+    updateFormFieldValue: (fieldName: string, value: unknown): void => {
+      const msg: Message = {
+        name: EventName.externalChangeInputValue,
+        data: {
+          fieldName,
+          value
+        },
+      };
+
+      void this.postMessagesClient.send(msg, externalInputChangeValueHandler);
+    },
 
     submit: async (): Promise<void> => {
       await this.postMessagesClient.send(
