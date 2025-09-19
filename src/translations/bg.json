@@ -85,7 +85,7 @@
          "xsolla-number.notification.failed" : "Неуспешно изпращане на платежни инструкции. Опитайте отново по-късно.",
          "xsolla-number.notification.success.email" : "Изпратихме платежни инструкции на Вашия имейл. Ако не сте ги получили, опитайте отново.",
          "xsolla-number.notification.success.sms" : "Изпратихме вашия Ексола номер на телефона Ви. Ако не сте го получили, опитайте отново.",
-         "xsolla-number.payment.description" : "За да обработим плащането Ви, трябва да потвърдим профила Ви.",
+         "xsolla-number.payment.description" : "За да обработим плащането Ви, трябва да потвърдим профила Ви",
          "xsolla-number.payment.title" : "Плащане с {{paymentMethodName}}",
          "xsolla-number.send-panel.email" : "Имейл",
          "xsolla-number.send-panel.get-xsolla-number" : "Получаване на номер на Ексола",
