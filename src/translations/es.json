@@ -85,7 +85,7 @@
          "xsolla-number.notification.failed" : "No se puede enviar instrucciones de pago. Vuelve a intentarlo más tarde.",
          "xsolla-number.notification.success.email" : "Enviamos las instrucciones de pago a tu correo electrónico. Si no las has recibido, inténtalo de nuevo.",
          "xsolla-number.notification.success.sms" : "Enviamos tu número de Xsolla a tu número de teléfono. Si no lo has recibido, inténtalo de nuevo.",
-         "xsolla-number.payment.description" : "Debemos verificar tu cuenta para procesar tu pago.",
+         "xsolla-number.payment.description" : "Debemos verificar tu cuenta para procesar tu pago",
          "xsolla-number.payment.title" : "Pago mediante {{paymentMethodName}}",
          "xsolla-number.send-panel.email" : "Correo electrónico",
          "xsolla-number.send-panel.get-xsolla-number" : "Obtener número de Xsolla",
