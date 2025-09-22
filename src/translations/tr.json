@@ -85,7 +85,7 @@
          "xsolla-number.notification.failed" : "Ödeme talimatları gönderilemiyor. Daha sonra tekrar deneyin.",
          "xsolla-number.notification.success.email" : "Ödeme talimatlarını e-posta adresinize gönderdik. E-postayı almadıysanız tekrar deneyin.",
          "xsolla-number.notification.success.sms" : "Xsolla numaranızı telefonunuza gönderdik. Almadıysanız tekrar deneyin.",
-         "xsolla-number.payment.description" : "Ödemenizin işlenebilmesi için hesabınızı doğrulamamız gerekiyor.",
+         "xsolla-number.payment.description" : "Ödemenizin işlenebilmesi için hesabınızı doğrulamamız gerekiyor",
          "xsolla-number.payment.title" : "{{paymentMethodName}} ile ödeme",
          "xsolla-number.send-panel.email" : "E-posta",
          "xsolla-number.send-panel.get-xsolla-number" : "Xsolla numarası al",

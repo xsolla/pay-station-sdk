@@ -18,7 +18,7 @@
          "finance-details-subtotal-details-fee" : "Taxa do sistema de pagamento",
          "finance-details-subtotal-details-user-balance" : "Saldo",
          "finance-details-subtotal-title" : "Subtotal",
-         "finance-details-total-title" : "Total",
+         "finance-details-total-title" : "Total do pedido",
          "finance-details-transaction-details-invoice" : "Transação",
          "finance-details-transaction-details-time" : "Data",
          "finance-details-vat" : "VAT",
