@@ -52,7 +52,7 @@
          "status.message.auto-cancellation" : "선택한 결제 방식으로 거래를 완료합니다. 결제 방식 페이지에서 완료하지 않기로 선택한 경우 이 창을 닫습니다. 계정으로 요금이 청구되지 않습니다.",
          "status.processing.description" : "결제 완료 대기 중...",
          "status.processing.title" : "결제 처리 중",
-         "status.success.description" : "{{email}}(으)로 영수증을 보내드렸습니다.",
+         "status.success.description" : "{{email}}(으)로 영수증을 보내드렸습니다",
          "status.success.title" : "결제 성공함",
          "validation-error.birth-date-pattern" : "유효한 생년월일을 입력하세요",
          "validation-error.building-number-pattern" : "유효한 건물 번호를 입력하세요",
