@@ -78,7 +78,7 @@
          "xsolla-number.info.xsolla-number" : "លេខ Xsolla",
          "xsolla-number.instruction.how-to" : "របៀបបង់ប្រាក់",
          "xsolla-number.instruction.notification" : "ម្ចាស់ស្ថានីយអាចគិតថ្លៃកម្រៃជើងសារបន្ថែម",
-         "xsolla-number.instruction.paragraph-four" : " 4. បញ្ចូលសាច់ប្រាក់ដើម្បីបញ្ចប់ប្រតិបត្តិការ។ ",
+         "xsolla-number.instruction.paragraph-four" : "4. បញ្ចូលសាច់ប្រាក់ដើម្បីបញ្ចប់ប្រតិបត្តិការ។",
          "xsolla-number.instruction.paragraph-one" : "1. ទៅកាន់ទីតាំងទូទាត់ {{paymentMethodName}} ។",
          "xsolla-number.instruction.paragraph-three" : "3. បញ្ចូលឈ្មោះគណនីរបស់អ្នកប្រើប្រាស់ ឬលេខ Xsolla របស់អ្នក។",
          "xsolla-number.instruction.paragraph-two" : "2. ចុចប៊ូតុង {{projectName}} ឬប៊ូតុង Xsolla នៅលើបញ្ជរទូទាត់។",
