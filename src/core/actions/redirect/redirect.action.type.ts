@@ -13,6 +13,7 @@ export interface RedirectActionData {
   order?: object;
   redirect: {
     redirectUrl: string;
+    isNewWindowRequired?: boolean;
     data: object;
   };
 }
