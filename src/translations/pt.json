@@ -30,7 +30,7 @@
          "finance-details-vat-india-percent" : "GST {{percent}}%",
          "finance-details-vat-india-percent-including" : "Incluindo {{percent}}% de GST",
          "finance-details-vat-percent" : "VAT {{percent}}%",
-         "finance-details-vat-percent-including" : "Incluindo {{percent}}% de VAT",
+         "finance-details-vat-percent-including" : "Incluindo {{percent}}% de IVA",
          "hello" : "Olá mundo!",
          "legal" : "Legal",
          "legal-cookies" : "A Xsolla coleta apenas cookies essenciais.<a href={{xsolla_privacy_link}} target=\"_blank\">Política de Cookies da Xsolla<\/a>.",
