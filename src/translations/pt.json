@@ -33,7 +33,7 @@
          "finance-details-vat-percent-including" : "Incluindo {{percent}}% de IVA",
          "hello" : "Olá mundo!",
          "legal" : "Legal",
-         "legal-cookies" : "A Xsolla coleta apenas cookies essenciais.<a href={{xsolla_privacy_link}} target=\"_blank\">Política de Cookies da Xsolla<\/a>.",
+         "legal-cookies" : "A Xsolla coleta apenas cookies essenciais. <a href={{xsolla_privacy_link}} target=\"_blank\">Política de Cookies da Xsolla<\/a>.",
          "legal-mor" : "A Xsolla é o distribuidor oficial deste conteúdo.",
          "legal-mor-eu" : "Ao comprar este conteúdo da Xsolla, você está indicando que é um adulto e que leu cuidadosamente e concordou com o <a href={{xsolla_terms_link}} target=\"_blank\">CLUA<\/a>.",
          "legal-support" : "Caso tenha dúvidas, fale com o <a href={{xsolla_help_link}} target=\"_blank\">Suporte Gamer Xsolla<\/a>.",
