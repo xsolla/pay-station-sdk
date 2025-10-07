@@ -958,7 +958,7 @@ Integration flow:
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps:
    - The `NextAction` with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. You must remove previously added fields and render new fields for this step.
-   - **3DS 1.0 (a deprecated method of payment authorization)**: The Next action with the `redirect` type means the form is redirected to complete payment according to the **3DS 1.0** secure procedure.
+   - **3DS 1.0 (a deprecated method of payment authorization)**: The Next action with the `redirect` type means the form is redirected to complete payment according to the **3DS 1.0** secure procedure. See also [Special cases for 3DS 1.0](special-cases-for-3-ds-1-0).
    - **3DS 2.0**: The `NextAction` with the `3DS` type means the user’s card must be verified according to the **3DS 2.0** procedure. When an additional user action (the challenge flow) is required, the `3DS` event is triggered along with the `data` object. Pass this object to the `ThreeDs` component as the `data-challenge` attribute (refer to the [example](./examples/credit-card)). The component opens a new browser tab where the user can authorize the payment.
 1. Add the form fields component to the HTML markup.
    - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
@@ -969,6 +969,24 @@ Integration flow:
 1. Create a `return` page.
 1. Add the `<psdk-finance-details>`, `<psdk-status>` and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
+
+### Special cases for 3DS 1.0
+
+If you embed the payment interface in an iframe, be aware that some ACS providers implement the 3DS 1.0 challenge flow by performing an additional redirect using:
+
+```js
+window.top.location.href = 'redirect_url';
+```
+
+When such a provider is loaded inside an iframe, this redirect targets the entire page — not just the iframe — and modern browsers block this behavior for security reasons.
+
+To handle this, redirect the user in a new browser tab for those cases.
+
+> ⚠️ Important: The redirect must be triggered by a trusted user interaction for the new tab to open reliably.
+
+To test this behavior, handle the `isNewWindowRequired` parameter in the `redirect` NextAction payload using the [Japanese test cards](https://developers.xsolla.com/doc/pay-station/testing/test-cards/?tabs=100-Visa_200-Japan&_xm=403441203812630597) with 3-D Secure in the sandbox mode.
+
+> You can find an example of using `isNewWindowRequired` [here](./examples/credit-card).
 
 ## Google Pay integration guide
 

@@ -25,6 +25,14 @@ function buildPaymentFlow() {
    */
   const { headlessCheckout } = PayStationSdk;
 
+  /**
+   *  Retrieving DOM elements to render form fields and display status messages.
+   */
+  const formElement = document.querySelector('#form-container');
+  const statusElement = document.querySelector('#status-container');
+
+  let redirectUrl = '';
+
   function handleRedirectAction(redirectAction) {
     /**
      * Handle redirect to 3-D Secure procedure.
@@ -36,13 +44,24 @@ function buildPaymentFlow() {
       url.searchParams.append(key, value);
     });
 
+    // Show additional step with button to get trusted event and
+    // open 3-D Secure in a new tab for specific ACS providers
+    if (redirectAction.data.redirect.isNewWindowRequired) {
+      redirectUrl = url.toString();
+
+      clearFormFields();
+      renderRedirectButton();
+
+      return;
+    }
+
     /**
-     * Open 3-D Secure.
+     * Open 3-D Secure in the same tab.
      */
     this.window.location.href = url.toString();
   }
 
-  function renderFields(requiredFields, formElement) {
+  function renderFields(requiredFields) {
     /**
      * It is important to render every every required field as a component according to its own type or
      * other specific parameters. In the current case, we could encounter fields of the following types:
@@ -52,26 +71,26 @@ function buildPaymentFlow() {
      */
     requiredFields.forEach((field) => {
       if (field.type === 'text' && field.name === 'card_number') {
-        renderCardNumberComponent(formElement, field);
+        renderCardNumberComponent(field);
         return;
       }
       if (field.type === 'text') {
-        renderTextComponent(formElement, field);
+        renderTextComponent(field);
         return;
       }
       if (field.type === 'select') {
-        renderSelectComponent(formElement, field);
+        renderSelectComponent(field);
         return;
       }
 
       if (field.type === 'check') {
-        renderCheckboxComponent(formElement, field);
+        renderCheckboxComponent(field);
         return;
       }
     });
   }
 
-  function renderCardNumberComponent(formElement, field) {
+  function renderCardNumberComponent(field) {
     /**
      * You can use <psdk-card-number icon="true" name="field.name"></psdk-card-number> as well.
      */
@@ -80,7 +99,7 @@ function buildPaymentFlow() {
     formElement.append(input);
   }
 
-  function renderSelectComponent(formElement, field) {
+  function renderSelectComponent(field) {
     /**
      * You can use <psdk-select name="field.name"></psdk-select> as well.
      */
@@ -89,7 +108,7 @@ function buildPaymentFlow() {
     formElement.append(input);
   }
 
-  function renderCheckboxComponent(formElement, field) {
+  function renderCheckboxComponent(field) {
     /**
      * You can use <psdk-checkbox name="field.name"></psdk-checkbox> as well.
      */
@@ -98,7 +117,7 @@ function buildPaymentFlow() {
     formElement.append(input);
   }
 
-  function renderTextComponent(formElement, field) {
+  function renderTextComponent(field) {
     /**
      * You can use <psdk-text name="field.name"></psdk-text> as well.
      */
@@ -107,7 +126,7 @@ function buildPaymentFlow() {
     formElement.append(input);
   }
 
-  function renderSubmitButton(formElement) {
+  function renderSubmitButton() {
     /**
      * Render the submit form button.
      * You can use <psdk-submit-button></psdk-submit-button> as well.
@@ -115,6 +134,17 @@ function buildPaymentFlow() {
     const submitButton = new PayStationSdk.SubmitButtonComponent();
     submitButton.setAttribute('text', 'Pay Now');
     formElement.append(submitButton);
+  }
+
+  function renderRedirectButton() {
+    const button = document.createElement('button');
+    button.innerText = 'Continue';
+    button.onclick = () => {
+      window.open(redirectUrl, '_blank');
+      clearFormFields();
+      renderStatusComponent();
+    };
+    formElement.append(button);
   }
 
   function handle3dsAction(threeDsAction) {
@@ -126,14 +156,14 @@ function buildPaymentFlow() {
     const threeDsComponent = new PayStationSdk.ThreeDsComponent();
 
     threeDsComponent.setAttribute(
-        'data-challenge',
-        JSON.stringify(threeDsAction.data.data),
+      'data-challenge',
+      JSON.stringify(threeDsAction.data.data),
     );
 
     document.getElementById('right-col').append(threeDsComponent);
   }
 
-  function renderStatusComponent(statusElement) {
+  function renderStatusComponent() {
     /**
      * Create the status component. It will be updated once a payment status changed.
      * You can use the <psdk-status></psdk-status> component as well.
@@ -142,7 +172,7 @@ function buildPaymentFlow() {
     statusElement.append(statusComponent);
   }
 
-  function clearFormFields(formElement) {
+  function clearFormFields() {
     /**
      * In some cases, we need to remove all form fields that were rendered before.
      * This may be necessary when processing Brazilian credit cards, because
@@ -200,46 +230,40 @@ function buildPaymentFlow() {
     });
 
     /**
-     *  Retrieving DOM elements to render form fields and display status messages.
-     */
-    const formElement = document.querySelector('#form-container');
-    const statusElement = document.querySelector('#status-container');
-
-    /**
      * Subscribe to payment actions.
      */
     headlessCheckout.form.onNextAction((nextAction) => {
       switch (nextAction.type) {
-          /**
-           * Handle the 'show_fields' action.
-           */
+        /**
+         * Handle the 'show_fields' action.
+         */
         case 'show_fields':
-          clearFormFields(formElement);
-          renderFields(nextAction.data.fields, formElement);
-          renderSubmitButton(formElement);
+          clearFormFields();
+          renderFields(nextAction.data.fields);
+          renderSubmitButton();
           break;
 
-          /**
-           * Handle the 'check_status' action.
-           */
+        /**
+         * Handle the 'check_status' action.
+         */
         case 'check_status':
           /**
            * Remove unnecessary form fields to render StatusComponent in the same place.
            */
-          clearFormFields(formElement);
-          renderStatusComponent(statusElement);
+          clearFormFields();
+          renderStatusComponent();
           break;
 
-          /**
-           * Handle the '3DS' action.
-           */
+        /**
+         * Handle the '3DS' action.
+         */
         case '3DS':
           handle3dsAction(nextAction);
           break;
 
-          /**
-           * Handle the 'redirect' action.
-           */
+        /**
+         * Handle the 'redirect' action.
+         */
         case 'redirect':
           handleRedirectAction(nextAction);
           break;
@@ -249,9 +273,9 @@ function buildPaymentFlow() {
     /**
      * Render the fields.
      */
-    renderFields(form.fields, formElement);
+    renderFields(form.fields);
 
-    renderSubmitButton(formElement);
+    renderSubmitButton();
 
     /**
      * Listen for the custom 'cardBinCountryChanged' event from the <psdk-card-number> component.
@@ -260,12 +284,17 @@ function buildPaymentFlow() {
      */
     const cardNumberComponent = document.querySelector('psdk-card-number');
     if (cardNumberComponent) {
-        cardNumberComponent.addEventListener('cardBinCountryChanged', function (event) {
-            const country = event.detail && event.detail.cardBinCountry;
-            const checkbox = document.querySelector('psdk-checkbox[name="allowSubscription"]');
-            if (!checkbox) return;
-            checkbox.style.display = country === 'IN' ? 'none' : '';
-        });
+      cardNumberComponent.addEventListener(
+        'cardBinCountryChanged',
+        function (event) {
+          const country = event.detail && event.detail.cardBinCountry;
+          const checkbox = document.querySelector(
+            'psdk-checkbox[name="allowSubscription"]',
+          );
+          if (!checkbox) return;
+          checkbox.style.display = country === 'IN' ? 'none' : '';
+        },
+      );
     }
   }
 
