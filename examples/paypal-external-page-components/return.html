@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>PayPal external page integration - Return Page</title>
+    <!--
+    This is the return page that PayPal redirects to after payment completion.
+    It acts as a bridge between PayPal and the main application.
+    -->
+    <script src="main.js"></script>
+    <script src="variables.js"></script>
+</head>
+
+<body>
+<h1>PayPal payment integration</h1>
+<div>Processing payment result...</div>
+
+<psdk-return></psdk-return>
+
+<script>
+    if (typeof PayStationSdk === 'undefined') {
+        alert(payStationSdkUndefinedError);
+        throw new Error('PayStationSdk not found');
+    }
+
+    /**
+     * The SDK is available under the PayStationSdk namespace.
+     * To begin initialization, obtain a reference to the headlessCheckout object.
+     */
+    const { headlessCheckout } = PayStationSdk;
+
+    async function initPayStationSdk() {
+        /**
+         * Initialize the SDK for status page.
+         * The isWebView parameter is required and indicates whether your
+         * integration type is a WebView or not.
+         * Sandbox mode is enabled for testing purposes.
+         */
+        await headlessCheckout.init({
+            isWebView: false,
+            sandbox: true,
+        });
+
+        /**
+         * Extract the token from URL parameters.
+         * The token was passed from the return page via URL parameters
+         * and contains the payment session information needed to display status.
+         */
+        const url = new URL(window.location.href);
+        const token = url.searchParams.get('token');
+
+        if (!token) {
+            console.error('No token found in URL parameters');
+        }
+
+        /**
+         * Set the token to establish the payment session context.
+         * This allows the SDK to retrieve and display the current payment status.
+         */
+        await headlessCheckout.setToken(token);
+
+    }
+
+    /**
+     * Initialize the SDK when the page loads.
+     * This will display the payment status based on the URL parameters
+     * received from the PayPal payment flow.
+     */
+    initPayStationSdk().catch((error) => {
+        console.error('Failed to initialize payment status:', error);
+    });
+</script>
+</body>
+</html>

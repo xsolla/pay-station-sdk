@@ -45,4 +45,5 @@ export const enum EventName {
   closeExternalWindow = 'closeExternalWindow',
   sendCardBinCountry = 'sendCardBinCountry',
   cardBinCountryChanged = 'cardBinCountryChanged',
+  statusUrlSend = 'statusUrl',
 }

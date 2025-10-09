@@ -28,4 +28,6 @@ export enum WebComponentTagName {
   QrCodeComponent = 'psdk-qr-code',
   CashPaymentInstructionComponent = 'psdk-cash-payment-instruction',
   XsollaNumberComponent = 'psdk-xsolla-number',
+  ReturnComponent = 'psdk-return',
+  ReturnListenerComponent = 'psdk-return-listener',
 }
