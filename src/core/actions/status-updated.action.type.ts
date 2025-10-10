@@ -10,6 +10,7 @@ export interface StatusUpdatedActionData {
   isCanceled?: boolean;
   isSuccess?: boolean;
   invoice?: number;
+  email?: string;
   isSavePaymentMethodMode?: boolean;
   savePaymentMethodStatus?: SavePaymentMethodStatus;
 }
