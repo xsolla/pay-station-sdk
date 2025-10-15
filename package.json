@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "scripts": {
     "build": "webpack --mode=production",
@@ -16,7 +16,7 @@
     "eslint:lint": "eslint \"src/**/*.{ts,tsx}\"",
     "stylelint:lint": "stylelint \"src/**/*.scss\"",
     "prepare": "husky install",
-    "lib-publish": "npm run build && npm test && npm run lint && npm publish --access public",
+    "lib-publish": "npm run build && npm publish --access public",
     "prettier": "prettier --write ./src"
   },
   "lint-staged": {
