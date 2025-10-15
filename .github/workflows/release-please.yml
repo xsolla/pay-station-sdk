@@ -1,7 +1,7 @@
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -12,17 +12,263 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      version: ${{ steps.release.outputs.tag_name }}
+      release_url: ${{ steps.release.outputs.html_url }}
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - name: Create Release PR or Release
+        uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: node
           package-name: '@xsolla/pay-station-sdk'
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      
+      # Send notification when Release PR is created
+      - name: Send Release PR notification to Slack
+        if: ${{ steps.release.outputs.pr && !steps.release.outputs.release_created }}
+        uses: slackapi/slack-github-action@v1.25.0
         with:
-          node-version: 16
+          payload: |
+            {
+              "text": "📝 Release PR Created: @xsolla/pay-station-sdk",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "📝 Release PR Ready for Review",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Package:*\n`@xsolla/pay-station-sdk`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*PR:*\n<${{ steps.release.outputs.pr }}|#${{ steps.release.outputs.pr }}>"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "A new release PR has been created. Review and merge it to publish the release."
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Review PR",
+                        "emoji": true
+                      },
+                      "url": "${{ steps.release.outputs.pr }}",
+                      "style": "primary"
+                    }
+                  ]
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "Triggered by ${{ github.event.head_commit.author.name }}"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      
+      # Publishing happens ONLY if release was created
+      - name: Checkout code
+        uses: actions/checkout@v3
+        id: checkout
+        if: ${{ steps.release.outputs.release_created }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        id: setup-node
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm run lib-publish
+      
+      - name: Install dependencies
+        id: install
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm ci
+      
+      - name: Build package
+        id: build
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm run build
+      
+      - name: Publish to NPM
+        id: publish
+        # To disable NPM publishing, set ENABLE_NPM_PUBLISH variable to 'false'
+        if: ${{ steps.release.outputs.release_created && vars.ENABLE_NPM_PUBLISH != 'false' }}
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      
+      # Send Slack notification on successful release
+      - name: Send success notification to Slack
+        if: ${{ steps.release.outputs.release_created && success() }}
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          payload: |
+            {
+              "text": "🚀 New Release: @xsolla/pay-station-sdk ${{ steps.release.outputs.tag_name }}",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "✅ Release Published Successfully",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Package:*\n`@xsolla/pay-station-sdk`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Version:*\n`${{ steps.release.outputs.tag_name }}`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Release:*\n<${{ steps.release.outputs.html_url }}|View on GitHub>"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*NPM:*\n<https://www.npmjs.com/package/@xsolla/pay-station-sdk|View on NPM>"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "Released by ${{ github.event.head_commit.author.name }} • <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View workflow>"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      
+      # Send Slack notification on release failure
+      - name: Send failure notification to Slack
+        if: ${{ steps.release.outputs.release_created && failure() }}
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          payload: |
+            {
+              "text": "❌ Release Failed: @xsolla/pay-station-sdk ${{ steps.release.outputs.tag_name }}",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "❌ Release Failed",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Package:*\n`@xsolla/pay-station-sdk`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Version:*\n`${{ steps.release.outputs.tag_name }}`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch:*\n`${{ github.ref_name }}`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commit:*\n<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Failed Steps:* Check workflow logs for details"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "⚠️ *Action Required:* Check the workflow logs and fix the issue."
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Workflow Logs",
+                        "emoji": true
+                      },
+                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                      "style": "danger"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Release",
+                        "emoji": true
+                      },
+                      "url": "${{ steps.release.outputs.html_url }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "Triggered by ${{ github.event.head_commit.author.name }}"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
