@@ -10,3 +10,5 @@ export { NextActionType } from './core/actions/next-action-type.enum';
 export { FinanceDetails } from './core/finance-details/finance-details.interface';
 export { InitialOptions } from './features/headless-checkout/initial-options.interface';
 export { StatusEnum } from './core/status/status.enum';
+
+console.log('patch v1');
