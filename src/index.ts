@@ -12,4 +12,4 @@ export { InitialOptions } from './features/headless-checkout/initial-options.int
 export { StatusEnum } from './core/status/status.enum';
 
 console.log('patch v1');
-console.log('fix v1');
+console.log('fix v2');
