@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/p-zaslavsky/pay-station-sdk-sandbox/compare/v1.0.0...v1.1.0) (2025-10-17)
+
+
+### Features
+
+* real minor release! ([930a9ef](https://github.com/p-zaslavsky/pay-station-sdk-sandbox/commit/930a9ef84ddaf25c984bf08a5998efd371543ed3))
+* real minor release! ([58b1466](https://github.com/p-zaslavsky/pay-station-sdk-sandbox/commit/58b14662e24fbd0e4252afe8f5772e07583632a4))
+
 ## [1.0.0](https://github.com/p-zaslavsky/pay-station-sdk-sandbox/compare/v0.35.0...v1.0.0) (2025-10-17)
 
 
