@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.34.0](https://github.com/p-zaslavsky/pay-station-sdk/compare/v0.33.5...v0.34.0) (2025-10-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* major release!
+
+### Features
+
+* major release! ([5c76c5f](https://github.com/p-zaslavsky/pay-station-sdk/commit/5c76c5f9695cd7563a698f40f4f75e196e502068))
+
 ## [0.33.5](https://github.com/p-zaslavsky/pay-station-sdk/compare/v0.33.4...v0.33.5) (2025-10-17)
 
 
