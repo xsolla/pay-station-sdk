@@ -5,7 +5,8 @@
       "release-type": "node",
       "changelog-path": "CHANGELOG.md",
       "include-component-in-tag": false,
-      "bump-minor-pre-major": true
+      "bump-minor-pre-major": true,
+      "bootstrap-sha": "3b51441c70a972ca7fdcbdf14efb43dea96add3c"
     }
   }
 }
