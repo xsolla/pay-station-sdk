@@ -11,4 +11,5 @@ export { FinanceDetails } from './core/finance-details/finance-details.interface
 export { InitialOptions } from './features/headless-checkout/initial-options.interface';
 export { StatusEnum } from './core/status/status.enum';
 
-console.log('yaaaaay!');
+console.log('yaaaaay!!');
+console.log('new log!');
