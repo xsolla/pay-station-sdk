@@ -14,6 +14,7 @@
 
 ---
 
+
 ## What is Pay Station SDK?
 
 Pay Station SDK is a fully customizable payment solution that allows you to manage payments in browsers or WebView via Xsolla without using Xsolla Pay Station.
