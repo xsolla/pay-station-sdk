@@ -18,3 +18,4 @@ console.log('new feature');
 console.log('new feature 001 awesome');
 console.log('new feature 002 awesome');
 console.log('new feature 003 awesome');
+console.log('some fix was applied here');
