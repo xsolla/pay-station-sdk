@@ -1,5 +1,6 @@
 import { cardPid } from '../../features/headless-checkout/web-components/payment-methods/variables';
 import { XpsBoolean } from '../xps-boolean.enum';
+import { PaymentConfigurationApplePaySettings } from './types/apple-pay-form-configuration.interface';
 import { PaymentConfigurationCreditCardSettings } from './types/credit-card-form-configuration.interface';
 import { PaymentConfigurationGooglePaySettings } from './types/google-pay-form-configuration.interface';
 
@@ -26,4 +27,5 @@ interface PaymentConfigurationWithGeneralSettings
 export type FormConfiguration =
   | PaymentConfigurationCreditCardSettings
   | PaymentConfigurationGooglePaySettings
+  | PaymentConfigurationApplePaySettings
   | PaymentConfigurationWithGeneralSettings;
