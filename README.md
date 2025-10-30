@@ -282,33 +282,6 @@ Gets the user balance’s value, including amount and currency.
 </td>
 </tr>
 <tr>
-<td>initFormHandler</td>
-<td>EventName.initForm</td>
-<td>initForm</td>
-<td>
-<pre>
-<code>
-{
-  name: EventName.initForm;
-  data: {
-    configuration: {
-      paymentMethodId: number;
-      returnUrl: string;
-      country?: string;
-      paymentWithSavedMethod?: boolean;
-      savedMethodId?: number;
-      savePaymentMethod?: boolean;
-      overrideFormFields?: {
-        [key: string]: OverridedField
-      };
-    }
-  }
-}
-</code></pre>
-</td>
-<td>Initializes the payment form with the provided data.</td>
-</tr>
-<tr>
 <td>submitHandler</td>
 <td>EventName.submitForm</td>
 <td>submitForm</td>

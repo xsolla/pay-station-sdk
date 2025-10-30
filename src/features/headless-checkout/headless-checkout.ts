@@ -42,6 +42,8 @@ import { InitialOptions } from './initial-options.interface';
 import { submitHandler } from './post-messages-handlers/submit/submit.handler';
 import { externalInputChangeValueHandler } from './post-messages-handlers/external-input-change-value/external-input-change-value.handler';
 import { isGooglePaySettingsGuard } from '../../core/form/types/is-google-pay-settings.guard';
+import { isApplePaySettingsGuard } from '../../core/form/types/is-apple-pay-settings.guard';
+import { PaymentConfigurationApplePaySettings } from '../../core/form/types/apple-pay-form-configuration.interface';
 
 @singleton()
 export class HeadlessCheckout {
@@ -500,6 +502,28 @@ export class HeadlessCheckout {
       };
     }
 
+    if (isApplePaySettingsGuard(configuration)) {
+      configurationWithDefaultValues.paymentMethodSettings =
+        this.getDefaultApplePaySettings(configuration);
+    }
+
     return configurationWithDefaultValues;
+  }
+
+  private getDefaultApplePaySettings(
+    configuration: PaymentConfigurationApplePaySettings,
+  ): PaymentConfigurationApplePaySettings['paymentMethodSettings'] {
+    if (!configuration.paymentMethodSettings) {
+      return {
+        enableExternalWindowOpenMessage: false,
+      };
+    }
+
+    return {
+      ...configuration.paymentMethodSettings,
+      enableExternalWindowOpenMessage:
+        configuration.paymentMethodSettings?.enableExternalWindowOpenMessage ??
+        false,
+    };
   }
 }
