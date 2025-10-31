@@ -159,6 +159,10 @@
             showErrorsAction(nextAction);
             clearPaymentForm();
           }
+
+          if (nextAction.type === 'redirect') {
+            window.location.href = nextAction.data.redirect.redirectUrl;
+          }
         });
       }
 

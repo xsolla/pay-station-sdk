@@ -40,9 +40,8 @@ import { CountryResponse } from '../../core/country-response.interface';
 import { FormLoader } from '../../core/form/form-loader';
 import { InitialOptions } from './initial-options.interface';
 import { submitHandler } from './post-messages-handlers/submit/submit.handler';
-import {
-  externalInputChangeValueHandler
-} from './post-messages-handlers/external-input-change-value/external-input-change-value.handler';
+import { externalInputChangeValueHandler } from './post-messages-handlers/external-input-change-value/external-input-change-value.handler';
+import { isGooglePaySettingsGuard } from '../../core/form/types/is-google-pay-settings.guard';
 
 @singleton()
 export class HeadlessCheckout {
@@ -80,13 +79,14 @@ export class HeadlessCheckout {
      * @returns {Form} form details
      */
     init: async (configuration: FormConfiguration): Promise<Form> => {
-      this._formConfiguration = configuration;
+      this._formConfiguration =
+        this.getFormConfigurationWithDefaultValues(configuration);
       this.formStatus = FormStatus.pending;
 
       const msg: Message = {
         name: EventName.initForm,
         data: {
-          configuration,
+          configuration: this._formConfiguration,
         },
       };
 
@@ -151,7 +151,7 @@ export class HeadlessCheckout {
         name: EventName.externalChangeInputValue,
         data: {
           fieldName,
-          value
+          value,
         },
       };
 
@@ -246,7 +246,7 @@ export class HeadlessCheckout {
           sandbox: this.isSandbox,
           topLevelDomain: this.topLevelDomain,
           isApplePayInstantFlowEnabled: this.isApplePayInstantFlowEnabled,
-          locale: this.locale
+          locale: this.locale,
         },
       },
     };
@@ -484,5 +484,22 @@ export class HeadlessCheckout {
     }
     const themeStyles = this.themesLoader.getTheme();
     await this.setSecureComponentStyles(themeStyles);
+  }
+
+  private getFormConfigurationWithDefaultValues(
+    configuration: FormConfiguration,
+  ): FormConfiguration {
+    const configurationWithDefaultValues = configuration;
+
+    if (
+      isGooglePaySettingsGuard(configuration) &&
+      !configuration.paymentMethodSettings
+    ) {
+      configurationWithDefaultValues.paymentMethodSettings = {
+        useSdkHandlerForUserBackRedirect: true,
+      };
+    }
+
+    return configurationWithDefaultValues;
   }
 }
