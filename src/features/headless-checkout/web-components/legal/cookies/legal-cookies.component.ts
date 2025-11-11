@@ -6,7 +6,7 @@ import './legal-cookies.component.scss';
 export class LegalCookiesComponent extends LegalPartComponentAbstract {
   protected readonly componentName = 'LegalCookiesComponent';
 
-  protected getHtml(): string {
+  protected getLegalPartHtml(): string {
     return getLegalCookiesComponentTemplate();
   }
 }

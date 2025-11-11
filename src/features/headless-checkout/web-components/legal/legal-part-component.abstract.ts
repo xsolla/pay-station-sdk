@@ -15,6 +15,13 @@ export abstract class LegalPartComponentAbstract extends WebComponentAbstract {
     this.window = container.resolve(Window);
   }
 
+  protected abstract getLegalPartHtml(): string;
+
+  protected getHtml(): string {
+    const legalPartHtml = this.getLegalPartHtml();
+    return legalPartHtml !== '' ? ` ${legalPartHtml} ` : ''; // Return with spaces to prevent collapsing in some browsers
+  }
+
   protected connectedCallback(): void {
     if (!this.headlessCheckoutSpy.appWasInit) {
       this.headlessCheckoutSpy.listenAppInit(() => this.connectedCallback());
