@@ -6,7 +6,7 @@ import './legal-mor.component.scss';
 export class LegalMorComponent extends LegalConfigPartComponentAbstract {
   protected readonly componentName = 'LegalMorComponent';
 
-  protected getHtml(): string {
+  protected getLegalPartHtml(): string {
     if (this.config) {
       return getLegalMorComponentTemplate(this.config);
     }

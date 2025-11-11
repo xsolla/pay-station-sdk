@@ -8,7 +8,7 @@ export class LegalLinksComponent extends LegalConfigPartComponentAbstract {
   protected readonly componentName = 'LegalLinksComponent';
   protected config?: LegalComponentConfig;
 
-  protected getHtml(): string {
+  protected getLegalPartHtml(): string {
     if (this.config) {
       return getLegalLinksComponentTemplate(this.config);
     }
