@@ -1,12 +1,17 @@
 # Changelog
 
-## [0.2.0](https://github.com/xsolla/pay-station-sdk/compare/v0.1.31...v0.2.0) (2025-11-05)
+## [0.2.1](https://github.com/xsolla/pay-station-sdk/compare/v0.2.0...v0.2.1) (2025-11-12)
 
+### Bug Fixes
+
+- **PAYMENTS-26184:** fix spaces in legal texts ([61f3793](https://github.com/xsolla/pay-station-sdk/commit/61f3793ac110dbba99a62987fd35cdc8ab3f7650))
+
+## [0.2.0](https://github.com/xsolla/pay-station-sdk/compare/v0.1.31...v0.2.0) (2025-11-05)
 
 ### Features
 
-* **actions:** added a new flag for redirect action - isSameWindowRequired ([1f4a212](https://github.com/xsolla/pay-station-sdk/commit/1f4a212882289d15327df1517f53be9cf8e607a2))
-* **google-pay:** userback via flag ([0dfd19f](https://github.com/xsolla/pay-station-sdk/commit/0dfd19f37daa57df32ebf9b38001b41b6bc58f10))
+- **actions:** added a new flag for redirect action - isSameWindowRequired ([1f4a212](https://github.com/xsolla/pay-station-sdk/commit/1f4a212882289d15327df1517f53be9cf8e607a2))
+- **google-pay:** userback via flag ([0dfd19f](https://github.com/xsolla/pay-station-sdk/commit/0dfd19f37daa57df32ebf9b38001b41b6bc58f10))
 
 ## [0.0.3](https://github.com/xsolla/pay-station-sdk/compare/v0.0.2...v0.0.3) (2023-10-12)
 
