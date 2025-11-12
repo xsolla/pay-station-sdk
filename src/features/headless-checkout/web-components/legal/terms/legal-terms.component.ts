@@ -6,7 +6,7 @@ import './legal-terms.component.scss';
 export class LegalTermsComponent extends LegalConfigPartComponentAbstract {
   protected readonly componentName = 'LegalTermsComponent';
 
-  protected getHtml(): string {
+  protected getLegalPartHtml(): string {
     if (this.config) {
       return getLegalTermsComponentTemplate(this.config);
     }

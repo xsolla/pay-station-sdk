@@ -6,7 +6,7 @@ import './legal-support.component.scss';
 export class LegalSupportComponent extends LegalPartComponentAbstract {
   protected readonly componentName = 'LegalSupportComponent';
 
-  protected getHtml(): string {
+  protected getLegalPartHtml(): string {
     return getLegalSupportComponentTemplate();
   }
 }
