@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0](https://github.com/xsolla/pay-station-sdk/compare/v0.2.1...v0.3.0) (2025-11-18)
+
+### Features
+
+- **PAYMENTS-26178:** feat transactionInitiationType ([52cd6df](https://github.com/xsolla/pay-station-sdk/commit/52cd6df9c9737d1ed3f5192e2383aa7b29572aca))
+
+### Bug Fixes
+
+- **PAYMENTS-25007:** fix readme 3ds link ([c9dd1fe](https://github.com/xsolla/pay-station-sdk/commit/c9dd1fe8d083f9186b7b2f58a9a667a5b8584516))
+
 ## [0.2.1](https://github.com/xsolla/pay-station-sdk/compare/v0.2.0...v0.2.1) (2025-11-12)
 
 ### Bug Fixes
