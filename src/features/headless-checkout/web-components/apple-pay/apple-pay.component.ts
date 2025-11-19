@@ -17,6 +17,7 @@ import { applePayButtonClassName } from './apple-pay-button-classname.const';
 import './apple-pay.component.scss';
 import { applePayQrClosedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-qr-closed.handler';
 import { applePayQrOpenedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-qr-opened.handler';
+import { applePayButtonClickedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-button-clicked.handler';
 import { closeExternalWindowHandler } from '../../post-messages-handlers/close-external-window.handler';
 import { openExternalWindowHandler } from '../../post-messages-handlers/open-external-window.handler';
 import { isApplePaySettingsGuard } from '../../../../core/form/types/is-apple-pay-settings.guard';
@@ -120,6 +121,16 @@ export class ApplePayComponent extends SecureComponentAbstract {
         ),
       );
     }
+
+    this.subscriptions.push(
+      this.headlessCheckout.events.onCoreEvent(
+        EventName.applePayButtonClicked,
+        applePayButtonClickedHandler,
+        () => {
+          this.dispatchEvent(new CustomEvent(EventName.applePayButtonClicked));
+        },
+      ),
+    );
   }
 
   protected connectedCallback(): void {
