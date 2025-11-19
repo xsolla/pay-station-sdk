@@ -43,7 +43,6 @@ export const enum EventName {
   applePayQrOpened = 'applePayQrOpened',
   applePayQrClosed = 'applePayQrClosed',
   closeExternalWindow = 'closeExternalWindow',
-  openExternalWindow = 'openExternalWindow',
   sendCardBinCountry = 'sendCardBinCountry',
   cardBinCountryChanged = 'cardBinCountryChanged',
 }
