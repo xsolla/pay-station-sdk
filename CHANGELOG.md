@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/xsolla/pay-station-sdk/compare/v0.3.0...v0.3.1) (2025-11-20)
+
+
+### Bug Fixes
+
+* add optional external window open event for Apple Pay ([93601d5](https://github.com/xsolla/pay-station-sdk/commit/93601d5f414e2e1f210106337e6b9879467e1e15))
+* add support for new Apple Pay window edge cases ([060dd0a](https://github.com/xsolla/pay-station-sdk/commit/060dd0ad303d45f75c6d86fb22238455273f5f28))
+
 ## [0.3.0](https://github.com/xsolla/pay-station-sdk/compare/v0.2.1...v0.3.0) (2025-11-18)
 
 ### Features
