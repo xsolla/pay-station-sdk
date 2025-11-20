@@ -122,6 +122,14 @@
            * Refer to `examples/return.html` for more details.
            */
           returnUrl: 'http://return',
+
+          paymentMethodSettings: {
+            /**
+             * Enables applePayWindowOpened to handle edge cases related to external window openings;
+             * set to false by default.
+             */
+            enableExternalWindowOpenMessage: true,
+          },
         });
       }
 
@@ -171,6 +179,12 @@
        */
       function listenApplePayEvents() {
         const applePayButton = document.querySelector('psdk-apple-pay');
+
+        // Handle Apple Pay window opened event
+        applePayButton.addEventListener('applePayWindowOpened', () => {
+          console.log('Apple Pay: window opened');
+          // Add custom logic for handling window opening here
+        });
 
         // Handle Apple Pay window closed event
         applePayButton.addEventListener('applePayWindowClosed', () => {
