@@ -47,6 +47,9 @@ export class ApplePayComponent extends SecureComponentAbstract {
         (res) => {
           if (res?.error) {
             this.drawError(res.error);
+            this.dispatchEvent(
+              new CustomEvent(EventName.applePayError, { detail: res.error }),
+            );
           }
         },
       ),
