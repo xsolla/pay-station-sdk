@@ -111,6 +111,7 @@ export class ThreeDsComponent extends WebComponentAbstract {
   }
 
   private openChallengeWindowViaForm(form: HTMLFormElement): void {
+    this.window.open('', '_self');
     form.submit();
     this.elementRef.removeChild(form);
   }
