@@ -44,6 +44,7 @@ import { externalInputChangeValueHandler } from './post-messages-handlers/extern
 import { isGooglePaySettingsGuard } from '../../core/form/types/is-google-pay-settings.guard';
 import { isApplePaySettingsGuard } from '../../core/form/types/is-apple-pay-settings.guard';
 import { PaymentConfigurationApplePaySettings } from '../../core/form/types/apple-pay-form-configuration.interface';
+import { PaymentConfigurationGooglePaySettings } from '../../core/form/types/google-pay-form-configuration.interface';
 
 @singleton()
 export class HeadlessCheckout {
@@ -497,9 +498,8 @@ export class HeadlessCheckout {
       isGooglePaySettingsGuard(configuration) &&
       !configuration.paymentMethodSettings
     ) {
-      configurationWithDefaultValues.paymentMethodSettings = {
-        useSdkHandlerForUserBackRedirect: true,
-      };
+      configurationWithDefaultValues.paymentMethodSettings =
+        this.getDefaultGooglePaySettings(configuration);
     }
 
     if (isApplePaySettingsGuard(configuration)) {
@@ -508,6 +508,23 @@ export class HeadlessCheckout {
     }
 
     return configurationWithDefaultValues;
+  }
+
+  private getDefaultGooglePaySettings(
+    configuration: PaymentConfigurationGooglePaySettings,
+  ): PaymentConfigurationGooglePaySettings['paymentMethodSettings'] {
+    if (!configuration.paymentMethodSettings) {
+      return {
+        useSdkHandlerForUserBackRedirect: true,
+      };
+    }
+
+    return {
+      ...configuration.paymentMethodSettings,
+      useSdkHandlerForUserBackRedirect:
+        configuration.paymentMethodSettings?.useSdkHandlerForUserBackRedirect ??
+        true,
+    };
   }
 
   private getDefaultApplePaySettings(
