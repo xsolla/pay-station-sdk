@@ -33,34 +33,6 @@ function buildPaymentFlow() {
 
   let redirectUrl = '';
 
-  function handleRedirectAction(redirectAction) {
-    /**
-     * Handle redirect to 3-D Secure procedure.
-     */
-    const url = new URL(redirectAction.data.redirect.redirectUrl);
-    const params = Object.entries(redirectAction.data.redirect.data);
-    params.forEach((entry) => {
-      const [key, value] = entry;
-      url.searchParams.append(key, value);
-    });
-
-    // Show additional step with button to get trusted event and
-    // open 3-D Secure in a new tab for specific ACS providers
-    if (redirectAction.data.redirect.isNewWindowRequired) {
-      redirectUrl = url.toString();
-
-      clearFormFields();
-      renderRedirectButton();
-
-      return;
-    }
-
-    /**
-     * Open 3-D Secure in the same tab.
-     */
-    this.window.location.href = url.toString();
-  }
-
   function renderFields(requiredFields) {
     /**
      * It is important to render every every required field as a component according to its own type or
@@ -147,22 +119,6 @@ function buildPaymentFlow() {
     formElement.append(button);
   }
 
-  function handle3dsAction(threeDsAction) {
-    /**
-     * Create the 3-D Secure component. It will handle the 3-D Secure verification flow.
-     * You can use the <psdk-3ds></psdk-3ds> component as well.
-     */
-
-    const threeDsComponent = new PayStationSdk.ThreeDsComponent();
-
-    threeDsComponent.setAttribute(
-      'data-challenge',
-      JSON.stringify(threeDsAction.data.data),
-    );
-
-    document.getElementById('right-col').append(threeDsComponent);
-  }
-
   function renderStatusComponent() {
     /**
      * Create the status component. It will be updated once a payment status changed.
@@ -170,6 +126,54 @@ function buildPaymentFlow() {
      */
     const statusComponent = new PayStationSdk.StatusComponent();
     statusElement.append(statusComponent);
+  }
+
+  function handleRedirectAction(redirectAction) {
+    /**
+     * Handle redirect to 3-D Secure procedure.
+     */
+    const url = new URL(redirectAction.data.redirect.redirectUrl);
+    const params = Object.entries(redirectAction.data.redirect.data);
+    params.forEach((entry) => {
+      const [key, value] = entry;
+      url.searchParams.append(key, value);
+    });
+
+    // Show additional step with button to get trusted event and
+    // open 3-D Secure in a new tab for specific ACS providers
+    if (redirectAction.data.redirect.isNewWindowRequired) {
+      redirectUrl = url.toString();
+
+      clearFormFields();
+      renderRedirectButton();
+
+      return;
+    }
+
+    /**
+     * Open 3-D Secure in the same tab.
+     */
+    this.window.location.href = url.toString();
+  }
+
+  function handle3dsAction(threeDsAction) {
+    clearFormFields();
+
+    /**
+     * Create the 3-D Secure component. It will handle the 3-D Secure verification flow.
+     * You can use the <psdk-3ds></psdk-3ds> component as well.
+     */
+    const threeDsComponent = new PayStationSdk.ThreeDsComponent();
+
+    threeDsComponent.setAttribute(
+      'data-challenge',
+      JSON.stringify(threeDsAction.data.data),
+    );
+    // Show additional step with button to get trusted event and
+    // open 3-D Secure in a new tab for specific token settings (like is_three_ds_independent_windows)
+    threeDsComponent.setAttribute('text', 'Continue');
+
+    document.querySelector('.right-col').append(threeDsComponent);
   }
 
   function clearFormFields() {

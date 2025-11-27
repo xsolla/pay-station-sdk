@@ -66,6 +66,10 @@ describe('ThreeDsComponent', () => {
       params: {
         foo: 'bar',
       },
+      redirect: {
+        isNewWindowRequired: false,
+        isSameWindowRequired: true,
+      },
     } as CheckoutForm;
 
     const createElementSpy = spyOn(
