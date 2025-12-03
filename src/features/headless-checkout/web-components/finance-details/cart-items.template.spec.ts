@@ -15,36 +15,6 @@ const item: CartItem = {
   isBonus: false,
 };
 
-const itemWithImage = {
-  ...item,
-  imgSrc: 'imgSrc',
-};
-
-const itemWithDiscount: CartItem = {
-  ...item,
-  priceBeforeDiscount: {
-    amount: 1,
-    currency: 'USD',
-  },
-};
-
-const itemWithTax: CartItem = {
-  ...item,
-  tax: {
-    key: 'vat',
-    title: 'tax-title',
-    money: {
-      amount: 1,
-      currency: 'USD',
-    },
-  },
-};
-
-const itemWithQuantity: CartItem = {
-  ...item,
-  quantity: 2,
-};
-
 const itemCheckout: CartItem = {
   ...item,
   key: 'checkout',
@@ -56,30 +26,15 @@ describe('getCartItemsTemplate', () => {
     expect(getCartItemsTemplate([])).toEqual('');
   });
 
-  it('Should not draw image', () => {
-    expect(getCartItemsTemplate([item])).not.toContain('img');
+  it('Should draw CartItemComponent', () => {
+    expect(getCartItemsTemplate([item])).toContain('psdk-cart-item');
   });
 
-  it('Should draw image', () => {
-    expect(getCartItemsTemplate([itemWithImage])).toContain('img');
-  });
-
-  it('Should draw price before discount', () => {
-    expect(getCartItemsTemplate([itemWithDiscount])).toContain(
-      'price-before-discount'
-    );
-  });
-
-  it('Should draw tax', () => {
-    expect(getCartItemsTemplate([itemWithTax])).toContain('tax');
-  });
-
-  it('Should draw item quantity', () => {
-    expect(getCartItemsTemplate([itemWithQuantity])).toContain('2 x');
-  });
-
-  it('Should draw checkout item', () => {
+  it('Should translate title of item', () => {
     spyOn(i18next, 't').and.returnValue('In-game purchase');
-    expect(getCartItemsTemplate([itemCheckout])).toContain('In-game purchase');
+
+    expect(getCartItemsTemplate([itemCheckout])).toContain(
+      encodeURIComponent('In-game purchase'),
+    );
   });
 });
