@@ -1,12 +1,23 @@
 # Changelog
 
-## [0.3.1](https://github.com/xsolla/pay-station-sdk/compare/v0.3.0...v0.3.1) (2025-11-20)
+## [0.4.0](https://github.com/xsolla/pay-station-sdk/compare/v0.3.1...v0.4.0) (2025-12-03)
 
+### Features
+
+- **PAYMENTS-26264:** fix apple pay error message ([a4163c2](https://github.com/xsolla/pay-station-sdk/commit/a4163c2e74be56c6a57771195f5ee55072ccafaa))
+- **PAYMENTS-26264:** unify google/apple pay events ([99562e9](https://github.com/xsolla/pay-station-sdk/commit/99562e9d3e46db6773ada91b4ff7251e59adc8c6))
+- **three-ds:** added extra step for an external challenge window ([53b1785](https://github.com/xsolla/pay-station-sdk/commit/53b1785d2c5f54b0dfa89bad289daf4d8d320c94))
 
 ### Bug Fixes
 
-* add optional external window open event for Apple Pay ([93601d5](https://github.com/xsolla/pay-station-sdk/commit/93601d5f414e2e1f210106337e6b9879467e1e15))
-* add support for new Apple Pay window edge cases ([060dd0a](https://github.com/xsolla/pay-station-sdk/commit/060dd0ad303d45f75c6d86fb22238455273f5f28))
+- **headless-checkout:** fix default settings handling for google pay ([a9eec87](https://github.com/xsolla/pay-station-sdk/commit/a9eec87c20663edeed19bbe61412270a8f42a770))
+
+## [0.3.1](https://github.com/xsolla/pay-station-sdk/compare/v0.3.0...v0.3.1) (2025-11-20)
+
+### Bug Fixes
+
+- add optional external window open event for Apple Pay ([93601d5](https://github.com/xsolla/pay-station-sdk/commit/93601d5f414e2e1f210106337e6b9879467e1e15))
+- add support for new Apple Pay window edge cases ([060dd0a](https://github.com/xsolla/pay-station-sdk/commit/060dd0ad303d45f75c6d86fb22238455273f5f28))
 
 ## [0.3.0](https://github.com/xsolla/pay-station-sdk/compare/v0.2.1...v0.3.0) (2025-11-18)
 
