@@ -2,12 +2,18 @@ import { container } from 'tsyringe';
 import { WebComponentAbstract } from '../../../../core/web-components/web-component.abstract';
 import { CheckoutForm } from '../../../../core/actions/three-ds/checkout-form.interface';
 import { ThreeDsAttributes } from './three-ds-attributes.enum';
+import { threeDsRedirectButtonTemplate } from './three-ds.template';
+import './three-ds.component.scss';
 
 export class ThreeDsComponent extends WebComponentAbstract {
   private readonly window: Window;
 
   private get elementRef(): HTMLElement {
     return this.querySelector('div')! as HTMLElement;
+  }
+
+  private get redirectButtonRef(): HTMLButtonElement {
+    return this.querySelector('button')! as HTMLButtonElement;
   }
 
   private get challengeAttribute(): CheckoutForm | null {
@@ -31,31 +37,51 @@ export class ThreeDsComponent extends WebComponentAbstract {
   }
 
   public static get observedAttributes(): string[] {
-    return [ThreeDsAttributes.challenge];
+    return [ThreeDsAttributes.challenge, ThreeDsAttributes.text];
   }
 
   protected connectedCallback(): void {
-    if (this.challengeAttribute) {
-      this.render();
-
-      this.openChallengeWindowViaForm(this.challengeAttribute);
-    }
+    this.handleChallengeFlow();
   }
 
   protected attributeChangedCallback(): void {
-    if (this.challengeAttribute) {
-      this.render();
-
-      this.openChallengeWindowViaForm(this.challengeAttribute);
-    }
+    this.handleChallengeFlow();
   }
 
   protected getHtml(): string {
+    if (this.challengeAttribute?.redirect.isNewWindowRequired) {
+      return threeDsRedirectButtonTemplate(
+        this.getAttribute(ThreeDsAttributes.text) ?? '',
+      );
+    }
+
     return '<div></div>';
   }
 
-  private openChallengeWindowViaForm(checkoutFormData: CheckoutForm): void {
-    const target = '_self';
+  private handleChallengeFlow(): void {
+    if (this.challengeAttribute) {
+      this.render();
+
+      const form = this.renderChallengeWindowForm(this.challengeAttribute);
+
+      // case for external window
+      if (this.redirectButtonRef) {
+        this.addEventListenerToElement(this.elementRef, 'click', () => {
+          this.openChallengeWindowViaForm(form);
+        });
+      }
+
+      // will open on same window
+      if (this.challengeAttribute.redirect.isSameWindowRequired) {
+        this.openChallengeWindowViaForm(form);
+      }
+    }
+  }
+
+  private renderChallengeWindowForm(
+    checkoutFormData: CheckoutForm,
+  ): HTMLFormElement {
+    const target = this.getFormTarget(checkoutFormData);
     const attributes: { [key: string]: string } = {
       method: checkoutFormData.method,
       action: checkoutFormData.action,
@@ -79,11 +105,14 @@ export class ThreeDsComponent extends WebComponentAbstract {
 
     this.elementRef.append(form);
 
-    this.window.open('', target);
-
     form.target = target;
-    form.submit();
 
+    return form;
+  }
+
+  private openChallengeWindowViaForm(form: HTMLFormElement): void {
+    this.window.open('', '_self');
+    form.submit();
     this.elementRef.removeChild(form);
   }
 
@@ -94,5 +123,15 @@ export class ThreeDsComponent extends WebComponentAbstract {
     Object.keys(attributes).forEach((name) => {
       element.setAttribute(name, attributes[name]);
     });
+  }
+
+  private getFormTarget(checkoutFormData: CheckoutForm): '_self' | '_blank' {
+    const redirectParams = checkoutFormData?.redirect;
+
+    if (redirectParams?.isNewWindowRequired) {
+      return '_blank';
+    }
+
+    return '_self';
   }
 }
