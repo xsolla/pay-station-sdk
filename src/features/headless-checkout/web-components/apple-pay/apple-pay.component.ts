@@ -9,7 +9,6 @@ import { applePayErrors } from './apple-pay.errors.const';
 import i18next from 'i18next';
 import { FormSpy } from '../../../../core/spy/form-spy/form-spy';
 import { finishLoadComponentHandler } from '../../post-messages-handlers/finish-load-component.handler';
-import { headlessCheckoutAppUrl } from '../../environment';
 import { openApplePayPageHandler } from '../../post-messages-handlers/apple-pay/open-apple-pay-page.handler';
 import { getWaitingProcessingTemplate } from './waiting-processing.template';
 import { waitingProcessingClassname } from './waiting-processing-classname.const';
@@ -160,7 +159,8 @@ export class ApplePayComponent extends SecureComponentAbstract {
   }
 
   protected getSecureHtml(): string {
-    return `<iframe id="apple-pay-iframe" src='${headlessCheckoutAppUrl}/secure-components/${this
+    const appUrl = this.environmentService.getHeadlessCheckoutAppUrl();
+    return `<iframe id="apple-pay-iframe" src='${appUrl}/secure-components/${this
       .componentName!}' allow='payment'></iframe>`;
   }
 

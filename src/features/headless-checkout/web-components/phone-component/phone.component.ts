@@ -1,5 +1,4 @@
 import { PhoneComponentAttributes } from './phone-component-attributes.enum';
-import { headlessCheckoutAppUrl } from '../../environment';
 import { TextComponent } from '../text-component/text.component';
 
 export class PhoneComponent extends TextComponent {
@@ -19,7 +18,8 @@ export class PhoneComponent extends TextComponent {
       throw new Error('Component name is required');
     }
 
-    let src = `${headlessCheckoutAppUrl}/secure-components/${this.componentName}`;
+    const appUrl = this.environmentService.getHeadlessCheckoutAppUrl();
+    let src = `${appUrl}/secure-components/${this.componentName}`;
     const showFlags = this.getAttribute(PhoneComponentAttributes.showFlags);
 
     if (showFlags) {
