@@ -12,7 +12,6 @@ import { isEventMessage } from '../../../../core/guards/event-message.guard';
 import { CashPaymentData } from '../../../../core/cash-payment-data.interface';
 import { getCashPaymentDataHandler } from '../../post-messages-handlers/get-cash-payment-data/get-cash-payment-data.handler';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
-import { headlessCheckoutAppUrl } from '../../environment';
 import { getXsollaNumberComponentTemplate } from './templates/get-xsolla-number.compontent.template';
 import './xsolla-number.component.scss';
 import { SendButtonStatus } from './send-button-status.interface';
@@ -56,8 +55,9 @@ export class XsollaNumberComponent extends SecureComponentAbstract {
   }
 
   protected getHtml(): string {
-    const emailControl = `<iframe src='${headlessCheckoutAppUrl}/secure-components/xsolla-number/email'></iframe>`;
-    const phoneControl = `<iframe src='${headlessCheckoutAppUrl}/secure-components/xsolla-number/phone'></iframe>`;
+    const appUrl = this.environmentService.getHeadlessCheckoutAppUrl();
+    const emailControl = `<iframe src='${appUrl}/secure-components/xsolla-number/email'></iframe>`;
+    const phoneControl = `<iframe src='${appUrl}/secure-components/xsolla-number/phone'></iframe>`;
     const title = this.cashPaymentData?.title;
     const userName = this.cashPaymentData?.publicId;
     const xsollaNumber = this.cashPaymentData?.xsollaNumber;

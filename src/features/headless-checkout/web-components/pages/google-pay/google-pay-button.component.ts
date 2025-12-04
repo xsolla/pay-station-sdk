@@ -1,5 +1,4 @@
 import { SecureComponentAbstract } from '../../../../../core/web-components/secure-component/secure-component.abstract';
-import { headlessCheckoutAppUrl } from '../../../environment';
 import { GooglePayButtonColorType } from './google-pay-button-color.type';
 import { EventName } from '../../../../../core/event-name.enum';
 import { container } from 'tsyringe';
@@ -93,6 +92,7 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
   }
 
   protected getSecureHtml(): string {
-    return `<iframe allow='payment' src='${headlessCheckoutAppUrl}/secure-components/${this.componentName}?buttonColor=${this.buttonColor}'></iframe>`;
+    const appUrl = this.environmentService.getHeadlessCheckoutAppUrl();
+    return `<iframe allow='payment' src='${appUrl}/secure-components/${this.componentName}?buttonColor=${this.buttonColor}'></iframe>`;
   }
 }
