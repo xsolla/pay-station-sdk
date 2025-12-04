@@ -10,6 +10,7 @@ import { FormStatus } from '../../core/status/form-status.enum';
 import { noopStub } from '../../tests/stubs/noop.stub';
 import { headlessCheckoutAppUrl } from './environment';
 import { ThemesLoader } from '../../core/customization/themes-loader';
+import { EnvironmentService } from '../../core/environment/environment.service';
 import { submitHandler } from './post-messages-handlers/submit/submit.handler';
 
 const mockMessage: Message = {
@@ -43,6 +44,7 @@ describe('HeadlessCheckout', () => {
   let postMessagesClient: PostMessagesClient;
   let localizeService: LocalizeService;
   let themesLoader: ThemesLoader;
+  let environmentService: EnvironmentService;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const stub = (): void => {};
@@ -71,6 +73,11 @@ describe('HeadlessCheckout', () => {
       getTheme: () => 'body { margin: 0;}',
     } as unknown as ThemesLoader;
 
+    environmentService = {
+      isSandbox: false,
+      getHeadlessCheckoutAppUrl: () => headlessCheckoutAppUrl,
+    } as unknown as EnvironmentService;
+
     container.clearInstances();
 
     headlessCheckout = container
@@ -84,6 +91,9 @@ describe('HeadlessCheckout', () => {
       })
       .register<ThemesLoader>(ThemesLoader, {
         useValue: themesLoader,
+      })
+      .register<EnvironmentService>(EnvironmentService, {
+        useValue: environmentService,
       })
       .registerSingleton(HeadlessCheckout)
       .resolve(HeadlessCheckout);

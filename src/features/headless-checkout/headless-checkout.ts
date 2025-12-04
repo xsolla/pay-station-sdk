@@ -24,7 +24,7 @@ import { getUserBalanceHandler } from './post-messages-handlers/get-user-balance
 import { nextActionHandler } from './post-messages-handlers/next-action.handler';
 import { Field } from '../../core/form/field.interface';
 import { getPaymentStatusHandler } from './post-messages-handlers/get-payment-status/get-payment-status.handler';
-import { headlessCheckoutAppUrl } from './environment';
+import { EnvironmentService } from '../../core/environment/environment.service';
 import { FinanceDetails } from '../../core/finance-details/finance-details.interface';
 import { getFinanceDetailsHandler } from './post-messages-handlers/get-finance-details.handler';
 import { FormStatus } from '../../core/status/form-status.enum';
@@ -177,14 +177,12 @@ export class HeadlessCheckout {
 
   private formStatus: FormStatus = FormStatus.undefined;
   private isWebView?: boolean;
-  private isSandbox?: boolean;
   private theme?: string;
   private topLevelDomain?: string;
   private isApplePayInstantFlowEnabled = false;
   private locale = Lang.EN;
   private coreIframe!: HTMLIFrameElement;
   private errorsSubscription?: () => void;
-  private readonly headlessAppUrl = headlessCheckoutAppUrl;
   private _formConfiguration?: FormConfiguration;
 
   public constructor(
@@ -195,11 +193,12 @@ export class HeadlessCheckout {
     private readonly formSpy: FormSpy,
     private readonly themesLoader: ThemesLoader,
     private readonly formLoader: FormLoader,
+    private readonly environmentService: EnvironmentService,
   ) {}
 
   public async init(environment: InitialOptions): Promise<void> {
     this.isWebView = environment.isWebview;
-    this.isSandbox = environment.sandbox;
+    this.environmentService.isSandbox = !!environment.sandbox;
     this.theme = environment.theme;
     this.topLevelDomain = environment.topLevelDomain;
     this.isApplePayInstantFlowEnabled =
@@ -208,11 +207,17 @@ export class HeadlessCheckout {
 
     await this.localizeService.initDictionaries(environment.language);
 
-    this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
+    this.postMessagesClient.init(
+      this.coreIframe,
+      this.environmentService.getHeadlessCheckoutAppUrl(),
+    );
     await this.setupCoreIframe();
     this.defineComponents();
 
-    this.postMessagesClient.init(this.coreIframe, this.headlessAppUrl);
+    this.postMessagesClient.init(
+      this.coreIframe,
+      this.environmentService.getHeadlessCheckoutAppUrl(),
+    );
     void this.setupSecureStyles(this.theme);
     this.errorsSubscription = this.postMessagesClient.listen<string>(
       EventName.error,
@@ -246,7 +251,7 @@ export class HeadlessCheckout {
         configuration: {
           token,
           isWebView: this.isWebView,
-          sandbox: this.isSandbox,
+          sandbox: this.environmentService.isSandbox,
           topLevelDomain: this.topLevelDomain,
           isApplePayInstantFlowEnabled: this.isApplePayInstantFlowEnabled,
           locale: this.locale,
@@ -444,7 +449,7 @@ export class HeadlessCheckout {
     this.coreIframe.height = '0px';
     this.coreIframe.style.border = 'none';
     this.coreIframe.style.position = 'absolute';
-    this.coreIframe.src = `${this.headlessAppUrl}/core`;
+    this.coreIframe.src = `${this.environmentService.getHeadlessCheckoutAppUrl()}/core`;
     this.coreIframe.name = 'core';
     this.window.document.body.appendChild(this.coreIframe);
     return this.listenCoreIframeLoading();
