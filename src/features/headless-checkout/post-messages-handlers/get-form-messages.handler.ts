@@ -3,7 +3,7 @@ import { Handler } from '../../../core/post-messages-client/handler.type';
 import { isFormMessagesEventMessage } from '../../../core/guards/form-messages.guard';
 
 export const getFormMessagesHandler: Handler<string[]> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value?: string[] } | null => {
   if (isFormMessagesEventMessage(message)) {
     return {

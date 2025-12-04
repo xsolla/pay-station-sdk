@@ -4,7 +4,7 @@ import { Message } from '../../../core/message.interface';
 import { Handler } from '../../../core/post-messages-client/handler.type';
 
 export const getFinanceDetailsHandler: Handler<FinanceDetails | null> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value?: FinanceDetails | null } | null => {
   if (isFinanceDetailsEventMessage(message)) {
     return {

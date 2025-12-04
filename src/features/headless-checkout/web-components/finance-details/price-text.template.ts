@@ -4,7 +4,7 @@ import { CartLine } from '../../../../core/finance-details/cart-line.interface';
 export const getPriceTextTemplate = (
   cartLine?: CartLine | null,
   price?: Price | null,
-  className?: string
+  className?: string,
 ): string => {
   const priceLineContent = cartLine?.content ?? '';
   const priceLineAmount = cartLine?.money?.amount ?? '';

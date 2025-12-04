@@ -4,7 +4,7 @@ import { Form } from '../form/form.interface';
 import { isEventMessage } from './event-message.guard';
 
 export const isInitFormEventMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<Form> => {
   if (isEventMessage(messageData)) {
     return messageData.name === EventName.initForm;

@@ -3,7 +3,7 @@ import { Handler } from '../../../core/post-messages-client/handler.type';
 import { isUpdateCreditCardTypeMessage } from '../../../core/guards/update-credit-card-type.guard';
 
 export const updateCreditCardTypeHandler: Handler<{ cardType: string }> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value?: { cardType: string } } | null => {
   if (isUpdateCreditCardTypeMessage(message)) {
     return {

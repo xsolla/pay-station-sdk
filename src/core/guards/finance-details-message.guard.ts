@@ -4,7 +4,7 @@ import { FinanceDetails } from '../finance-details/finance-details.interface';
 import { isEventMessage } from './event-message.guard';
 
 export const isFinanceDetailsEventMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<FinanceDetails> => {
   if (isEventMessage(messageData)) {
     return messageData.name === EventName.financeDetails;

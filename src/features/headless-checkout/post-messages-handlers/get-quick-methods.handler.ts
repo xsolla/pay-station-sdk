@@ -5,7 +5,7 @@ import { isMethodsEventMessage } from '../../../core/guards/methods-event-messag
 import { EventName } from '../../../core/event-name.enum';
 
 export const getQuickMethodsHandler: Handler<PaymentMethod[]> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value: PaymentMethod[] } | null => {
   if (
     isMethodsEventMessage(message) &&

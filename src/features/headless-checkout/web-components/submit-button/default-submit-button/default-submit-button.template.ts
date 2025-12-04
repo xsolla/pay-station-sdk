@@ -6,7 +6,7 @@ const getLoaderTemplate = (): string => {
 
 export const getSubmitButtonTemplate = (
   text: string,
-  isLoading: boolean
+  isLoading: boolean,
 ): string => {
   return `
     <button>

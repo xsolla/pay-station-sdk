@@ -15,7 +15,7 @@ describe('getPaymentStatusHandler', () => {
 
   it('should return null', () => {
     expect(
-      getPaymentStatusHandler({ name: EventName.getPaymentMethodsList })
+      getPaymentStatusHandler({ name: EventName.getPaymentMethodsList }),
     ).toBeNull();
   });
 });
