@@ -20,7 +20,7 @@ describe('openApplePayPageHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      openApplePayPageHandler({ name: EventName.getSavedMethods })
+      openApplePayPageHandler({ name: EventName.getSavedMethods }),
     ).toBeNull();
   });
 });

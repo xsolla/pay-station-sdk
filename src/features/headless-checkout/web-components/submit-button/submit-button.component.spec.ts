@@ -10,7 +10,7 @@ import { FormConfiguration } from '../../../../core/form/form-configuration.inte
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.SubmitButtonComponent
+    WebComponentTagName.SubmitButtonComponent,
   );
   element.setAttribute('text', 'Pay Now');
   element.setAttribute('id', 'test');
@@ -24,7 +24,7 @@ describe('SubmitButtonComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.SubmitButtonComponent,
-    SubmitButtonComponent
+    SubmitButtonComponent,
   );
 
   beforeEach(() => {
@@ -81,18 +81,18 @@ describe('SubmitButtonComponent', () => {
     createComponent();
     expect(
       document.querySelector(WebComponentTagName.SubmitButtonComponent)!
-        .innerHTML
+        .innerHTML,
     ).toContain(WebComponentTagName.DefaultSubmitButtonComponent);
   });
 
   it('Should draw apple pay button', () => {
     spyOnProperty(headlessCheckout, 'formConfiguration', 'get').and.returnValue(
-      { paymentMethodId: applePayId } as FormConfiguration
+      { paymentMethodId: applePayId } as FormConfiguration,
     );
     createComponent();
     expect(
       document.querySelector(WebComponentTagName.SubmitButtonComponent)!
-        .innerHTML
+        .innerHTML,
     ).toContain(WebComponentTagName.ApplePayComponent);
   });
 });

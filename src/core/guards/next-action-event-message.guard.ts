@@ -4,7 +4,7 @@ import { Message } from '../message.interface';
 import { isEventMessage } from './event-message.guard';
 
 export const isNextActionEventMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<NextAction> => {
   if (isEventMessage(messageData)) {
     return messageData.name === EventName.nextAction;

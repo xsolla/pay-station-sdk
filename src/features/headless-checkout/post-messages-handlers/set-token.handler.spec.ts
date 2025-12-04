@@ -13,7 +13,7 @@ describe('getRegularMethodsHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      setTokenHandler({ name: EventName.getPaymentMethodsList })
+      setTokenHandler({ name: EventName.getPaymentMethodsList }),
     ).toBeNull();
   });
 });

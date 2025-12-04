@@ -4,7 +4,7 @@ import { UserBalanceType } from './user-balance.type';
 
 export const getUserBalanceTemplate = (
   balance: UserBalanceType,
-  noBalanceTemplate: string
+  noBalanceTemplate: string,
 ): string => {
   const currencyPipe = container.resolve(CurrencyPipe);
   if (balance?.amount) {
