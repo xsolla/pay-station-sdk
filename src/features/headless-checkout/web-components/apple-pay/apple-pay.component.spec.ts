@@ -20,7 +20,7 @@ describe('ApplePayComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.ApplePayComponent,
-    ApplePayComponent
+    ApplePayComponent,
   );
 
   beforeEach(() => {

@@ -4,7 +4,7 @@ import { UserBalance } from '../../../core/user-balance.interface';
 import { isUserBalanceEventMessage } from '../../../core/guards/user-balance-event-message.guard';
 
 export const getUserBalanceHandler: Handler<UserBalance> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value: UserBalance } | null => {
   if (!isUserBalanceEventMessage(message)) {
     return null;

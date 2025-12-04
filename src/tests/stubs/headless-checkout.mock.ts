@@ -7,7 +7,7 @@ export class HeadlessCheckoutMock<T> {
     onCoreEvent: (
       name: string,
       handler: Handler<string>,
-      callback: (value: T | null) => void
+      callback: (value: T | null) => void,
     ): void => {
       this.addEventListener(callback);
     },

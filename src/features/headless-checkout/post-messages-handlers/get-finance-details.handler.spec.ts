@@ -20,7 +20,7 @@ describe('getFinanceDetailsHandler', () => {
 
   it('Should not handle not financeDetails event', () => {
     expect(
-      getFinanceDetailsHandler({ name: EventName.initPayment })
+      getFinanceDetailsHandler({ name: EventName.initPayment }),
     ).toBeNull();
   });
 });

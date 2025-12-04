@@ -23,7 +23,7 @@ describe('getUserBalanceHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      getUserBalanceHandler({ name: EventName.getSavedMethods })
+      getUserBalanceHandler({ name: EventName.getSavedMethods }),
     ).toBeNull();
   });
 });

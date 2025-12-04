@@ -4,7 +4,7 @@ import { EventName } from '../../core/event-name.enum';
 import { PaymentMethod } from '../../core/payment-method.interface';
 
 export const isMethodsEventMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<{ methods: PaymentMethod[] }> => {
   if (isEventMessage(messageData)) {
     return (

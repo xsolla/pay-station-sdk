@@ -26,7 +26,7 @@ function getItemByKey(items: CartLine[], key: string): CartLine | undefined {
 }
 
 export const getTransactionDetailsTemplate = (
-  detailsItems?: CartLine[]
+  detailsItems?: CartLine[],
 ): string => {
   if (!detailsItems?.length) {
     return '';

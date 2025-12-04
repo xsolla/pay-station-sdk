@@ -8,7 +8,7 @@ import { HeadlessCheckout } from '../../headless-checkout';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.PaymentFormMessages
+    WebComponentTagName.PaymentFormMessages,
   );
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
@@ -20,7 +20,7 @@ describe('PaymentFormMessagesComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.PaymentFormMessages,
-    PaymentFormMessagesComponent
+    PaymentFormMessagesComponent,
   );
 
   beforeEach(() => {
@@ -52,14 +52,14 @@ describe('PaymentFormMessagesComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.PaymentFormMessages)
+      document.querySelector(WebComponentTagName.PaymentFormMessages),
     ).toBeDefined();
   });
 
   it('Should subscribe to form messages event', () => {
     const spy = spyOn(headlessCheckout.events, 'onCoreEvent');
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     expect(spy).toHaveBeenCalled();
@@ -67,24 +67,24 @@ describe('PaymentFormMessagesComponent', () => {
 
   it('Should not draw for empty form messages event', () => {
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     headlessCheckout.emitEvent(null);
     const element = document.querySelector(
-      WebComponentTagName.PaymentFormMessages
+      WebComponentTagName.PaymentFormMessages,
     );
     expect(element!.innerHTML).toEqual('');
   });
 
   it('Should draw on finance details event', () => {
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     headlessCheckout.emitEvent(['message1']);
     expect(
-      document.querySelector(WebComponentTagName.PaymentFormMessages)
+      document.querySelector(WebComponentTagName.PaymentFormMessages),
     ).not.toBeNull();
   });
 });

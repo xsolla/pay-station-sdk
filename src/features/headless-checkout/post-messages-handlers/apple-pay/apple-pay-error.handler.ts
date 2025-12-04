@@ -5,7 +5,7 @@ import { isApplePayErrorEventMessage } from '../../../../core/guards/apple-pay/a
 export const applePayErrorHandler: Handler<
   { error: string } | null | undefined
 > = (
-  message: Message
+  message: Message,
 ): {
   isHandled: boolean;
   value: { error: string } | null | undefined;

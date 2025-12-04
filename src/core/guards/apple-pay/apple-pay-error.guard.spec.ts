@@ -5,7 +5,7 @@ import { EventName } from '../../event-name.enum';
 describe('Event message type guard', () => {
   it('Should return true', () => {
     expect(
-      isApplePayErrorEventMessage({ name: EventName.applePayError })
+      isApplePayErrorEventMessage({ name: EventName.applePayError }),
     ).toBeTruthy();
   });
   it('Should return false', () => {

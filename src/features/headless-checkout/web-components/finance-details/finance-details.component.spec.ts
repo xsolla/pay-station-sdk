@@ -13,7 +13,7 @@ class HeadlessCheckoutMock {
     onCoreEvent: (
       name: string,
       handler: Handler<string>,
-      callback: (value: FinanceDetails | null) => void
+      callback: (value: FinanceDetails | null) => void,
     ) => {
       this.addEventListener(callback);
     },
@@ -22,7 +22,7 @@ class HeadlessCheckoutMock {
     [];
 
   public addEventListener(
-    callback: (value: FinanceDetails | null) => void
+    callback: (value: FinanceDetails | null) => void,
   ): void {
     this.listenerts.push(callback);
   }
@@ -47,7 +47,7 @@ const financeDetails = {
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.FinanceDetailsComponent
+    WebComponentTagName.FinanceDetailsComponent,
   );
 
   (document.getElementById('container')! as HTMLElement).appendChild(element);
@@ -59,7 +59,7 @@ describe('FinanceDetailsComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.FinanceDetailsComponent,
-    FinanceDetailsComponent
+    FinanceDetailsComponent,
   );
 
   beforeEach(() => {
@@ -91,14 +91,14 @@ describe('FinanceDetailsComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.FinanceDetailsComponent)
+      document.querySelector(WebComponentTagName.FinanceDetailsComponent),
     ).not.toBeNull();
   });
 
   it('Should subscribe to finance details event', () => {
     const spy = spyOn(headlessCheckout.events, 'onCoreEvent');
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     expect(spy).toHaveBeenCalled();
@@ -106,24 +106,24 @@ describe('FinanceDetailsComponent', () => {
 
   it('Should not draw for empty finance details event', () => {
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     headlessCheckout.emitEvent(null);
     const element = document.querySelector(
-      WebComponentTagName.FinanceDetailsComponent
+      WebComponentTagName.FinanceDetailsComponent,
     );
     expect(element!.innerHTML).toEqual('');
   });
 
   it('Should draw on finance details event', () => {
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     headlessCheckout.emitEvent(financeDetails as unknown as FinanceDetails);
     expect(
-      document.querySelector(WebComponentTagName.FinanceDetailsComponent)
+      document.querySelector(WebComponentTagName.FinanceDetailsComponent),
     ).not.toBeNull();
   });
 });

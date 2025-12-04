@@ -16,7 +16,7 @@ describe('getLegalComponentConfigHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      getLegalComponentConfigHandler({ name: EventName.initPayment })
+      getLegalComponentConfigHandler({ name: EventName.initPayment }),
     ).toBeNull();
   });
 });

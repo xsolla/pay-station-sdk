@@ -4,7 +4,7 @@ import { EventName } from '../../core/event-name.enum';
 import { UserBalance } from '../user-balance.interface';
 
 export const isUserBalanceEventMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<{ userBalance: UserBalance }> => {
   if (isEventMessage(messageData)) {
     return (

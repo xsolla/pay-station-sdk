@@ -3,7 +3,7 @@ import { DefaultSubmitButtonAttributes } from './default-submit-button/default-s
 
 export const getSubmitButtonTemplate = (
   text: string,
-  isLoading: boolean
+  isLoading: boolean,
 ): string => {
   let attributes = '';
   if (text) {

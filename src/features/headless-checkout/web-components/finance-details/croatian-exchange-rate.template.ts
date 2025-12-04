@@ -4,7 +4,7 @@ import { Currency } from '../../../../core/currency/currency.enum';
 import { FinanceDetails } from '../../../../core/finance-details/finance-details.interface';
 
 export const getCroatianExchangeRateTemplate = (
-  financeDetails: FinanceDetails
+  financeDetails: FinanceDetails,
 ): string => {
   const cartSummary = financeDetails.cartSummary;
   const isCroatia = financeDetails.paymentCountry === CountryCode.Croatia;
@@ -33,7 +33,7 @@ export const getCroatianExchangeRateTemplate = (
         value: getCroatianCurrencyRate(),
       })}</div>
       <div class="details">${i18next.t(
-        'finance-details-hrk-exchange-rate'
+        'finance-details-hrk-exchange-rate',
       )}</div>
     </div>`;
 };

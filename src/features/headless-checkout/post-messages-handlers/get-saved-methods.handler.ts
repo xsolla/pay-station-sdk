@@ -4,7 +4,7 @@ import { SavedMethod } from '../../../core/saved-method.interface';
 import { isSavedMethodsEventMessage } from '../../../core/guards/saved-methods-event-message.guard';
 
 export const getSavedMethodsHandler: Handler<SavedMethod[]> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value: SavedMethod[] } | null => {
   if (!isSavedMethodsEventMessage(message)) {
     return null;

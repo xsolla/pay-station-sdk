@@ -14,7 +14,7 @@ export const getControlComponentConfigHandler: Handler<
   ControlComponentConfigType
 > = (
   message: Message,
-  callback?: (args?: unknown) => boolean | void
+  callback?: (args?: unknown) => boolean | void,
 ): {
   isHandled: boolean;
   value: ControlComponentConfigType;

@@ -5,7 +5,7 @@ import { LegalComponentConfig } from '../web-components/legal/legal-component.co
 import { isLegalConfigEventMessage } from '../../../core/guards/legal-config-event-message.guard';
 
 export const getLegalComponentConfigHandler: Handler<LegalComponentConfig> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value: LegalComponentConfig } | null => {
   if (
     isLegalConfigEventMessage(message) &&

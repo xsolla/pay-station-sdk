@@ -3,7 +3,7 @@ import { Message } from '../../../core/message.interface';
 import { isErrorEventMessage } from '../../../core/guards/error-event-message.guard';
 
 export const getErrorHandler: Handler<string> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value: string } | null => {
   if (isErrorEventMessage(message)) {
     return {

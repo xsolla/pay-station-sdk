@@ -4,7 +4,7 @@ import { EventName } from '../../core/event-name.enum';
 import { LegalComponentConfig } from '../../features/headless-checkout/web-components/legal/legal-component.config.interface';
 
 export const isLegalConfigEventMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<{ config: LegalComponentConfig }> => {
   if (isEventMessage(messageData)) {
     return (

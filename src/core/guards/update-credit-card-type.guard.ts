@@ -3,7 +3,7 @@ import { isEventMessage } from './event-message.guard';
 import { EventName } from '../../core/event-name.enum';
 
 export const isUpdateCreditCardTypeMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<{ cardType: string }> => {
   if (isEventMessage(messageData)) {
     return (

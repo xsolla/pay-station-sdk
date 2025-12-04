@@ -20,7 +20,7 @@ describe('applePayErrorHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      applePayErrorHandler({ name: EventName.getSavedMethods })
+      applePayErrorHandler({ name: EventName.getSavedMethods }),
     ).toBeNull();
   });
 });

@@ -4,7 +4,7 @@ import { EventName } from '../../core/event-name.enum';
 import { SavedMethod } from '../saved-method.interface';
 
 export const isSavedMethodsEventMessage = (
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<{ methods: SavedMethod[] }> => {
   if (isEventMessage(messageData)) {
     return (

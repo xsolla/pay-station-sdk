@@ -53,7 +53,7 @@ export class SubmitButtonComponent extends WebComponentAbstract {
     }
     return getSubmitButtonTemplate(
       this.getAttribute(DefaultSubmitButtonAttributes.text) ?? '',
-      !!this.getAttribute(DefaultSubmitButtonAttributes.isLoading)
+      !!this.getAttribute(DefaultSubmitButtonAttributes.isLoading),
     );
   }
 }

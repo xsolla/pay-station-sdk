@@ -1,6 +1,5 @@
 import i18next from 'i18next';
 import { CartItem } from '../../../../core/finance-details/cart-item.interface';
-import { getPriceTextTemplate } from './price-text.template';
 import { taxTranslationMap } from './tax-translation-map.const';
 
 const cartItemTitleTranslationMap = new Map<string, string>([
@@ -34,51 +33,6 @@ function translateCartItems(items: CartItem[] = []): CartItem[] {
   });
 }
 
-function getCartItemImage(item: CartItem): string {
-  if (!item.imgSrc) {
-    return '';
-  }
-
-  return `
-    <div class="image-container">
-      <img
-        class="image"
-        src="${item.imgSrc}"
-        alt="${item.title}"
-      />
-    </div>
-  `;
-}
-
-function getCartItemText(item: CartItem): string {
-  const title =
-    item.quantity && item.quantity > 1
-      ? `${item.quantity} x ${item.title}`
-      : item.title;
-  const description = item.description?.replace(/\\n/g, '<br/>');
-  return `
-    <div class="details-wrapper">
-      <div class="details">
-        <div class="title">${title ?? ''}</div>
-        <div class="description">${description ?? ''}</div>
-        ${item.tax ? getPriceTextTemplate(item.tax, null, 'tax') : ''}
-      </div>
-      <div class="price-wrapper">
-        ${getPriceTextTemplate(null, item.price, 'price')}
-        ${
-          item.priceBeforeDiscount?.amount
-            ? getPriceTextTemplate(
-                null,
-                item.priceBeforeDiscount,
-                'price-before-discount',
-              )
-            : ''
-        }
-      </div>
-    </div>
-  `;
-}
-
 export const getCartItemsTemplate = (cartItems: CartItem[] = []): string => {
   if (!cartItems?.length) {
     return '';
@@ -86,12 +40,9 @@ export const getCartItemsTemplate = (cartItems: CartItem[] = []): string => {
 
   const items = translateCartItems(cartItems);
   const itemLines = items.map((item) => {
-    return `
-      <div class="cart-item">
-        ${getCartItemImage(item)}
-        ${getCartItemText(item)}
-      </div>
-    `;
+    return `<psdk-cart-item data-item='${encodeURIComponent(
+      JSON.stringify(item),
+    )}'></psdk-cart-item>`;
   });
 
   return `

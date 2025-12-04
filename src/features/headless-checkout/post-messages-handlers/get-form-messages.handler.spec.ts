@@ -18,7 +18,7 @@ describe('getFormMessagesHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      getFormMessagesHandler({ name: EventName.getSavedMethods })
+      getFormMessagesHandler({ name: EventName.getSavedMethods }),
     ).toBeNull();
   });
 });

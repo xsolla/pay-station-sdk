@@ -7,7 +7,7 @@ import { UserBalanceComponent } from './user-balance-component';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.UserBalanceComponent
+    WebComponentTagName.UserBalanceComponent,
   );
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
@@ -19,7 +19,7 @@ describe('UserBalanceComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.UserBalanceComponent,
-    UserBalanceComponent
+    UserBalanceComponent,
   );
 
   beforeEach(() => {
@@ -54,16 +54,16 @@ describe('UserBalanceComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.UserBalanceComponent)
+      document.querySelector(WebComponentTagName.UserBalanceComponent),
     ).toBeDefined();
   });
 
   it('Should load user balance', () => {
     const spy = spyOn(postMessagesClient, 'send').and.returnValue(
-      Promise.resolve({})
+      Promise.resolve({}),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     expect(spy).toHaveBeenCalled();
@@ -71,12 +71,12 @@ describe('UserBalanceComponent', () => {
 
   it('Should load user balance after init', () => {
     const spy = spyOn(postMessagesClient, 'send').and.returnValue(
-      Promise.resolve({})
+      Promise.resolve({}),
     );
     const appWasInitSpy = spyOnProperty(
       headlessCheckoutSpy,
       'appWasInit',
-      'get'
+      'get',
     );
     const listenAppInitSpy = spyOn(headlessCheckoutSpy, 'listenAppInit');
     listenAppInitSpy.and.callFake((callback: () => void) => {

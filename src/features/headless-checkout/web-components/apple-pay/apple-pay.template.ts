@@ -3,7 +3,7 @@ import { applePayButtonClassName } from './apple-pay-button-classname.const';
 
 export const getApplePayComponentTemplate = (
   secureHtml: string,
-  error?: string
+  error?: string,
 ): string => {
   return `
   <div class='${errorsHtmlWrapperClassName}'>${error ?? ''}</div>
