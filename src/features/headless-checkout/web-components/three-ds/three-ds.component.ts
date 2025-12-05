@@ -4,9 +4,13 @@ import { CheckoutForm } from '../../../../core/actions/three-ds/checkout-form.in
 import { ThreeDsAttributes } from './three-ds-attributes.enum';
 import { threeDsRedirectButtonTemplate } from './three-ds.template';
 import './three-ds.component.scss';
+import { EventName } from '../../../../core/event-name.enum';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
 
 export class ThreeDsComponent extends WebComponentAbstract {
   private readonly window: Window;
+  private readonly postMessageClient: PostMessagesClient;
+  private windowCloseWaitingTimer: number | null = null;
 
   private get elementRef(): HTMLElement {
     return this.querySelector('div')! as HTMLElement;
@@ -34,6 +38,7 @@ export class ThreeDsComponent extends WebComponentAbstract {
     super();
 
     this.window = container.resolve(Window);
+    this.postMessageClient = container.resolve(PostMessagesClient);
   }
 
   public static get observedAttributes(): string[] {
@@ -46,6 +51,14 @@ export class ThreeDsComponent extends WebComponentAbstract {
 
   protected attributeChangedCallback(): void {
     this.handleChallengeFlow();
+  }
+
+  protected disconnectedCallback(): void {
+    super.disconnectedCallback();
+
+    if (this.windowCloseWaitingTimer) {
+      clearInterval(this.windowCloseWaitingTimer);
+    }
   }
 
   protected getHtml(): string {
@@ -67,13 +80,13 @@ export class ThreeDsComponent extends WebComponentAbstract {
       // case for external window
       if (this.redirectButtonRef) {
         this.addEventListenerToElement(this.elementRef, 'click', () => {
-          this.openChallengeWindowViaForm(form);
+          this.openChallengeWindowInNewWindow(form);
         });
       }
 
       // will open on same window
       if (this.challengeAttribute.redirect.isSameWindowRequired) {
-        this.openChallengeWindowViaForm(form);
+        this.openChallengeWindowInSameWindow(form);
       }
     }
   }
@@ -89,6 +102,8 @@ export class ThreeDsComponent extends WebComponentAbstract {
     };
 
     const form = this.window.document.createElement('form');
+
+    form.setAttribute('id', 'psdk-3ds-form');
 
     this.setElementAttributes(form, attributes);
 
@@ -110,10 +125,32 @@ export class ThreeDsComponent extends WebComponentAbstract {
     return form;
   }
 
-  private openChallengeWindowViaForm(form: HTMLFormElement): void {
+  private openChallengeWindowInSameWindow(form: HTMLFormElement): void {
     this.window.open('', '_self');
+
     form.submit();
-    this.elementRef.removeChild(form);
+  }
+
+  private openChallengeWindowInNewWindow(form: HTMLFormElement): void {
+    const challengeWindowTarget = 'three-ds-challenge-window';
+    const challengeWindow = this.window.open(
+      'about:blank',
+      challengeWindowTarget,
+    );
+
+    if (challengeWindow) {
+      form.target = challengeWindowTarget;
+    }
+
+    const timerTickTime = 500;
+    this.windowCloseWaitingTimer = setInterval(() => {
+      if (challengeWindow?.closed) {
+        clearInterval(this.windowCloseWaitingTimer!);
+        this.sendCloseWindowEvent();
+      }
+    }, timerTickTime) as unknown as number;
+
+    form.submit();
   }
 
   private setElementAttributes(
@@ -133,5 +170,13 @@ export class ThreeDsComponent extends WebComponentAbstract {
     }
 
     return '_self';
+  }
+
+  private sendCloseWindowEvent(): void {
+    this.dispatchEvent(new CustomEvent(EventName.threeDsWindowClosed));
+
+    this.postMessageClient.sendPublicMessage({
+      name: EventName.threeDsWindowClosed,
+    });
   }
 }

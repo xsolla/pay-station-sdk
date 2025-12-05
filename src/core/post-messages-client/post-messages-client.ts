@@ -65,6 +65,10 @@ export class PostMessagesClient {
     return () => this.window.removeEventListener('message', handlerWrapper);
   }
 
+  public sendPublicMessage(message: Message): void {
+    this.window.postMessage(JSON.stringify(message), this.window.origin ?? '*');
+  }
+
   private sendMessage(message: Message): void {
     this.recipient.contentWindow?.postMessage(
       JSON.stringify(message),
