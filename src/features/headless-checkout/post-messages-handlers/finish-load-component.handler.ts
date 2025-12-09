@@ -5,7 +5,7 @@ import { isFinishLoadComponentEventMessage } from '../../../core/guards/finish-l
 export const finishLoadComponentHandler: Handler<
   { fieldName: string } | null | undefined
 > = (
-  message: Message
+  message: Message,
 ): {
   isHandled: boolean;
   value: { fieldName: string } | null | undefined;

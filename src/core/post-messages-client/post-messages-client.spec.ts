@@ -7,7 +7,7 @@ import { PaymentMethod } from '../payment-method.interface';
 import { isMethodsEventMessage } from '../../core/guards/methods-event-message.guard';
 
 const mockHandler: Handler<PaymentMethod[]> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value: PaymentMethod[] } | null => {
   if (
     isMethodsEventMessage(message) &&
@@ -56,7 +56,7 @@ describe('PostMessagesClient', () => {
   it('Should throw exception if no recipient', () => {
     const promise = postMessagesClient.send(mockMessage, mockHandler);
     return expectAsync(promise).toBeRejectedWithError(
-      'No recipient for post messages.'
+      'No recipient for post messages.',
     );
   });
 
@@ -64,7 +64,7 @@ describe('PostMessagesClient', () => {
     spyOn(window, 'addEventListener').and.callFake(
       (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
         (handlerWrapper as (message: MessageEvent) => void)(mockMessageEvent);
-      }
+      },
     );
 
     postMessagesClient.init(recipient, recipientUrl);
@@ -76,7 +76,7 @@ describe('PostMessagesClient', () => {
     spyOn(window, 'addEventListener').and.callFake(
       (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
         (handlerWrapper as (message: MessageEvent) => void)(mockMessageEvent);
-      }
+      },
     );
 
     const callbackSpy = jasmine.createSpy();
@@ -84,7 +84,7 @@ describe('PostMessagesClient', () => {
     postMessagesClient.listen(
       EventName.getPaymentMethodsList,
       mockHandler,
-      callbackSpy
+      callbackSpy,
     );
 
     expect(callbackSpy).toHaveBeenCalled();
@@ -98,7 +98,7 @@ describe('PostMessagesClient', () => {
     const removeListener = postMessagesClient.listen(
       EventName.getPaymentMethodsList,
       mockHandler,
-      callbackSpy
+      callbackSpy,
     );
     removeListener();
 

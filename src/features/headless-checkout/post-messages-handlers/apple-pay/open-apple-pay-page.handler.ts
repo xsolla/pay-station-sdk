@@ -5,7 +5,7 @@ import { isOpenApplePayPageEventMessage } from '../../../../core/guards/apple-pa
 export const openApplePayPageHandler: Handler<
   { redirectUrl: string } | null | undefined
 > = (
-  message: Message
+  message: Message,
 ): {
   isHandled: boolean;
   value: { redirectUrl: string } | null | undefined;

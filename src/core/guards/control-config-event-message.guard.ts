@@ -3,7 +3,7 @@ import { EventName } from '../event-name.enum';
 import { isEventMessage } from './event-message.guard';
 
 export const isControlConfigEventMessage = <T>(
-  messageData: unknown
+  messageData: unknown,
 ): messageData is Message<{ config: T }> => {
   if (isEventMessage(messageData)) {
     return (

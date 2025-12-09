@@ -28,6 +28,7 @@ import { LegalMorComponent } from '../../features/headless-checkout/web-componen
 import { LegalSupportComponent } from '../../features/headless-checkout/web-components/legal/support/legal-support.component';
 import { LegalLinksComponent } from '../../features/headless-checkout/web-components/legal/links/legal-links.component';
 import { SecureConnectionComponent } from '../../features/headless-checkout/web-components/secure-connection/secure-connection.component';
+import { CartItemComponent } from '../../features/headless-checkout/web-components/finance-details/cart-item/cart-item.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -39,6 +40,7 @@ export const webComponents: {
   [WebComponentTagName.PriceTextComponent]: PriceTextComponent,
   [WebComponentTagName.FinanceDetailsComponent]: FinanceDetailsComponent,
   [WebComponentTagName.TotalComponent]: TotalComponent,
+  [WebComponentTagName.CartItem]: CartItemComponent,
   [WebComponentTagName.LegalComponent]: LegalComponent,
   [WebComponentTagName.LegalTermsComponent]: LegalTermsComponent,
   [WebComponentTagName.LegalCookiesComponent]: LegalCookiesComponent,

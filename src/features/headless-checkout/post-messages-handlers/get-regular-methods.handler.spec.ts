@@ -16,7 +16,7 @@ describe('getRegularMethodsHandler', () => {
   });
   it('Should return null', () => {
     expect(
-      getRegularMethodsHandler({ name: EventName.initPayment })
+      getRegularMethodsHandler({ name: EventName.initPayment }),
     ).toBeNull();
   });
 });

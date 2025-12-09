@@ -19,7 +19,7 @@ describe('StatusComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.StatusComponent,
-    StatusComponent
+    StatusComponent,
   );
 
   beforeEach(() => {
@@ -51,14 +51,14 @@ describe('StatusComponent', () => {
   it('Should create component', () => {
     createComponent();
     expect(
-      document.querySelector(WebComponentTagName.StatusComponent)
+      document.querySelector(WebComponentTagName.StatusComponent),
     ).toBeDefined();
   });
 
   it('Should get status', () => {
     const spy = spyOn(headlessCheckout, 'getStatus');
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     expect(spy).toHaveBeenCalled();
@@ -66,7 +66,7 @@ describe('StatusComponent', () => {
 
   it('Should not draw for empty form messages event', () => {
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     headlessCheckout.emitEvent(null);
@@ -79,10 +79,10 @@ describe('StatusComponent', () => {
       statusState: 'done',
     } as unknown as Status;
     spyOn(headlessCheckout, 'getStatus').and.returnValue(
-      Promise.resolve(mockStatus)
+      Promise.resolve(mockStatus),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
-      true
+      true,
     );
     createComponent();
     // delay the template to be drawn
