@@ -1,13 +1,19 @@
 # Changelog
 
-## [0.5.0](https://github.com/xsolla/pay-station-sdk/compare/v0.4.0...v0.5.0) (2025-12-04)
+## [0.5.1](https://github.com/xsolla/pay-station-sdk/compare/v0.5.0...v0.5.1) (2025-12-09)
 
+### Bug Fixes
+
+- **finance-details:** added cart image checking for broken state ([75aa55c](https://github.com/xsolla/pay-station-sdk/commit/75aa55cc18009d6ea838f56fa139c14a5ede0430))
+- **three-ds:** added id for form and challenge window close event ([2141c33](https://github.com/xsolla/pay-station-sdk/commit/2141c33d0f9b7908405961f5fddf81e4c786b19b))
+
+## [0.5.0](https://github.com/xsolla/pay-station-sdk/compare/v0.4.0...v0.5.0) (2025-12-04)
 
 ### Features
 
-* **PAYMENTS-26462:** sandbox environment ([74d2512](https://github.com/xsolla/pay-station-sdk/commit/74d251276a9655d7e257449bb541d8985aa7ce14))
-* **PAYMENTS-26462:** sandbox environment ([9de2adb](https://github.com/xsolla/pay-station-sdk/commit/9de2adb45ccc4c122fba7bd8153797f06e3c9bc7))
-* update README.md ([ce4798f](https://github.com/xsolla/pay-station-sdk/commit/ce4798ff0413a7d88a20a09dacace0f77bc22241))
+- **PAYMENTS-26462:** sandbox environment ([74d2512](https://github.com/xsolla/pay-station-sdk/commit/74d251276a9655d7e257449bb541d8985aa7ce14))
+- **PAYMENTS-26462:** sandbox environment ([9de2adb](https://github.com/xsolla/pay-station-sdk/commit/9de2adb45ccc4c122fba7bd8153797f06e3c9bc7))
+- update README.md ([ce4798f](https://github.com/xsolla/pay-station-sdk/commit/ce4798ff0413a7d88a20a09dacace0f77bc22241))
 
 ## [0.4.0](https://github.com/xsolla/pay-station-sdk/compare/v0.3.1...v0.4.0) (2025-12-03)
 
