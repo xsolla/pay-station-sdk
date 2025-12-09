@@ -40,6 +40,7 @@ export const enum EventName {
   openExternalWindow = 'openExternalWindow',
   sendCardBinCountry = 'sendCardBinCountry',
   cardBinCountryChanged = 'cardBinCountryChanged',
+  threeDsWindowClosed = 'threeDsWindowClosed',
   // Apple Pay
   applePayError = 'applePayError',
   openApplePayPage = 'openApplePayPage',
