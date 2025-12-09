@@ -35,7 +35,7 @@ export class UserBalanceComponent extends WebComponentAbstract {
 
     return this.postMessagesClient.send<UserBalanceType>(
       msg,
-      getUserBalanceValueHandler
+      getUserBalanceValueHandler,
     ) as Promise<UserBalanceType>;
   }
 

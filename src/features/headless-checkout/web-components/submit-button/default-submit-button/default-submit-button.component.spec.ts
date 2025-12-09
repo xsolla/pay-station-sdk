@@ -8,7 +8,7 @@ import { FormSpy } from '../../../../../core/spy/form-spy/form-spy';
 
 function createComponent(): void {
   const element = document.createElement(
-    WebComponentTagName.DefaultSubmitButtonComponent
+    WebComponentTagName.DefaultSubmitButtonComponent,
   );
   element.setAttribute('text', 'Pay Now');
   element.setAttribute('id', 'test');
@@ -22,7 +22,7 @@ describe('DefaultSubmitButtonComponent', () => {
 
   window.customElements.define(
     WebComponentTagName.DefaultSubmitButtonComponent,
-    DefaultSubmitButtonComponent
+    DefaultSubmitButtonComponent,
   );
 
   beforeEach(() => {

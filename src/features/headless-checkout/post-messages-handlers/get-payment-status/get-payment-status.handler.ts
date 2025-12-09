@@ -4,7 +4,7 @@ import { Status } from '../../../../core/status/status.interface';
 import { isGetPaymentStatusMessage } from '../../../../core/guards/get-payment-status-message.guard';
 
 export const getPaymentStatusHandler: Handler<Status> = (
-  message: Message
+  message: Message,
 ): { isHandled: boolean; value?: Status } | null => {
   if (!isGetPaymentStatusMessage(message)) {
     return null;
