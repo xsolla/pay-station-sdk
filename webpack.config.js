@@ -75,9 +75,7 @@ module.exports = (env, argv) => {
   }
 
   Object.keys(process.env).forEach((key) => {
-    if (!processEnv[`process.env.${key}`]) {
-      processEnv[`process.env.${key}`] = JSON.stringify(process.env[key]);
-    }
+    processEnv[`process.env.${key}`] = JSON.stringify(process.env[key]);
   });
 
   config.plugins.push(new webpack.DefinePlugin(processEnv));
