@@ -31,8 +31,7 @@ psdk-select {
     display: none;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
     width: 100%;
     height: 216px;
     padding: 8px 0;
