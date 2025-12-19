@@ -39,8 +39,10 @@
   },
   "scripts": {
     "build": "npm run build:types && webpack --mode=production",
+    "build:dev": "npm run build:types && webpack --mode=development",
     "build:types": "tsc --project tsconfig.declaration.json",
-    "dev": "npm run build:types && (npm run dev:types &) && webpack --mode=development --watch",
+    "dev": "npm run build:types && webpack --mode=development --watch",
+    "dev:watch": "concurrently \"tsc --project tsconfig.declaration.json --watch --preserveWatchOutput\" \"webpack --mode=development --watch\"",
     "dev:types": "tsc --project tsconfig.declaration.json --watch",
     "test": "karma start --single-run",
     "test:dev": "karma start --auto-watch",
