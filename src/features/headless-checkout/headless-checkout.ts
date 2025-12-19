@@ -82,6 +82,7 @@ export class HeadlessCheckout {
      * @returns {Form} form details
      */
     init: async (configuration: FormConfiguration): Promise<Form> => {
+      console.log('🟣[LOG] Pay Station SDK - Headless Checkout form init');
       this._formConfiguration =
         this.getFormConfigurationWithDefaultValues(configuration);
       this.formStatus = FormStatus.pending;
