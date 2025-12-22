@@ -1,0 +1,38 @@
+stages:
+  - mirror
+
+variables:
+  PACKAGE_NAME: '@xsolla/pay-station-sdk'
+  PACKAGE_PATH: 'packages/pay-station-sdk'
+  GITHUB_REPO: 'p-zaslavsky/pay-station-sdk-sandbox'
+
+mirror to github:
+  stage: mirror
+  image: registry.srv.local/dh-proxy/library/node:latest
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$CI_XSOLLA_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+  script:
+    - |
+      LOCAL_VERSION=$(node -p "require('./${PACKAGE_PATH}/package.json').version")
+      echo "🔄 Mirroring ${PACKAGE_NAME} v${LOCAL_VERSION} to GitHub..."
+
+      git config --global user.email "ci@xsolla.com"
+      git config --global user.name "Xsolla CI"
+
+      git fetch --unshallow || true
+      git fetch origin --tags
+
+      git branch -D github-mirror 2>/dev/null || true
+
+      git subtree split --prefix=${PACKAGE_PATH} -b github-mirror
+
+      git remote add github git@github.com:${GITHUB_REPO}.git || true
+      git push github github-mirror:main --force
+
+      echo "✅ Successfully mirrored to https://github.com/${GITHUB_REPO}"
+  tags:
+    - devops
+  when: always

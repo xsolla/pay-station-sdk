@@ -70,6 +70,6 @@ jobs:
 
       - name: Publish to npm
         if: steps.rp.outputs.release_created == 'true'
-        run: npm publish --access public
+        run: npm publish --access public --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
