@@ -1,35 +1,45 @@
+const path = require('path');
+const webpackConfig = require('./webpack.config.js');
+
 module.exports = function (config) {
+  const baseConfig = webpackConfig({}, { mode: 'development' });
+
+  const testWebpackConfig = {
+    mode: 'development',
+    devtool: 'inline-source-map',
+    module: baseConfig.module,
+    resolve: {
+      ...baseConfig.resolve,
+      extensions: ['.ts', '.js'],
+      modules: [
+        path.resolve(__dirname, 'src'),
+        path.resolve(__dirname, 'node_modules'),
+        path.resolve(__dirname, '../../node_modules'),
+      ],
+    },
+    plugins: [
+      ...baseConfig.plugins,
+    ],
+  };
+
   config.set({
     basePath: './',
-    frameworks: ['jasmine', 'karma-typescript'],
-    files: ['src/**/*.ts'],
+    frameworks: ['jasmine', 'webpack'],
+    files: [
+      { pattern: 'src/**/*.spec.ts', watched: false },
+    ],
     preprocessors: {
-      '**/*.ts': 'karma-typescript',
+      'src/**/*.spec.ts': ['webpack'],
     },
-    karmaTypescriptConfig: {
-      compilerOptions: {
-        module: 'commonjs',
-      },
-      tsconfig: './tsconfig.json',
+    webpack: testWebpackConfig,
+    webpackMiddleware: {
+      stats: 'errors-only',
     },
-    coverageOptions: {
-      global: {
-        branches: 80,
-        functions: 80,
-        lines: 80,
-        statements: -10,
-      },
-      watermarks: {
-        branches: [65, 80],
-        functions: [65, 80],
-        lines: [65, 80],
-        statements: [65, 80],
-      },
-    },
-    reporters: ['progress', 'karma-typescript'],
+    reporters: ['progress'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     browsers: ['ChromeHeadless'],
+    singleRun: true,
   });
 };

@@ -1,4 +1,4 @@
-import * as i18next from 'i18next';
+import i18next from 'i18next';
 import { ValidationErrorId } from './validation-error-id.enum';
 import { ValidationErrorService } from './validation-error.service';
 import { ValidationErrorParams } from './validation-error-params.interface';

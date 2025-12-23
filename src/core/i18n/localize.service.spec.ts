@@ -11,21 +11,26 @@ describe('LocalizeService', () => {
     localizeService = container.createChildContainer().resolve(LocalizeService);
   });
 
-  it('Should init dictionaries', () => {
-    const spy = spyOn(i18next, 'init');
+  it('Should init dictionaries', async () => {
+    await localizeService.initDictionaries();
 
-    void localizeService.initDictionaries();
-
-    expect(spy).toHaveBeenCalled();
+    expect(i18next.isInitialized).toBe(true);
   });
 
-  it('Should translate', () => {
-    const expectedValue = 'Hello World!';
-
-    spyOn(i18next, 't').and.returnValue(expectedValue);
+  it('Should translate', async () => {
+    await i18next.init({
+      lng: 'en',
+      resources: {
+        en: {
+          translation: {
+            hello: 'Hello World!',
+          },
+        },
+      },
+    });
 
     const result = localizeService.translate('hello');
 
-    expect(result).toEqual(expectedValue);
+    expect(result).toEqual('Hello World!');
   });
 });
