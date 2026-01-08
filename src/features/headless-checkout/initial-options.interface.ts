@@ -8,4 +8,9 @@ export interface InitialOptions {
   language?: Lang;
   topLevelDomain?: string;
   isApplePayInstantFlowEnabled?: boolean;
+  /**
+   * Custom API URL for dev/stage environments only.
+   * Will be ignored in production.
+   */
+  apiUrl?: string;
 }
