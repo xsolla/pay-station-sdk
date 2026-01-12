@@ -18,20 +18,18 @@ import { applePayQrClosedHandler } from '../../post-messages-handlers/apple-pay/
 import { applePayQrOpenedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-qr-opened.handler';
 import { applePayButtonClickedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-button-clicked.handler';
 import { closeExternalWindowHandler } from '../../post-messages-handlers/close-external-window.handler';
-import { openExternalWindowHandler } from '../../post-messages-handlers/open-external-window.handler';
-import { isApplePaySettingsGuard } from '../../../../core/form/types/is-apple-pay-settings.guard';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
   private readonly applePayWindowName = 'HeadlessCheckout_PayStation_ApplePay';
-  private readonly externalWindowTimeoutMs = 5000;
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly formSpy: FormSpy;
   private readonly window: Window;
   private applePayWindow?: Window | null;
   private readonly subscriptions: Array<() => void> = [];
-  private externalWindowTimeoutId?: number;
-  private isWaitingElementShown = false;
+  // eslint-disable-next-line no-magic-numbers
+  private readonly externalWindowCheckIntervalMs = 500;
+  private externalWindowCheckIntervalId?: ReturnType<typeof setInterval>;
 
   public constructor() {
     super();
@@ -110,20 +108,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
       ),
     );
 
-    if (this.isExternalWindowOpenMessageEnabled) {
-      this.subscriptions.push(
-        this.headlessCheckout.events.onCoreEvent(
-          EventName.openExternalWindow,
-          openExternalWindowHandler,
-          () => {
-            this.notifyExternalWindowOpened();
-            this.clearExternalWindowTimeout();
-            this.setupWaitingPayment(true);
-          },
-        ),
-      );
-    }
-
     this.subscriptions.push(
       this.headlessCheckout.events.onCoreEvent(
         EventName.applePayButtonClicked,
@@ -148,9 +132,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
   protected disconnectedCallback(): void {
     this.subscriptions.forEach((unsubscribe) => unsubscribe());
-    if (this.isExternalWindowOpenMessageEnabled) {
-      this.clearExternalWindowTimeout();
-    }
+    this.stopWindowCheckInterval();
   }
 
   protected getHtml(): string {
@@ -213,9 +195,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
   }
 
   private drawWaitingElement(): void {
-    if (this.isWaitingElementShown) {
-      return;
-    }
     const waitingProcessingWrapper = document.createElement('div');
     waitingProcessingWrapper.classList.add(waitingProcessingClassname);
     waitingProcessingWrapper.innerHTML = getWaitingProcessingTemplate(
@@ -223,7 +202,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
       i18next.t('status.processing.description'),
     );
     this.append(waitingProcessingWrapper);
-    this.isWaitingElementShown = true;
   }
 
   private removeWaitingElement(): void {
@@ -233,7 +211,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
     if (waitingProcessingWrapper) {
       waitingProcessingWrapper.remove();
     }
-    this.isWaitingElementShown = false;
   }
 
   private openRedirectPage(redirectUrl: string): void {
@@ -242,15 +219,34 @@ export class ApplePayComponent extends SecureComponentAbstract {
       redirectUrl,
       this.applePayWindowName,
     );
-    if (this.isExternalWindowOpenMessageEnabled) {
-      this.startExternalWindowTimeout();
+
+    this.startWindowCheckInterval();
+  }
+
+  private startWindowCheckInterval(): void {
+    this.stopWindowCheckInterval();
+
+    this.externalWindowCheckIntervalId = setInterval(() => {
+      if (this.applePayWindow?.closed) {
+        this.stopWindowCheckInterval();
+        this.onApplePayWindowClosed();
+      }
+    }, this.externalWindowCheckIntervalMs);
+  }
+
+  private stopWindowCheckInterval(): void {
+    if (this.externalWindowCheckIntervalId) {
+      clearInterval(this.externalWindowCheckIntervalId);
+      this.externalWindowCheckIntervalId = undefined;
     }
   }
 
+  private onApplePayWindowClosed(): void {
+    this.destroyApplePayWindow(true);
+  }
+
   private destroyApplePayWindow(stopLoading?: boolean): void {
-    if (this.isExternalWindowOpenMessageEnabled) {
-      this.clearExternalWindowTimeout();
-    }
+    this.stopWindowCheckInterval();
     this.dispatchEvent(new CustomEvent(EventName.applePayWindowClosed));
 
     this.window.focus();
@@ -260,23 +256,6 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
     if (stopLoading) {
       this.setupWaitingPayment(false);
-    }
-  }
-
-  private startExternalWindowTimeout(): void {
-    this.clearExternalWindowTimeout();
-    const timeoutId = this.window.setTimeout(() => {
-      if (this.externalWindowTimeoutId === timeoutId) {
-        this.setupWaitingPayment(false);
-      }
-    }, this.externalWindowTimeoutMs);
-    this.externalWindowTimeoutId = timeoutId;
-  }
-
-  private clearExternalWindowTimeout(): void {
-    if (this.externalWindowTimeoutId !== undefined) {
-      this.window.clearTimeout(this.externalWindowTimeoutId);
-      this.externalWindowTimeoutId = undefined;
     }
   }
 
@@ -294,26 +273,5 @@ export class ApplePayComponent extends SecureComponentAbstract {
     (iframe as HTMLElement).style.removeProperty('position');
     (iframe as HTMLElement).style.removeProperty('top');
     (iframe as HTMLElement).style.removeProperty('left');
-  }
-
-  private notifyExternalWindowOpened(): void {
-    this.dispatchEvent(new CustomEvent(EventName.applePayWindowOpened));
-  }
-
-  private get isExternalWindowOpenMessageEnabled(): boolean {
-    const configuration = this.headlessCheckout.formConfiguration;
-
-    if (!configuration) {
-      return false;
-    }
-
-    if (!isApplePaySettingsGuard(configuration)) {
-      return false;
-    }
-
-    return (
-      configuration.paymentMethodSettings?.enableExternalWindowOpenMessage ??
-      false
-    );
   }
 }
