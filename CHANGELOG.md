@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.2](https://github.com/xsolla/pay-station-sdk/compare/v0.5.1...v0.5.2) (2026-01-13)
+
+
+### Bug Fixes
+
+* **events:** prevent losing Apple Pay external window close event ([130bb5f](https://github.com/xsolla/pay-station-sdk/commit/130bb5fa3cf1a28f7e6a0d0b82267f572b871625))
+* **events:** prevent losing Apple Pay external window close event ([b396f07](https://github.com/xsolla/pay-station-sdk/commit/b396f07ef8d6dab7cdf44e54a62095db43772312))
+
 ## [0.5.1](https://github.com/xsolla/pay-station-sdk/compare/v0.5.0...v0.5.1) (2025-12-09)
 
 ### Bug Fixes
