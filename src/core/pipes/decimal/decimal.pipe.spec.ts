@@ -17,7 +17,7 @@ describe('DecimalPipe', () => {
   });
 
   it('Should format string number with default settings', () => {
-    const value = pipe.transform('1234567890.123');
+    const value = pipe.transform('1234567890.123', 1, 2, 2, Lang.EN);
     expect(value).toEqual('1,234,567,890.12');
   });
 
