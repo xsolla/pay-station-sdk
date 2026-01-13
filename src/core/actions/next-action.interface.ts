@@ -9,6 +9,7 @@ import { ShowQrCodeAction } from './show-qr-code.action.type';
 import { ShowMobilePaymentScreenAction } from './show-mobile-payment-screen.action.type';
 import { HideFormAction } from './hide-form.action.type';
 import { ShowCashPaymentAction } from './show-cash-payment.action.type';
+import { ServerErrorAction } from './server-error.action.type';
 
 export type NextAction =
   | CheckStatusAction
@@ -21,4 +22,5 @@ export type NextAction =
   | ShowQrCodeAction
   | ShowMobilePaymentScreenAction
   | HideFormAction
-  | ShowCashPaymentAction;
+  | ShowCashPaymentAction
+  | ServerErrorAction;

@@ -10,4 +10,5 @@ export enum NextActionType {
   showMobilePaymentScreen = 'show_mobile_payment_screen',
   hideForm = 'hide_form',
   showCashPaymentInstruction = 'show_cash_payment_instruction',
+  serverError = 'server_error',
 }
