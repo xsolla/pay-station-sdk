@@ -116,6 +116,7 @@ declare const headlessCheckout: {
      * 3. Show form errors.
      * 4. Show another form.
      * 5. Check payment status for completion.
+     * 6. Handle HTTP error (network issues, CORS, server unavailability).
      */
     onNextAction: (nextAction: NextAction) => void;
 
@@ -1017,6 +1018,7 @@ Integration flow:
 - The Next action with the `check_status` type means that you need to render the status component.
 - The Next action with the `hide_form` type informs you that can hide payment form with css.
 - The Next action with the `show_errors` type means that you need to show errors messages and payment can't be completed.
+- The Next action with the `server_error` type is emitted when an HTTP request fails (e.g., network error, CORS block, or server unavailability). The action contains `status` (HTTP code, `0` for network errors) and `message` fields. Display a user-friendly message like "Something went wrong, please try again".
 
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Initialize the payment form with the Apple-pay payment method ID and return URL.
