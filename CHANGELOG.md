@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/xsolla/pay-station-sdk/compare/v0.5.2...v0.6.0) (2026-01-14)
+
+
+### Features
+
+* **PAYMENTS-26373:** server error next action ([3d149fa](https://github.com/xsolla/pay-station-sdk/commit/3d149fa8bd5d95cd124db81d0b975e3aa3b86438))
+
 ## [0.5.2](https://github.com/xsolla/pay-station-sdk/compare/v0.5.1...v0.5.2) (2026-01-13)
 
 
