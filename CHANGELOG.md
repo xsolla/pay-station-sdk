@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/xsolla/pay-station-sdk/compare/v0.6.0...v0.7.0) (2026-01-19)
+
+
+### Change
+* Technical Release
+
+
 ## [0.6.0](https://github.com/xsolla/pay-station-sdk/compare/v0.5.2...v0.6.0) (2026-01-14)
 
 
