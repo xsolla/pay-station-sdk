@@ -4,7 +4,7 @@ stages:
 variables:
   PACKAGE_NAME: '@xsolla/pay-station-sdk'
   PACKAGE_PATH: 'packages/pay-station-sdk'
-  GITHUB_REPO: 'xsolla/pay-station-sdk-sandbox'
+  GITHUB_REPO: 'xsolla/pay-station-sdk'
 
 mirror to github:
   stage: mirror
