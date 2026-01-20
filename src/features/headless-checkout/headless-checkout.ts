@@ -204,8 +204,11 @@ export class HeadlessCheckout {
 
     this.isApplePayInstantFlowEnabled =
       !!environment.isApplePayInstantFlowEnabled;
-    this.isGooglePayInstantFlowEnabled =
-      !!environment.isGooglePayInstantFlowEnabled;
+
+    if (environment.isGooglePayInstantFlowEnabled !== undefined) {
+      this.isGooglePayInstantFlowEnabled =
+        environment.isGooglePayInstantFlowEnabled;
+    }
 
     this.locale = environment.language ?? Lang.EN;
     this.apiUrl = environment.apiUrl;
