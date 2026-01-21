@@ -1,4 +1,5 @@
 stages:
+  - publish
   - mirror
 
 variables:
@@ -6,9 +7,21 @@ variables:
   PACKAGE_PATH: 'packages/pay-station-sdk'
   GITHUB_REPO: 'xsolla/pay-station-sdk'
 
+publish:
+  stage: publish
+  image: registry.srv.local/dh-proxy/library/node:latest
+  script:
+    - npx turbo build --filter @xsolla/pay-station-sdk
+    - cd ./packages/pay-station-sdk
+    - npx @changesets/cli version
+    - npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+    - npx @changesets/cli publish
+
 mirror to github:
   stage: mirror
   image: registry.srv.local/dh-proxy/library/node:latest
+  needs:
+    - publish
   before_script:
     - mkdir -p ~/.ssh
     - echo "$CI_XSOLLA_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
