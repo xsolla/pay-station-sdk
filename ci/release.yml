@@ -10,6 +10,9 @@ variables:
 publish:
   stage: publish
   image: registry.srv.local/dh-proxy/library/node:latest
+  needs:
+    - pipeline: $PARENT_PIPELINE_ID
+      job: node modules
   script:
     - npx turbo build --filter @xsolla/pay-station-sdk
     - cd ./packages/pay-station-sdk
