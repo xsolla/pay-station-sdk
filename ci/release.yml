@@ -13,12 +13,65 @@ publish:
   needs:
     - pipeline: $PARENT_PIPELINE_ID
       job: node modules
+  before_script:
+    # Setup SSH for git push
+    - mkdir -p ~/.ssh
+    - echo "$CI_XSOLLA_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan gitlab.loc >> ~/.ssh/known_hosts 2>/dev/null || true
+    # Configure git remote to use SSH
+    - git remote set-url origin git@gitlab.loc:pay-station/headless-checkout.git || true
   script:
-    - npx turbo build --filter @xsolla/pay-station-sdk
-    - cd ./packages/pay-station-sdk
-    - npx @changesets/cli version
-    - npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
-    - npx @changesets/cli publish
+    - |
+      set -e
+
+      # Configure git
+      git config --global user.email "ci@xsolla.com"
+      git config --global user.name "Xsolla CI"
+
+      # Checkout master branch (exit detached HEAD state)
+      git fetch origin master
+      git checkout -B master origin/master
+
+      # Configure npm auth
+      echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+
+      # Build the package
+      npx turbo build --filter @xsolla/pay-station-sdk
+
+      # Go to package directory (where .changeset is located)
+      cd ./${PACKAGE_PATH}
+
+      # Check if there are changesets to consume
+      CHANGESET_STATUS=$(npx @changesets/cli status 2>&1 || true)
+      if echo "$CHANGESET_STATUS" | grep -q "No changesets present"; then
+        echo "⚠️ No changesets found. Skipping version update."
+      else
+        echo "📦 Updating version based on changesets..."
+        npx @changesets/cli version
+
+        # Push version changes to master (changesets already committed with "commit": true)
+        cd ../..
+        git push origin master
+        cd ./${PACKAGE_PATH}
+      fi
+
+      # Get local version
+      LOCAL_VERSION=$(node -p "require('./package.json').version")
+      echo "📦 Local version: ${LOCAL_VERSION}"
+
+      # Check if version already published
+      NPM_VERSION=$(npm view ${PACKAGE_NAME} version 2>/dev/null || echo "0.0.0")
+      echo "📦 npm version: ${NPM_VERSION}"
+
+      if [ "$LOCAL_VERSION" = "$NPM_VERSION" ]; then
+        echo "⚠️ Version ${LOCAL_VERSION} already published. Skipping publish."
+        exit 0
+      fi
+
+      # Publish the package
+      npm publish --access public
+      echo "✅ Successfully published ${PACKAGE_NAME}@${LOCAL_VERSION}"
 
 mirror to github:
   stage: mirror
