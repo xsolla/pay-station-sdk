@@ -34,7 +34,7 @@ publish:
       git checkout -B master origin/master
 
       # Configure npm auth
-      npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+      echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 
       # Build the package
       npx turbo build --filter @xsolla/pay-station-sdk
@@ -104,4 +104,3 @@ mirror to github:
       echo "✅ Successfully mirrored to https://github.com/${GITHUB_REPO}"
   tags:
     - devops
-  when: always
