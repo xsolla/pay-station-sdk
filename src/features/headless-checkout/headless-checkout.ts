@@ -178,6 +178,7 @@ export class HeadlessCheckout {
   private theme?: string;
   private topLevelDomain?: string;
   private isApplePayInstantFlowEnabled = false;
+  private isGooglePayInstantFlowEnabled: boolean | null = null;
   private locale = Lang.EN;
   private apiUrl?: string;
   private coreIframe!: HTMLIFrameElement;
@@ -200,8 +201,15 @@ export class HeadlessCheckout {
     this.environmentService.isSandbox = !!environment.sandbox;
     this.theme = environment.theme;
     this.topLevelDomain = environment.topLevelDomain;
+
     this.isApplePayInstantFlowEnabled =
       !!environment.isApplePayInstantFlowEnabled;
+
+    if (environment.isGooglePayInstantFlowEnabled !== undefined) {
+      this.isGooglePayInstantFlowEnabled =
+        environment.isGooglePayInstantFlowEnabled;
+    }
+
     this.locale = environment.language ?? Lang.EN;
     this.apiUrl = environment.apiUrl;
 
@@ -254,6 +262,7 @@ export class HeadlessCheckout {
           sandbox: this.environmentService.isSandbox,
           topLevelDomain: this.topLevelDomain,
           isApplePayInstantFlowEnabled: this.isApplePayInstantFlowEnabled,
+          isGooglePayInstantFlowEnabled: this.isGooglePayInstantFlowEnabled,
           locale: this.locale,
           apiUrl: this.apiUrl,
         },

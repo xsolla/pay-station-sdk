@@ -8,6 +8,7 @@ export interface InitialOptions {
   language?: Lang;
   topLevelDomain?: string;
   isApplePayInstantFlowEnabled?: boolean;
+  isGooglePayInstantFlowEnabled?: boolean;
   /**
    * Custom API URL for dev/stage environments only.
    * Will be ignored in production.
