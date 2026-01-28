@@ -60,8 +60,12 @@ const config = {
 module.exports = (env, argv) => {
   const rootPath = path.resolve(__dirname, '../../');
 
-  const envFile =
-    argv.mode === 'development' ? '.env.development' : '.env.production';
+  let envFile = '.env.production';
+  if (env.development) {
+    envFile = '.env.developemnt';
+  } else if (env.staging) {
+    envFile = '.env.staging';
+  }
 
   const envPath = path.resolve(rootPath, envFile);
   const envVars = dotenv.config({ path: envPath });

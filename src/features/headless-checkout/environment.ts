@@ -13,7 +13,7 @@ export const otelCollectorToken = process.env.SDK_OTEL_COLLECTOR_TOKEN || '';
 
 export const elkUrl = process.env.SDK_ELK_URL || '';
 
-export const environment = process.env.NODE_ENV || 'production';
+export const environment = process.env.ENVIRONMENT || 'production';
 
 export const cdnIconsUrl =
   'https://cdn.xsolla.net/headless-checkout-prod/assets/icons';
