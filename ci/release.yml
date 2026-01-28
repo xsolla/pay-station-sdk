@@ -94,6 +94,8 @@ mirror to github:
       git fetch --unshallow || true
       git fetch origin --tags
 
+      git checkout -B master origin/master
+
       git branch -D github-mirror 2>/dev/null || true
 
       git subtree split --prefix=${PACKAGE_PATH} -b github-mirror
