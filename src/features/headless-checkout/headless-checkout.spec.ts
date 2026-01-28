@@ -34,6 +34,10 @@ class MockIframeElement {
   public onload(): void {
     return;
   }
+
+  public addEventListener(): void {
+    return;
+  }
 }
 
 class CustomElementMock extends HTMLElement {}
