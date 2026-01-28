@@ -1,19 +1,27 @@
 # Changelog
 
-## [0.6.0](https://github.com/xsolla/pay-station-sdk/compare/v0.5.2...v0.6.0) (2026-01-14)
+## 0.7.0
 
+### Minor Changes
+
+- added flag for google instant flow override - isGooglePayInstantFlowEnabled
+
+### Patch Changes
+
+- new release system
+
+## [0.6.0](https://github.com/xsolla/pay-station-sdk/compare/v0.5.2...v0.6.0) (2026-01-14)
 
 ### Features
 
-* **PAYMENTS-26373:** server error next action ([3d149fa](https://github.com/xsolla/pay-station-sdk/commit/3d149fa8bd5d95cd124db81d0b975e3aa3b86438))
+- **PAYMENTS-26373:** server error next action ([3d149fa](https://github.com/xsolla/pay-station-sdk/commit/3d149fa8bd5d95cd124db81d0b975e3aa3b86438))
 
 ## [0.5.2](https://github.com/xsolla/pay-station-sdk/compare/v0.5.1...v0.5.2) (2026-01-13)
 
-
 ### Bug Fixes
 
-* **events:** prevent losing Apple Pay external window close event ([130bb5f](https://github.com/xsolla/pay-station-sdk/commit/130bb5fa3cf1a28f7e6a0d0b82267f572b871625))
-* **events:** prevent losing Apple Pay external window close event ([b396f07](https://github.com/xsolla/pay-station-sdk/commit/b396f07ef8d6dab7cdf44e54a62095db43772312))
+- **events:** prevent losing Apple Pay external window close event ([130bb5f](https://github.com/xsolla/pay-station-sdk/commit/130bb5fa3cf1a28f7e6a0d0b82267f572b871625))
+- **events:** prevent losing Apple Pay external window close event ([b396f07](https://github.com/xsolla/pay-station-sdk/commit/b396f07ef8d6dab7cdf44e54a62095db43772312))
 
 ## [0.5.1](https://github.com/xsolla/pay-station-sdk/compare/v0.5.0...v0.5.1) (2025-12-09)
 
