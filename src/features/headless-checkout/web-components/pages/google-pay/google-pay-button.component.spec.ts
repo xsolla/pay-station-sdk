@@ -40,6 +40,7 @@ describe('GooglePayButtonComponent', () => {
     container.clearInstances();
     container.registerInstance(HeadlessCheckout, headlessCheckout);
     container.registerInstance(FormSpy, formSpy);
+    container.register<Window>(Window, { useValue: window });
   });
 
   afterEach(() => {

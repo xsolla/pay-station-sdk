@@ -40,6 +40,7 @@ describe('QrCodeComponent', () => {
     container.clearInstances();
 
     container
+      .register<Window>(Window, { useValue: window })
       .register<HeadlessCheckoutSpy>(HeadlessCheckoutSpy, {
         useValue: headlessCheckoutSpy,
       })
