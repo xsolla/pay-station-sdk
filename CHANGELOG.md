@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.8.0
+
+### Minor Changes
+
+- changed build target to es2017
+- added flag for google instant flow override - isGooglePayInstantFlowEnabled
+
+### Patch Changes
+
+- new release system
+
 ## 0.7.0
 
 ### Minor Changes
