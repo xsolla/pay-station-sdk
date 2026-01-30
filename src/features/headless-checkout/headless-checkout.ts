@@ -44,6 +44,7 @@ import { externalInputChangeValueHandler } from './post-messages-handlers/extern
 import { isGooglePaySettingsGuard } from '../../core/form/types/is-google-pay-settings.guard';
 import { PaymentConfigurationGooglePaySettings } from '../../core/form/types/google-pay-form-configuration.interface';
 import { LoggerService } from '../../core/exception-handling/logger.service';
+import { NextActionType } from '../../core/actions/next-action-type.enum';
 
 @singleton()
 export class HeadlessCheckout {
@@ -112,6 +113,19 @@ export class HeadlessCheckout {
         (nextAction) => {
           if (nextAction) {
             callbackFn(nextAction);
+          }
+
+          if (nextAction?.type === NextActionType.showErrors) {
+            this.loggerService.error('showError next action received', {
+              errors: nextAction.data.errors,
+            });
+          }
+
+          if (nextAction?.type === NextActionType.serverError) {
+            this.loggerService.error('serverError next action received', {
+              message: nextAction.data.message,
+              status: nextAction.data.status,
+            });
           }
         },
       );

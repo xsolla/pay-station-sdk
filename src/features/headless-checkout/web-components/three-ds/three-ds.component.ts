@@ -83,10 +83,15 @@ export class ThreeDsComponent extends WebComponentAbstract {
       this.render();
 
       const form = this.renderChallengeWindowForm(this.challengeAttribute);
+      const originalSubmit = form.submit.bind(form);
 
-      this.addEventListenerToElement(form, 'submit', () => {
-        this.loggerService.info('psdk-3ds: open challenge window');
-      });
+      form.submit = () => {
+        setTimeout(() => {
+          this.loggerService.info('psdk-3ds: open challenge window');
+        }, 0);
+
+        originalSubmit();
+      };
 
       // case for external window
       if (this.redirectButtonRef) {

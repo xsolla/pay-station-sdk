@@ -43,10 +43,15 @@ export class OtelService implements LoggerInterface {
     message: string,
     attributes: { [key: string]: unknown },
   ): void {
-    const mergedAttributes = {
+    const mergedAttributes: { [key: string]: unknown } = {
       ...this.commonLogAttributesService.getAttributes(),
       ...attributes,
     };
+
+    if (level === 'error') {
+      mergedAttributes['error.type'] = 'error';
+      mergedAttributes['error.message'] = message;
+    }
 
     this.otelTracer.createLogTrace(level, message, mergedAttributes);
     void this.otelLogger.logOtlp(level, message, mergedAttributes);
