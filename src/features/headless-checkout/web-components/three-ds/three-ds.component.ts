@@ -6,10 +6,13 @@ import { threeDsRedirectButtonTemplate } from './three-ds.template';
 import './three-ds.component.scss';
 import { EventName } from '../../../../core/event-name.enum';
 import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
+import { LoggerService } from '../../../../core/exception-handling/logger.service';
 
 export class ThreeDsComponent extends WebComponentAbstract {
   private readonly window: Window;
   private readonly postMessageClient: PostMessagesClient;
+  private readonly loggerService: LoggerService;
+
   private windowCloseWaitingTimer: number | null = null;
 
   private get elementRef(): HTMLElement {
@@ -30,6 +33,9 @@ export class ThreeDsComponent extends WebComponentAbstract {
     try {
       return JSON.parse(challengeString) as CheckoutForm;
     } catch (error: unknown) {
+      this.loggerService.error('psdk-3ds: challenge parse error', {
+        error,
+      });
       return null;
     }
   }
@@ -39,6 +45,7 @@ export class ThreeDsComponent extends WebComponentAbstract {
 
     this.window = container.resolve(Window);
     this.postMessageClient = container.resolve(PostMessagesClient);
+    this.loggerService = container.resolve(LoggerService);
   }
 
   public static get observedAttributes(): string[] {
@@ -76,6 +83,10 @@ export class ThreeDsComponent extends WebComponentAbstract {
       this.render();
 
       const form = this.renderChallengeWindowForm(this.challengeAttribute);
+
+      this.addEventListenerToElement(form, 'submit', () => {
+        this.loggerService.info('psdk-3ds: open challenge window');
+      });
 
       // case for external window
       if (this.redirectButtonRef) {
