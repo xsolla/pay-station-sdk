@@ -124,14 +124,6 @@ export class OtelTracerService {
     return { span, traceId, spanId };
   }
 
-  public isInitialized(): boolean {
-    return !!this.tracer;
-  }
-
-  public getTracer(): Tracer | null {
-    return this.tracer;
-  }
-
   private readonly applyCustomAttributesOnSpan = (span: Span): void => {
     const attributes = this.commonLogAttributesService.getAttributes();
     for (const [key, value] of Object.entries(attributes)) {

@@ -18,13 +18,17 @@ import { applePayQrClosedHandler } from '../../post-messages-handlers/apple-pay/
 import { applePayQrOpenedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-qr-opened.handler';
 import { applePayButtonClickedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-button-clicked.handler';
 import { closeExternalWindowHandler } from '../../post-messages-handlers/close-external-window.handler';
+import { LoggerService } from '../../../../core/exception-handling/logger.service';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
-  private readonly applePayWindowName = 'HeadlessCheckout_PayStation_ApplePay';
+
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly formSpy: FormSpy;
   private readonly window: Window;
+  private readonly loggerService: LoggerService;
+
+  private readonly applePayWindowName = 'HeadlessCheckout_PayStation_ApplePay';
   private applePayWindow?: Window | null;
   private readonly subscriptions: Array<() => void> = [];
   // eslint-disable-next-line no-magic-numbers
@@ -36,6 +40,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
     this.headlessCheckout = container.resolve(HeadlessCheckout);
     this.formSpy = container.resolve(FormSpy);
     this.window = container.resolve(Window);
+    this.loggerService = container.resolve(LoggerService);
 
     this.subscriptions.push(
       this.headlessCheckout.events.onCoreEvent(
@@ -44,6 +49,11 @@ export class ApplePayComponent extends SecureComponentAbstract {
         (res) => {
           if (res?.error) {
             this.drawError(res.error);
+
+            this.loggerService.error('applePayError', {
+              error: res?.error,
+            });
+
             this.dispatchEvent(
               new CustomEvent(EventName.applePayError, { detail: res.error }),
             );

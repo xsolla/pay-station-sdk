@@ -8,18 +8,23 @@ import { googlePayButtonClickedHandler } from '../../../post-messages-handlers/g
 import { googlePayWindowOpenedHandler } from '../../../post-messages-handlers/google-pay/google-pay-window-opened.handler';
 import { googlePayWindowClosedHandler } from '../../../post-messages-handlers/google-pay/google-pay-window-closed.handler';
 import { googlePayErrorHandler } from '../../../post-messages-handlers/google-pay/google-pay-error.handler';
+import { LoggerService } from '../../../../../core/exception-handling/logger.service';
 
 export class GooglePayButtonComponent extends SecureComponentAbstract {
   protected componentName = 'pages/google-pay-button';
   private buttonColor: GooglePayButtonColorType = 'default';
+
   private readonly headlessCheckout: HeadlessCheckout;
   private readonly formSpy: FormSpy;
+  private readonly loggerService: LoggerService;
+
   private readonly subscriptions: Array<() => void> = [];
 
   public constructor() {
     super();
     this.headlessCheckout = container.resolve(HeadlessCheckout);
     this.formSpy = container.resolve(FormSpy);
+    this.loggerService = container.resolve(LoggerService);
 
     this.subscriptions.push(
       this.headlessCheckout.events.onCoreEvent(
@@ -57,6 +62,10 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
         googlePayErrorHandler,
         (res) => {
           if (res?.error) {
+            this.loggerService.error('googlePayError', {
+              error: res?.error,
+            });
+
             this.dispatchEvent(
               new CustomEvent(EventName.googlePayError, {
                 detail: { error: res.error },

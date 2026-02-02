@@ -43,10 +43,7 @@ export class OtelLoggerService {
                   timeUnixNano: Date.now() * this.MILLISECONDS_TO_NANOSECONDS,
                   severityText: level.toUpperCase(),
                   body: { stringValue: message },
-                  attributes: Object.entries(attributes).map(([key, val]) => ({
-                    key,
-                    value: { stringValue: String(val) },
-                  })),
+                  attributes: this.addAttributes(attributes),
                 },
               ],
             },
@@ -67,5 +64,25 @@ export class OtelLoggerService {
     } catch (error: unknown) {
       console.error('OtelService log failed', error);
     }
+  }
+
+  private addAttributes(attributes: { [key: string]: unknown }): Array<{
+    key: string;
+    value: {
+      stringValue: string;
+    };
+  }> {
+    return Object.entries(attributes).map(([key, val]) => {
+      let value = val;
+
+      if (typeof value === 'object') {
+        value = JSON.stringify(value);
+      }
+
+      return {
+        key,
+        value: { stringValue: String(value) },
+      };
+    });
   }
 }
