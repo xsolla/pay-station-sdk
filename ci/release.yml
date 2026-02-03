@@ -39,25 +39,21 @@ publish:
       # Build the package
       npx turbo build --filter @xsolla/pay-station-sdk
 
-      # Go to package directory (where .changeset is located)
-      cd ./${PACKAGE_PATH}
-
-      # Check if there are changesets to consume
+      # Check if there are changesets to consume (run from repo root)
       CHANGESET_STATUS=$(npx @changesets/cli status 2>&1 || true)
       if echo "$CHANGESET_STATUS" | grep -q "No changesets present"; then
         echo "⚠️ No changesets found. Skipping version update."
       else
         echo "📦 Updating version based on changesets..."
+        # Run changesets version from repo root (this will update version and delete changesets)
         npx @changesets/cli version
 
         # Push version changes to master (changesets already committed with "commit": true)
-        cd ../..
         git push origin master
-        cd ./${PACKAGE_PATH}
       fi
 
       # Get local version
-      LOCAL_VERSION=$(node -p "require('./package.json').version")
+      LOCAL_VERSION=$(node -p "require('./${PACKAGE_PATH}/package.json').version")
       echo "📦 Local version: ${LOCAL_VERSION}"
 
       # Check if version already published
@@ -69,7 +65,8 @@ publish:
         exit 0
       fi
 
-      # Publish the package
+      # Go to package directory and publish
+      cd ./${PACKAGE_PATH}
       npm publish --access public
       echo "✅ Successfully published ${PACKAGE_NAME}@${LOCAL_VERSION}"
 
