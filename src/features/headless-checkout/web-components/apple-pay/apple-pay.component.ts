@@ -34,6 +34,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
   // eslint-disable-next-line no-magic-numbers
   private readonly externalWindowCheckIntervalMs = 500;
   private externalWindowCheckIntervalId?: ReturnType<typeof setInterval>;
+  private isWindowDestroyed = false;
 
   public constructor() {
     super();
@@ -112,8 +113,11 @@ export class ApplePayComponent extends SecureComponentAbstract {
       this.headlessCheckout.events.onCoreEvent(
         EventName.closeExternalWindow,
         closeExternalWindowHandler,
-        () => {
-          this.destroyApplePayWindow(true);
+        (res) => {
+          this.destroyApplePayWindow({
+            stopLoading: true,
+            closedByUser: !!res?.closedByUser,
+          });
         },
       ),
     );
@@ -224,6 +228,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
   }
 
   private openRedirectPage(redirectUrl: string): void {
+    this.isWindowDestroyed = false;
     this.setupWaitingPayment(true);
     this.applePayWindow = this.window.open(
       redirectUrl,
@@ -252,19 +257,31 @@ export class ApplePayComponent extends SecureComponentAbstract {
   }
 
   private onApplePayWindowClosed(): void {
-    this.destroyApplePayWindow(true);
+    this.destroyApplePayWindow({ stopLoading: true, closedByUser: true });
   }
 
-  private destroyApplePayWindow(stopLoading?: boolean): void {
+  private destroyApplePayWindow(options: {
+    stopLoading?: boolean;
+    closedByUser: boolean;
+  }): void {
+    if (this.isWindowDestroyed) {
+      return;
+    }
+    this.isWindowDestroyed = true;
+
     this.stopWindowCheckInterval();
-    this.dispatchEvent(new CustomEvent(EventName.applePayWindowClosed));
+    this.dispatchEvent(
+      new CustomEvent(EventName.applePayWindowClosed, {
+        detail: { closedByUser: options.closedByUser },
+      }),
+    );
 
     this.window.focus();
     if (this.applePayWindow && !this.applePayWindow.closed) {
       this.applePayWindow.close();
     }
 
-    if (stopLoading) {
+    if (options.stopLoading) {
       this.setupWaitingPayment(false);
     }
   }
