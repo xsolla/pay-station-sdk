@@ -12,6 +12,7 @@ import { headlessCheckoutAppUrl } from './environment';
 import { ThemesLoader } from '../../core/customization/themes-loader';
 import { EnvironmentService } from '../../core/environment/environment.service';
 import { submitHandler } from './post-messages-handlers/submit/submit.handler';
+import { LoggerService } from '../../core/exception-handling/logger.service';
 
 const mockMessage: Message = {
   name: EventName.initPayment,
@@ -49,6 +50,7 @@ describe('HeadlessCheckout', () => {
   let localizeService: LocalizeService;
   let themesLoader: ThemesLoader;
   let environmentService: EnvironmentService;
+  let loggerService: LoggerService;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const stub = (): void => {};
@@ -82,6 +84,13 @@ describe('HeadlessCheckout', () => {
       getHeadlessCheckoutAppUrl: () => headlessCheckoutAppUrl,
     } as unknown as EnvironmentService;
 
+    loggerService = {
+      initialize: noopStub,
+      setAttributes: noopStub,
+      error: noopStub,
+      info: noopStub,
+    } as unknown as LoggerService;
+
     container.clearInstances();
 
     headlessCheckout = container
@@ -98,6 +107,9 @@ describe('HeadlessCheckout', () => {
       })
       .register<EnvironmentService>(EnvironmentService, {
         useValue: environmentService,
+      })
+      .register<LoggerService>(LoggerService, {
+        useValue: loggerService,
       })
       .registerSingleton(HeadlessCheckout)
       .resolve(HeadlessCheckout);
