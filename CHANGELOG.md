@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0
+
+### Minor Changes
+
+- 9f47b35: added error tracking
+
 ## 0.8.0
 
 ### Minor Changes
