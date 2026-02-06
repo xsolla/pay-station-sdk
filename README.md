@@ -994,6 +994,19 @@ Integration flow:
 1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
 
+To configure one-click payment via Google Pay, update the SDK initialization script as shown below:
+
+```typescript
+const config: InitialOptions = {
+  isWebview: false,
+  theme: 'default',
+  language: parameters.language,
+  isGooglePayInstantFlowEnabled: true
+};
+
+await headlessCheckout.init(config);
+```
+
 ## Apple Pay integration guide
 
 > A working example can be found [here](./examples/apple-pay).
