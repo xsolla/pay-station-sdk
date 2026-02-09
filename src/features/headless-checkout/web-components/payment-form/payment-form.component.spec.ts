@@ -82,6 +82,10 @@ describe('PaymentFormComponent', () => {
     formLoader = {
       setupAndAwaitFieldsLoading: noopStub,
       setFieldLoaded: noopStub,
+      onceLoaded: noopStub,
+      get hasTrackedFields() {
+        return true;
+      },
     } as unknown as FormLoader;
 
     paymentFormFieldsManager = {

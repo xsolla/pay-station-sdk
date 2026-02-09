@@ -4,6 +4,7 @@ import { GooglePayButtonComponent } from '../../../../../web-components';
 import { noopStub } from '../../../../../tests/stubs/noop.stub';
 import { FormSpy } from '../../../../../core/spy/form-spy/form-spy';
 import { HeadlessCheckout } from '../../../headless-checkout';
+import { PostMessagesClient } from '../../../../../core/post-messages-client/post-messages-client';
 
 function createComponent(): void {
   const element = document.createElement(
@@ -14,6 +15,7 @@ function createComponent(): void {
 
 describe('GooglePayButtonComponent', () => {
   let headlessCheckout: HeadlessCheckout;
+  let postMessagesClient: PostMessagesClient;
   let formSpy: FormSpy;
 
   window.customElements.define(
@@ -37,9 +39,14 @@ describe('GooglePayButtonComponent', () => {
       },
     } as unknown as FormSpy;
 
+    postMessagesClient = {
+      send: noopStub,
+    } as unknown as PostMessagesClient;
+
     container.clearInstances();
     container.registerInstance(HeadlessCheckout, headlessCheckout);
     container.registerInstance(FormSpy, formSpy);
+    container.registerInstance(PostMessagesClient, postMessagesClient);
     container.register<Window>(Window, { useValue: window });
   });
 

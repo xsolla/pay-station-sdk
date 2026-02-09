@@ -9,6 +9,7 @@ export class FormLoader {
 
   private _resolve!: () => void;
   private _isPromiseResolved = false;
+  private _onLoadedCallbacks: Array<() => void> = [];
 
   public async setupAndAwaitFieldsLoading(fields: Field[]): Promise<void> {
     this._isAllFieldsLoaded = new Promise((resolve) => {
@@ -27,6 +28,7 @@ export class FormLoader {
     if (isFormWithoutFields) {
       this._resolve();
       this._isPromiseResolved = true;
+      this.notifyOnLoaded();
     }
 
     filteredFields.forEach((field) => {
@@ -34,6 +36,10 @@ export class FormLoader {
     });
 
     return this._isAllFieldsLoaded;
+  }
+
+  public onceLoaded(callback: () => void): void {
+    this._onLoadedCallbacks.push(callback);
   }
 
   public setFieldLoaded(name: string): void {
@@ -48,7 +54,17 @@ export class FormLoader {
     if (this.isAllFieldsLoaded && !this._isPromiseResolved) {
       this._resolve();
       this._isPromiseResolved = true;
+      this.notifyOnLoaded();
     }
+  }
+
+  private notifyOnLoaded(): void {
+    this._onLoadedCallbacks.forEach((callback) => callback());
+    this._onLoadedCallbacks = [];
+  }
+
+  public get hasTrackedFields(): boolean {
+    return !!this._fields && Object.keys(this._fields).length > 0;
   }
 
   private get isAllFieldsLoaded(): boolean {

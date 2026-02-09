@@ -19,11 +19,14 @@ import { applePayQrOpenedHandler } from '../../post-messages-handlers/apple-pay/
 import { applePayButtonClickedHandler } from '../../post-messages-handlers/apple-pay/apple-pay-button-clicked.handler';
 import { closeExternalWindowHandler } from '../../post-messages-handlers/close-external-window.handler';
 import { LoggerService } from '../../../../core/exception-handling/logger.service';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
+import { formLoadedHandler } from '../payment-form/form-loaded.handler';
 
 export class ApplePayComponent extends SecureComponentAbstract {
   protected componentName: string | null = 'pages/apple-pay';
 
   private readonly headlessCheckout: HeadlessCheckout;
+  private readonly postMessagesClient: PostMessagesClient;
   private readonly formSpy: FormSpy;
   private readonly window: Window;
   private readonly loggerService: LoggerService;
@@ -35,10 +38,12 @@ export class ApplePayComponent extends SecureComponentAbstract {
   private readonly externalWindowCheckIntervalMs = 500;
   private externalWindowCheckIntervalId?: ReturnType<typeof setInterval>;
   private isWindowDestroyed = false;
+  private formLoadStartTime: number | null = null;
 
   public constructor() {
     super();
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.postMessagesClient = container.resolve(PostMessagesClient);
     this.formSpy = container.resolve(FormSpy);
     this.window = container.resolve(Window);
     this.loggerService = container.resolve(LoggerService);
@@ -82,6 +87,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
         (res) => {
           if (res?.fieldName && res?.fieldName === this.componentName) {
             this.finishLoadingComponentHandler(this.componentName);
+            this.sendFormLoadedEvent();
           }
         },
       ),
@@ -141,6 +147,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
       return;
     }
 
+    this.formLoadStartTime = Date.now();
     this.render();
   }
 
@@ -158,6 +165,23 @@ export class ApplePayComponent extends SecureComponentAbstract {
     const appUrl = this.environmentService.getHeadlessCheckoutAppUrl();
     return `<iframe id="apple-pay-iframe" src='${appUrl}/secure-components/${this
       .componentName!}' allow='payment'></iframe>`;
+  }
+
+  private sendFormLoadedEvent(): void {
+    if (!this.formLoadStartTime) {
+      return;
+    }
+
+    const renderTime = Date.now() - this.formLoadStartTime;
+    this.formLoadStartTime = null;
+
+    void this.postMessagesClient.send(
+      {
+        name: EventName.formLoaded,
+        data: { renderTime },
+      },
+      formLoadedHandler,
+    );
   }
 
   private drawError(error: string): void {

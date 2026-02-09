@@ -62,7 +62,7 @@ module.exports = (env, argv) => {
 
   let envFile = '.env.production';
   if (env.development) {
-    envFile = '.env.developemnt';
+    envFile = '.env.development';
   } else if (env.staging) {
     envFile = '.env.staging';
   }

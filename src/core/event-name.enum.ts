@@ -55,4 +55,6 @@ export const enum EventName {
   googlePayWindowOpened = 'googlePayWindowOpened',
   googlePayWindowClosed = 'googlePayWindowClosed',
   googlePayError = 'googlePayError',
+  // Form loading
+  formLoaded = 'formLoaded',
 }
