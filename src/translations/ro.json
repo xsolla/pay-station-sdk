@@ -33,7 +33,7 @@
          "finance-details-vat-percent-including" : "Inclusiv {{percent}}% TVA",
          "hello" : "Salutare, lume!",
          "legal" : "Juridic",
-         "legal-cookies" : "Xsolla colectează doar module cookie esențiale. <a href={{xsolla_privacy_link}} target=\"_blank\">Politica Xsolla privind modulele cookie<\/a>. ",
+         "legal-cookies" : "Xsolla colectează doar module cookie esențiale. <a href={{xsolla_privacy_link}} target=\"_blank\">Politica Xsolla privind modulele cookie<\/a>.",
          "legal-mor" : "Xsolla este distribuitorul oficial al acestui conținut.",
          "legal-mor-eu" : "Atunci când achiziționați acest conținut de la Xsolla, declarați că sunteți adult și că ați citit cu atenție și sunteți de acord cu <a href={{xsolla_terms_link}} target=\"_blank\">acordul de licențiere pentru utilizatorul final<\/a>.",
          "legal-support" : "Dacă aveți întrebări, vă rugăm să contactați <a href={{xsolla_help_link}} target=\"_blank\">serviciul Xsolla de asistență a jucătorilor<\/a>.",
