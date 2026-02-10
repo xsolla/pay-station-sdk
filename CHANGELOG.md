@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.10.0
+
+### Minor Changes
+
+- 615a484: applePayWindowClosed event now includes closedByUser flag to distinguish manual window close from automatic close after transaction. applePayButtonClicked event is now dispatched in external page flow.
+
+### Patch Changes
+
+- 1d01310: documentation update
+
 ## 0.9.0
 
 ### Minor Changes
