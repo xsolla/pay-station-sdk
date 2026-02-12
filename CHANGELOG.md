@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.0
+
+### Minor Changes
+
+- 59d7d4a: Add payment-form-loaded analytics event with form render time tracking
+
 ## 0.10.0
 
 ### Minor Changes
