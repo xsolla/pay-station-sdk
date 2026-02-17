@@ -6,6 +6,6 @@ export const getTotalRowTemplate = (cartSummary: CartSummary): string => {
   return `
     <div class="total-row">
       <div class="title">${i18next.t('finance-details-total-title')}</div>
-      ${getPriceTextTemplate(null, cartSummary.total.money)}
+      ${getPriceTextTemplate(null, cartSummary?.total?.money)}
     </div>`;
 };

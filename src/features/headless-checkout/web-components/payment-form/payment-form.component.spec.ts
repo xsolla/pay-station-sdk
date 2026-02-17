@@ -202,6 +202,8 @@ describe('PaymentFormComponent', () => {
       zip,
       zip,
       zip,
+      zip,
+      zip,
     ]);
   });
 });

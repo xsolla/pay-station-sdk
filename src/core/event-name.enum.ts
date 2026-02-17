@@ -50,6 +50,10 @@ export const enum EventName {
   applePayQrOpened = 'applePayQrOpened',
   applePayQrClosed = 'applePayQrClosed',
   applePayButtonClicked = 'applePayButtonClicked',
+  // Coupon
+  applyCoupon = 'applyCoupon',
+  removeCoupon = 'removeCoupon',
+  couponUpdate = 'couponUpdate',
   // Google Pay
   googlePayButtonClicked = 'googlePayButtonClicked',
   googlePayWindowOpened = 'googlePayWindowOpened',

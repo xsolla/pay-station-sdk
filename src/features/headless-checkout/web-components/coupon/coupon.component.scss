@@ -1,0 +1,96 @@
+@use 'src/styles/mixins/typo.mixin' as typo;
+
+psdk-coupon {
+  @include typo.psdk-typo;
+
+  display: block;
+
+  .coupon-input-wrapper {
+    display: flex;
+    gap: 8px;
+  }
+
+  .coupon-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--psdk-input-border-color, #ccc);
+    border-radius: 4px;
+    outline: none;
+    font-size: 14px;
+
+    &:focus {
+      border-color: var(--psdk-input-focus-border-color, #0073ff);
+    }
+
+    &--error {
+      border-color: var(--psdk-input-error-border-color, #ff3b30);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+
+  .coupon-apply-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background: var(--psdk-button-bg, #0073ff);
+    color: var(--psdk-button-color, #fff);
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &--loading {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .coupon-applied {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .coupon-tag {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: var(--psdk-coupon-tag-bg, #e8f5e9);
+    font-size: 14px;
+  }
+
+  .coupon-discount {
+    font-weight: 600;
+  }
+
+  .coupon-remove-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--psdk-coupon-remove-hover-bg, #f5f5f5);
+    }
+  }
+}

@@ -31,7 +31,7 @@ export const getTotalDetailsTemplate = (
 ): string => {
   const totalDetailsRows = translateTotalDetails(
     finance,
-    cartSummary.totalDetails,
+    cartSummary?.totalDetails,
   )?.map((totalDetails) => {
     return `
       <div class="total-details-row">
