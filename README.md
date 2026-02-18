@@ -11,6 +11,7 @@
 - [Pay Station SDK supported events](#pay-station-sdk-supported-events)
 - [Pay Station SDK supported languages](#pay-station-sdk-supported-languages)
 - [Integration guide](#integration-guide)
+- [Coupon integration guide](#coupon-integration-guide)
 
 ---
 
@@ -199,6 +200,7 @@ declare const headlessCheckout: {
 | User Balance          | psdk-user-balance          | ✅         |
 | Finance Details       | psdk-finance-details       | ✅         |
 | Status                | psdk-status                | ✅         |
+| Coupon                | psdk-coupon                | ✅         |
 
 ![Regular SDK web components](./readme_images/sdk_web_components_scheme.png 'Regular SDK web components')
 
@@ -542,6 +544,39 @@ name: EventName.deleteSavedMethod,
 </td>
 <td>Allows to remove saved payment methods.</td>
 </tr>
+<tr>
+<td>applyCouponHandler</td>
+<td>EventName.applyCoupon</td>
+<td>applyCoupon</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.applyCoupon;
+  data: {
+    code: string;
+  }
+}
+</code>
+</pre>
+</td>
+<td>Applies a coupon code. Responds with a <code>couponUpdate</code> event containing the validation result.</td>
+</tr>
+<tr>
+<td>removeCouponHandler</td>
+<td>EventName.removeCoupon</td>
+<td>removeCoupon</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.removeCoupon;
+}
+</code>
+</pre>
+</td>
+<td>Removes the currently applied coupon. Responds with a <code>couponUpdate</code> event with <code>null</code> data and an updated <code>financeDetails</code> event.</td>
+</tr>
 </tbody>
 </table>
 
@@ -735,6 +770,40 @@ Notifies about completion of the payment form component loading.
 </pre>
 </td>
 <td>Provides data on the payment status when cash methods are used.</td>
+</tr>
+<tr>
+<td>EventName.couponUpdate</td>
+<td>couponUpdate</td>
+<td>couponUpdateHandler</td>
+<td>
+<pre>
+<code>
+{
+  name: EventName.couponUpdate;
+  data: null | {
+    code: string;
+    isValid: boolean;
+    discount: null | {
+      amount: number | null;
+      currency: string;
+    };
+    subTotal: null | {
+      amount: number | null;
+      currency: string;
+      payment_amount: number;
+      payment_currency: string;
+    };
+    errorMessage?: string;
+  }
+}
+</code>
+</pre>
+</td>
+<td>
+Notifies about coupon state changes. Emitted after <code>applyCoupon</code> or <code>removeCoupon</code> events.
+When a coupon is removed, <code>data</code> is <code>null</code>.
+When a coupon is applied, <code>data</code> contains the validation result with discount and subtotal information.
+</td>
 </tr>
 </tbody>
 </table>
@@ -1175,6 +1244,71 @@ Integration flow:
 1. Create a `return` page.
 1. Add the `<psdk-finance-details>`, `<psdk-status>`, and `<psdk-legal>` components to the created `return` page to show a payment status.
 1. Set accessToken at `headlessCheckout.setToken`. Run `headlessCheckout.init` to initialize the headless checkout library.
+
+## Coupon integration guide
+
+The SDK provides the `<psdk-coupon>` component with a built-in input, apply/remove buttons, and discount display. If you want full control over the coupon UI, you can build your own component using the coupon events described below.
+
+### Sending events
+
+**Apply a coupon:**
+
+```javascript
+headlessCheckout.events.send({
+  name: 'applyCoupon',
+  data: { code: 'SUMMER20' },
+});
+```
+
+**Remove the applied coupon:**
+
+```javascript
+headlessCheckout.events.send({
+  name: 'removeCoupon',
+});
+```
+
+### Listening for responses
+
+Subscribe to the `couponUpdate` event to receive validation results and discount information:
+
+```javascript
+headlessCheckout.events.onCoreEvent((event) => {
+  if (event.name === 'couponUpdate') {
+    if (event.data === null) {
+      // Coupon was removed
+      return;
+    }
+
+    if (event.data.isValid) {
+      // Coupon applied successfully
+      console.log('Discount:', event.data.discount);
+      console.log('Subtotal:', event.data.subTotal);
+    } else {
+      // Coupon is invalid
+      console.log('Error:', event.data.errorMessage);
+    }
+  }
+});
+```
+
+### Response data structure
+
+The `couponUpdate` event data follows the `AppliedCoupon` interface:
+
+```typescript
+interface AppliedCoupon {
+  code: string;
+  isValid: boolean;
+  discount: Price | null; // { amount: number | null, currency: string }
+  subTotal: Price | null; // { amount: number | null, currency: string, payment_amount: number, payment_currency: string }
+  errorMessage?: string;
+}
+```
+
+When a coupon is removed, `data` is `null`. When a coupon is applied, the response contains `isValid: true` with discount/subtotal or `isValid: false` with an `errorMessage`.
+
+> **Note:** After a successful `removeCoupon`, you will also receive an updated `financeDetails` event reflecting the new totals.
 
 ## Payment via user balance
 

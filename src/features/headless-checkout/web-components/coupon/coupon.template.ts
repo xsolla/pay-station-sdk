@@ -54,16 +54,16 @@ const getLoadingTemplate = (context: CouponTemplateContext): string => {
 };
 
 const getAppliedTemplate = (context: CouponTemplateContext): string => {
-  const isHaveDiscount = Boolean(
-    context.coupon?.discount && context.coupon?.total,
+  const hasDiscount = Boolean(
+    context.coupon?.discount && context.coupon?.subTotal,
   );
 
-  const discount = isHaveDiscount
+  const discount = hasDiscount
     ? `<span class='coupon-discount'>${context.discountLabel.replace(
         '{{value}}',
         getDiscountPercent(
           context.coupon?.discount?.amount as unknown as number,
-          context.coupon?.total?.payment_amount as unknown as number,
+          context.coupon?.subTotal?.payment_amount as unknown as number,
         ),
       )}</span>`
     : '';
