@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.1
+
+### Patch Changes
+
+- f30d33e: fixed translations
+
 ## 0.11.0
 
 ### Minor Changes
