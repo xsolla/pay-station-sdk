@@ -5,5 +5,5 @@ export interface AppliedCoupon {
   discount: Price | null;
   subTotal: Price | null;
   isValid: boolean;
-  errorMessage?: string;
+  errorMessage: string;
 }
