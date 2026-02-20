@@ -37,6 +37,9 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
         EventName.googlePayButtonClicked,
         googlePayButtonClickedHandler,
         () => {
+          this.loggerService.info(
+            `Google Pay - ${EventName.googlePayButtonClicked}`,
+          );
           this.dispatchEvent(new CustomEvent(EventName.googlePayButtonClicked));
         },
       ),
@@ -47,6 +50,9 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
         EventName.googlePayWindowOpened,
         googlePayWindowOpenedHandler,
         () => {
+          this.loggerService.info(
+            `Google Pay - ${EventName.googlePayWindowOpened}`,
+          );
           this.dispatchEvent(new CustomEvent(EventName.googlePayWindowOpened));
         },
       ),
@@ -57,6 +63,9 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
         EventName.googlePayWindowClosed,
         googlePayWindowClosedHandler,
         () => {
+          this.loggerService.info(
+            `Google Pay - ${EventName.googlePayWindowClosed}`,
+          );
           this.dispatchEvent(new CustomEvent(EventName.googlePayWindowClosed));
         },
       ),
@@ -69,7 +78,7 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
         (res) => {
           if (res?.error) {
             this.loggerService.error('googlePayError', {
-              error: res?.error,
+              error: this.serializeError(res?.error),
             });
 
             this.dispatchEvent(
@@ -133,6 +142,8 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
     const renderTime = Date.now() - this.formLoadStartTime;
     this.formLoadStartTime = null;
 
+    this.loggerService.info(`Google Pay - form loaded`);
+
     void this.postMessagesClient.send(
       {
         name: EventName.formLoaded,
@@ -140,5 +151,21 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
       },
       formLoadedHandler,
     );
+  }
+
+  private serializeError(error: unknown): unknown {
+    if (error instanceof Error) {
+      return {
+        name: error.name,
+        stack: error.stack,
+        message: error.message,
+      };
+    }
+
+    if (typeof error === 'object') {
+      return { message: JSON.stringify(error) };
+    }
+
+    return { message: String(error) };
   }
 }
