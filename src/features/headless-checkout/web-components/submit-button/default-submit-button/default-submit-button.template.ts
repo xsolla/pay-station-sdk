@@ -9,7 +9,7 @@ export const getSubmitButtonTemplate = (
   isLoading: boolean,
 ): string => {
   return `
-    <button>
+    <button data-testid="submit-button">
       ${isLoading ? getLoaderTemplate() : text}
     </button>
   `;
