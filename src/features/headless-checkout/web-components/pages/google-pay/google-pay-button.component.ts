@@ -163,7 +163,11 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
     }
 
     if (typeof error === 'object') {
-      return { message: JSON.stringify(error) };
+      try {
+        return { message: JSON.stringify(error) };
+      } catch {
+        return { message: '[object with circular structure]' };
+      }
     }
 
     return { message: String(error) };

@@ -1,6 +1,7 @@
-import { getOtelEnvironmentName } from './otel-environment-map.const';
 import { container, injectable } from 'tsyringe';
 import { EnvironmentService } from '../../../environment/environment.service';
+import { getOtelEnvironmentName } from './otel-environment-map.const';
+import { OtelAnyValue } from './otel-attribute-value.type';
 
 @injectable()
 export class OtelLoggerService {
@@ -68,21 +69,59 @@ export class OtelLoggerService {
 
   private addAttributes(attributes: { [key: string]: unknown }): Array<{
     key: string;
-    value: {
-      stringValue: string;
-    };
+    value: OtelAnyValue;
   }> {
     return Object.entries(attributes).map(([key, val]) => {
-      let value = val;
-
-      if (typeof value === 'object') {
-        value = JSON.stringify(value);
-      }
-
       return {
         key,
-        value: { stringValue: String(value) },
+        value: this.convertAttributeToOtelType(val),
       };
     });
+  }
+
+  private convertAttributeToOtelType(attribute: unknown): OtelAnyValue {
+    if (attribute === null || attribute === undefined) {
+      return { stringValue: 'null' };
+    }
+
+    if (typeof attribute === 'string') {
+      return { stringValue: attribute };
+    }
+
+    if (typeof attribute === 'boolean') {
+      return { boolValue: attribute };
+    }
+
+    if (typeof attribute === 'number') {
+      return Number.isInteger(attribute)
+        ? { intValue: attribute }
+        : { doubleValue: attribute };
+    }
+
+    if (Array.isArray(attribute)) {
+      return {
+        kvlistValue: {
+          values: attribute.map((item, i) => ({
+            key: String(i),
+            value: this.convertAttributeToOtelType(item),
+          })),
+        },
+      };
+    }
+
+    if (typeof attribute === 'object') {
+      return {
+        kvlistValue: {
+          values: Object.entries(attribute as { [key: string]: unknown }).map(
+            ([k, v]) => ({ key: k, value: this.convertAttributeToOtelType(v) }),
+          ),
+        },
+      };
+    }
+
+    // fallback to default type
+    return {
+      stringValue: String(attribute),
+    };
   }
 }
