@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.2
+
+### Patch Changes
+
+- 51e892c: add google pay logs
+
 ## 0.11.1
 
 ### Patch Changes
