@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.12.0
+
+### Minor Changes
+
+- fc81233: implement coupon support
+
 ## 0.11.2
 
 ### Patch Changes
