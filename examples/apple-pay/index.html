@@ -164,7 +164,12 @@
       /**
        * Handle Apple Pay events
        *
+       * IMPORTANT: The <psdk-apple-pay> element is created dynamically after the
+       * form is fully loaded. Make sure the element exists in the DOM before
+       * adding event listeners.
+       *
        * Available events:
+       * - applePayButtonClicked: Apple Pay button was clicked
        * - applePayWindowOpened: Apple Pay window opened
        * - applePayWindowClosed: Apple Pay window closed
        *   Event detail: { closedByUser: boolean }
@@ -173,8 +178,11 @@
        * - applePayQrOpened: Apple Pay QR code opened (fullscreen mode)
        * - applePayQrClosed: Apple Pay QR code closed
        */
-      function listenApplePayEvents() {
-        const applePayButton = document.querySelector('psdk-apple-pay');
+      function listenApplePayEvents(applePayButton) {
+        // Handle Apple Pay button clicked event
+        applePayButton.addEventListener('applePayButtonClicked', () => {
+          console.log('Apple Pay: button clicked');
+        });
 
         // Handle Apple Pay window opened event
         applePayButton.addEventListener('applePayWindowOpened', () => {
@@ -235,7 +243,15 @@
         addPaymentFormElement();
         await initPaymentForm(applePayId);
         addSubmitButtonElement();
-        listenApplePayEvents();
+
+        /**
+         * Wait for <psdk-apple-pay> to appear in the DOM,
+         * then attach event listeners.
+         */
+        const applePayButton = document.querySelector('psdk-apple-pay');
+        if (applePayButton) {
+          listenApplePayEvents(applePayButton);
+        }
       }
 
       main();
