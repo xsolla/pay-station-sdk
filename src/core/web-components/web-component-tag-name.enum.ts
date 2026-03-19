@@ -30,4 +30,5 @@ export enum WebComponentTagName {
   CashPaymentInstructionComponent = 'psdk-cash-payment-instruction',
   XsollaNumberComponent = 'psdk-xsolla-number',
   CouponComponent = 'psdk-coupon',
+  RedirectComponent = 'psdk-redirect',
 }

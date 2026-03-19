@@ -30,6 +30,7 @@ import { LegalSupportComponent } from '../../features/headless-checkout/web-comp
 import { LegalLinksComponent } from '../../features/headless-checkout/web-components/legal/links/legal-links.component';
 import { SecureConnectionComponent } from '../../features/headless-checkout/web-components/secure-connection/secure-connection.component';
 import { CartItemComponent } from '../../features/headless-checkout/web-components/finance-details/cart-item/cart-item.component';
+import { RedirectComponent } from '../../features/headless-checkout/web-components/redirect/redirect.component';
 
 export const webComponents: {
   [key in WebComponentTagName]: CustomElementConstructor;
@@ -67,4 +68,5 @@ export const webComponents: {
     CashPaymentInstructionComponent,
   [WebComponentTagName.XsollaNumberComponent]: XsollaNumberComponent,
   [WebComponentTagName.CouponComponent]: CouponComponent,
+  [WebComponentTagName.RedirectComponent]: RedirectComponent,
 };

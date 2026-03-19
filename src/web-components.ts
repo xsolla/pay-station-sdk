@@ -26,6 +26,7 @@ import { LegalMorComponent } from './features/headless-checkout/web-components/l
 import { LegalSupportComponent } from './features/headless-checkout/web-components/legal/support/legal-support.component';
 import { LegalLinksComponent } from './features/headless-checkout/web-components/legal/links/legal-links.component';
 import { SecureConnectionComponent } from './features/headless-checkout/web-components/secure-connection/secure-connection.component';
+import { RedirectComponent } from './features/headless-checkout/web-components/redirect/redirect.component';
 
 export {
   SubmitButtonComponent,
@@ -56,4 +57,5 @@ export {
   TotalComponent,
   CashPaymentInstructionComponent,
   CouponComponent,
+  RedirectComponent,
 };

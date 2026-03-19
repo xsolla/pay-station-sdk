@@ -280,6 +280,7 @@ Secure components have access to sensitive user data, and are encapsulated in if
 | LegalSupportComponent | psdk-legal-support | ✅         |
 | LegalLinksComponent   | psdk-legal-links   | ✅         |
 | Payment Form          | psdk-payment-form  | ✅         |
+| Redirect              | psdk-redirect      | ✅         |
 | ThreeDs               | psdk-3ds           | ✅         |
 | TotalComponent        | psdk-total         | ✅         |
 
@@ -288,6 +289,8 @@ The `Payment Form` component creates missed payment form components to ensure th
 The `Legal` component contains information about Xsolla's legal documents. The client must include either this component or all related components (`LegalTermsComponent`, `LegalCookiesComponent`, `LegalMorComponent`, `LegalSupportComponent`, `LegalLinksComponent`) to display legal documents in the application in accordance with the agreement with Xsolla. Otherwise, the payment flow is blocked.
 
 The `LegalTermsComponent`, `LegalCookiesComponent`, `LegalMorComponent`, `LegalSupportComponent`, `LegalLinksComponent` components contain information about Xsolla's legal documents. The client must include either all these components or only the `Legal` component to display legal documents in the application in accordance with the agreement with Xsolla. Otherwise, the payment flow is blocked.
+
+The `Redirect` component handles redirect actions triggered after payment form submission. It supports both GET and POST redirects and manages opening the redirect URL in a new tab or the same tab based on the `isNewWindowRequired` and `isSameWindowRequired` flags from the NextAction payload.
 
 The `ThreeDs` component contains the logic required to perform the necessary credit card checks in accordance with the 3DS procedure.
 
@@ -994,33 +997,23 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-
-- The financial details component will be updated with transaction details once the payment is completed.
-
+   - The financial details component will be updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the PayPal payment method ID and return URL.
-
-- The return URL is used to redirect the user once payment is completed on PayPal’s side.
-- `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
-
+   - The return URL is used to redirect the user once payment is completed on PayPal’s side.
+   - `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-
-- Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the URL to redirect from the action payload.
-
+   - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the URL to redirect from the action payload.
 1. Add the form fields component to the HTML markup.
-
-- Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
-- Use fields with the `isMandatory` flag to get required fields only.
-- Use the `<psdk-text>` component to render form fields if required. Email and ZIP fields can only be required for PayPal.
-
+   - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
+   - Use fields with the `isMandatory` flag to get required fields only.
+   - Use the `<psdk-text>` component to render form fields if required. Email and ZIP fields can only be required for PayPal.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 1. Handle next action with the `redirect` type once the submit button is clicked.
-
-- Use action payload to get the URL. Make sure you add query parameters to the URL from action payload data.
-- Redirect the user to the PayPal payment system using the generated URL.
-- You can redirect to the PayPal URL in the same window or create a new window and keep the payment form in a separate tab. Once payment is completed on PayPal’s side, a user is redirected to `returnUrl`.
-
+   - Use action payload to get the URL. Make sure you add query parameters to the URL from action payload data.
+   - Redirect the user to the PayPal payment system using the generated URL.
+   - You can redirect to the PayPal URL in the same window or create a new window and keep the payment form in a separate tab. Once payment is completed on PayPal’s side, a user is redirected to `returnUrl`.
 1. Add the `<psdk-status>` component to the HTML markup to see the payment status.
 
 ## Credit card integration guide
@@ -1043,7 +1036,7 @@ Integration flow:
    - The `NextAction` with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. You must remove previously added fields and render new fields for this step. It can also include a new text for the submit button (in the submitButtonText property).
    > **Note:** On payment validation failure, `show_errors` and `show_fields` may fire in sequence for the same server response. The `show_fields` event is emitted even when the set of visible fields has not changed. If you call `setupAndAwaitFieldsLoading` on each `show_fields`, use an `AbortSignal` to cancel the previous loading before starting a new one. The `FormLoader` internally tracks which fields have already reported as loaded, so re-calling `setupAndAwaitFieldsLoading` with the same fields resolves immediately without hanging.
    - 3-D Secure verification can be handled either by the acquirer's built-in mechanism or through an external [MPI](https://en.wikipedia.org/wiki/Merchant_plug-in), which authenticates a cardholder and forwards the result to the acquirer.
-   - **3DS via external MPI**: The Next action with the `redirect` type means the form is redirected to complete payment according to the 3DS procedure. See also [Special cases for 3DS via external MPI](#special-cases-for-3ds-via-external-mpi).
+   - **3DS via external MPI**: The Next action with the `redirect` type means the form is redirected to complete payment according to the 3DS procedure. Use the `<psdk-redirect>` component to handle it automatically (supports both GET and POST), or implement the redirect manually. See also [Special cases for 3DS via external MPI](#special-cases-for-3ds-via-external-mpi).
    - **3DS via built-in method**: The `NextAction` with the `3DS` type means the user's card must be verified according to the procedure triggered by acquirer. When an additional user action (the challenge flow) is required, the `3DS` event is triggered along with the `data` object. Pass this object to the `ThreeDs` component as the `data-challenge` attribute (refer to the [example](./examples/credit-card)). The component opens a new browser tab where the user can authorize the payment.
 1. Add the form fields component to the HTML markup.
    - Use the form object that was returned by `headlessCheckout.form.init` method to get form fields.
@@ -1069,9 +1062,15 @@ To handle this, redirect the user in a new browser tab for those cases.
 
 > ⚠️ Important: The redirect must be triggered by a trusted user interaction for the new tab to open reliably.
 
-To test this behavior, handle the `isNewWindowRequired` parameter in the `redirect` NextAction payload using the [Japanese test cards](https://developers.xsolla.com/doc/pay-station/testing/test-cards/?tabs=100-Visa_200-Japan&_xm=403441203812630597) with 3-D Secure in the sandbox mode.
+The recommended approach is to use the `<psdk-redirect>` component — it automatically handles both GET and POST redirects and manages new tab opening based on `isNewWindowRequired`. Pass the `redirect` object from the NextAction payload as the `data-redirect` attribute:
 
-> You can find an example of using `isNewWindowRequired` [here](./examples/credit-card).
+```html
+<psdk-redirect data-redirect="..." text="Continue"></psdk-redirect>
+```
+
+Alternatively, you can implement redirect handling manually (refer to the [example](./examples/credit-card)).
+
+To test this behavior, handle the `isNewWindowRequired` parameter in the `redirect` NextAction payload using the [Japanese test cards](https://developers.xsolla.com/doc/pay-station/testing/test-cards/?tabs=100-Visa_200-Japan&_xm=403441203812630597) with 3-D Secure in the sandbox mode.
 
 ## Google Pay integration guide
 
@@ -1083,20 +1082,14 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-
-- The financial details component are updated with transaction details once the payment is completed.
-
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the Google Pay payment method ID and return URL.
-
-- The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
-
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-
-- The Next action with the `check_status` type means that you need to render the status component.
-- The Next action with the `special_button` type means that you need to render the special button component (in our case it is the Google Pay button).
-
+   - The Next action with the `check_status` type means that you need to render the status component.
+   - The Next action with the `special_button` type means that you need to render the special button component (in our case it is the Google Pay button).
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
@@ -1133,21 +1126,15 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-
-- The financial details component are updated with transaction details once the payment is completed.
-
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-
-- The Next action with the `check_status` type means that you need to render the status component.
-- The Next action with the `hide_form` type informs you that can hide payment form with css.
-- The Next action with the `show_errors` type means that you need to show errors messages and payment can't be completed.
-- The Next action with the `server_error` type is emitted when an HTTP request fails (e.g., network error, CORS block, or server unavailability). The action contains `status` (HTTP code, `0` for network errors) and `message` fields. Display a user-friendly message like "Something went wrong, please try again".
-
+   - The Next action with the `check_status` type means that you need to render the status component.
+   - The Next action with the `hide_form` type informs you that can hide payment form with css.
+   - The Next action with the `show_errors` type means that you need to show errors messages and payment can't be completed.
+   - The Next action with the `server_error` type is emitted when an HTTP request fails (e.g., network error, CORS block, or server unavailability). The action contains `status` (HTTP code, `0` for network errors) and `message` fields. Display a user-friendly message like "Something went wrong, please try again".
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Initialize the payment form with the Apple-pay payment method ID and return URL.
-
-- The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
-
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
 
 To configure one-click payment via Apple Pay:
@@ -1202,19 +1189,13 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-
-- The financial details component are updated with transaction details once the payment is completed.
-
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the SDK payment method ID and return URL.
-
-- The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
-
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-
-- Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
-
+   - Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
@@ -1232,21 +1213,15 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-
-- The financial details component are updated with transaction details once the payment is completed.
-
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the QR code payment method ID and return URL.
-
-- The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
-
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-
-- The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
-- The Next action with the `show_qr_code` type means that you need to render the QR code component.
-- The Next action with the `check_status` type means that you need to render the status component.
-
+   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
+   - The Next action with the `show_qr_code` type means that you need to render the QR code component.
+   - The Next action with the `check_status` type means that you need to render the status component.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.
@@ -1264,21 +1239,15 @@ Integration flow:
 1. Access the `headlessCheckout` object that contains the Pay Station initialization logic.
 1. Add the `<psdk-legal>` component to the HTML markup to provide links to legal documents.
 1. Add the `<psdk-finance-details>` component to the HTML markup to show purchase details.
-
-- The financial details component are updated with transaction details once the payment is completed.
-
+   - The financial details component are updated with transaction details once the payment is completed.
 1. Initialize the SDK with your environment parameters.
 1. Set the access token for the initialized SDK.
 1. Initialize the payment form with the QR code payment method ID and return URL.
-
-- The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
-
+   - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps.
-
-- The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
-- The Next action with the `show_mobile_payment_screen` type means that you need to render new submit button.
-- The Next action with the `check_status` type means that you need to render the status component.
-
+   - The Next action with the `redirect` type informs you that a redirect action is required on your side. You can get the redirect URL from the action payload.
+   - The Next action with the `show_mobile_payment_screen` type means that you need to render new submit button.
+   - The Next action with the `check_status` type means that you need to render the status component.
 1. Add a form message component to the form - `<psdk-payment-form-messages>`.
 1. Add a payment form component to the form - `<psdk-payment-form>`.
 1. Add the `<psdk-submit-button>` form submit button to the HTML markup.

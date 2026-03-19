@@ -16,6 +16,7 @@ export interface RedirectActionData {
     isNewWindowRequired?: boolean;
     isSameWindowRequired?: boolean;
     data: object;
+    method?: string;
   };
 }
 

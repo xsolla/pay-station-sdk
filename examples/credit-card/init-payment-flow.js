@@ -31,8 +31,6 @@ function buildPaymentFlow() {
   const formElement = document.querySelector('#form-container');
   const statusElement = document.querySelector('#status-container');
 
-  let redirectUrl = '';
-
   function renderFields(requiredFields) {
     /**
      * It is important to render every every required field as a component according to its own type or
@@ -108,11 +106,16 @@ function buildPaymentFlow() {
     formElement.append(submitButton);
   }
 
-  function renderRedirectButton() {
+  function renderRedirectButton(onContinue) {
+    /**
+     * Show a button to redirect the user.
+     * This pattern is used when isNewWindowRequired is true — a user gesture is needed
+     * to open a new tab in most browsers.
+     */
     const button = document.createElement('button');
     button.innerText = 'Continue';
     button.onclick = () => {
-      window.open(redirectUrl, '_blank');
+      onContinue();
       clearFormFields();
       renderStatusComponent();
     };
@@ -130,30 +133,55 @@ function buildPaymentFlow() {
 
   function handleRedirectAction(redirectAction) {
     /**
-     * Handle redirect to 3-D Secure procedure.
+     * Handle redirect action. The redirect data includes:
+     * - redirectUrl: the URL to redirect to
+     * - data: query parameters or POST body fields
+     * - method: HTTP method ('GET' or 'POST'), determined by the payment provider
+     * - isNewWindowRequired: open redirect in a new tab (requires user gesture)
+     * - isSameWindowRequired: redirect in the same tab automatically
+     *
+     * Option 1 (manual): handle GET and POST redirects yourself using an HTML form.
+     * For GET, the browser serializes hidden inputs as query parameters.
+     * For POST, data is sent in the request body — avoiding the 414 Request-URI Too Large error.
      */
-    const url = new URL(redirectAction.data.redirect.redirectUrl);
-    const params = Object.entries(redirectAction.data.redirect.data);
-    params.forEach((entry) => {
-      const [key, value] = entry;
-      url.searchParams.append(key, value);
+    const { redirectUrl, data, method, isNewWindowRequired } =
+      redirectAction.data.redirect;
+    const isPost = method?.toUpperCase() === 'POST';
+
+    const form = document.createElement('form');
+    form.method = isPost ? 'POST' : 'GET';
+    form.action = redirectUrl;
+    document.body.appendChild(form);
+
+    Object.entries(data).forEach(([key, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = String(value);
+      form.appendChild(input);
     });
 
-    // Show additional step with button to get trusted event and
-    // open 3-D Secure in a new tab for specific ACS providers
-    if (redirectAction.data.redirect.isNewWindowRequired) {
-      redirectUrl = url.toString();
-
+    if (isNewWindowRequired) {
+      form.target = '_blank';
       clearFormFields();
-      renderRedirectButton();
-
+      renderRedirectButton(() => form.submit());
       return;
     }
 
+    form.submit();
+
     /**
-     * Open 3-D Secure in the same tab.
+     * Option 2 (recommended): use the <psdk-redirect> component.
+     * It encapsulates the form-based redirect logic above and handles both GET and POST
+     * automatically, including the 3-D Secure challenge page opened via a redirect action.
+     * You can use <psdk-redirect data-redirect="..." text="Continue"></psdk-redirect> as well.
+     *
+     * clearFormFields();
+     * const redirectComponent = new PayStationSdk.RedirectComponent();
+     * redirectComponent.setAttribute('data-redirect', JSON.stringify(redirectAction.data.redirect));
+     * redirectComponent.setAttribute('text', 'Continue');
+     * formElement.append(redirectComponent);
      */
-    this.window.location.href = url.toString();
   }
 
   function handle3dsAction(threeDsAction) {
