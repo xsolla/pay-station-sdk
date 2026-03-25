@@ -58,6 +58,7 @@
          "status.processing.title" : "Обработка платежа",
          "status.success.description" : "Мы отправили чек на {{email}}",
          "status.success.title" : "Платеж прошел",
+         "submit-button.default-text" : "Далее",
          "validation-error.birth-date-pattern" : "Укажите верную дату рождения",
          "validation-error.building-number-pattern" : "Введите верный номер дома",
          "validation-error.card-number-pattern" : "Введите корректный номер карты",

@@ -9,6 +9,7 @@ export interface ShowFieldsActionData {
   errors: FormError[] | undefined;
   messages: FormMessage[] | null;
   order?: object;
+  submitButtonText?: string;
 }
 export type ShowFieldsAction = Action<
   ShowFieldsActionType,

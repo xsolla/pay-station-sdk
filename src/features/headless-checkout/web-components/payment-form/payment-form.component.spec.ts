@@ -64,8 +64,8 @@ describe('PaymentFormComponent', () => {
         onCoreEvent: noopStub,
       },
       form: {
-        onFieldsStatusChange: noopStub,
-        onNextAction: noopStub,
+        onFieldsStatusChange: () => noopStub,
+        onNextAction: () => noopStub,
       },
     } as unknown as HeadlessCheckout;
 
@@ -82,6 +82,7 @@ describe('PaymentFormComponent', () => {
     formLoader = {
       setupAndAwaitFieldsLoading: noopStub,
       setFieldLoaded: noopStub,
+      setFieldUnloaded: noopStub,
       onceLoaded: noopStub,
       get hasTrackedFields() {
         return true;

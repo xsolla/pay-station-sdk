@@ -57,11 +57,12 @@ describe('SelectComponent', () => {
     formLoader = {
       setupAndAwaitFieldsLoading: noopStub,
       setFieldLoaded: noopStub,
+      setFieldUnloaded: noopStub,
     } as unknown as FormLoader;
 
     headlessCheckout = {
       form: {
-        onFieldsStatusChange: noopStub,
+        onFieldsStatusChange: () => noopStub,
       },
     } as unknown as HeadlessCheckout;
 

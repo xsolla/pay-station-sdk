@@ -58,6 +58,7 @@
          "status.processing.title" : "Zpracovávání platby",
          "status.success.description" : "Vaši stvrzenku jsme zaslali na {{email}}",
          "status.success.title" : "Platba byla úspěšná",
+         "submit-button.default-text" : "Další",
          "validation-error.birth-date-pattern" : "Zadejte platné datum narození",
          "validation-error.building-number-pattern" : "Zadejte platné číslo domu",
          "validation-error.card-number-pattern" : "Zadejte platné číslo karty",

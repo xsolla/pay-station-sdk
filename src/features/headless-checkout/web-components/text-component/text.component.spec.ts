@@ -74,7 +74,7 @@ describe('TextComponent', () => {
 
     headlessCheckout = {
       form: {
-        onFieldsStatusChange: noopStub,
+        onFieldsStatusChange: () => noopStub,
       },
       events: {
         onCoreEvent: noopStub,
@@ -139,6 +139,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
+        return noopStub;
       },
     );
 
@@ -161,6 +162,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
+        return noopStub;
       },
     );
 
@@ -183,6 +185,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
+        return noopStub;
       },
     );
     spyOn(validationErrorService, 'getMessage').and.returnValue(
@@ -208,6 +211,7 @@ describe('TextComponent', () => {
     spyOn(headlessCheckout.form, 'onFieldsStatusChange').and.callFake(
       (callbackFn) => {
         setTimeout(() => (callback = callbackFn));
+        return noopStub;
       },
     );
     spyOn(validationErrorService, 'getMessage').and.returnValue(

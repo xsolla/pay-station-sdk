@@ -58,6 +58,7 @@
          "status.processing.title" : "正在处理付款",
          "status.success.description" : "您的收据已发送至{{email}}",
          "status.success.title" : "支付成功",
+         "submit-button.default-text" : "下一步",
          "validation-error.birth-date-pattern" : "请输入有效的出生日期",
          "validation-error.building-number-pattern" : "请输入有效的楼号",
          "validation-error.card-number-pattern" : "请输入有效的卡号",

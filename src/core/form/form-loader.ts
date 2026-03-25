@@ -8,21 +8,49 @@ export class FormLoader {
   private _isAllFieldsLoaded!: Promise<void>;
 
   private _resolve!: () => void;
+  private _reject!: (reason?: unknown) => void;
   private _isPromiseResolved = false;
   private _onLoadedCallbacks: Array<() => void> = [];
+  private readonly _loadedFieldNames = new Set<string>();
 
-  public async setupAndAwaitFieldsLoading(fields: Field[]): Promise<void> {
-    this._isAllFieldsLoaded = new Promise((resolve) => {
+  public async setupAndAwaitFieldsLoading(
+    fields: Field[],
+    signal?: AbortSignal,
+  ): Promise<void> {
+    this._isAllFieldsLoaded = new Promise<void>((resolve, reject) => {
       this._resolve = () => {
         resolve();
       };
+      this._reject = reject;
     });
 
     this._isPromiseResolved = false;
     this._fields = {};
 
-    const filteredFields = this.filterFields(fields);
+    if (signal?.aborted) {
+      this._reject(new DOMException('Aborted', 'AbortError'));
+      this._isPromiseResolved = true;
+      return this._isAllFieldsLoaded;
+    }
 
+    let onAbort: (() => void) | undefined;
+    if (signal) {
+      onAbort = (): void => {
+        if (!this._isPromiseResolved) {
+          this._reject(new DOMException('Aborted', 'AbortError'));
+          this._isPromiseResolved = true;
+        }
+      };
+      signal.addEventListener('abort', onAbort, { once: true });
+
+      const originalResolve = this._resolve;
+      this._resolve = (): void => {
+        signal.removeEventListener('abort', onAbort!);
+        originalResolve();
+      };
+    }
+
+    const filteredFields = this.filterFields(fields);
     const isFormWithoutFields = !filteredFields.length;
 
     if (isFormWithoutFields) {
@@ -32,8 +60,14 @@ export class FormLoader {
     }
 
     filteredFields.forEach((field) => {
-      this._fields[field.name] = false;
+      this._fields[field.name] = this._loadedFieldNames.has(field.name);
     });
+
+    if (this.isAllFieldsLoaded && !this._isPromiseResolved) {
+      this._resolve();
+      this._isPromiseResolved = true;
+      this.notifyOnLoaded();
+    }
 
     return this._isAllFieldsLoaded;
   }
@@ -43,6 +77,8 @@ export class FormLoader {
   }
 
   public setFieldLoaded(name: string): void {
+    this._loadedFieldNames.add(name);
+
     if (!this._fields) {
       return;
     }
@@ -56,6 +92,10 @@ export class FormLoader {
       this._isPromiseResolved = true;
       this.notifyOnLoaded();
     }
+  }
+
+  public setFieldUnloaded(name: string): void {
+    this._loadedFieldNames.delete(name);
   }
 
   private notifyOnLoaded(): void {

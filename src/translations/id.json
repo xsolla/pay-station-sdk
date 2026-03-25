@@ -58,6 +58,7 @@
          "status.processing.title" : "Memproses pembayaran",
          "status.success.description" : "Kami telah mengirimkan bukti pembayaran ke {{email}}",
          "status.success.title" : "Pembayaran berhasil",
+         "submit-button.default-text" : "Bayar sekarang",
          "validation-error.birth-date-pattern" : "Masukkan tanggal lahir yang valid",
          "validation-error.building-number-pattern" : "Masukkan nomor gedung yang valid",
          "validation-error.card-number-pattern" : "Masukkan nomor yang valid",

@@ -37,8 +37,8 @@ describe('SubmitButtonComponent', () => {
 
     headlessCheckout = {
       form: {
-        onNextAction: noopStub,
-        onFieldsStatusChange: noopStub,
+        onNextAction: () => noopStub,
+        onFieldsStatusChange: () => noopStub,
       },
       get formConfiguration() {
         return null;

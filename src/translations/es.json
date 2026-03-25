@@ -58,6 +58,7 @@
          "status.processing.title" : "Procesando el pago",
          "status.success.description" : "Hemos enviado el recibo a {{email}}",
          "status.success.title" : "Pago efectuado",
+         "submit-button.default-text" : "Siguiente",
          "validation-error.birth-date-pattern" : "Introduce una fecha de nacimiento válida",
          "validation-error.building-number-pattern" : "Introduce un número de edificio válido",
          "validation-error.card-number-pattern" : "Introduce un número de tarjeta válido",

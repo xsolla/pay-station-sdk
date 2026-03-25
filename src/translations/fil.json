@@ -58,6 +58,7 @@
          "status.processing.title" : "Ipinoproseso ang pagbabayad",
          "status.success.description" : "Ipinadala namin ang iyong resibo sa {{email}}",
          "status.success.title" : "Matagumpay ang pagbabayad",
+         "submit-button.default-text" : "Magbayad ngayon",
          "validation-error.birth-date-pattern" : "Maglagay ng wastong petsa ng kapanganakan",
          "validation-error.building-number-pattern" : "Maglagay ng wastong numero ng gusali",
          "validation-error.card-number-pattern" : "Maglagay ng wastong numero ng card",

@@ -58,6 +58,7 @@
          "status.processing.title" : "ငွေပေးချေမှုကို ဆောင်ရွက်နေသည်",
          "status.success.description" : "ပြေစာကို {{email}} သို့ ပို့ထားပါသည် ",
          "status.success.title" : "ငွေပေးချေမှု အောင်မြင်သည်",
+         "submit-button.default-text" : "ယခုပေးချေမည်",
          "validation-error.birth-date-pattern" : "မှန်ကန်သော မွေးသက္ကရာဇ်ကို ထည့်ပါ",
          "validation-error.building-number-pattern" : "မှန်ကန်သော တည်ဆောက်ပုံ နံပါတ်ကို ထည့်သွင်းပါ",
          "validation-error.card-number-pattern" : "မှန်ကန်သောကတ်နံပါတ်ကို ထည့်ပါ",

@@ -94,7 +94,8 @@
       "validation-error.data-pattern": "Enter valid data",
       "coupon.apply": "Apply",
       "coupon.placeholder": "Enter promo code",
-      "coupon.discount": "{{value}}% off"
+      "coupon.discount": "{{value}}% off",
+      "submit-button.default-text": "Pay now"
     }
   }
 }

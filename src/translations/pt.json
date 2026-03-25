@@ -58,6 +58,7 @@
          "status.processing.title" : "Pagamento em processamento",
          "status.success.description" : "Enviamos seu recibo para {{email}}",
          "status.success.title" : "Pagamento bem-sucedido",
+         "submit-button.default-text" : "Próximo",
          "validation-error.birth-date-pattern" : "Insira uma data de nascimento válida",
          "validation-error.building-number-pattern" : "Insira um número de endereço válido",
          "validation-error.card-number-pattern" : "Insira um número de cartão válido",

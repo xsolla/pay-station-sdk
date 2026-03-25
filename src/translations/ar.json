@@ -58,6 +58,7 @@
          "status.processing.title" : "جارٍ تنفيذ السداد",
          "status.success.description" : "أرسلنا إيصالك إلى {{email}}",
          "status.success.title" : "نجحت عملية السداد",
+         "submit-button.default-text" : "التالي",
          "validation-error.birth-date-pattern" : "أدخل تاريخ ميلاد صالح",
          "validation-error.building-number-pattern" : "أدخل رقم بناية صالحًا",
          "validation-error.card-number-pattern" : "أدخل رقم بطاقة صالحًا",

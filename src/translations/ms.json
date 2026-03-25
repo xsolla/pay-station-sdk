@@ -58,6 +58,7 @@
          "status.processing.title" : "Memproses pembayaran",
          "status.success.description" : "Kami telah menghantar resit anda ke {{email}}",
          "status.success.title" : "Pembayaran berjaya",
+         "submit-button.default-text" : "Bayar Sekarang",
          "validation-error.birth-date-pattern" : "Masukkan tarikh lahir yang sah",
          "validation-error.building-number-pattern" : "Masukkan nombor bangunan yang sah",
          "validation-error.card-number-pattern" : "Masukkan nombor kad yang sah",

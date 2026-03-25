@@ -5,12 +5,15 @@ import { WebComponentTagName } from '../../../../../core/web-components/web-comp
 import { HeadlessCheckout } from '../../../headless-checkout';
 import { noopStub } from '../../../../../tests/stubs/noop.stub';
 import { FormSpy } from '../../../../../core/spy/form-spy/form-spy';
+import { LocalizeService } from '../../../../../core/i18n/localize.service';
 
-function createComponent(): void {
+function createComponent(text?: string): void {
   const element = document.createElement(
     WebComponentTagName.DefaultSubmitButtonComponent,
   );
-  element.setAttribute('text', 'Pay Now');
+  if (text) {
+    element.setAttribute('text', text);
+  }
   element.setAttribute('id', 'test');
   (document.getElementById('container')! as HTMLElement).appendChild(element);
 }
@@ -19,6 +22,7 @@ describe('DefaultSubmitButtonComponent', () => {
   let postMessagesClient: PostMessagesClient;
   let headlessCheckout: HeadlessCheckout;
   let formSpy: FormSpy;
+  let localizeService: LocalizeService;
 
   window.customElements.define(
     WebComponentTagName.DefaultSubmitButtonComponent,
@@ -35,8 +39,8 @@ describe('DefaultSubmitButtonComponent', () => {
 
     headlessCheckout = {
       form: {
-        onNextAction: noopStub,
-        onFieldsStatusChange: noopStub,
+        onNextAction: () => noopStub,
+        onFieldsStatusChange: () => noopStub,
       },
     } as unknown as HeadlessCheckout;
 
@@ -46,6 +50,11 @@ describe('DefaultSubmitButtonComponent', () => {
         return;
       },
     } as unknown as FormSpy;
+
+    localizeService = {
+      translate: (key: string) =>
+        key === 'submit-button.default-text' ? 'Pay now' : key,
+    } as unknown as LocalizeService;
 
     container.clearInstances();
 
@@ -58,6 +67,9 @@ describe('DefaultSubmitButtonComponent', () => {
       })
       .register<HeadlessCheckout>(HeadlessCheckout, {
         useValue: headlessCheckout,
+      })
+      .register<LocalizeService>(LocalizeService, {
+        useValue: localizeService,
       });
   });
 
@@ -67,9 +79,15 @@ describe('DefaultSubmitButtonComponent', () => {
   });
 
   it('Should set text for button', () => {
-    createComponent();
+    createComponent('Pay Now');
 
     expect(document.querySelector('button')!.textContent).toContain('Pay Now');
+  });
+
+  it('Should show localized default text when no text attribute', () => {
+    createComponent();
+
+    expect(document.querySelector('button')!.textContent).toContain('Pay now');
   });
 
   it('Should sendPostMessage event', () => {

@@ -58,6 +58,7 @@
          "status.processing.title" : "กำลังดำเนินการชำระเงิน",
          "status.success.description" : "เราส่งใบเสร็จรับเงินไปยัง {{email}} แล้ว",
          "status.success.title" : "ชำระเงินสำเร็จแล้ว",
+         "submit-button.default-text" : "ต่อไป",
          "validation-error.birth-date-pattern" : "ป้อนวันเกิดที่ถูกต้อง",
          "validation-error.building-number-pattern" : "ป้อนหมายเลขอาคารที่ถูกต้อง",
          "validation-error.card-number-pattern" : "ป้อนหมายเลขบัตรที่ถูกต้อง",

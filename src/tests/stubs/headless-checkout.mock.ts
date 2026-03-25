@@ -14,7 +14,7 @@ export class HeadlessCheckoutMock<T> {
   };
 
   public form = {
-    onNextAction: noopStub,
+    onNextAction: (): (() => void) => noopStub,
   };
   private readonly listeners: Array<(value: T | null) => void> = [];
 

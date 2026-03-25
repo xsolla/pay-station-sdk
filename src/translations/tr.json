@@ -58,6 +58,7 @@
          "status.processing.title" : "Ödeme işlemi gerçekleştiriliyor",
          "status.success.description" : "Makbuzunuzu {{email}} adresine gönderdik",
          "status.success.title" : "Ödeme alındı",
+         "submit-button.default-text" : "Devam",
          "validation-error.birth-date-pattern" : "Geçerli bir doğum tarihi girin",
          "validation-error.building-number-pattern" : "Geçerli bir apartman numarası girin",
          "validation-error.card-number-pattern" : "Geçerli bir kart numarası girin",

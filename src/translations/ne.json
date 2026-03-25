@@ -58,6 +58,7 @@
          "status.processing.title" : "भुक्तानी प्रक्रिया गरिँदै छ",
          "status.success.description" : "हामीले तपाईंको रसिद {{email}} मा पठाएका छौँ",
          "status.success.title" : "भुक्तानी सफल भयो",
+         "submit-button.default-text" : "अहिले नै भुक्तानी गर्नुहोस्",
          "validation-error.birth-date-pattern" : "मान्य जन्म मिति हाल्नुहोस्",
          "validation-error.building-number-pattern" : "मान्य भवन नम्बर हाल्नुहोस्",
          "validation-error.card-number-pattern" : "मान्य कार्ड नम्बर हाल्नुहोस्",

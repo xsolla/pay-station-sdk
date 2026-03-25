@@ -4,6 +4,7 @@ import { singleton } from 'tsyringe';
 import { EventName } from '../event-name.enum';
 import { isEventMessage } from '../guards/event-message.guard';
 import { parseMessageData } from '../../shared/utils/parse-message-data.helper';
+import { sdkVersion } from '../../features/headless-checkout/environment';
 
 @singleton()
 export class PostMessagesClient {
@@ -43,7 +44,13 @@ export class PostMessagesClient {
       };
 
       this.window.addEventListener('message', handlerWrapper);
-      this.sendMessage(msg);
+
+      const messageWithVersion = {
+        ...msg,
+        sdkVersion,
+      };
+
+      this.sendMessage(messageWithVersion);
     });
   }
 

@@ -275,6 +275,27 @@ describe('HeadlessCheckout', () => {
     expect(spy).toHaveBeenCalled();
   });
 
+  it('Should return unsubscribe function from onFieldsStatusChange', () => {
+    const mockUnsubscribe = jasmine.createSpy('unsubscribe');
+    spyOn(postMessagesClient, 'listen').and.returnValue(mockUnsubscribe);
+    const unsubscribe = headlessCheckout.form.onFieldsStatusChange(noopStub);
+    expect(typeof unsubscribe).toBe('function');
+  });
+
+  it('Should return unsubscribe function from onNextAction', () => {
+    const mockUnsubscribe = jasmine.createSpy('unsubscribe');
+    spyOn(postMessagesClient, 'listen').and.returnValue(mockUnsubscribe);
+    const unsubscribe = headlessCheckout.form.onNextAction(noopStub);
+    expect(typeof unsubscribe).toBe('function');
+  });
+
+  it('Should return unsubscribe function from onUpdateFinanceDetails', () => {
+    const mockUnsubscribe = jasmine.createSpy('unsubscribe');
+    spyOn(postMessagesClient, 'listen').and.returnValue(mockUnsubscribe);
+    const unsubscribe = headlessCheckout.onUpdateFinanceDetails(noopStub);
+    expect(typeof unsubscribe).toBe('function');
+  });
+
   it('Should init', async () => {
     const spy = spyOn(postMessagesClient, 'send');
     await headlessCheckout.form.submit();
