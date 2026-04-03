@@ -42,6 +42,7 @@
          "legal-support" : "Nếu có thắc mắc, vui lòng liên hệ bộ phận <a href={{xsolla_help_link}} target=\"_blank\">Hỗ trợ người chơi của Xsolla<\/a>.",
          "legal-terms" : "Khi tiếp tục, bạn xác nhận mình là người trưởng thành theo luật pháp của quốc gia bạn và chấp nhận ràng buộc theo <a href={{xsolla_terms_link}} target=\"_blank\">Thỏa thuận người dùng cuối (EULA)<\/a> của Xsolla.",
          "legal-terms-eu" : "Khi tiến hành thanh toán, bạn yêu cầu thực hiện thỏa thuận ngay lập tức và thừa nhận sẽ mất quyền thay đổi ý định.",
+         "legal-terms-kr" : "Nếu tiếp tục, bạn xác nhận rằng bạn là người trưởng thành theo luật pháp sở tại và đồng ý chịu sự ràng buộc bởi <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> của Xsolla. Đối với các trò chơi trực tuyến, hạn mức giao dịch mua hàng tháng đối với người dưới 18 tuổi là 70.000 KRW. Hạn mức giao dịch mua được đặt lại vào ngày mùng 1 hàng tháng.",
          "legal-terms-us" : "Khi tiếp tục, bạn xác nhận mình là người trưởng thành theo luật pháp của quốc gia bạn và chấp nhận ràng buộc theo <a href={{xsolla_terms_link}} target=\"_blank\">Thỏa thuận người dùng cuối (EULA)<\/a> của Xsolla. Giao dịch mua hàng này sẽ cấp cho bạn giấy phép sử dụng phần mềm hoặc nội dung số. Đọc toàn văn điều khoản tại đây: <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>.",
          "privacy-policy" : "Chính sách Quyền riêng tư",
          "refund-policy" : "Chính sách hoàn tiền",

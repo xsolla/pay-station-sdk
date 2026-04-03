@@ -42,6 +42,7 @@
          "legal-support" : "Kung mayroon kang anumang tanong, makipag-ugnayan sa <a href={{xsolla_help_link}} target=\"_blank\">Xsolla Gamer Support<\/a>.",
          "legal-terms" : "Sa pagpapatuloy, kinukumpirma mong nasa hustong gulang ka na ayon sa mga batas ng iyong bansa, at sumasang-ayon kang mapailalim sa <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> ng Xsolla.",
          "legal-terms-eu" : "Sa pagpapatuloy sa pagbabayad na ito, hinihiling mo na gawin agad ang kasunduan at kinikilala mo na mawawalan ka ng karapatang mag-withdraw.",
+         "legal-terms-kr" : " Sa pamamagitan ng pagpapatuloy, kinukimpirma mo na ikaw ay adult ayon sa mga batas ng inyong bansa at sumasang-ayon kang sumunod sa <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> ng Xsolla. Para sa mga online game, ang buwanang limit sa halaga ng pagbili para sa mga user na wala pang 18 ay 70,000 KRW. Nare-reset ang mga limit sa pagbili sa unang araw ng bawat buwan.",
          "legal-terms-us" : "Sa pagpapatuloy, kinukumpirma mong nasa hustong gulang ka na ayon sa mga batas ng iyong bansa, at sumasang-ayon kang mapailalim sa <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> ng Xsolla. Ang pagbiling ito ay nagbibigay ng lisensya para sa software o sa digital content. Tingnan ang buong tuntunin dito: <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>.",
          "privacy-policy" : "Patakaran sa privacy",
          "refund-policy" : "Patakaran sa refund",

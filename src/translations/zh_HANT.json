@@ -42,6 +42,7 @@
          "legal-support" : "如有任何問題，請直接找 <a href={{xsolla_help_link}} target=\"_blank\">愛索拉玩家支援<\/a>洽詢。",
          "legal-terms" : "依各國法律規定，繼續使用，即表示您確認自己已成年，並同意接受愛索拉<a href={{xsolla_terms_link}} target=\"_blank\">使用者授權合約<\/a>約束。",
          "legal-terms-eu" : "只要繼續付款，即表示您特此要求立即履行合約，承認這份合約內容。因此，就喪失撤回權利。",
+         "legal-terms-kr" : "繼續操作即表示您已根據所在國家法律規定，確認自己的成年身份，並同意接受愛索拉的<a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>規定約束。至於線上遊戲，18 歲以下的用戶，每月購買金額上限為 70,000 韓元。購買限額將於每月 1 日重設。",
          "legal-terms-us" : "依各國法律規定，繼續使用，即表示您確認自己已成年，並同意接受愛索拉<a href={{xsolla_terms_link}} target=\"_blank\">使用者授權合約<\/a>約束。此購買項目有給予軟體授權，或是數位內容授權。有關完整條款，請參閱以下：<a href={{xsolla_terms_link}} target=\"_blank\">使用者授權合約<\/a>。",
          "privacy-policy" : "隱私權政策",
          "refund-policy" : "退款政策",

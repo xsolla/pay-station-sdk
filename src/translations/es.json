@@ -42,6 +42,7 @@
          "legal-support" : "Si tienes alguna pregunta, contacta con el <a href={{xsolla_help_link}} target=\"_blank\">servicio de asistencia al jugador<\/a>.",
          "legal-terms" : "Al continuar, confirmas que eres mayor de edad de acuerdo con la legislación de tu país y aceptas el <a href={{xsolla_terms_link}} target=\"_blank\">Acuerdo de licencia de usuario final<\/a> de Xsolla.",
          "legal-terms-eu" : "Al continuar con el pago, solicitas expresamente la ejecución inmediata del acuerdo y reconoces que, por ello, renuncias a tu derecho de desistimiento.",
+         "legal-terms-kr" : "Al proceder, confirmas que eres mayor de edad según las leyes de tu estado y aceptas el <a href={{xsolla_terms_link}} target=\"_blank\">Contrato de licencia de usuario final (EULA)<\/a> de Xsolla. Para los juegos en línea, el límite de compra mensual para los usuarios menores de 18 años es de 70 000 KRW. Los límites de compra se restablecen el día 1 de cada mes.",
          "legal-terms-us" : "Al continuar, confirmas que eres mayor de edad de acuerdo con la legislación de tu país y aceptas el <a href={{xsolla_terms_link}} target=\"_blank\">Acuerdo de licencia de usuario final<\/a> de Xsolla. Esta compra otorga una licencia de uso para el software o contenido digital adquirido. Consulte las condiciones completas aquí: <a href={{xsolla_terms_link}} target=\"_blank\">Acuerdo de licencia de usuario final<\/a>.",
          "privacy-policy" : "Política de privacidad",
          "refund-policy" : "Política de reembolso",

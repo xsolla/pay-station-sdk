@@ -42,6 +42,7 @@
          "legal-support" : "Sorularınız varsa lütfen <a href={{xsolla_help_link}} target=\"_blank\">Xsolla Oyuncu Destek Ekibi<\/a> ile iletişime geçin.",
          "legal-terms" : "Devam ederek ilgili ülke yasalarına göre yetişkin olduiğunuzu ve Xsolla'nın<a href={{xsolla_terms_link}} target=\"_blank\">SKLA<\/a> belgesine tabi olduğunuzu kabul etmiş olursunuz.",
          "legal-terms-eu" : "Ödeme işlemine devam ederek sözleşmenin anında geçerli olmasını talep etmiş ve böylece cayma hakkınızdan vazgeçtiğinizi kabul etmiş sayılırsınız.",
+         "legal-terms-kr" : "Devam ederek, bulunduğunuz ülkenin yasaları uyarınca bir yetişkin olduğunuzu ve Xsolla'nın <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> yönetmeliğine uyacağınızı kabul etmiş olursunuz. 18 yaşının altındaki kullanıcılar için çevrimiçi oyunlarda aylık satın alma limiti 70,000 KRW'dir. Satın alma limitleri her ayın 1. gününde sıfırlanır.",
          "legal-terms-us" : "Devam ederek ülkenizin yasalarına göre yetişkin olduğunuzu ve Xsolla'nın <a href={{xsolla_terms_link}} target=\"_blank\">SKLA<\/a> belgesine tabi olduğunuzu kabul etmiş olursunuz. Bu satın alımla yazılım ya da dijital içerik için bir lisans edinirsiniz. Tüm hükümleri buradan görüntüleyebilirsiniz: <a href={{xsolla_terms_link}} target=\"_blank\">SKLA<\/a>.",
          "privacy-policy" : "Gizlilik Politikası",
          "refund-policy" : "İade Politikası",

@@ -42,6 +42,7 @@
          "legal-support" : "Heb je vragen? Neem dan contact op met de klantenservice van <a href={{xsolla_help_link}} target=\"_blank\">Xsolla Gamer<\/a>.",
          "legal-terms" : "Door verder te gaan, bevestig je dat je meerderjarig bent in het land waar je woont en verklaar je je akkoord met de <a href={{xsolla_terms_link}} target=\"_blank\">gebruikersovereenkomst<\/a>.",
          "legal-terms-eu" : "Door verder te gaan met de betaling, vraag je om onmiddellijke uitvoering van de overeenkomst en bevestig je dat je daarmee je herroepingsrecht verliest.",
+         "legal-terms-kr" : "Door verder te gaan, bevestig je dat je volgens de wetgeving van je land meerderjarig bent en ga je akkoord met de <a href={{xsolla_terms_link}} target=\"_blank\">gebruiksvoorwaarden<\/a> van Xsolla. De maandelijkse aankooplimiet voor gebruikers jonger dan 18 jaar bedraagt 70.000 KRW. De aankooplimieten worden elke eerste dag van de maand opnieuw ingesteld.",
          "legal-terms-us" : "Door verder te gaan, bevestig je dat je meerderjarig bent in het land waar je woont en verklaar je je akkoord met de <a href={{xsolla_terms_link}} target=\"_blank\">gebruikersovereenkomst<\/a>. Deze aankoop geeft je een licentie voor de software of digitale content. Bekijk hier de volledige voorwaarden: <a href={{xsolla_terms_link}} target=\"_blank\">gebruikersovereenkomst<\/a>.",
          "privacy-policy" : "Privacybeleid",
          "refund-policy" : "Terugbetalingsbeleid",

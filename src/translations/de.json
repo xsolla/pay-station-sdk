@@ -42,6 +42,7 @@
          "legal-support" : "Bitte wende dich bei Fragen an den <a href={{xsolla_help_link}} target=\"_blank\">Xsolla-Support für Gamer<\/a>.",
          "legal-terms" : "Indem du fortfährst, bestätigst du, dass du gemäß den Gesetzen deines Landes volljährig bist und dich mit der <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> von Xsolla einverstanden erklärst.",
          "legal-terms-eu" : "Indem du mit der Bezahlung fortfährst, bittest du um sofortige Erfüllung der Vereinbarung und erkennst an, dass du dadurch dein Widerrufsrecht verlierst.",
+         "legal-terms-kr" : "Wenn du fortfährst, bestätigst du, dass du gemäß den Gesetzen deines Landes volljährig bist, und erklärst dich mit Xsollas <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> einverstanden. Bei Onlinespielen beträgt das monatliche Kauflimit für Nutzer unter 18 Jahren 70.000 KRW. Die Kauflimits werden am 1. Tag jedes Monats zurückgesetzt.",
          "legal-terms-us" : "Indem du fortfährst, bestätigst du, dass du gemäß den Gesetzen deines Landes volljährig bist und dich mit der <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> von Xsolla einverstanden erklärst. Dieser Kauf gewährt eine Lizenz für die Software oder den digitalen Inhalt. Siehe vollständige Bedingungen hier: <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>.",
          "privacy-policy" : "Datenschutzerklärung",
          "refund-policy" : "Erstattungsrichtlinie",
