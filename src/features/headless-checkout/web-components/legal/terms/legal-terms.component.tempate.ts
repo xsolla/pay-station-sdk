@@ -8,6 +8,7 @@ import {
 const legalAreaLabelMap = new Map<LegalArea, string>([
   ['US', 'legal-terms-us'],
   ['EU', 'legal-terms-eu'],
+  ['KR', 'legal-terms-kr'],
 ]);
 
 const getLabel = (legalArea: LegalArea = 'other'): string => {
