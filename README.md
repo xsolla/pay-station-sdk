@@ -137,13 +137,7 @@ declare const headlessCheckout: {
      * isSaveMode setting allows you to save payment methods.
      * @throws InvalidConfiguration if accountId and isSaveMode are both defined.
      */
-    init(formConfiguration: {
-      paymentMethodId: number;
-      returnUrl: string;
-      country?: string;
-      accountId?: number;
-      isSaveMode?: boolean;
-    }): Promise<{
+    init(formConfiguration: { paymentMethodId: number; returnUrl: string; country?: string; accountId?: number; isSaveMode?: boolean }): Promise<{
       fields: Field[];
       financeDetails: FinanceDetails;
     }>;
@@ -859,10 +853,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <!--
@@ -1070,7 +1061,7 @@ const config: InitialOptions = {
   isWebview: false,
   theme: 'default',
   language: parameters.language,
-  isGooglePayInstantFlowEnabled: true
+  isGooglePayInstantFlowEnabled: true,
 };
 
 await headlessCheckout.init(config);
@@ -1384,13 +1375,21 @@ How to get the country value?
 
 ### Changing locales
 
-Where can the language value be used?
+**Where can the language value be used?**
 
-1. The language value can be used when initializing `headlessCheckout` - `init({ language?: Lang; })`. Lang - `src/core/i18n/lang.enum.ts`.
+To set a specific language in the interface, you need to specify it not only in the token parameters, but also when initializing headlessCheckout:
 
-How can I get the value of the available locale?
+```
+headlessCheckout.init({
+  language?: Lang;
+})`
+```
 
-1. You can get the list of locales by using the `headlessCheckout.getAvailableLanguages()` method.
+The list of supported languages can be found here: `src/core/i18n/lang.enum.ts`.
+
+**How can I get the value of the available locale?**
+
+You can get the list of locales by using the `headlessCheckout.getAvailableLanguages()` method.
 
 ## Default styles
 
