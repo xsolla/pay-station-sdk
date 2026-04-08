@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.13.0
+
+### Minor Changes
+
+- d4e00e7: Custom Legal text for Korea has beend added
+
+### Patch Changes
+
+- 71a65b3: Added a data-testid attribute for submit button
+
 ## 0.12.0
 
 ### Minor Changes
