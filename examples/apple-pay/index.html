@@ -164,13 +164,25 @@
       /**
        * Handle Apple Pay events
        *
+       * IMPORTANT: The <psdk-apple-pay> element is created dynamically after the
+       * form is fully loaded. Make sure the element exists in the DOM before
+       * adding event listeners.
+       *
        * Available events:
-       *  events applePayWindowClosed: Apple Pay window closed
+       * - applePayButtonClicked: Apple Pay button was clicked
+       * - applePayWindowOpened: Apple Pay window opened
+       * - applePayWindowClosed: Apple Pay window closed
+       *   Event detail: { closedByUser: boolean }
+       *   - closedByUser: true - user manually closed the window (clicked X or Cancel)
+       *   - closedByUser: false - window closed automatically after transaction completed
        * - applePayQrOpened: Apple Pay QR code opened (fullscreen mode)
        * - applePayQrClosed: Apple Pay QR code closed
        */
-      function listenApplePayEvents() {
-        const applePayButton = document.querySelector('psdk-apple-pay');
+      function listenApplePayEvents(applePayButton) {
+        // Handle Apple Pay button clicked event
+        applePayButton.addEventListener('applePayButtonClicked', () => {
+          console.log('Apple Pay: button clicked');
+        });
 
         // Handle Apple Pay window opened event
         applePayButton.addEventListener('applePayWindowOpened', () => {
@@ -179,9 +191,19 @@
         });
 
         // Handle Apple Pay window closed event
-        applePayButton.addEventListener('applePayWindowClosed', () => {
-          console.log('Apple Pay: window closed');
-          // Add custom logic for handling window closure here
+        applePayButton.addEventListener('applePayWindowClosed', (event) => {
+          const { closedByUser } = event.detail;
+          console.log('Apple Pay: window closed', { closedByUser });
+
+          if (closedByUser) {
+            // User manually closed the Apple Pay window (clicked X or Cancel button)
+            console.log('Apple Pay: User closed the window manually');
+          } else {
+            // Window closed automatically after transaction completed (success or failure)
+            console.log(
+              'Apple Pay: Window closed automatically after transaction',
+            );
+          }
         });
 
         // Handle Apple Pay QR code opened event
@@ -221,7 +243,15 @@
         addPaymentFormElement();
         await initPaymentForm(applePayId);
         addSubmitButtonElement();
-        listenApplePayEvents();
+
+        /**
+         * Wait for <psdk-apple-pay> to appear in the DOM,
+         * then attach event listeners.
+         */
+        const applePayButton = document.querySelector('psdk-apple-pay');
+        if (applePayButton) {
+          listenApplePayEvents(applePayButton);
+        }
       }
 
       main();

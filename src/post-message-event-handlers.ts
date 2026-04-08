@@ -23,6 +23,9 @@ import { setSecureComponentStylesHandler } from './features/headless-checkout/po
 import { setTokenHandler } from './features/headless-checkout/post-messages-handlers/set-token.handler';
 import { updateCreditCardTypeHandler } from './features/headless-checkout/post-messages-handlers/update-credit-card-type.handler';
 import { getControlComponentConfigHandler } from './features/headless-checkout/web-components/get-control-component-config.handler';
+import { applyCouponHandler } from './features/headless-checkout/post-messages-handlers/apply-coupon.handler';
+import { removeCouponHandler } from './features/headless-checkout/post-messages-handlers/remove-coupon.handler';
+import { couponUpdateHandler } from './features/headless-checkout/post-messages-handlers/coupon-update.handler';
 
 export {
   getUserBalanceValueHandler,
@@ -50,4 +53,7 @@ export {
   finishLoadComponentHandler,
   getFormMessagesHandler,
   sendCashPaymentDataStatusHandler,
+  applyCouponHandler,
+  removeCouponHandler,
+  couponUpdateHandler,
 };

@@ -90,7 +90,10 @@
       "validation-error.phone-pattern": "Enter a valid phone",
       "validation-error.building-number-pattern": "Enter a valid building number",
       "validation-error.zip-pattern": "Enter a valid ZIP code",
-      "validation-error.data-pattern": "Enter valid data"
+      "validation-error.data-pattern": "Enter valid data",
+      "coupon.apply": "Apply",
+      "coupon.placeholder": "Enter promo code",
+      "coupon.discount": "{{value}}% off"
     }
   }
 }

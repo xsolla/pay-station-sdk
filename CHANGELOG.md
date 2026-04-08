@@ -1,15 +1,50 @@
 # Changelog
 
+## 0.12.0
+
+### Minor Changes
+
+- fc81233: implement coupon support
+
+## 0.11.2
+
+### Patch Changes
+
+- 51e892c: add google pay logs
+
+## 0.11.1
+
+### Patch Changes
+
+- f30d33e: fixed translations
+
+## 0.11.0
+
+### Minor Changes
+
+- 59d7d4a: Add payment-form-loaded analytics event with form render time tracking
+
+## 0.10.0
+
+### Minor Changes
+
+- 615a484: applePayWindowClosed event now includes closedByUser flag to distinguish manual window close from automatic close after transaction. applePayButtonClicked event is now dispatched in external page flow.
+
+### Patch Changes
+
+- 1d01310: documentation update
+
+## 0.9.0
+
+### Minor Changes
+
+- 9f47b35: added error tracking
+
 ## 0.8.0
 
 ### Minor Changes
 
 - changed build target to es2017
-- added flag for google instant flow override - isGooglePayInstantFlowEnabled
-
-### Patch Changes
-
-- new release system
 
 ## 0.7.0
 

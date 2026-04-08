@@ -82,6 +82,10 @@ describe('PaymentFormComponent', () => {
     formLoader = {
       setupAndAwaitFieldsLoading: noopStub,
       setFieldLoaded: noopStub,
+      onceLoaded: noopStub,
+      get hasTrackedFields() {
+        return true;
+      },
     } as unknown as FormLoader;
 
     paymentFormFieldsManager = {
@@ -189,6 +193,8 @@ describe('PaymentFormComponent', () => {
     };
     // rewrite querySelectorAll mock
     expect(spy).toHaveBeenCalledWith([
+      zip,
+      zip,
       zip,
       zip,
       zip,

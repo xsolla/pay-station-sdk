@@ -22,6 +22,7 @@ import { DefaultSubmitButtonComponent } from '../../features/headless-checkout/w
 import { TotalComponent } from '../../features/headless-checkout/web-components/finance-details/total.component';
 import { CashPaymentInstructionComponent } from '../../features/headless-checkout/web-components/cash-payment-instruction/cash-payment-instruction.component';
 import { XsollaNumberComponent } from '../../features/headless-checkout/web-components/xsolla-number/xsolla-number.component';
+import { CouponComponent } from '../../features/headless-checkout/web-components/coupon/coupon.component';
 import { LegalTermsComponent } from '../../features/headless-checkout/web-components/legal/terms/legal-terms.component';
 import { LegalCookiesComponent } from '../../features/headless-checkout/web-components/legal/cookies/legal-cookies.component';
 import { LegalMorComponent } from '../../features/headless-checkout/web-components/legal/mor/legal-mor.component';
@@ -65,4 +66,5 @@ export const webComponents: {
   [WebComponentTagName.CashPaymentInstructionComponent]:
     CashPaymentInstructionComponent,
   [WebComponentTagName.XsollaNumberComponent]: XsollaNumberComponent,
+  [WebComponentTagName.CouponComponent]: CouponComponent,
 };

@@ -11,9 +11,12 @@ import { WebComponentTagName } from '../../../../core/web-components/web-compone
 import { formControlsTags } from './form-controls-tags.list';
 import { isShowFieldsAction } from '../../../../core/actions/is-show-fields-action.function';
 import { FieldSettings } from './field-settings.interface';
+import { PostMessagesClient } from '../../../../core/post-messages-client/post-messages-client';
+import { formLoadedHandler } from './form-loaded.handler';
 
 export class PaymentFormComponent extends WebComponentAbstract {
   private readonly headlessCheckout: HeadlessCheckout;
+  private readonly postMessagesClient: PostMessagesClient;
   private readonly formSpy: FormSpy;
   private readonly paymentFormFieldsManager: PaymentFormFieldsService;
   private readonly window: Window;
@@ -25,6 +28,7 @@ export class PaymentFormComponent extends WebComponentAbstract {
   public constructor() {
     super();
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.postMessagesClient = container.resolve(PostMessagesClient);
     this.formSpy = container.resolve(FormSpy);
     this.window = container.resolve(Window);
     this.paymentFormFieldsManager = container.resolve(PaymentFormFieldsService);
@@ -156,5 +160,25 @@ export class PaymentFormComponent extends WebComponentAbstract {
 
   private setupFormLoader(fields: Field[]): void {
     void this.formLoader.setupAndAwaitFieldsLoading(fields);
+
+    if (this.formLoader.hasTrackedFields) {
+      this.sendFormLoadedEvent();
+    }
+  }
+
+  private sendFormLoadedEvent(): void {
+    const startTime = Date.now();
+
+    this.formLoader.onceLoaded(() => {
+      const renderTime = Date.now() - startTime;
+
+      void this.postMessagesClient.send(
+        {
+          name: EventName.formLoaded,
+          data: { renderTime },
+        },
+        formLoadedHandler,
+      );
+    });
   }
 }

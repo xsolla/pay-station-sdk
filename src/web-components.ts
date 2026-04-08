@@ -19,6 +19,7 @@ import { PaymentFormComponent } from './features/headless-checkout/web-component
 import { SavedMethodsComponent } from './features/headless-checkout/web-components/saved-methods/saved-methods.component';
 import { TotalComponent } from './features/headless-checkout/web-components/finance-details/total.component';
 import { CashPaymentInstructionComponent } from './features/headless-checkout/web-components/cash-payment-instruction/cash-payment-instruction.component';
+import { CouponComponent } from './features/headless-checkout/web-components/coupon/coupon.component';
 import { LegalTermsComponent } from './features/headless-checkout/web-components/legal/terms/legal-terms.component';
 import { LegalCookiesComponent } from './features/headless-checkout/web-components/legal/cookies/legal-cookies.component';
 import { LegalMorComponent } from './features/headless-checkout/web-components/legal/mor/legal-mor.component';
@@ -54,4 +55,5 @@ export {
   SavedMethodsComponent,
   TotalComponent,
   CashPaymentInstructionComponent,
+  CouponComponent,
 };

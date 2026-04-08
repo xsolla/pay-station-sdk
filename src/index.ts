@@ -10,3 +10,5 @@ export { NextActionType } from './core/actions/next-action-type.enum';
 export { FinanceDetails } from './core/finance-details/finance-details.interface';
 export { InitialOptions } from './features/headless-checkout/initial-options.interface';
 export { StatusEnum } from './core/status/status.enum';
+export { AppliedCoupon } from './core/coupon/applied-coupon.interface';
+export { CouponState } from './core/coupon/coupon-state.enum';

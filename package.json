@@ -1,6 +1,6 @@
 {
   "name": "@xsolla/pay-station-sdk",
-  "version": "0.8.0",
+  "version": "0.12.0",
   "description": "Pay Station SDK",
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
@@ -38,11 +38,12 @@
     "node": ">=16"
   },
   "scripts": {
-    "build": "npm run build:types && webpack --mode=production",
-    "build:dev": "npm run build:types && webpack --mode=development",
+    "build": "npm run build:types && webpack --mode=production --env=production",
+    "build:dev": "npm run build:types && webpack --mode=development --env=development",
+    "build:stage": "npm run build:types && webpack --mode=production --env=staging",
     "build:types": "tsc --project tsconfig.declaration.json",
-    "dev": "npm run build:types && webpack --mode=development --watch",
-    "dev:watch": "concurrently \"tsc --project tsconfig.declaration.json --watch --preserveWatchOutput\" \"webpack --mode=development --watch\"",
+    "dev": "npm run build:types && webpack --mode=development --env=development --watch",
+    "dev:watch": "concurrently \"tsc --project tsconfig.declaration.json --watch --preserveWatchOutput\" \"webpack --mode=development --env=development --watch\"",
     "dev:types": "tsc --project tsconfig.declaration.json --watch",
     "test": "karma start",
     "test:ci": "karma start --single-run",
@@ -62,8 +63,6 @@
     "lib/**/*"
   ],
   "devDependencies": {
-    "@changesets/changelog-git": "^0.2.1",
-    "@changesets/cli": "^2.29.8",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@types/jasmine": "^4.3.5",
@@ -102,6 +101,14 @@
   "dependencies": {
     "currency-format": "^1.0.13",
     "i18next": "^23.4.6",
-    "tsyringe": "^4.8.0"
+    "tsyringe": "^4.8.0",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.203.0",
+    "@opentelemetry/instrumentation": "^0.203.0",
+    "@opentelemetry/instrumentation-document-load": "^0.48.0",
+    "@opentelemetry/instrumentation-fetch": "^0.203.0",
+    "@opentelemetry/instrumentation-xml-http-request": "^0.203.0",
+    "@opentelemetry/resources": "^2.0.1",
+    "@opentelemetry/sdk-trace-web": "^2.0.1"
   }
 }

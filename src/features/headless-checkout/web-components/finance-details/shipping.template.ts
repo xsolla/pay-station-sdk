@@ -2,7 +2,7 @@ import { CartSummary } from '../../../../core/finance-details/cart-summary.inter
 import { getPriceTextTemplate } from './price-text.template';
 
 export const getShippingTemplate = (cartSummary: CartSummary): string => {
-  const shipping = cartSummary.shipping;
+  const shipping = cartSummary?.shipping;
 
   if (!shipping?.length) {
     return '';

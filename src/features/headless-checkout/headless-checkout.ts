@@ -43,6 +43,8 @@ import { submitHandler } from './post-messages-handlers/submit/submit.handler';
 import { externalInputChangeValueHandler } from './post-messages-handlers/external-input-change-value/external-input-change-value.handler';
 import { isGooglePaySettingsGuard } from '../../core/form/types/is-google-pay-settings.guard';
 import { PaymentConfigurationGooglePaySettings } from '../../core/form/types/google-pay-form-configuration.interface';
+import { LoggerService } from '../../core/exception-handling/logger.service';
+import { NextActionType } from '../../core/actions/next-action-type.enum';
 
 @singleton()
 export class HeadlessCheckout {
@@ -111,6 +113,19 @@ export class HeadlessCheckout {
         (nextAction) => {
           if (nextAction) {
             callbackFn(nextAction);
+          }
+
+          if (nextAction?.type === NextActionType.showErrors) {
+            this.loggerService.error('showError next action received', {
+              errors: nextAction.data.errors,
+            });
+          }
+
+          if (nextAction?.type === NextActionType.serverError) {
+            this.loggerService.error('serverError next action received', {
+              message: nextAction.data.message,
+              status: nextAction.data.status,
+            });
           }
         },
       );
@@ -194,6 +209,7 @@ export class HeadlessCheckout {
     private readonly themesLoader: ThemesLoader,
     private readonly formLoader: FormLoader,
     private readonly environmentService: EnvironmentService,
+    private readonly loggerService: LoggerService,
   ) {}
 
   public async init(environment: InitialOptions): Promise<void> {
@@ -213,6 +229,23 @@ export class HeadlessCheckout {
     this.locale = environment.language ?? Lang.EN;
     this.apiUrl = environment.apiUrl;
 
+    this.loggerService.setAttributes({
+      userAgent: this.window.navigator.userAgent,
+      referrerUrl: this.window.document.referrer,
+      viewportWidth: this.window.document.documentElement.clientWidth,
+      viewportHeight: this.window.document.documentElement.clientHeight,
+      isWebview: environment.isWebview,
+      theme: environment.theme,
+      topLevelDomain: environment.topLevelDomain,
+      sandbox: environment.sandbox,
+      language: environment.language,
+      isApplePayInstantFlowEnabled: this.isApplePayInstantFlowEnabled,
+      isGooglePayInstantFlowEnabled: this.isGooglePayInstantFlowEnabled,
+      apiUrl: this.apiUrl,
+    });
+
+    this.loggerService.initialize();
+
     await this.localizeService.initDictionaries(environment.language);
 
     this.postMessagesClient.init(
@@ -231,6 +264,7 @@ export class HeadlessCheckout {
       EventName.error,
       getErrorHandler,
       (error) => {
+        this.loggerService.error(error!);
         throw new Error(error);
       },
     );
@@ -252,6 +286,10 @@ export class HeadlessCheckout {
     if (!token) {
       throw new Error('Need correct token');
     }
+
+    this.loggerService.setAttributes({
+      token,
+    });
 
     const msg: Message = {
       name: EventName.initPayment,
@@ -462,11 +500,29 @@ export class HeadlessCheckout {
     this.coreIframe.src = `${this.environmentService.getHeadlessCheckoutAppUrl()}/core`;
     this.coreIframe.name = 'core';
     this.window.document.body.appendChild(this.coreIframe);
+
+    this.coreIframe.addEventListener('error', (event) => {
+      this.loggerService.error('Error on Core frame loading', {
+        error: event.error,
+        message: event.message,
+        colno: event.colno,
+        lineno: event.lineno,
+        filename: event.filename,
+      });
+    });
+    this.coreIframe.addEventListener('abort', (event) => {
+      this.loggerService.error('Abort of Core frame loading', {
+        detail: event.detail,
+      });
+    });
+
     return this.listenCoreIframeLoading();
   }
 
   private async listenCoreIframeLoading(): Promise<void> {
     return new Promise((resolve) => {
+      let isLoaded = false;
+
       const handler = (event: MessageEvent): void => {
         if (typeof event.data !== 'string') {
           return;
@@ -474,11 +530,22 @@ export class HeadlessCheckout {
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         if (JSON.parse(event.data).name === EventName.isReady) {
+          isLoaded = true;
           resolve();
           this.window.removeEventListener('message', handler);
         }
       };
+
       this.window.addEventListener('message', handler);
+
+      const loadingAwaitTimer = 5000;
+      setTimeout(() => {
+        if (!isLoaded) {
+          this.loggerService.error('Core frame is not loaded', {
+            awaitTimer: loadingAwaitTimer,
+          });
+        }
+      }, loadingAwaitTimer);
     });
   }
 

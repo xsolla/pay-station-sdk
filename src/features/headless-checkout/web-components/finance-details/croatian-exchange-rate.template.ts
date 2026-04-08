@@ -8,7 +8,7 @@ export const getCroatianExchangeRateTemplate = (
 ): string => {
   const cartSummary = financeDetails.cartSummary;
   const isCroatia = financeDetails.paymentCountry === CountryCode.Croatia;
-  const isEuroCurrency = cartSummary.total.money?.currency === Currency.EUR;
+  const isEuroCurrency = cartSummary?.total?.money?.currency === Currency.EUR;
   const croatianCurrencyExchangeRate = 7.5345;
 
   if (!isCroatia || !isEuroCurrency) {
@@ -16,7 +16,7 @@ export const getCroatianExchangeRateTemplate = (
   }
 
   function getCroatianCurrencyRate(): number {
-    const amount = cartSummary.total.money?.amount
+    const amount = cartSummary?.total?.money?.amount
       ? cartSummary.total.money?.amount
       : 0;
     const ceilDecimals = 100;

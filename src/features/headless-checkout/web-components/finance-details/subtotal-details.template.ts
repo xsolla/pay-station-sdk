@@ -33,6 +33,10 @@ function translateSubtotalDetails(
 function getSubtotalTitle(cartSummary: CartSummary): string {
   const lines = [];
 
+  if (!cartSummary) {
+    return '';
+  }
+
   if (cartSummary.subtotal) {
     lines.push(
       `<div class="title">${i18next.t('finance-details-subtotal-title')}</div>`,
@@ -74,7 +78,7 @@ function getSubtotalContent(
 ): string {
   const lines = translateSubtotalDetails(
     finance,
-    cartSummary.subtotalDetails,
+    cartSummary?.subtotalDetails,
   ).map((details) => {
     if (!details.money?.amount && !details.content) {
       return '';
