@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.1
+
+### Patch Changes
+
+- 7be670a: update readme localization section
+
 ## 0.13.0
 
 ### Minor Changes
