@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.2
+
+### Patch Changes
+
+- cd24e80: Added type guard for post message handlers JSON.parse()
+
 ## 0.13.1
 
 ### Patch Changes
