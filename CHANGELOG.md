@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.14.0
+
+### Minor Changes
+
+- 53858ac: setupAndAwaitFieldsLoading is now accept AbortSignal
+- b2ee23c: now you can unsubscribe from onNextAction method
+- 537f5ab: submit-button now support default text
+
 ## 0.13.2
 
 ### Patch Changes
