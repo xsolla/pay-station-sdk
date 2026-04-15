@@ -175,8 +175,8 @@ declare const headlessCheckout: {
      * Wait until all specified fields are fully loaded and rendered in their iframes.
      * Useful when you want to show a loading indicator until the form is interactive.
      *
-     * Accepts an optional AbortSignal to cancel the waiting (e.g. when the user
-     * switches payment methods before the previous form finishes loading).
+     * Accepts an optional AbortSignal to cancel the waiting 
+     * (e.g., when the user switches between payment methods before the previous form completes loading).
      * When aborted, the returned promise rejects with an AbortError.
      *
      * @param fields - Array of fields returned by form.init().
@@ -1040,7 +1040,7 @@ Integration flow:
    - The return URL redirects the user once payment is completed on the 3-D Secure’s side.
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps:
-   - The `NextAction` with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. You must remove previously added fields and render new fields for this step. Also, it can include a new text for submit button (in submitButtonText property)
+   - The `NextAction` with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. You must remove previously added fields and render new fields for this step. It can also include a new text for the submit button (in the submitButtonText property).
    > **Note:** On payment validation failure, `show_errors` and `show_fields` may fire in sequence for the same server response. The `show_fields` event is emitted even when the set of visible fields has not changed. If you call `setupAndAwaitFieldsLoading` on each `show_fields`, use an `AbortSignal` to cancel the previous loading before starting a new one. The `FormLoader` internally tracks which fields have already reported as loaded, so re-calling `setupAndAwaitFieldsLoading` with the same fields resolves immediately without hanging.
    - 3-D Secure verification can be handled either by the acquirer's built-in mechanism or through an external [MPI](https://en.wikipedia.org/wiki/Merchant_plug-in), which authenticates a cardholder and forwards the result to the acquirer.
    - **3DS via external MPI**: The Next action with the `redirect` type means the form is redirected to complete payment according to the 3DS procedure. See also [Special cases for 3DS via external MPI](#special-cases-for-3ds-via-external-mpi).
