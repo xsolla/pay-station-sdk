@@ -3,6 +3,8 @@ import { Message } from '../message.interface';
 import { singleton } from 'tsyringe';
 import { EventName } from '../event-name.enum';
 import { isEventMessage } from '../guards/event-message.guard';
+import { parseMessageData } from '../../shared/utils/parse-message-data.helper';
+import { sdkVersion } from '../../features/headless-checkout/environment';
 
 @singleton()
 export class PostMessagesClient {
@@ -27,7 +29,7 @@ export class PostMessagesClient {
     return new Promise((resolve) => {
       const handlerWrapper = (message: MessageEvent): void => {
         if (this.isSameOrigin(message.origin)) {
-          const data = JSON.parse(message.data);
+          const data = parseMessageData<Message>(message.data);
           const handledData: { isHandled: boolean; value?: T } | null =
             handler(data);
           if (handledData) {
@@ -42,7 +44,13 @@ export class PostMessagesClient {
       };
 
       this.window.addEventListener('message', handlerWrapper);
-      this.sendMessage(msg);
+
+      const messageWithVersion = {
+        ...msg,
+        sdkVersion,
+      };
+
+      this.sendMessage(messageWithVersion);
     });
   }
 
@@ -53,7 +61,7 @@ export class PostMessagesClient {
   ): () => void {
     const handlerWrapper = (message: MessageEvent): void => {
       if (this.isSameOrigin(message.origin)) {
-        const data = JSON.parse(message.data);
+        const data = parseMessageData<Message>(message.data);
         if (isEventMessage(data) && data.name === eventName) {
           const handledData = handler(data);
           callback(handledData?.value);

@@ -36,8 +36,11 @@ publish:
       # Configure npm auth
       echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 
+      # Get local version
+      LOCAL_VERSION=$(node -p "require('./${PACKAGE_PATH}/package.json').version")
+
       # Build the package
-      npx turbo build --filter @xsolla/pay-station-sdk
+      SDK_VERSION=$LOCAL_VERSION npx turbo build --filter @xsolla/pay-station-sdk
 
       # Check if there are changesets to consume (run from repo root)
       CHANGESET_STATUS=$(npx @changesets/cli status 2>&1 || true)
@@ -52,8 +55,6 @@ publish:
         git push origin master
       fi
 
-      # Get local version
-      LOCAL_VERSION=$(node -p "require('./${PACKAGE_PATH}/package.json').version")
       echo "📦 Local version: ${LOCAL_VERSION}"
 
       # Check if version already published

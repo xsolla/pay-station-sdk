@@ -1,4 +1,4 @@
-export type LegalArea = 'US' | 'EU' | 'other';
+export type LegalArea = 'US' | 'EU' | 'KR' | 'other';
 
 export interface LegalComponentConfig {
   legalArea?: LegalArea;

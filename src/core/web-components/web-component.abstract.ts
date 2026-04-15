@@ -13,6 +13,8 @@ export abstract class WebComponentAbstract extends HTMLElement {
     listener(event: Event): void;
   }> = [];
 
+  private _loadedComponentName: string | null = null;
+
   public constructor() {
     super();
     this.formLoader = container.resolve(FormLoader);
@@ -26,6 +28,10 @@ export abstract class WebComponentAbstract extends HTMLElement {
 
   protected disconnectedCallback(): void {
     this.removeAllEventListeners();
+    if (this._loadedComponentName) {
+      this.formLoader.setFieldUnloaded(this._loadedComponentName);
+      this._loadedComponentName = null;
+    }
   }
 
   protected addEventListenerToElement(
@@ -85,6 +91,7 @@ export abstract class WebComponentAbstract extends HTMLElement {
   }
 
   protected finishLoadingFormControlHandler(componentName: string): void {
+    this._loadedComponentName = componentName;
     this.formLoader.setFieldLoaded(componentName);
   }
 
@@ -99,6 +106,7 @@ export abstract class WebComponentAbstract extends HTMLElement {
 
   protected dispatchFinishLoadingEvent(componentName: string): void {
     this.dispatchEvent(createFinishLoadingEvent(componentName));
+    this._loadedComponentName = componentName;
     this.formLoader.setFieldLoaded(componentName);
   }
 }

@@ -45,6 +45,7 @@ import { isGooglePaySettingsGuard } from '../../core/form/types/is-google-pay-se
 import { PaymentConfigurationGooglePaySettings } from '../../core/form/types/google-pay-form-configuration.interface';
 import { LoggerService } from '../../core/exception-handling/logger.service';
 import { NextActionType } from '../../core/actions/next-action-type.enum';
+import { sdkVersion } from './environment';
 
 @singleton()
 export class HeadlessCheckout {
@@ -106,8 +107,20 @@ export class HeadlessCheckout {
       ) as Promise<Form>;
     },
 
-    onNextAction: (callbackFn: (nextAction: NextAction) => void): void => {
-      this.postMessagesClient.listen<NextAction>(
+    /**
+     * Subscribe to next action events (show_fields, show_errors, redirect, 3DS, etc.).
+     *
+     * Note: On payment validation failure, `show_errors` and `show_fields` may fire
+     * in sequence for the same server response. If you call `setupAndAwaitFieldsLoading`
+     * on each `show_fields`, use an `AbortSignal` to cancel the previous loading before
+     * starting a new one.
+     *
+     * @returns Unsubscribe function. Call it to remove the listener.
+     */
+    onNextAction: (
+      callbackFn: (nextAction: NextAction) => void,
+    ): (() => void) => {
+      return this.postMessagesClient.listen<NextAction>(
         EventName.nextAction,
         nextActionHandler,
         (nextAction) => {
@@ -133,8 +146,8 @@ export class HeadlessCheckout {
 
     onFieldsStatusChange: (
       callbackFn: (fieldsStatus: FormFieldsStatus) => void,
-    ): void => {
-      this.postMessagesClient.listen<FormFieldsStatus>(
+    ): (() => void) => {
+      return this.postMessagesClient.listen<FormFieldsStatus>(
         EventName.formFieldsStatusChanged,
         formFieldsStatusChangedHandler,
         (fieldsStatus) => {
@@ -159,8 +172,25 @@ export class HeadlessCheckout {
       this.formStatus = FormStatus.active;
     },
 
-    setupAndAwaitFieldsLoading: async (fields: Field[]): Promise<void> =>
-      this.formLoader.setupAndAwaitFieldsLoading(fields),
+    /**
+     * Wait for all tracked form field components to finish loading.
+     *
+     * Safe to call repeatedly with the same fields — internally tracks which
+     * fields have already reported as loaded, so re-calling after a paired
+     * `show_errors` + `show_fields` sequence resolves immediately.
+     *
+     * When fields change between calls (e.g. multi-step forms), removed
+     * components automatically unregister via `disconnectedCallback`, so
+     * only genuinely new fields are awaited.
+     *
+     * @param fields - Fields to track (typically mandatory fields from the form).
+     * @param signal - Optional AbortSignal to cancel waiting.
+     */
+    setupAndAwaitFieldsLoading: async (
+      fields: Field[],
+      signal?: AbortSignal,
+    ): Promise<void> =>
+      this.formLoader.setupAndAwaitFieldsLoading(fields, signal),
 
     updateFormFieldValue: (fieldName: string, value: unknown): void => {
       const msg: Message = {
@@ -242,6 +272,7 @@ export class HeadlessCheckout {
       isApplePayInstantFlowEnabled: this.isApplePayInstantFlowEnabled,
       isGooglePayInstantFlowEnabled: this.isGooglePayInstantFlowEnabled,
       apiUrl: this.apiUrl,
+      sdkVersion,
     });
 
     this.loggerService.initialize();
@@ -341,8 +372,8 @@ export class HeadlessCheckout {
 
   public onUpdateFinanceDetails(
     callbackFn: (financeDetails: FinanceDetails) => void,
-  ): void {
-    this.postMessagesClient.listen<FinanceDetails | null>(
+  ): () => void {
+    return this.postMessagesClient.listen<FinanceDetails | null>(
       EventName.financeDetails,
       getFinanceDetailsHandler,
       (financeDetails) => {

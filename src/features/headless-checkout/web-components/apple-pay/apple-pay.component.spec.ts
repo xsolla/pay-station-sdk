@@ -28,7 +28,7 @@ describe('ApplePayComponent', () => {
 
     headlessCheckout = {
       form: {
-        onFieldsStatusChange: noopStub,
+        onFieldsStatusChange: () => noopStub,
       },
       events: {
         onCoreEvent: () => noopStub,

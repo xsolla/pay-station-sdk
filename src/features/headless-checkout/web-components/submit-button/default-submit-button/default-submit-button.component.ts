@@ -10,11 +10,16 @@ import { Message } from '../../../../../core/message.interface';
 import { Handler } from '../../../../../core/post-messages-client/handler.type';
 import { isSubmitButtonLoadingMessage } from '../../../../../core/guards/submit-button-loading-message.guard';
 import { isShowFieldsAction } from '../../../../../core/actions/is-show-fields-action.function';
+import { NextActionType } from '../../../../../core/actions/next-action-type.enum';
+import { LocalizeService } from '../../../../../core/i18n/localize.service';
 import './default-submit-button.component.scss';
 
 export class DefaultSubmitButtonComponent extends WebComponentAbstract {
   private readonly postMessagesClient: PostMessagesClient;
   private readonly headlessCheckout: HeadlessCheckout;
+  private readonly localizeService: LocalizeService;
+
+  private nextActionSubscription: (() => void) | null = null;
 
   private get elementRef(): HTMLButtonElement {
     return this.querySelector('button')! as HTMLButtonElement;
@@ -24,6 +29,7 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
     super();
     this.postMessagesClient = container.resolve(PostMessagesClient);
     this.headlessCheckout = container.resolve(HeadlessCheckout);
+    this.localizeService = container.resolve(LocalizeService);
   }
 
   public static get observedAttributes(): string[] {
@@ -36,6 +42,14 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
   protected connectedCallback(): void {
     super.connectedCallback();
     this.listenFormInit();
+  }
+
+  protected disconnectedCallback(): void {
+    super.disconnectedCallback();
+
+    if (this.nextActionSubscription) {
+      this.nextActionSubscription();
+    }
   }
 
   protected render(): void {
@@ -84,7 +98,9 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
   }
 
   protected getHtml(): string {
-    const text = this.getAttribute(DefaultSubmitButtonAttributes.text) ?? '';
+    const text =
+      this.getAttribute(DefaultSubmitButtonAttributes.text) ??
+      this.localizeService.translate('submit-button.default-text');
     const isLoading = !!this.getAttribute(
       DefaultSubmitButtonAttributes.isLoading,
     );
@@ -93,12 +109,17 @@ export class DefaultSubmitButtonComponent extends WebComponentAbstract {
   }
 
   private listenFormInit(): void {
-    this.headlessCheckout.form.onNextAction((nextAction) => {
-      if (isShowFieldsAction(nextAction)) {
-        this.removeAttribute(DefaultSubmitButtonAttributes.isLoading);
-        this.render();
-      }
-    });
+    this.nextActionSubscription = this.headlessCheckout.form.onNextAction(
+      (nextAction) => {
+        if (
+          isShowFieldsAction(nextAction) ||
+          nextAction.type === NextActionType.showErrors
+        ) {
+          this.removeAttribute(DefaultSubmitButtonAttributes.isLoading);
+          this.render();
+        }
+      },
+    );
   }
 
   private readonly loadingHandler: Handler<void> = (

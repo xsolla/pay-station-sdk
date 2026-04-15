@@ -47,7 +47,15 @@ declare const headlessCheckout: {
    * Load secure Core Iframe.
    * Load components to CustomElementRegistry. https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry
    */
-  init(environment: { isWebview?: boolean; sandbox?: boolean }): Promise<void>;
+  init(environment: {
+    isWebview?: boolean;
+    sandbox?: boolean;
+    theme?: Themes;
+    language?: Lang;
+    topLevelDomain?: string;
+    isApplePayInstantFlowEnabled?: boolean;
+    isGooglePayInstantFlowEnabled?: boolean;
+  }): Promise<void>;
 
   /**
    * Destroys current instance and creates a new one.
@@ -63,7 +71,10 @@ declare const headlessCheckout: {
   /**
    * Returns available payment methods, excluding quick payment options.
    */
-  getRegularMethods(country?: string): Promise<PaymentMethod[]>;
+  getRegularMethods(options?: {
+    country?: string;
+    isSaveMethodMode?: boolean;
+  }): Promise<PaymentMethod[]>;
 
   /**
    * Returns available quick payment options, e.g., Apple Pay, Google Pay.
@@ -118,8 +129,9 @@ declare const headlessCheckout: {
      * 4. Show another form.
      * 5. Check payment status for completion.
      * 6. Handle HTTP error (network issues, CORS, server unavailability).
+     * @returns Unsubscribe function. Call it to remove the listener.
      */
-    onNextAction: (nextAction: NextAction) => void;
+    onNextAction: (callbackFn: (nextAction: NextAction) => void) => (() => void);
 
     /**
      * Form statuses:
@@ -127,7 +139,7 @@ declare const headlessCheckout: {
      * 2. active - form is ready for user interaction.
      * 3. pending - form is waiting for the initialization and submission processes.
      */
-    getStatus(): 'undefined' | 'active' | 'pending';
+    getStatus(): FormStatus; // FormStatus.undefined | FormStatus.active | FormStatus.pending
 
     /**
      * Initialize the form. Changes the form to the pending status.
@@ -141,11 +153,15 @@ declare const headlessCheckout: {
       paymentMethodId: number;
       returnUrl: string;
       country?: string;
-      accountId?: number;
-      isSaveMode?: boolean;
+      paymentWithSavedMethod?: boolean;
+      savedMethodId?: number;
+      savePaymentMethod?: boolean;
+      overrideFormFields?: { [key: string]: { initialValue: string } };
     }): Promise<{
       fields: Field[];
-      financeDetails: FinanceDetails;
+      pid: number | null;
+      submitButtonText: string;
+      isFormAutoSubmitted: boolean;
     }>;
 
     /**
@@ -154,6 +170,34 @@ declare const headlessCheckout: {
      * Allows you to prepare components before a user can interact with them.
      */
     activate(): void;
+
+    /**
+     * Wait until all specified fields are fully loaded and rendered in their iframes.
+     * Useful when you want to show a loading indicator until the form is interactive.
+     *
+     * Accepts an optional AbortSignal to cancel the waiting (e.g. when the user
+     * switches payment methods before the previous form finishes loading).
+     * When aborted, the returned promise rejects with an AbortError.
+     *
+     * @param fields - Array of fields returned by form.init().
+     * @param signal - Optional AbortSignal for cancellation.
+     * @throws {DOMException} AbortError if the signal is aborted.
+     *
+     * @example
+     * const controller = new AbortController();
+     * const { fields } = await headlessCheckout.form.init({ ... });
+     *
+     * headlessCheckout.form
+     *   .setupAndAwaitFieldsLoading(fields, controller.signal)
+     *   .then(() => console.log('Fields ready'))
+     *   .catch((err) => {
+     *     if (err.name === 'AbortError') console.log('Loading cancelled');
+     *   });
+     *
+     * // Cancel if needed:
+     * controller.abort();
+     */
+    setupAndAwaitFieldsLoading(fields: Field[], signal?: AbortSignal): Promise<void>;
 
     /**
      * Initiate form submit.
@@ -165,11 +209,10 @@ declare const headlessCheckout: {
   /**
    * Get the final payment status: Success or Error.
    * Calling this method breaks the previous connection.
-   * Use the invoiceId argument after a return from the payment system.
-   * @throws UndefinedFormError if you did not pass invoiceId and the initialized form does not exist.
+   * @throws UndefinedFormError if the initialized form does not exist.
    * @throws BreakConnectionError if the method is called again.
    */
-  getStatus(invoiceId?: number): Promise<Status>;
+  getStatus(): Promise<Status>;
 
   /**
    * Can be used instead of SDK components for creating custom components.
@@ -859,10 +902,7 @@ Regardless of the SDK adding method chosen, all integration steps are the same:
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <!--
@@ -1000,7 +1040,8 @@ Integration flow:
    - The return URL redirects the user once payment is completed on the 3-D Secure’s side.
    - The `headlessCheckout.form.init` method returns the form object that can be used for future work with the payment form.
 1. Subscribe to events of the `NextActions` form to receive notifications about the next payment flow steps:
-   - The `NextAction` with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. You must remove previously added fields and render new fields for this step.
+   - The `NextAction` with the `show_fields` type means that the form needs to render extra fields, e.g., for Brazilian credit cards. You must remove previously added fields and render new fields for this step. Also, it can include a new text for submit button (in submitButtonText property)
+   > **Note:** On payment validation failure, `show_errors` and `show_fields` may fire in sequence for the same server response. The `show_fields` event is emitted even when the set of visible fields has not changed. If you call `setupAndAwaitFieldsLoading` on each `show_fields`, use an `AbortSignal` to cancel the previous loading before starting a new one. The `FormLoader` internally tracks which fields have already reported as loaded, so re-calling `setupAndAwaitFieldsLoading` with the same fields resolves immediately without hanging.
    - 3-D Secure verification can be handled either by the acquirer's built-in mechanism or through an external [MPI](https://en.wikipedia.org/wiki/Merchant_plug-in), which authenticates a cardholder and forwards the result to the acquirer.
    - **3DS via external MPI**: The Next action with the `redirect` type means the form is redirected to complete payment according to the 3DS procedure. See also [Special cases for 3DS via external MPI](#special-cases-for-3ds-via-external-mpi).
    - **3DS via built-in method**: The `NextAction` with the `3DS` type means the user's card must be verified according to the procedure triggered by acquirer. When an additional user action (the challenge flow) is required, the `3DS` event is triggered along with the `data` object. Pass this object to the `ThreeDs` component as the `data-challenge` attribute (refer to the [example](./examples/credit-card)). The component opens a new browser tab where the user can authorize the payment.
@@ -1070,7 +1111,7 @@ const config: InitialOptions = {
   isWebview: false,
   theme: 'default',
   language: parameters.language,
-  isGooglePayInstantFlowEnabled: true
+  isGooglePayInstantFlowEnabled: true,
 };
 
 await headlessCheckout.init(config);
@@ -1384,13 +1425,21 @@ How to get the country value?
 
 ### Changing locales
 
-Where can the language value be used?
+**Where can the language value be used?**
 
-1. The language value can be used when initializing `headlessCheckout` - `init({ language?: Lang; })`. Lang - `src/core/i18n/lang.enum.ts`.
+To set a specific language in the interface, you need to specify it not only in the token parameters, but also when initializing headlessCheckout:
 
-How can I get the value of the available locale?
+```
+headlessCheckout.init({
+  language?: Lang;
+})`
+```
 
-1. You can get the list of locales by using the `headlessCheckout.getAvailableLanguages()` method.
+The list of supported languages can be found here: `src/core/i18n/lang.enum.ts`.
+
+**How can I get the value of the available locale?**
+
+You can get the list of locales by using the `headlessCheckout.getAvailableLanguages()` method.
 
 ## Default styles
 

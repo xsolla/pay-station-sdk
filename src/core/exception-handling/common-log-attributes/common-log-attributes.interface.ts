@@ -12,4 +12,5 @@ export interface CommonLogAttributes {
   isApplePayInstantFlowEnabled?: boolean;
   isGooglePayInstantFlowEnabled?: boolean | null;
   apiUrl?: string;
+  sdkVersion?: string;
 }

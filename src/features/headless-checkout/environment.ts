@@ -15,5 +15,7 @@ export const elkUrl = process.env.SDK_ELK_URL || '';
 
 export const environment = process.env.ENVIRONMENT || 'production';
 
+export const sdkVersion = process.env.SDK_VERSION || 'unknown';
+
 export const cdnIconsUrl =
   'https://cdn.xsolla.net/headless-checkout-prod/assets/icons';

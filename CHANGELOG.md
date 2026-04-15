@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.14.0
+
+### Minor Changes
+
+- 53858ac: setupAndAwaitFieldsLoading is now accept AbortSignal
+- b2ee23c: now you can unsubscribe from onNextAction method
+- 537f5ab: submit-button now support default text
+
+## 0.13.2
+
+### Patch Changes
+
+- cd24e80: Added type guard for post message handlers JSON.parse()
+
+## 0.13.1
+
+### Patch Changes
+
+- 7be670a: update readme localization section
+
+## 0.13.0
+
+### Minor Changes
+
+- d4e00e7: Custom Legal text for Korea has beend added
+
+### Patch Changes
+
+- 71a65b3: Added a data-testid attribute for submit button
+
 ## 0.12.0
 
 ### Minor Changes

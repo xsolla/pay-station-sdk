@@ -43,7 +43,7 @@ describe('CheckboxComponent', () => {
     document.body.innerHTML = '<div id="container"></div>';
 
     headlessCheckout = {
-      form: { onFieldsStatusChange: noopStub },
+      form: { onFieldsStatusChange: () => noopStub },
     } as unknown as HeadlessCheckout;
 
     validationErrorService = {
@@ -61,6 +61,7 @@ describe('CheckboxComponent', () => {
     formLoader = {
       setupAndAwaitFieldsLoading: noopStub,
       setFieldLoaded: noopStub,
+      setFieldUnloaded: noopStub,
     } as unknown as FormLoader;
 
     container.clearInstances();
