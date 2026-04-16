@@ -34,7 +34,7 @@
          "finance-details-vat-india-percent-including" : "{{percent}}% GST 포함",
          "finance-details-vat-percent" : "VAT {{percent}}%",
          "finance-details-vat-percent-including" : "{{percent}}% VAT 포함",
-         "hello" : "Hello world!",
+         "hello" : "안녕하세요 세상!",
          "legal" : "법률",
          "legal-cookies" : "엑솔라는 필수 쿠키만 수집합니다. <a href={{xsolla_privacy_link}} target=\"_blank\">엑솔라 쿠키 정책<\/a>.",
          "legal-mor" : "본 콘텐츠의 공식 배포자는 엑솔라입니다.",
