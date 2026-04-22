@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.15.1
+
+### Patch Changes
+
+- a01b13a: fix status component next action subscription
+
 ## 0.15.0
 
 ### Minor Changes
