@@ -1,5 +1,5 @@
 import { LegalComponentConfig } from '../legal-component.config.interface';
-import { getLegalLinksComponentTemplate } from './legal-links.component.tempate';
+import { getLegalLinksComponentTemplate } from './legal-links.component.template';
 
 const config: LegalComponentConfig = {
   isJapanUser: false,

@@ -1,4 +1,4 @@
-import { getLegalTermsComponentTemplate } from './legal-terms.component.tempate';
+import { getLegalTermsComponentTemplate } from './legal-terms.component.template';
 import { LegalConfigPartComponentAbstract } from '../legal-config-part-component.abstract';
 
 import './legal-terms.component.scss';

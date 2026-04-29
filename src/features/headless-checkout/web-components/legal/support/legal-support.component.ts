@@ -1,5 +1,5 @@
 import { LegalPartComponentAbstract } from '../legal-part-component.abstract';
-import { getLegalSupportComponentTemplate } from './legal-support.component.tempate';
+import { getLegalSupportComponentTemplate } from './legal-support.component.template';
 
 import './legal-support.component.scss';
 

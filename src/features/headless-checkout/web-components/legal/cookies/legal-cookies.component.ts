@@ -1,5 +1,5 @@
 import { LegalPartComponentAbstract } from '../legal-part-component.abstract';
-import { getLegalCookiesComponentTemplate } from './legal-cookies.component.tempate';
+import { getLegalCookiesComponentTemplate } from './legal-cookies.component.template';
 
 import './legal-cookies.component.scss';
 

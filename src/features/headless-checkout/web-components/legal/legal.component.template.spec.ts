@@ -1,4 +1,4 @@
-import { getLegalComponentTemplate } from './legal.component.tempate';
+import { getLegalComponentTemplate } from './legal.component.template';
 import { LegalComponentConfig } from './legal-component.config.interface';
 
 const mockConfig: LegalComponentConfig = {

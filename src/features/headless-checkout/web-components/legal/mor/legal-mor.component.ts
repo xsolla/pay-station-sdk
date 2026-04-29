@@ -1,5 +1,5 @@
 import { LegalConfigPartComponentAbstract } from '../legal-config-part-component.abstract';
-import { getLegalMorComponentTemplate } from './legal-mor.component.tempate';
+import { getLegalMorComponentTemplate } from './legal-mor.component.template';
 
 import './legal-mor.component.scss';
 

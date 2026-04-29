@@ -1,10 +1,10 @@
 import i18next from 'i18next';
 import { LegalComponentConfig } from './legal-component.config.interface';
 import { legalAgreementsUrl, privacyPolicyUrl } from './links.const';
-import { getLegalTermsComponentTemplate } from './terms/legal-terms.component.tempate';
-import { getLegalCookiesComponentTemplate } from './cookies/legal-cookies.component.tempate';
-import { getLegalMorComponentTemplate } from './mor/legal-mor.component.tempate';
-import { getLegalSupportComponentTemplate } from './support/legal-support.component.tempate';
+import { getLegalTermsComponentTemplate } from './terms/legal-terms.component.template';
+import { getLegalCookiesComponentTemplate } from './cookies/legal-cookies.component.template';
+import { getLegalMorComponentTemplate } from './mor/legal-mor.component.template';
+import { getLegalSupportComponentTemplate } from './support/legal-support.component.template';
 
 export const getLegalComponentTemplate = (
   config: LegalComponentConfig,
