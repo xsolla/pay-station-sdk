@@ -8,16 +8,26 @@ import {
 const legalAreaLabelMap = new Map<LegalArea, string>([
   ['US', 'legal-terms-us'],
   ['EU', 'legal-terms-eu'],
-  ['KR', 'legal-terms-kr'],
 ]);
 
 const getLabel = (legalArea: LegalArea = 'other'): string => {
   return legalAreaLabelMap.get(legalArea) ?? 'legal-terms';
 };
 
+const getKoreanTermsTemplate = (): string => {
+  return `<div>${i18next.t('legal-terms-kr', {
+    xsolla_terms_link: termsUrl,
+  })}</div>
+  <div>${i18next.t('legal-terms-kr-cash')}</div>`;
+};
+
 export const getLegalTermsComponentTemplate = (
   config: LegalComponentConfig,
 ): string => {
+  if (config.legalArea === 'KR') {
+    return getKoreanTermsTemplate();
+  }
+
   const label = getLabel(config.legalArea);
   return i18next.t(label, {
     xsolla_terms_link: termsUrl,
