@@ -43,6 +43,7 @@
          "legal-terms" : "계속 진행하면 본인이 거주 국가의 법률에 따른 성인임을 확인하고 엑솔라의 <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>에 동의하는 것입니다.",
          "legal-terms-eu" : "귀하는 이 결제를 진행함으로써 본 계약의 즉각적인 이행을 요청하며, 이에 따라 철회권을 상실한다는 사실을 인정합니다.",
          "legal-terms-kr" : "계속 진행함으로써 귀하는 해당 국가의 법률에 따라 성인임을 확인하며, 엑솔라의 <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>에 동의하는 것으로 간주됩니다. 온라인 게임의 경우, 만 18세 미만 사용자의 월 구매 한도는 70,000원입니다. 구매 한도는 매월 1일에 초기화됩니다.",
+         "legal-terms-kr-cash" : "본 거래는 기록상 판매자(Merchant of Record)인 Xsolla (USA), Inc.를 통해 처리됩니다. 해외 사업자가 포함된 거래 구조로 인해 현금영수증 발행은 지원되지 않으며, 결제 영수증만 제공됩니다",
          "legal-terms-us" : "계속 진행하면 본인이 거주 국가의 법률에 따른 성인임을 확인하고 엑솔라의 <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>에 동의하는 것입니다. 이 구매는 소프트웨어 또는 디지털 콘텐츠의 라이선스를 부여합니다. <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>에서 전체 약관을 확인할 수 있습니다.",
          "privacy-policy" : "개인정보 보호정책",
          "refund-policy" : "환불 정책",

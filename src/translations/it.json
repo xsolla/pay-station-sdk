@@ -43,6 +43,7 @@
          "legal-terms" : "Proseguendo, confermi di essere un adulto secondo le leggi del tuo Paese e acconsenti di essere vincolato dall'<a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> di Xsolla.",
          "legal-terms-eu" : "Procedendo con il pagamento richiedi l'immediata esecuzione del contratto e riconosci che in tal modo perdi il diritto di recesso.",
          "legal-terms-kr" : "Proseguendo, confermi di essere un adulto secondo le leggi del tuo Paese e acconsenti di essere vincolato dall'<a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> di Xsolla. Per i giochi online, il limite mensile di spesa per gli utenti minori di 18 anni è di 70.000 KRW. I limiti di spesa vengono azzerati il primo giorno di ogni mese.",
+         "legal-terms-kr-cash" : "Questa transazione viene elaborata tramite Xsolla (USA), Inc., il Merchant of Record. A causa della struttura dell'operazione, che coinvolge un soggetto economico estero, non vengono emesse ricevute di incasso, ma solo ricevute di pagamento.",
          "legal-terms-us" : "Proseguendo, confermi di essere un adulto secondo le leggi del tuo Paese e acconsenti di essere vincolato dall'<a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a> di Xsolla. Questo acquisto ti garantisce una licenza per il software o il contenuto digitale. Puoi trovare i termini completi qui: <a href={{xsolla_terms_link}} target=\"_blank\">EULA<\/a>.",
          "privacy-policy" : "Informativa sulla Privacy",
          "refund-policy" : "Politica di Rimborso",
