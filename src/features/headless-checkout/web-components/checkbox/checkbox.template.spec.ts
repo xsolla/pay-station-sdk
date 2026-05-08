@@ -18,4 +18,14 @@ describe('getCheckboxComponentTemplate', () => {
     expect(template).toContain('checked');
     expect(template).toContain('test placeholder');
   });
+
+  it('Should render checkmark icon for unchecked checkbox', () => {
+    const template = getCheckboxComponentTemplate({
+      ...mockedData,
+      initValue: XpsBoolean.false,
+    });
+
+    expect(template).toContain('img src=\'');
+    expect(template).not.toContain('checked');
+  });
 });

@@ -20,7 +20,7 @@ export const getCheckboxComponentTemplate = (
         ${isChecked ? 'checked' : ''}
         />
         <div class='checkbox-dummy'>
-          ${isChecked ? `<img src='${check}' alt='checkbox'>` : ''}
+          <img src='${check}' alt='checkbox'>
         </div>
         <div class='wrapper'>
           ${placeholder ? `<span class='label'>${placeholder}</span>` : ''}
