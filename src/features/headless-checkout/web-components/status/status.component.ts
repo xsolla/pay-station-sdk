@@ -17,6 +17,7 @@ export class StatusComponent extends WebComponentAbstract {
   private readonly headlessCheckoutSpy: HeadlessCheckoutSpy;
   private statusConfig: StatusComponentConfig | null = null;
   private prevStatusUpdate: StatusUpdatedAction | null = null;
+  private nextActionSubscription: (() => void) | null = null;
 
   public constructor() {
     super();
@@ -34,6 +35,14 @@ export class StatusComponent extends WebComponentAbstract {
     this.listenFormInit();
   }
 
+  protected disconnectedCallback(): void {
+    super.disconnectedCallback();
+
+    if (this.nextActionSubscription) {
+      this.nextActionSubscription();
+    }
+  }
+
   protected getHtml(): string {
     if (this.statusConfig) {
       return getStatusComponentTemplate(this.statusConfig);
@@ -43,16 +52,20 @@ export class StatusComponent extends WebComponentAbstract {
   }
 
   private listenFormInit(): void {
-    this.headlessCheckout.form.onNextAction((nextAction) => {
-      if (
-        isStatusUpdatedAction(nextAction) &&
-        nextAction.data.statusState !== this.prevStatusUpdate?.data?.statusState
-      ) {
-        this.prevStatusUpdate = nextAction;
+    this.nextActionSubscription?.();
+    this.nextActionSubscription = this.headlessCheckout.form.onNextAction(
+      (nextAction) => {
+        if (
+          isStatusUpdatedAction(nextAction) &&
+          nextAction.data.statusState !==
+            this.prevStatusUpdate?.data?.statusState
+        ) {
+          this.prevStatusUpdate = nextAction;
 
-        void this.getStatus();
-      }
-    });
+          void this.getStatus();
+        }
+      },
+    );
   }
 
   private statusLoadedHandler(
