@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.15.2
+
+### Patch Changes
+
+- cc50757: fix files' names typos
+
 ## 0.15.0
 
 ### Minor Changes
