@@ -169,6 +169,19 @@ describe('HeadlessCheckout', () => {
     expect(spy).toHaveBeenCalled();
   });
 
+  it('Should send SDK capabilities in setToken init payload', async () => {
+    const spy = spyOn(postMessagesClient, 'send').and.stub();
+    await headlessCheckout.setToken('token');
+
+    const sentMessage = spy.calls.mostRecent().args[0] as Message<{
+      configuration: { capabilities?: string[] };
+    }>;
+    expect(sentMessage.name).toBe(EventName.initPayment);
+    expect(sentMessage.data?.configuration.capabilities).toContain(
+      'show_init_form_action',
+    );
+  });
+
   it('Should set secure component styles', async () => {
     const spy = spyOn(postMessagesClient, 'send');
     await headlessCheckout.setSecureComponentStyles('styles');

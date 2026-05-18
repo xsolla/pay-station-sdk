@@ -46,6 +46,7 @@ import { PaymentConfigurationGooglePaySettings } from '../../core/form/types/goo
 import { LoggerService } from '../../core/exception-handling/logger.service';
 import { NextActionType } from '../../core/actions/next-action-type.enum';
 import { sdkVersion } from './environment';
+import { SDK_CAPABILITIES } from '../../core/capabilities/sdk-capabilities.const';
 
 @singleton()
 export class HeadlessCheckout {
@@ -334,6 +335,7 @@ export class HeadlessCheckout {
           isGooglePayInstantFlowEnabled: this.isGooglePayInstantFlowEnabled,
           locale: this.locale,
           apiUrl: this.apiUrl,
+          capabilities: SDK_CAPABILITIES,
         },
       },
     };

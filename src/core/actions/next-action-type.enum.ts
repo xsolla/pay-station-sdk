@@ -3,6 +3,7 @@ export enum NextActionType {
   showFields = 'show_fields',
   statusUpdated = 'status_updated',
   showErrors = 'show_errors',
+  showInitForm = 'show_init_form',
   redirect = 'redirect',
   threeDS = '3DS',
   specialButton = 'special_button',
