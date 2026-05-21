@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+
+### Major Changes
+
+- 67eea36: Add show_init_form next action to re-display card input fields after submit error
+
 ## 0.15.2
 
 ### Patch Changes
