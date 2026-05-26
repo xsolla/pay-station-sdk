@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+### Patch Changes
+
+- ab7ab04: improvements for build process
+
 ## 1.0.0
 
 ### Major Changes
