@@ -12,6 +12,7 @@ import { finishLoadComponentHandler } from '../../../post-messages-handlers/fini
 import { LoggerService } from '../../../../../core/exception-handling/logger.service';
 import { PostMessagesClient } from '../../../../../core/post-messages-client/post-messages-client';
 import { formLoadedHandler } from '../../payment-form/form-loaded.handler';
+import './google-pay-button.component.scss';
 
 export class GooglePayButtonComponent extends SecureComponentAbstract {
   protected componentName = 'pages/google-pay-button';
@@ -131,7 +132,10 @@ export class GooglePayButtonComponent extends SecureComponentAbstract {
 
   protected getSecureHtml(): string {
     const appUrl = this.environmentService.getHeadlessCheckoutAppUrl();
-    return `<iframe allow='payment' src='${appUrl}/secure-components/${this.componentName}?buttonColor=${this.buttonColor}'></iframe>`;
+    return `
+      <div class="google-button-loader"></div>
+      <iframe allow='payment' src='${appUrl}/secure-components/${this.componentName}?buttonColor=${this.buttonColor}'></iframe>
+    `;
   }
 
   private sendFormLoadedEvent(): void {

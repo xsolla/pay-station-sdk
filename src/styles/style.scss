@@ -48,6 +48,10 @@ psdk-xsolla-number {
 }
 
 psdk-google-pay-button {
+  .google-button-loader {
+    height: 40px; // the height of real google button
+  }
+
   iframe {
     height: 44px;
   }

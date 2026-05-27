@@ -1,0 +1,24 @@
+@use 'src/styles/mixins/animation.mixin' as animation;
+
+psdk-google-pay-button {
+  display: block;
+  position: relative;
+
+  .google-button-loader {
+    display: none;
+  }
+
+  &.psdk-is-loading {
+    .google-button-loader {
+      @include animation.loader(#fff);
+
+      position: absolute;
+      inset: 0;
+      width: auto;
+      height: 40px;
+      margin: 2px;
+      background: #000;
+      border-radius: 4px;
+    }
+  }
+}
