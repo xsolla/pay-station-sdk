@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+### Patch Changes
+
+- a2cf447: fix status component next action subscription
+
 ## 1.0.1
 
 ### Patch Changes
