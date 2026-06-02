@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4
+
+### Patch Changes
+
+- 10aa193: Make 'Allow save card' checkboxes visible regardless of value
+
 ## 1.0.3
 
 ### Patch Changes
