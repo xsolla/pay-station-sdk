@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+### Patch Changes
+
+- 889363d: Add loader for google pay button
+
 ## 1.0.2
 
 ### Patch Changes
