@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5
+
+### Patch Changes
+
+- 8e01c29: Implement version display functionality
+
 ## 1.0.4
 
 ### Patch Changes
