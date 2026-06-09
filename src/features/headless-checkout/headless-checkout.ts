@@ -46,6 +46,13 @@ import { PaymentConfigurationGooglePaySettings } from '../../core/form/types/goo
 import { LoggerService } from '../../core/exception-handling/logger.service';
 import { NextActionType } from '../../core/actions/next-action-type.enum';
 import { sdkVersion } from './environment';
+import {
+  resetHeadlessUiVersion,
+  resetPaymentClientCoreVersion,
+  setHeadlessUiVersion,
+  setPaymentClientCoreVersion,
+} from '../../core/versions/window-versions';
+import { ReadyMessageData } from './ready-message-data.interface';
 import { SDK_CAPABILITIES } from '../../core/capabilities/sdk-capabilities.const';
 
 @singleton()
@@ -308,6 +315,8 @@ export class HeadlessCheckout {
   public destroy(): void {
     this.destroyCoreIframe();
     this.errorsSubscription?.();
+    resetPaymentClientCoreVersion();
+    resetHeadlessUiVersion();
   }
 
   /**
@@ -561,8 +570,23 @@ export class HeadlessCheckout {
           return;
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (JSON.parse(event.data).name === EventName.isReady) {
+        const message = JSON.parse(event.data) as Message<ReadyMessageData>;
+
+        if (message.name === EventName.isReady) {
+          if (message.data?.paymentClientCoreVersion) {
+            setPaymentClientCoreVersion(message.data.paymentClientCoreVersion);
+            this.loggerService.setAttributes({
+              paymentClientCoreVersion: message.data.paymentClientCoreVersion,
+            });
+          }
+
+          if (message.data?.headlessUiVersion) {
+            setHeadlessUiVersion(message.data.headlessUiVersion);
+            this.loggerService.setAttributes({
+              headlessUiVersion: message.data.headlessUiVersion,
+            });
+          }
+
           isLoaded = true;
           resolve();
           this.window.removeEventListener('message', handler);

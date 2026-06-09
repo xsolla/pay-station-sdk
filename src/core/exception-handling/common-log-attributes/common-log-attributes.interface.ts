@@ -13,4 +13,6 @@ export interface CommonLogAttributes {
   isGooglePayInstantFlowEnabled?: boolean | null;
   apiUrl?: string;
   sdkVersion?: string;
+  paymentClientCoreVersion?: string;
+  headlessUiVersion?: string;
 }

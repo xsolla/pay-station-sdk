@@ -1,7 +1,10 @@
 import { container } from 'tsyringe';
 import { HeadlessCheckout } from './headless-checkout';
+import { registerPayStationSdkVersions } from '../../core/versions/window-versions';
 
 container.register<Window>(Window, { useValue: window });
+
+registerPayStationSdkVersions(window);
 
 let currentInstance: HeadlessCheckout = container.resolve(HeadlessCheckout);
 

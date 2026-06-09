@@ -61,7 +61,10 @@ describe('HeadlessCheckout', () => {
       (name: string, handlerWrapper: EventListenerOrEventListenerObject) => {
         (handlerWrapper as (message: MessageEvent) => void)({
           origin: headlessCheckoutAppUrl,
-          data: JSON.stringify({ name: EventName.isReady }),
+          data: JSON.stringify({
+            name: EventName.isReady,
+            data: { paymentClientCoreVersion: '0.3.2', headlessUiVersion: '1.0.0' },
+          }),
         } as MessageEvent);
       },
     );
@@ -248,6 +251,24 @@ describe('HeadlessCheckout', () => {
 
     await headlessCheckout.init({ isWebview: false });
     expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('Should set paymentClientCoreVersion attribute after init', async () => {
+    const spy = spyOn(loggerService, 'setAttributes');
+    await headlessCheckout.init({ isWebview: false });
+    
+    expect(spy).toHaveBeenCalledWith({
+      paymentClientCoreVersion: '0.3.2',
+    });
+  });
+
+  it('Should set headlessUiVersion attribute after init', async () => {
+    const spy = spyOn(loggerService, 'setAttributes');
+    await headlessCheckout.init({ isWebview: false });
+    
+    expect(spy).toHaveBeenCalledWith({
+      headlessUiVersion: '1.0.0',
+    });
   });
 
   it('Should getSavedMethods', async () => {

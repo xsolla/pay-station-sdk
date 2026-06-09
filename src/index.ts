@@ -12,3 +12,5 @@ export { InitialOptions } from './features/headless-checkout/initial-options.int
 export { StatusEnum } from './core/status/status.enum';
 export { AppliedCoupon } from './core/coupon/applied-coupon.interface';
 export { CouponState } from './core/coupon/coupon-state.enum';
+export { PayStationSdkVersions } from './core/versions/pay-station-sdk-versions.interface';
+export { getPayStationSdkVersions } from './core/versions/window-versions';

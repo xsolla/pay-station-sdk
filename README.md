@@ -226,6 +226,47 @@ declare const headlessCheckout: {
 };
 ```
 
+### Getting SDK versions
+
+The SDK provides access to version information for debugging and support purposes:
+
+```typescript
+// Available globally after SDK initialization
+window.getPayStationSdkVersions(): {
+  'pay-station-sdk': string;        // e.g., "0.15.2"
+  'payment-client-core': string;    // e.g., "0.3.2"
+  'headless-ui': string;            // e.g., "0.0.0"
+}
+```
+
+**Usage:**
+
+```javascript
+// Check versions before init
+console.log(window.getPayStationSdkVersions());
+// { "pay-station-sdk": "0.15.2", "payment-client-core": "unknown", "headless-ui": "unknown" }
+
+await headlessCheckout.init({ isWebview: false });
+await headlessCheckout.setToken(accessToken);
+
+// Check versions after init
+console.log(window.getPayStationSdkVersions());
+// { "pay-station-sdk": "0.15.2", "payment-client-core": "0.3.2", "headless-ui": "0.0.0" }
+```
+
+**Notes:**
+- `pay-station-sdk` version is available immediately after the SDK bundle loads
+- `payment-client-core` and `headless-ui` versions are available after `headlessCheckout.init()` completes
+- All versions reset to `"unknown"` after `headlessCheckout.destroy()`
+
+You can also import the function directly:
+
+```typescript
+import { getPayStationSdkVersions, PayStationSdkVersions } from '@xsolla/pay-station-sdk';
+
+const versions: PayStationSdkVersions = getPayStationSdkVersions();
+```
+
 ## Pay Station SDK components
 
 ### Regular components

@@ -82,6 +82,13 @@ module.exports = (env, argv) => {
     processEnv[`process.env.${key}`] = JSON.stringify(process.env[key]);
   });
 
+  const packageVersion = require('./package.json').version;
+  const sdkVersion = process.env.SDK_VERSION;
+
+  if (!sdkVersion || sdkVersion === 'unknown') {
+    processEnv['process.env.SDK_VERSION'] = JSON.stringify(packageVersion);
+  }
+
   config.plugins.push(new webpack.DefinePlugin(processEnv));
 
   if (argv.mode === 'development') {

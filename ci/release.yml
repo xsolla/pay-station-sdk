@@ -53,7 +53,7 @@ publish:
       LOCAL_VERSION=$(node -p "require('./${PACKAGE_PATH}/package.json').version")
 
       # Build the package
-      SDK_VERSION=$LOCAL_VERSION npx turbo build --filter @xsolla/pay-station-sdk
+      SDK_VERSION=$LOCAL_VERSION npx turbo build --filter @xsolla/pay-station-sdk --force
 
       echo "📦 Local version: ${LOCAL_VERSION}"
 
