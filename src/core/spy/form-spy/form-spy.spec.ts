@@ -29,7 +29,7 @@ describe('FormSpy', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('Should not re-fire a registered callback on a subsequent formWasInit cycle (PAYMENTS-28630)', () => {
+  it('Should not re-fire a registered callback on a subsequent formWasInit cycle', () => {
     const observer = new Observer();
     const spy = spyOn(observer, 'formInitHandler');
     formSpy.listenFormInit(observer.formInitHandler);
