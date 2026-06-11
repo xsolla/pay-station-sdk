@@ -31,6 +31,7 @@ export class FormSpy {
   }
 
   private formWasInitHandler(): void {
-    this._callbacks.forEach((callback) => callback());
+    const callbacks = this._callbacks.splice(0);
+    callbacks.forEach((callback) => callback());
   }
 }

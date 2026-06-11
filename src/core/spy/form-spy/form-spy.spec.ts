@@ -29,16 +29,17 @@ describe('FormSpy', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('Should call formWasInitHandler twice', () => {
+  it('Should not re-fire a registered callback on a subsequent formWasInit cycle (PAYMENTS-28630)', () => {
     const observer = new Observer();
     const spy = spyOn(observer, 'formInitHandler');
     formSpy.listenFormInit(observer.formInitHandler);
     formSpy.formWasInit = true;
+    formSpy.formWasInit = false;
     formSpy.formWasInit = true;
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it('Should call appWasInitHandler once', () => {
+  it('Should call formInitHandler once', () => {
     const observer = new Observer();
     const spy = spyOn(observer, 'formInitHandler');
     formSpy.listenFormInit(observer.formInitHandler);
