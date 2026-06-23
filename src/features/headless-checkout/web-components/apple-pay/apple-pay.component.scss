@@ -1,27 +1,3 @@
-@use 'src/styles/mixins/animation.mixin' as animation;
-
-psdk-apple-pay {
-  display: block;
-  position: relative;
-
-  .apple-button-loader {
-    display: none;
-  }
-
-  &.psdk-is-loading {
-    .apple-button-loader {
-      @include animation.loader(#fff);
-
-      position: absolute;
-      inset: 0;
-      width: auto;
-      height: 48px;
-      background: #000;
-      border-radius: 5px;
-    }
-  }
-}
-
 .apple-pay-error {
   margin: 0;
   padding: 12px;

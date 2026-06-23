@@ -163,8 +163,7 @@ export class ApplePayComponent extends SecureComponentAbstract {
 
   protected getSecureHtml(): string {
     const appUrl = this.environmentService.getHeadlessCheckoutAppUrl();
-    return `<div class="apple-button-loader"></div>
-      <iframe id="apple-pay-iframe" src='${appUrl}/secure-components/${this
+    return `<iframe id="apple-pay-iframe" src='${appUrl}/secure-components/${this
       .componentName!}' allow='payment'></iframe>`;
   }
 
