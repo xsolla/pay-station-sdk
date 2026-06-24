@@ -2,13 +2,14 @@
 
 psdk-apple-pay {
   display: block;
-  position: relative;
 
   .apple-button-loader {
     display: none;
   }
 
   &.psdk-is-loading {
+    position: relative;
+
     .apple-button-loader {
       @include animation.loader(#fff);
 
