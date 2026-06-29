@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6
+
+### Patch Changes
+
+- 1c9b5a9: Add loader for apple pay button
+
 ## 1.0.5
 
 ### Patch Changes
