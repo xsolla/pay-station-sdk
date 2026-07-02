@@ -32,7 +32,10 @@ export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
     }
 
     if (!this.formSpy.formWasInit) {
-      this.formSpy.listenFormInit(() => this.connectedCallback());
+      this.formSpy.listenFormInit(() => {
+        if (!this.isConnected) return;
+        this.connectedCallback();
+      });
       return;
     }
 
@@ -54,6 +57,7 @@ export class CheckboxComponent extends BaseControl<CheckboxComponentConfig> {
     }
 
     if (!this.formSpy.formWasInit) {
+      if(!this.isConnected) return;
       this.formSpy.listenFormInit(() => super.attributeChangedCallback());
     }
   }

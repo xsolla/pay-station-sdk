@@ -57,7 +57,10 @@ export class SelectComponent extends BaseControl<SelectComponentConfig> {
     }
 
     if (!this.formSpy.formWasInit && this.typeAttr !== SelectType.country) {
-      this.formSpy.listenFormInit(() => this.connectedCallback());
+      this.formSpy.listenFormInit(() => {
+        if (!this.isConnected) return;
+        this.connectedCallback();
+      });
       return;
     }
 

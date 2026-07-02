@@ -50,7 +50,10 @@ export class TextComponent extends SecureComponentAbstract {
 
   protected connectedCallback(): void {
     if (!this.formSpy.formWasInit) {
-      this.formSpy.listenFormInit(() => this.getConfigFromInputName());
+      this.formSpy.listenFormInit(() => {
+        if (!this.isConnected) return;
+        this.getConfigFromInputName();
+      });
       return;
     }
 

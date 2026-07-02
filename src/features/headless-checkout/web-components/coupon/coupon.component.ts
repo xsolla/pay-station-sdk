@@ -35,7 +35,10 @@ export class CouponComponent extends BaseControl<ControlComponentConfig> {
     this.controlName = 'couponCode';
 
     if (!this.formSpy.formWasInit) {
-      this.formSpy.listenFormInit(() => this.initComponent());
+      this.formSpy.listenFormInit(() => {
+        if (!this.isConnected) return;
+        this.initComponent();
+      });
       return;
     }
 

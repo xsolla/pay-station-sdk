@@ -36,7 +36,10 @@ export class PaymentFormComponent extends WebComponentAbstract {
 
   protected connectedCallback(): void {
     if (!this.formSpy.formWasInit) {
-      this.formSpy.listenFormInit(() => this.connectedCallback());
+      this.formSpy.listenFormInit(() => {
+        if (!this.isConnected) return;
+        this.connectedCallback();
+      });
       return;
     }
     const formExpectedFields = this.formSpy.formFields;

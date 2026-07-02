@@ -70,6 +70,7 @@ export class CardNumberComponent extends TextComponent {
   protected attributeChangedCallback(): void {
     if (!this.formSpy.formWasInit) {
       this.formSpy.listenFormInit(() => {
+        if (!this.isConnected) return;
         super.attributeChangedCallback();
         this.toggleCardIconVisibility();
       });
