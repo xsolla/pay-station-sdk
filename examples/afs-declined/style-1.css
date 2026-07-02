@@ -1,0 +1,181 @@
+/* *** *** COMMON: START *** *** */
+
+.application {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+}
+
+.columns-wrapper {
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.left-col,
+.right-col {
+  width: 50%;
+}
+
+/* *** *** COMMON: END *** *** */
+
+/* *** *** INFO BOX: START *** *** */
+
+.info-box {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
+
+.info-box h3 {
+  margin-top: 0;
+  color: #1565c0;
+}
+
+.info-box h4 {
+  margin-bottom: 10px;
+  color: #1976d2;
+}
+
+.info-box p {
+  margin: 8px 0;
+  color: #424242;
+}
+
+.info-box ul {
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.info-box li {
+  margin: 5px 0;
+  color: #424242;
+}
+
+.info-box code {
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #d32f2f;
+}
+
+/* *** *** INFO BOX: END *** *** */
+
+/* *** *** FINANCE DETAILS: START *** *** */
+
+psdk-finance-details,
+psdk-total {
+  display: block;
+  background: #f5f5f5;
+  margin-right: 10px;
+  padding: 10px;
+}
+
+.subtotal-row,
+.total-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+/* *** *** FINANCE DETAILS: END *** *** */
+
+/* *** *** STATUS: START *** *** */
+
+psdk-status {
+  display: flex;
+}
+
+psdk-status .image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+psdk-status .title-text {
+  text-align: center;
+}
+
+/* *** *** STATUS: END *** *** */
+
+/* *** *** ERRORS: START *** *** */
+
+#errors-container {
+  margin-top: 10px;
+}
+
+.error {
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  color: #c62828;
+}
+
+.error a,
+.error a:hover,
+.error a:visited {
+  color: #c62828;
+}
+
+.error.afs-error {
+  background: #fff3e0;
+  border-color: #ffcc80;
+  color: #e65100;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.error.afs-error .error-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.error.afs-error .error-content {
+  flex: 1;
+}
+
+.error.afs-error strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.error.afs-error p {
+  margin: 5px 0;
+}
+
+.error.afs-error .error-hint {
+  font-size: 13px;
+  color: #bf360c;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ffcc80;
+}
+
+/* *** *** ERRORS: END *** *** */
+
+/* *** *** FOOTER LINKS: START *** *** */
+
+.company {
+  padding-top: 5px;
+  display: flex;
+}
+
+.company .logo {
+  margin-right: 3px;
+}
+
+.legal-links {
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* *** *** FOOTER LINKS: END *** *** */
