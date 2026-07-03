@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', buildPaymentFlow);
 
 function buildPaymentFlow() {
+  console.log('buildPaymentFlow');
   if (typeof PayStationSdk === 'undefined') {
     alert(payStationSdkUndefinedError);
     throw new Error('PayStationSdk not found');
@@ -12,7 +13,7 @@ function buildPaymentFlow() {
    * To learn more about creating tokens,
    * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
    */
-  const accessToken = '';
+  const accessToken = 'uep0b5qOm0xDM5c6jTKmBYGWoEXfjtAx_lc_en';
 
   if (!accessToken) {
     alert('No token provided. Please, check the documentation');
@@ -225,7 +226,7 @@ function buildPaymentFlow() {
      */
     await headlessCheckout.init({
       isWebView: false,
-      sandbox: false,
+      sandbox: true,
     });
 
     /**
@@ -264,7 +265,12 @@ function buildPaymentFlow() {
     /**
      * Subscribe to payment actions.
      */
-    headlessCheckout.form.onNextAction((nextAction) => {
+    headlessCheckout.form.onNextAction(async(nextAction) => {
+
+      const status = await headlessCheckout.getStatus();
+      console.log('status', status);
+      debugger;
+
       switch (nextAction.type) {
         /**
          * Handle the 'show_fields' action.
