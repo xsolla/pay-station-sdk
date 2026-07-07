@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.7
+
+### Patch Changes
+
+- bbf44d5: Clear FormSpy callbacks after firing so stale credit-card listeners don't re-fire on payment-method switch
+
+  Added guard wrapping each listenFormInit callback so it's not fired if the field was unmounted
+
 ## 1.0.6
 
 ### Patch Changes
