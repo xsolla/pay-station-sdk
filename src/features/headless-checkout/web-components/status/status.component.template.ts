@@ -28,6 +28,13 @@ export const getStatusComponentTemplate = (
         ? `${autoCancellationMessage}<div class='loader'></div>`
         : ''
     }
+    ${
+      statusConfig.showRetryButton
+        ? `<button type='button' class='retry-button'>${i18next.t(
+            'status.try-again-button',
+          )}</button>`
+        : ''
+    }
   </div>
   `;
 };

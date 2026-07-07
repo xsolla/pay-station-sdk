@@ -8,4 +8,5 @@ export interface StatusComponentConfig {
   isSavePaymentAccount?: boolean;
   status: StatusEnum;
   autoCancellation: boolean;
+  showRetryButton?: boolean;
 }

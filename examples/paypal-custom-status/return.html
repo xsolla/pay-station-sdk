@@ -20,8 +20,15 @@
     <h1>PayPal custom status on return page</h1>
 
     <!--
-  A node to render custom status component
--->
+      Custom status UI without <psdk-status>.
+      headlessCheckout.getStatus() returns retry availability flags:
+      - canRepeatPayment
+      - canRepeatProcessingPayment
+      - isRetryPaymentEnabled
+
+      Use them to render your own status page and Try again button.
+      If you prefer the built-in status component, see examples/return.html.
+    -->
     <div id="custom-status-container"></div>
 
     <!--
@@ -74,16 +81,18 @@
         await headlessCheckout.setToken(accessToken);
 
         /*
-         * Create and render a Custom Status component using the current status data.
-         * You can either use the <psdk-status></psdk-status> component or create it dynamically via headlessCheckout.
-         * */
+         * Build a custom status UI without <psdk-status>.
+         * headlessCheckout.getStatus() exposes retry availability flags that you can use
+         * in your own markup and click handlers.
+         */
         const customStatusContainer = document.querySelector(
           '#custom-status-container',
         );
 
         const status = await headlessCheckout.getStatus();
 
-        console.log('status', status);
+        const showRetryButton =
+          status.isRetryPaymentEnabled && status.canRepeatPayment;
 
         customStatusContainer.innerHTML = `
           <div style="display: flex; border: 1px solid #c2c2c2; padding: 5px; margin: 5px;">
@@ -93,8 +102,28 @@
               ? '<b>Invoice sent to email:</b> ${status.email} <br />'
               : ''
           }
+            <b>Can repeat payment</b>: ${status.canRepeatPayment ?? false} <br />
+            <b>Can repeat processing payment</b>: ${status.canRepeatProcessingPayment ?? false} <br />
+            <b>Retry payment enabled for project</b>: ${status.isRetryPaymentEnabled ?? false} <br />
           </div>
+          ${
+            showRetryButton
+              ? '<button id="custom-retry-button" type="button">Try again</button>'
+              : ''
+          }
         `;
+
+        if (showRetryButton) {
+          document
+            .getElementById('custom-retry-button')
+            ?.addEventListener('click', () => {
+              const token = new URL(window.location.href).searchParams.get(
+                'token',
+              );
+
+              window.location.href = `../paypal/index.html?token=${token}`;
+            });
+        }
       }
 
       // Initialize sdk

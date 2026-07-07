@@ -20,7 +20,13 @@
     <h1>PayPal payment return page</h1>
 
     <!--
-      Add status component. It will take the necessary parameters from return url
+      Option 1: use <psdk-status>. It reads return URL params and may show Try again.
+      Listen for retryPaymentClick and redirect the user to your payment entry page.
+
+      Option 2: build your own status UI without <psdk-status>.
+      Call headlessCheckout.getStatus() and use canRepeatPayment,
+      canRepeatProcessingPayment, and isRetryPaymentEnabled to decide whether to show retry.
+      See examples/paypal-custom-status/return.html.
     -->
     <psdk-status></psdk-status>
 
@@ -72,6 +78,24 @@
          * refer to https://developers.xsolla.com/api/pay-station/operation/create-token/
          */
         await headlessCheckout.setToken(accessToken);
+
+        /**
+         * <psdk-status> dispatches retryPaymentClick when the user clicks Try again.
+         * Handle navigation yourself — the SDK does not redirect automatically.
+         *
+         * If you render your own status UI, call headlessCheckout.getStatus() instead
+         * and read canRepeatPayment, canRepeatProcessingPayment, isRetryPaymentEnabled.
+         * See examples/paypal-custom-status/return.html.
+         */
+        document
+          .querySelector('psdk-status')
+          ?.addEventListener('retryPaymentClick', () => {
+            const token = new URL(window.location.href).searchParams.get(
+              'token',
+            );
+
+            window.location.href = `./payment-form/index.html?token=${token}`;
+          });
       }
 
       // Initialize sdk

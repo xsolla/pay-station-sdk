@@ -6,6 +6,8 @@ import { HeadlessCheckoutMock } from '../../../../tests/stubs/headless-checkout.
 import { HeadlessCheckout } from '../../headless-checkout';
 import { StatusComponent } from './status.component';
 import { Status } from '../../../../core/status/status.interface';
+import { StatusEnum } from '../../../../core/status/status.enum';
+import { EventName } from '../../../../core/event-name.enum';
 
 function createComponent(): void {
   const element = document.createElement(WebComponentTagName.StatusComponent);
@@ -78,17 +80,60 @@ describe('StatusComponent', () => {
     const mockStatus: Status = {
       statusState: 'done',
     } as unknown as Status;
+
     spyOn(headlessCheckout, 'getStatus').and.returnValue(
       Promise.resolve(mockStatus),
     );
     spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
       true,
     );
+
     createComponent();
     // delay the template to be drawn
     await Promise.resolve();
 
     const element = document.querySelector(WebComponentTagName.StatusComponent);
     expect(element!.innerHTML).not.toEqual('');
+  });
+
+  it('Should dispatch retryPaymentClick event on retry button click', async () => {
+    const mockStatus: Status = {
+      statusState: StatusEnum.canceled,
+      statusMessage: '',
+      group: '',
+      autoCancellation: true,
+      isCancelUser: true,
+      isRetryPaymentEnabled: true,
+      canRepeatPayment: true,
+    } as Status;
+
+    spyOn(headlessCheckout, 'getStatus').and.returnValue(
+      Promise.resolve(mockStatus),
+    );
+    spyOnProperty(headlessCheckoutSpy, 'appWasInit', 'get').and.returnValue(
+      true,
+    );
+
+    createComponent();
+
+    await Promise.resolve();
+
+    const element = document.querySelector(
+      WebComponentTagName.StatusComponent,
+    )!;
+    const handler = jasmine.createSpy('retryPaymentClickHandler');
+    element.addEventListener(EventName.retryPaymentClick, handler);
+
+    const retryButton = element.querySelector('.retry-button');
+    expect(retryButton).not.toBeNull();
+
+    if (!(retryButton instanceof HTMLButtonElement)) {
+      fail('retry button not found');
+      return;
+    }
+
+    retryButton.click();
+
+    expect(handler).toHaveBeenCalled();
   });
 });

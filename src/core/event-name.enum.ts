@@ -62,4 +62,5 @@ export const enum EventName {
   googlePayError = 'googlePayError',
   // Form loading
   formLoaded = 'formLoaded',
+  retryPaymentClick = 'retryPaymentClick',
 }

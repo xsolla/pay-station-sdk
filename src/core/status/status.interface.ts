@@ -60,4 +60,7 @@ export interface Status {
   };
   isSavePaymentAccount?: boolean;
   autoCancellation: boolean;
+  canRepeatPayment?: boolean;
+  canRepeatProcessingPayment?: boolean;
+  isRetryPaymentEnabled?: boolean;
 }

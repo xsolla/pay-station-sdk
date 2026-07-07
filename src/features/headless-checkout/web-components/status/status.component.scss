@@ -40,4 +40,28 @@ psdk-status {
     background-color: var(--psdk-neutral-bg);
     color: var(--psdk-neutral-color);
   }
+
+  .retry-button {
+    @include typo.psdk-typo;
+
+    display: inline-block;
+    width: 100%;
+    max-width: 360px;
+    height: 40px;
+    margin-top: 16px;
+    border: none;
+    border-radius: var(--psdk-button-border-radius);
+    background: var(--psdk-button-default-bg);
+    color: var(--psdk-button-color);
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--psdk-button-hover-bg);
+    }
+
+    &:active {
+      background: var(--psdk-button-press-bg);
+    }
+  }
 }

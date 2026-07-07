@@ -13,6 +13,9 @@ export interface StatusUpdatedActionData {
   email?: string;
   isSavePaymentMethodMode?: boolean;
   savePaymentMethodStatus?: SavePaymentMethodStatus;
+  canRepeatPayment?: boolean;
+  canRepeatProcessingPayment?: boolean;
+  isRetryPaymentEnabled?: boolean;
 }
 
 export type StatusUpdatedAction = Action<

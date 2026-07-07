@@ -10,6 +10,8 @@ import { HeadlessCheckoutSpy } from '../../../../core/spy/headless-checkout-spy/
 import { getPaymentStatusConfig } from './template-config/get-payment-status-config.function';
 import { getSavingMethodStatusConfig } from './template-config/get-saving-method-status-config.function';
 import { getStatusState } from './template-config/get-status-state.function';
+import { getShowRetryButton } from './template-config/get-show-retry-button.function';
+import { EventName } from '../../../../core/event-name.enum';
 import './status.component.scss';
 
 export class StatusComponent extends WebComponentAbstract {
@@ -49,6 +51,28 @@ export class StatusComponent extends WebComponentAbstract {
     }
 
     return '';
+  }
+
+  protected override render(): void {
+    super.render();
+    this.bindRetryButton();
+  }
+
+  private bindRetryButton(): void {
+    const button = this.querySelector('.retry-button');
+
+    if (!button) {
+      return;
+    }
+
+    this.addEventListenerToElement(button, 'click', () => {
+      this.dispatchEvent(
+        new CustomEvent(EventName.retryPaymentClick, {
+          bubbles: true,
+          composed: true,
+        }),
+      );
+    });
   }
 
   private listenFormInit(): void {
@@ -94,9 +118,17 @@ export class StatusComponent extends WebComponentAbstract {
       return null;
     }
 
-    if (status.isSavePaymentAccount) {
-      return getSavingMethodStatusConfig(statusState, status);
+    const statusConfig = status.isSavePaymentAccount
+      ? getSavingMethodStatusConfig(statusState, status)
+      : getPaymentStatusConfig(statusState, status);
+
+    if (!statusConfig) {
+      return null;
     }
-    return getPaymentStatusConfig(statusState, status);
+
+    return {
+      ...statusConfig,
+      showRetryButton: getShowRetryButton(statusState, status),
+    };
   }
 }
