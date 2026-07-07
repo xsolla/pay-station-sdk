@@ -59,6 +59,7 @@
          "status.processing.title" : "Обрабатываем платеж",
          "status.success.description" : "Мы отправили ваш чек на электронный адрес {{email}}",
          "status.success.title" : "Платеж прошел",
+         "status.try-again-button" : "Попробовать снова",
          "submit-button.default-text" : "Далее",
          "validation-error.birth-date-pattern" : "Укажите верную дату рождения",
          "validation-error.building-number-pattern" : "Введите верный номер дома",

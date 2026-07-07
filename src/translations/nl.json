@@ -59,6 +59,7 @@
          "status.processing.title" : "Betaling verwerken...",
          "status.success.description" : "We hebben je ontvangstbewijs naar {{email}} gestuurd",
          "status.success.title" : "Betaling geslaagd",
+         "status.try-again-button" : "Probeer het opnieuw",
          "submit-button.default-text" : "Nu betalen",
          "validation-error.birth-date-pattern" : "Voer een geldige geboortedatum in",
          "validation-error.building-number-pattern" : "Voer een geldig huisnummer in",

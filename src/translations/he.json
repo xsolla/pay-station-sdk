@@ -59,6 +59,7 @@
          "status.processing.title" : "התשלום בעיבוד",
          "status.success.description" : "שלחנו את הקבלה אל {{email}}",
          "status.success.title" : "התשלום התקבל",
+         "status.try-again-button" : "ניסיון נוסף",
          "submit-button.default-text" : "הבא",
          "validation-error.birth-date-pattern" : "צריך להזין תאריך לידה תקין",
          "validation-error.building-number-pattern" : "מספר הבניין שהזנת לא תקין",

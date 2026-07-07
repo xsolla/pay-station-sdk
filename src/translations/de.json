@@ -59,6 +59,7 @@
          "status.processing.title" : "Die Zahlung wird verarbeitet",
          "status.success.description" : "Wir haben den Beleg an {{email}} gesendet",
          "status.success.title" : "Die Zahlung war erfolgreich",
+         "status.try-again-button" : "Erneut versuchen",
          "submit-button.default-text" : "Weiter",
          "validation-error.birth-date-pattern" : "Bitte ein gültiges Geburtsdatum eingeben",
          "validation-error.building-number-pattern" : "Bitte eine gültige Hausnummer eingeben",

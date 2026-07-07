@@ -59,6 +59,7 @@
          "status.processing.title" : "결제 처리 중",
          "status.success.description" : "{{email}}(으)로 영수증을 보냈습니다",
          "status.success.title" : "결제 성공",
+         "status.try-again-button" : "다시 시도",
          "submit-button.default-text" : "지금 결제",
          "validation-error.birth-date-pattern" : "유효한 생년월일을 입력하세요",
          "validation-error.building-number-pattern" : "유효한 건물 번호를 입력하세요",

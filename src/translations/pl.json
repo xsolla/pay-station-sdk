@@ -59,6 +59,7 @@
          "status.processing.title" : "Trwa przetwarzanie płatności",
          "status.success.description" : "Wysłaliśmy rachunek na adres {{email}}",
          "status.success.title" : "Płatność zrealizowana",
+         "status.try-again-button" : "Spróbuj ponownie",
          "submit-button.default-text" : "Dalej",
          "validation-error.birth-date-pattern" : "Wprowadź prawidłową datę urodzenia",
          "validation-error.building-number-pattern" : "Wprowadź prawidłowy numer budynku",

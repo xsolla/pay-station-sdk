@@ -59,6 +59,7 @@
          "status.processing.title" : "お支払いを処理しています",
          "status.success.description" : "領収書を{{email}}に送信しました",
          "status.success.title" : "お支払いが完了しました",
+         "status.try-again-button" : "再試行",
          "submit-button.default-text" : "今すぐ支払う",
          "validation-error.birth-date-pattern" : "有効な生年月日を入力してください",
          "validation-error.building-number-pattern" : "有効な建物番号を入力してください",

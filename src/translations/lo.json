@@ -59,6 +59,7 @@
          "status.processing.title" : "ກຳ​ລັງ​ດຳ​ເນີນ​ການ​ຊຳ​ລະເງິນ",
          "status.success.description" : "ພວກເຮົາສົ່ງໃບຮັບເງິນໄປຫາ {{email}}",
          "status.success.title" : "ການຊຳລະເງິນສຳເລັດ",
+         "status.try-again-button" : "ລອງໃໝ່ອີກຄັ້ງ",
          "submit-button.default-text" : "ຊຳລະເງິນຕອນນີ້",
          "validation-error.birth-date-pattern" : "ປ້ອນວັນເດືອນປີເກີດທີ່ຖືກຕ້ອງ",
          "validation-error.building-number-pattern" : "ປ້ອນໝາຍເລກອາ​ຄານທີ່ຖືກຕ້ອງ",

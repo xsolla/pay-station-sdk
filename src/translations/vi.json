@@ -59,6 +59,7 @@
          "status.processing.title" : "Đang xử lý thanh toán",
          "status.success.description" : "Biên nhận đã được gửi đến {{email}}",
          "status.success.title" : "Thanh toán thành công",
+         "status.try-again-button" : "Thử lại",
          "submit-button.default-text" : "Tiếp theo",
          "validation-error.birth-date-pattern" : "Nhập ngày sinh hợp lệ",
          "validation-error.building-number-pattern" : "Nhập số tòa nhà hợp lệ",

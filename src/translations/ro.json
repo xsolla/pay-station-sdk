@@ -59,6 +59,7 @@
          "status.processing.title" : "Procesare plată",
          "status.success.description" : "Am trimis chitanța dumneavoastră la {{email}}",
          "status.success.title" : "Plată realizată cu succes",
+         "status.try-again-button" : "Reîncercați",
          "submit-button.default-text" : "Următorul",
          "validation-error.birth-date-pattern" : "Introduceți o dată valabilă a nașterii",
          "validation-error.building-number-pattern" : "Introduceți un număr valid al clădirii",
