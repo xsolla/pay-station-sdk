@@ -1,14 +1,10 @@
 import { Status } from '../../../../../core/status/status.interface';
 import { StatusState } from './status-state.enum';
 import { StatusEnum } from '../../../../../core/status/status.enum';
-import { TitleClass } from '../../../../../core/status/title-class.enum';
 
 export function getStatusState(status: Status): StatusState | null {
   const isCanceled =
-    status.statusState === StatusEnum.canceled ||
-    status.isCancelUser ||
-    status.titleClass === TitleClass.cancel ||
-    status.titleClass === TitleClass.cancelUser;
+    status.statusState === StatusEnum.canceled || status.isCancelUser;
 
   if (isCanceled) {
     return StatusState.isCanceled;
