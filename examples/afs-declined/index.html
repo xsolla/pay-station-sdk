@@ -8,15 +8,17 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>AFS Declined Payment Example</title>
-    <link rel="stylesheet" href="style-1.css" />
-    <link rel="stylesheet" href="style-2.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../dist/style.css" />
 
     <!--
-      Link the SDK bundle.
-      NOTE: In this example, we use a local build for convenience purposes.
-    -->
-    <script src="main.js"></script>
-    <script src="variables.js"></script>
+Link the SDK bundle.
+NOTE: In this example, we use a local build for convenience purposes.
+-->
+    <script src="../../dist/main.js"></script>
+    <script src="../variables.js"></script>
+    <!-- Initialization script -->
+    <script src="init-payment-flow.js"></script>
   </head>
 
   <body>
@@ -26,28 +28,23 @@
       <div class="info-box">
         <h3>About this example</h3>
         <p>
-          This example demonstrates how to handle a payment declined by
-          <strong>AFS (Anti-Fraud System)</strong>.
-        </p>
-        <p>
-          There are two possible flows when AFS blocks a payment:
+          This example demonstrates how to handle a card payment declined by
+          <strong>AFS (Anti-Fraud System)</strong>. There are two flows:
         </p>
         <h4>Flow 1: show_errors action</h4>
         <p>
-          When AFS blocks immediately, the SDK returns a <code>show_errors</code> action
-          with error code <strong>1092</strong> (declinedByAfsAfterInvoiceCreated).
+          When AFS blocks immediately, the SDK returns a
+          <code>show_errors</code> action with error code
+          <strong>1092</strong> (declinedByAfsAfterInvoiceCreated).
         </p>
         <h4>Flow 2: check_status action</h4>
         <p>
-          When AFS blocks after invoice creation, the SDK returns a <code>check_status</code> action.
-          The status will have <code>titleClass: "cancel"</code>, which the SDK now correctly
-          maps to a declined state (not "processing").
+          When AFS blocks after invoice creation, the payment is auto-refunded
+          and the SDK returns a <code>check_status</code> action. The status
+          component then resolves to a canceled state once
+          <code>getStatus()</code> reports the terminal verdict — it no longer
+          hangs on "processing".
         </p>
-        <h4>How to trigger AFS decline:</h4>
-        <ul>
-          <li>Use sandbox mode with a test card configured to trigger AFS rejection</li>
-          <li>Or configure AFS rules in Xsolla Publisher Account to block specific patterns</li>
-        </ul>
       </div>
 
       <div class="columns-wrapper">
@@ -65,263 +62,5 @@
 
       <psdk-legal></psdk-legal>
     </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', buildPaymentFlow);
-
-      function buildPaymentFlow() {
-        if (typeof PayStationSdk === 'undefined') {
-          alert(payStationSdkUndefinedError);
-          throw new Error('PayStationSdk not found');
-        }
-
-        /**
-         * To learn more about creating tokens,
-         * refer to our documentation https://developers.xsolla.com/api/pay-station/operation/create-token/
-         */
-        const accessToken = 'uep0TyZ7xJalKFYWaxCuD89CCtTyztMK_lc_en';
-
-        if (!accessToken) {
-          alert('No token provided. Please, check the documentation');
-          throw new Error('No token provided');
-        }
-
-        const { headlessCheckout } = PayStationSdk;
-
-        const formElement = document.querySelector('#form-container');
-        const errorsContainer = document.querySelector('#errors-container');
-        const statusElement = document.querySelector('#status-container');
-
-        /**
-         * AFS error code constant.
-         * This error code indicates that the payment was declined by the Anti-Fraud System.
-         */
-        const AFS_DECLINED_ERROR_CODE = 1092;
-
-        function renderFields(requiredFields) {
-          requiredFields.forEach((field) => {
-            if (field.type === 'text' && field.name === 'card_number') {
-              renderCardNumberComponent(field);
-              return;
-            }
-            if (field.type === 'text') {
-              renderTextComponent(field);
-              return;
-            }
-            if (field.type === 'select') {
-              renderSelectComponent(field);
-              return;
-            }
-            if (field.type === 'check') {
-              renderCheckboxComponent(field);
-              return;
-            }
-          });
-        }
-
-        function renderCardNumberComponent(field) {
-          const input = new PayStationSdk.CardNumberComponent();
-          input.setAttribute('name', field.name);
-          formElement.append(input);
-        }
-
-        function renderSelectComponent(field) {
-          const input = new PayStationSdk.SelectComponent();
-          input.setAttribute('name', field.name);
-          formElement.append(input);
-        }
-
-        function renderCheckboxComponent(field) {
-          const input = new PayStationSdk.CheckboxComponent();
-          input.setAttribute('name', field.name);
-          formElement.append(input);
-        }
-
-        function renderTextComponent(field) {
-          const input = new PayStationSdk.TextComponent();
-          input.setAttribute('name', field.name);
-          formElement.append(input);
-        }
-
-        function renderSubmitButton() {
-          const submitButton = new PayStationSdk.SubmitButtonComponent();
-          submitButton.setAttribute('text', 'Pay Now');
-          formElement.append(submitButton);
-        }
-
-        function renderStatusComponent() {
-          const statusComponent = new PayStationSdk.StatusComponent();
-          statusElement.append(statusComponent);
-        }
-
-        function clearFormFields() {
-          formElement.innerHTML = '';
-        }
-
-        function clearErrors() {
-          errorsContainer.innerHTML = '';
-        }
-
-        /**
-         * Handle errors from the payment form.
-         * This function specifically checks for AFS declined error (code 1092)
-         * and displays appropriate messaging to the user.
-         */
-        function handleErrors(action) {
-          const errors = action.data.errors ?? [];
-
-          clearErrors();
-
-          errors.forEach((error) => {
-            const errorElement = document.createElement('div');
-            errorElement.classList.add('error');
-
-            if (error.code === AFS_DECLINED_ERROR_CODE) {
-              /**
-               * AFS declined error - payment was blocked by Anti-Fraud System.
-               * In production, you might want to:
-               * - Log this for analytics
-               * - Show user-friendly message
-               * - Suggest alternative payment methods
-               * - Contact support link
-               */
-              errorElement.classList.add('afs-error');
-              errorElement.innerHTML = `
-                <div class="error-icon">⚠️</div>
-                <div class="error-content">
-                  <strong>Payment Declined by Fraud Protection</strong>
-                  <p>${error.message}</p>
-                  <p class="error-hint">
-                    This payment was blocked by our security system.
-                    Please try a different payment method or contact support.
-                  </p>
-                </div>
-              `;
-            } else {
-              errorElement.innerHTML = `
-                <div class="error-content">
-                  <strong>Error ${error.code}</strong>
-                  <p>${error.message}</p>
-                </div>
-              `;
-            }
-
-            errorsContainer.append(errorElement);
-          });
-        }
-
-        function handle3dsAction(threeDsAction) {
-          clearFormFields();
-
-          const threeDsComponent = new PayStationSdk.ThreeDsComponent();
-          threeDsComponent.setAttribute(
-            'data-challenge',
-            JSON.stringify(threeDsAction.data.data),
-          );
-          threeDsComponent.setAttribute('text', 'Continue');
-
-          document.querySelector('.right-col').append(threeDsComponent);
-        }
-
-        function handleRedirectAction(redirectAction) {
-          const { redirectUrl, data, method, isNewWindowRequired } =
-            redirectAction.data.redirect;
-          const isPost = method?.toUpperCase() === 'POST';
-
-          const form = document.createElement('form');
-          form.method = isPost ? 'POST' : 'GET';
-          form.action = redirectUrl;
-          document.body.appendChild(form);
-
-          Object.entries(data).forEach(([key, value]) => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = String(value);
-            form.appendChild(input);
-          });
-
-          if (isNewWindowRequired) {
-            form.target = '_blank';
-            clearFormFields();
-            const button = document.createElement('button');
-            button.innerText = 'Continue';
-            button.onclick = () => {
-              form.submit();
-              clearFormFields();
-              renderStatusComponent();
-            };
-            formElement.append(button);
-            return;
-          }
-
-          form.submit();
-        }
-
-        async function initPayStationSdk() {
-          await headlessCheckout.init({
-            isWebView: false,
-            sandbox: true, // Use sandbox mode for testing
-          });
-
-          await headlessCheckout.setSecureComponentStyles(`
-            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-          `);
-
-          await headlessCheckout.setToken(accessToken);
-
-          const creditCardMethodId = 1380;
-
-          const form = await headlessCheckout.form.init({
-            paymentMethodId: creditCardMethodId,
-            returnUrl: 'http://localhost:3000/pay-station-sdk/examples/return.html',
-          });
-
-          /**
-           * Subscribe to payment actions.
-           * The key actions for AFS declined are:
-           * 1. 'show_errors' - with error code 1092
-           * 2. 'check_status' - when status has titleClass="cancel"
-           */
-          headlessCheckout.form.onNextAction((nextAction) => {
-            switch (nextAction.type) {
-              case 'show_fields':
-                clearFormFields();
-                clearErrors();
-                renderFields(nextAction.data.fields);
-                renderSubmitButton();
-                break;
-
-              case 'check_status':
-                clearFormFields();
-                clearErrors();
-                renderStatusComponent();
-                break;
-
-              case '3DS':
-                handle3dsAction(nextAction);
-                break;
-
-              case 'redirect':
-                handleRedirectAction(nextAction);
-                break;
-
-              /**
-               * Handle the 'show_errors' action.
-               * This is where AFS declined errors (code 1092) will appear.
-               */
-              case 'show_errors':
-                handleErrors(nextAction);
-                break;
-            }
-          });
-
-          renderFields(form.fields);
-          renderSubmitButton();
-        }
-
-        initPayStationSdk();
-      }
-    </script>
   </body>
 </html>

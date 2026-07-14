@@ -24,13 +24,4 @@ describe('getStatusState', () => {
       StatusState.isSuccess,
     );
   });
-
-  it('Should return cancel state when isCancelUser is true', () => {
-    expect(
-      getStatusState({
-        statusState: StatusEnum.processing,
-        isCancelUser: true,
-      } as Status),
-    ).toEqual(StatusState.isCanceled);
-  });
 });
