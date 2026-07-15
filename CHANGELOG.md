@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+### Minor Changes
+
+- c370c02: retry payment ability
+
 ## 1.0.7
 
 ### Patch Changes
