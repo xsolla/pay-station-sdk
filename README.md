@@ -1,5 +1,8 @@
 # Xsolla Pay Station SDK
 
+![License](https://img.shields.io/github/license/xsolla/pay-station-sdk)
+![Latest release](https://img.shields.io/github/v/release/xsolla/pay-station-sdk)
+
 - [What is Pay Station SDK?](#what-is-pay-station-sdk)
 - [Installing with npm-package](#installing-with-npm-package)
 - [General integration scheme](#general-integration-scheme)
@@ -1466,3 +1469,12 @@ You can get the list of locales by using the `headlessCheckout.getAvailableLangu
 
 When attempting to make a payment with a selected country that is not supported in the Pay Station SDK, the payment API will return an error message.
 You can find an example [here](./examples/unsupported-country).
+
+## Support
+
+- **GitHub Issues:** [github.com/xsolla/pay-station-sdk/issues](https://github.com/xsolla/pay-station-sdk/issues)
+- **Developer portal:** [developers.xsolla.com](https://developers.xsolla.com)
+
+## License
+
+Apache 2.0 License. See [LICENSE](./LICENSE).
